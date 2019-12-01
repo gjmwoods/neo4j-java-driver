@@ -47,8 +47,8 @@ import java.util.function.BooleanSupplier;
 import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Bookmark;
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.Session;
 import org.neo4j.driver.Result;
+import org.neo4j.driver.Session;
 import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.driver.internal.BoltServerAddress;
 import org.neo4j.driver.internal.DefaultBookmarkHolder;
@@ -344,6 +344,32 @@ public final class TestUtil
 
     }
 
+    public static void setupFailingRunAsync( Connection connection, Throwable error )
+    {
+        doAnswer( invocation ->
+                  {
+                      Thread thread = new Thread( () ->
+                                                  {
+                                                      ResponseHandler runHandler = invocation.getArgument( 1 );
+                                                      runHandler.onFailure( error );
+                                                  } );
+                      thread.start();
+                      return null;
+                  } ).when( connection ).writeAndFlush( any( RunWithMetadataMessage.class ), any() );
+
+        doAnswer( invocation ->
+                  {
+                      Thread thread = new Thread( () ->
+                                                  {
+                                                      ResponseHandler pullHandler = invocation.getArgument( 1 );
+                                                      pullHandler.onFailure( error );
+                                                  } );
+                      thread.start();
+                      return null;
+                  } ).when( connection ).writeAndFlush( any( PullMessage.class ), any() );
+
+    }
+
     public static void setupFailingBegin( Connection connection, Throwable error )
     {
         // with bookmarks
@@ -428,6 +454,31 @@ public final class TestUtil
         } ).when( connection ).writeAndFlush( any( PullMessage.class ), any() );
     }
 
+    public static void setupSuccessfulRunAndPullAsync( Connection connection )
+    {
+        doAnswer( invocation ->
+                  {
+                      Thread thread = new Thread( () ->
+                                                  {
+                                                      ResponseHandler runHandler = invocation.getArgument( 1 );
+                                                      runHandler.onSuccess( emptyMap() );
+                                                  } );
+                      thread.start();
+                      return null;
+                  } ).when( connection ).write( any( RunWithMetadataMessage.class ), any() );
+
+        doAnswer( invocation ->
+                  {
+                      Thread thread = new Thread( () ->
+                                                  {
+                                                      ResponseHandler pullHandler = invocation.getArgument( 1 );
+                                                      pullHandler.onSuccess( emptyMap() );
+                                                  } );
+                      thread.start();
+                      return null;
+                  } ).when( connection ).writeAndFlush( any( PullMessage.class ), any() );
+    }
+
     public static void setupSuccessfulRunRx( Connection connection )
     {
         doAnswer( invocation ->
@@ -453,6 +504,31 @@ public final class TestUtil
             pullHandler.onSuccess( emptyMap() );
             return null;
         } ).when( connection ).writeAndFlush( any( PullMessage.class ), any() );
+    }
+
+    public static void setupSuccessfulRunAndPullAsync( Connection connection, String query )
+    {
+        doAnswer( invocation ->
+                  {
+                      Thread thread = new Thread( () ->
+                                                  {
+                                                      ResponseHandler runHandler = invocation.getArgument( 1 );
+                                                      runHandler.onSuccess( emptyMap() );
+                                                  } );
+                      thread.start();
+                      return null;
+                  } ).when( connection ).write( argThat( runWithMetaMessageWithQueryMatcher( query ) ), any() );
+
+        doAnswer( invocation ->
+                  {
+                      Thread thread = new Thread( () ->
+                                                  {
+                                                      ResponseHandler pullHandler = invocation.getArgument( 1 );
+                                                      pullHandler.onSuccess( emptyMap() );
+                                                  } );
+                      thread.start();
+                      return null;
+                  } ).when( connection ).writeAndFlush( any( PullMessage.class ), any() );
     }
 
     public static Connection connectionMock()

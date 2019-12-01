@@ -40,18 +40,8 @@ import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.UNLIMITED_F
 import static org.neo4j.driver.internal.messaging.request.DiscardMessage.newDiscardAllMessage;
 
 /**
- * In this class we have a hidden state machine.
- * Here is how it looks like:
- * |                    | DONE | FAILED | STREAMING                      | READY              | CANCELED       |
- * |--------------------|------|--------|--------------------------------|--------------------|----------------|
- * | request            | X    | X      | toRequest++ ->STREAMING        | PULL ->STREAMING   | X              |
- * | cancel             | X    | X      | ->CANCELED                     | DISCARD ->CANCELED | ->CANCELED     |
- * | onSuccess has_more | X    | X      | ->READY request if toRequest>0 | X                  | ->READY cancel |
- * | onSuccess          | X    | X      | summary ->DONE                 | X                  | summary ->DONE |
- * | onRecord           | X    | X      | yield record ->STREAMING       | X                  | ->CANCELED     |
- * | onFailure          | X    | X      | ->FAILED                       | X                  | ->FAILED       |
- *
- * Currently the error state (marked with X on the table above) might not be enforced.
+ * Provides basic handling of pull responses from sever. The state is
+ * managed by {@link State}.
  */
 public class BasicPullResponseHandler implements PullResponseHandler
 {
@@ -61,92 +51,112 @@ public class BasicPullResponseHandler implements PullResponseHandler
     protected final Connection connection;
     private final PullResponseCompletionListener completionListener;
 
-    private Status status = Status.READY;
+    private State state;
+    private boolean isCompleting = false;
     private long toRequest;
     private BiConsumer<Record,Throwable> recordConsumer = null;
-    private BiConsumer<ResultSummary, Throwable> summaryConsumer = null;
+    private BiConsumer<ResultSummary,Throwable> summaryConsumer = null;
 
-    public BasicPullResponseHandler(Query query, RunResponseHandler runResponseHandler, Connection connection, MetadataExtractor metadataExtractor,
-                                    PullResponseCompletionListener completionListener )
+    public BasicPullResponseHandler( Query query, RunResponseHandler runResponseHandler,
+                                     Connection connection, MetadataExtractor metadataExtractor,
+                                     PullResponseCompletionListener completionListener )
     {
-        this.query = requireNonNull(query);
+        this.query = requireNonNull( query );
         this.runResponseHandler = requireNonNull( runResponseHandler );
         this.metadataExtractor = requireNonNull( metadataExtractor );
         this.connection = requireNonNull( connection );
         this.completionListener = requireNonNull( completionListener );
+
+        this.state = State.READY_STATE;
     }
 
     @Override
     public synchronized void onSuccess( Map<String,Value> metadata )
     {
         assertRecordAndSummaryConsumerInstalled();
-        if ( metadata.getOrDefault( "has_more", BooleanValue.FALSE ).asBoolean() )
-        {
-            handleSuccessWithHasMore();
-        }
-        else
-        {
-            handleSuccessWithSummary( metadata );
-        }
+        state = state.onSuccess( this, metadata );
     }
 
     @Override
     public synchronized void onFailure( Throwable error )
     {
         assertRecordAndSummaryConsumerInstalled();
-        status = Status.FAILED;
-        completionListener.afterFailure( error );
-
-        complete( extractResultSummary( emptyMap() ), error );
+        state = state.onFailure( this, error );
     }
 
     @Override
     public synchronized void onRecord( Value[] fields )
     {
         assertRecordAndSummaryConsumerInstalled();
-        if ( isStreaming() )
-        {
-            Record record = new InternalRecord( runResponseHandler.queryKeys(), fields );
-            recordConsumer.accept( record, null );
-        }
+        state = state.onRecord( this, fields );
     }
 
     @Override
     public synchronized void request( long size )
     {
         assertRecordAndSummaryConsumerInstalled();
-        if ( isStreamingPaused() )
-        {
-            status = Status.STREAMING;
-            connection.writeAndFlush( new PullMessage( size, runResponseHandler.queryId() ), this );
-        }
-        else if ( isStreaming() )
-        {
-            addToRequest( size );
-        }
+        state = state.request( this, size );
     }
 
     @Override
     public synchronized void cancel()
     {
         assertRecordAndSummaryConsumerInstalled();
-        if ( isStreamingPaused() )
+        state = state.cancel( this );
+    }
+
+    protected void completeWithFailure( Throwable error )
+    {
+        isCompleting = true;
+        completionListener.afterFailure( error );
+        complete( extractResultSummary( emptyMap() ), error );
+    }
+
+    protected void completeWithSuccess( Map<String,Value> metadata )
+    {
+        isCompleting = true;
+        completionListener.afterSuccess( metadata );
+        ResultSummary summary = extractResultSummary( metadata );
+
+        complete( summary, null );
+    }
+
+    protected boolean handleSuccessWithHasMore()
+    {
+        if ( toRequest > 0 || toRequest == UNLIMITED_FETCH_SIZE )
         {
-            status = Status.CANCELED;
-            // Reactive API does not provide a way to discard N. Only discard all.
-            connection.writeAndFlush( newDiscardAllMessage( runResponseHandler.queryId() ), this );
+            //stay in streaming state writing a new pull message
+            writePull( toRequest );
+            toRequest = 0;
+            summaryConsumer.accept( null, null );
+            return true; //keep streaming
         }
-        else if ( isStreaming() )
-        {
-            status = Status.CANCELED;
-        }
-        // no need to change status if it is already done
+
+        // summary consumer use (null, null) to identify done handling of success with has_more
+        summaryConsumer.accept( null, null );
+        return false; //stop streaming
+    }
+
+    protected void handleRecord( Value[] fields )
+    {
+        Record record = new InternalRecord( runResponseHandler.queryKeys(), fields );
+        recordConsumer.accept( record, null );
+    }
+
+    protected void writePull( long n )
+    {
+        connection.writeAndFlush( new PullMessage( n, runResponseHandler.queryId() ), this );
+    }
+
+    protected void discardAll()
+    {
+        connection.writeAndFlush( newDiscardAllMessage( runResponseHandler.queryId() ), this );
     }
 
     @Override
     public synchronized void installSummaryConsumer( BiConsumer<ResultSummary,Throwable> summaryConsumer )
     {
-        if( this.summaryConsumer != null )
+        if ( this.summaryConsumer != null )
         {
             throw new IllegalStateException( "Summary consumer already installed." );
         }
@@ -156,61 +166,27 @@ public class BasicPullResponseHandler implements PullResponseHandler
     @Override
     public synchronized void installRecordConsumer( BiConsumer<Record,Throwable> recordConsumer )
     {
-        if( this.recordConsumer != null )
+        if ( this.recordConsumer != null )
         {
             throw new IllegalStateException( "Record consumer already installed." );
         }
         this.recordConsumer = recordConsumer;
     }
 
-    private boolean isStreaming()
-    {
-        return status == Status.STREAMING;
-    }
-
-    private boolean isStreamingPaused()
-    {
-        return status == Status.READY;
-    }
-
     protected boolean isDone()
     {
-        return status == Status.SUCCEEDED || status == Status.FAILED;
+        return state.equals( State.SUCCEEDED_STATE ) || state.equals( State.FAILURE_STATE );
     }
 
-    private void handleSuccessWithSummary( Map<String,Value> metadata )
+    protected boolean isCompleting()
     {
-        status = Status.SUCCEEDED;
-        completionListener.afterSuccess( metadata );
-        ResultSummary summary = extractResultSummary( metadata );
-
-        complete( summary, null );
-    }
-
-    private void handleSuccessWithHasMore()
-    {
-        if ( this.status == Status.CANCELED )
-        {
-            this.status = Status.READY; // cancel request accepted.
-            cancel();
-        }
-        else if ( this.status == Status.STREAMING )
-        {
-            this.status = Status.READY;
-            if ( toRequest > 0 || toRequest == UNLIMITED_FETCH_SIZE )
-            {
-                request( toRequest );
-                toRequest = 0;
-            }
-            // summary consumer use (null, null) to identify done handling of success with has_more
-            summaryConsumer.accept( null, null );
-        }
+        return isCompleting;
     }
 
     private ResultSummary extractResultSummary( Map<String,Value> metadata )
     {
         long resultAvailableAfter = runResponseHandler.resultAvailableAfter();
-        return metadataExtractor.extractSummary(query, connection, resultAvailableAfter, metadata );
+        return metadataExtractor.extractSummary( query, connection, resultAvailableAfter, metadata );
     }
 
     private void addToRequest( long toAdd )
@@ -239,15 +215,15 @@ public class BasicPullResponseHandler implements PullResponseHandler
 
     private void assertRecordAndSummaryConsumerInstalled()
     {
-        if( isDone() )
+        if ( isDone() )
         {
             // no need to check if we've finished.
             return;
         }
-        if( recordConsumer == null || summaryConsumer == null )
+        if ( recordConsumer == null || summaryConsumer == null )
         {
-            throw new IllegalStateException( format("Access record stream without record consumer and/or summary consumer. " +
-                    "Record consumer=%s, Summary consumer=%s", recordConsumer, summaryConsumer) );
+            throw new IllegalStateException( format( "Access record stream without record consumer and/or summary consumer. " +
+                                                     "Record consumer=%s, Summary consumer=%s", recordConsumer, summaryConsumer ) );
         }
     }
 
@@ -267,13 +243,223 @@ public class BasicPullResponseHandler implements PullResponseHandler
         this.summaryConsumer = null;
     }
 
-    protected Status status()
+    protected State state()
     {
-        return this.status;
+        return state;
     }
 
-    protected void status( Status status )
+    protected void state( State state )
     {
-        this.status = status;
+        this.state = state;
+    }
+
+    enum State
+    {
+        READY_STATE
+                {
+                    @Override
+                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    {
+                        context.completeWithSuccess( metadata );
+                        return SUCCEEDED_STATE;
+                    }
+
+                    @Override
+                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    {
+                        context.completeWithFailure( error );
+                        return FAILURE_STATE;
+                    }
+
+                    @Override
+                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    {
+                        return READY_STATE;
+                    }
+
+                    @Override
+                    State request( BasicPullResponseHandler context, long n )
+                    {
+                        context.writePull( n );
+                        return STREAMING_STATE;
+                    }
+
+                    @Override
+                    State cancel( BasicPullResponseHandler context )
+                    {
+                        context.discardAll();
+                        return CANCELLED_STATE;
+                    }
+                },
+        STREAMING_STATE
+                {
+                    @Override
+                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    {
+                        if ( metadata.getOrDefault( "has_more", BooleanValue.FALSE ).asBoolean() )
+                        {
+                            if ( context.handleSuccessWithHasMore() )
+                            {
+                                return STREAMING_STATE;
+                            }
+                            else
+                            {
+                                return READY_STATE;
+                            }
+                        }
+                        else
+                        {
+                            context.completeWithSuccess( metadata );
+                            return SUCCEEDED_STATE;
+                        }
+                    }
+
+                    @Override
+                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    {
+                        context.completeWithFailure( error );
+                        return FAILURE_STATE;
+                    }
+
+                    @Override
+                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    {
+                        context.handleRecord( fields );
+                        return STREAMING_STATE;
+                    }
+
+                    @Override
+                    State request( BasicPullResponseHandler context, long n )
+                    {
+                        context.addToRequest( n );
+                        return STREAMING_STATE;
+                    }
+
+                    @Override
+                    State cancel( BasicPullResponseHandler context )
+                    {
+                        return CANCELLED_STATE;
+                    }
+                },
+        CANCELLED_STATE
+                {
+                    @Override
+                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    {
+                        if ( metadata.getOrDefault( "has_more", BooleanValue.FALSE ).asBoolean() )
+                        {
+                            context.discardAll();
+                            return CANCELLED_STATE;
+                        }
+                        else
+                        {
+                            context.completeWithSuccess( metadata );
+                            return SUCCEEDED_STATE;
+                        }
+                    }
+
+                    @Override
+                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    {
+                        context.completeWithFailure( error );
+                        return FAILURE_STATE;
+                    }
+
+                    @Override
+                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    {
+                        return CANCELLED_STATE;
+                    }
+
+                    @Override
+                    State request( BasicPullResponseHandler context, long n )
+                    {
+                        return CANCELLED_STATE;
+                    }
+
+                    @Override
+                    State cancel( BasicPullResponseHandler context )
+                    {
+                        return CANCELLED_STATE;
+                    }
+                },
+        SUCCEEDED_STATE
+                {
+                    @Override
+                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    {
+                        context.completeWithSuccess( metadata );
+                        return SUCCEEDED_STATE;
+                    }
+
+                    @Override
+                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    {
+                        context.completeWithFailure( error );
+                        return FAILURE_STATE;
+                    }
+
+                    @Override
+                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    {
+                        return SUCCEEDED_STATE;
+                    }
+
+                    @Override
+                    State request( BasicPullResponseHandler context, long n )
+                    {
+                        return SUCCEEDED_STATE;
+                    }
+
+                    @Override
+                    State cancel( BasicPullResponseHandler context )
+                    {
+                        return SUCCEEDED_STATE;
+                    }
+                },
+        FAILURE_STATE
+                {
+                    @Override
+                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    {
+                        context.completeWithSuccess( metadata );
+                        return SUCCEEDED_STATE;
+                    }
+
+                    @Override
+                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    {
+                        context.completeWithFailure( error );
+                        return FAILURE_STATE;
+                    }
+
+                    @Override
+                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    {
+                        return FAILURE_STATE;
+                    }
+
+                    @Override
+                    State request( BasicPullResponseHandler context, long n )
+                    {
+                        return FAILURE_STATE;
+                    }
+
+                    @Override
+                    State cancel( BasicPullResponseHandler context )
+                    {
+                        return FAILURE_STATE;
+                    }
+                };
+
+        abstract State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata );
+
+        abstract State onFailure( BasicPullResponseHandler context, Throwable error );
+
+        abstract State onRecord( BasicPullResponseHandler context, Value[] fields );
+
+        abstract State request( BasicPullResponseHandler context, long n );
+
+        abstract State cancel( BasicPullResponseHandler context );
     }
 }
