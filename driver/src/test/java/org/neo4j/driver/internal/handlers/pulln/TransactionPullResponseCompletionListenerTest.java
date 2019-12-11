@@ -31,7 +31,6 @@ import org.neo4j.driver.internal.spi.Connection;
 import org.neo4j.driver.summary.ResultSummary;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -53,7 +52,7 @@ public class TransactionPullResponseCompletionListenerTest extends BasicPullResp
         handler.onSuccess( Collections.emptyMap() );
 
         // Then
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.SUCCEEDED_STATE ));
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.SUCCEEDED_STATE ));
         verify( recordConsumer ).accept( null, null );
         verify( summaryConsumer ).accept( any( ResultSummary.class ), eq( null ) );
     }
@@ -73,7 +72,7 @@ public class TransactionPullResponseCompletionListenerTest extends BasicPullResp
         handler.onFailure( error );
 
         // Then
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.FAILURE_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.FAILURE_STATE ) );
         verify( tx ).markTerminated();
         verify( recordConsumer ).accept( null, error );
         verify( summaryConsumer ).accept( any( ResultSummary.class ), eq( error ) );
@@ -99,7 +98,7 @@ public class TransactionPullResponseCompletionListenerTest extends BasicPullResp
         handler.installRecordConsumer( recordConsumer );
         handler.installSummaryConsumer( summaryConsumer );
 
-        handler.state( state );
+        handler.setState( state );
         return handler;
     }
 }

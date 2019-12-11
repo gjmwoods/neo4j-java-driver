@@ -65,7 +65,6 @@ import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
 import static org.neo4j.driver.util.TestUtil.newSession;
 import static org.neo4j.driver.util.TestUtil.setupFailingBegin;
-import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPullAsync;
 import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunRx;
 import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPull;
 import static org.neo4j.driver.util.TestUtil.verifyBeginTx;
@@ -189,7 +188,7 @@ class NetworkSessionTest
     void releasesOpenConnectionUsedForRunWhenSessionIsClosed()
     {
         String query = "RETURN 1";
-        setupSuccessfulRunAndPullAsync( connection, query );
+        setupSuccessfulRunAndPull( connection, query );
 
         run( session, query );
 
@@ -252,7 +251,7 @@ class NetworkSessionTest
     void releasesConnectionWhenTxIsClosed()
     {
         String query = "RETURN 42";
-        setupSuccessfulRunAndPullAsync( connection, query );
+        setupSuccessfulRunAndPull( connection, query );
 
         UnmanagedTransaction tx = beginTransaction( session );
         await( tx.runAsync( new Query( query ), false ) );

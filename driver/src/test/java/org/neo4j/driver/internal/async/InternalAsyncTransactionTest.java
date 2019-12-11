@@ -56,7 +56,7 @@ import static org.neo4j.driver.util.TestUtil.connectionMock;
 import static org.neo4j.driver.util.TestUtil.newSession;
 import static org.neo4j.driver.util.TestUtil.setupFailingCommit;
 import static org.neo4j.driver.util.TestUtil.setupFailingRollback;
-import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPullAsync;
+import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPull;
 import static org.neo4j.driver.util.TestUtil.verifyCommitTx;
 import static org.neo4j.driver.util.TestUtil.verifyRollbackTx;
 import static org.neo4j.driver.util.TestUtil.verifyRunAndPull;
@@ -93,7 +93,7 @@ class InternalAsyncTransactionTest
     @MethodSource( "allSessionRunMethods" )
     void shouldFlushOnRun( Function<AsyncTransaction,CompletionStage<ResultCursor>> runReturnOne ) throws Throwable
     {
-        setupSuccessfulRunAndPullAsync( connection );
+        setupSuccessfulRunAndPull( connection );
 
         ResultCursor result = await( runReturnOne.apply( tx ) );
         ResultSummary summary = await( result.consumeAsync() );

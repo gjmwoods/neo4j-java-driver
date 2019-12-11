@@ -73,7 +73,7 @@ class SessionPullResponseCompletionListenerTest extends BasicPullResponseHandler
         handler.onFailure( error );
 
         // Then
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.FAILURE_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.FAILURE_STATE ) );
         verify( conn ).release();
         verify( recordConsumer ).accept( null, error );
         verify( summaryConsumer ).accept( any( ResultSummary.class ), eq( error ) );
@@ -99,7 +99,7 @@ class SessionPullResponseCompletionListenerTest extends BasicPullResponseHandler
         handler.installRecordConsumer( recordConsumer );
         handler.installSummaryConsumer( summaryConsumer );
 
-        handler.state( state );
+        handler.setState( state );
         return handler;
     }
 }

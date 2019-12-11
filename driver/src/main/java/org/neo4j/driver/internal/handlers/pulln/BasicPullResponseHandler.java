@@ -40,8 +40,7 @@ import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.UNLIMITED_F
 import static org.neo4j.driver.internal.messaging.request.DiscardMessage.newDiscardAllMessage;
 
 /**
- * Provides basic handling of pull responses from sever. The state is
- * managed by {@link State}.
+ * Provides basic handling of pull responses from sever. The state is managed by {@link State}.
  */
 public class BasicPullResponseHandler implements PullResponseHandler
 {
@@ -52,7 +51,6 @@ public class BasicPullResponseHandler implements PullResponseHandler
     private final PullResponseCompletionListener completionListener;
 
     private State state;
-    private boolean isCompleting = false;
     private long toRequest;
     private BiConsumer<Record,Throwable> recordConsumer = null;
     private BiConsumer<ResultSummary,Throwable> summaryConsumer = null;
@@ -74,67 +72,60 @@ public class BasicPullResponseHandler implements PullResponseHandler
     public synchronized void onSuccess( Map<String,Value> metadata )
     {
         assertRecordAndSummaryConsumerInstalled();
-        state = state.onSuccess( this, metadata );
+        state.onSuccess( this, metadata );
     }
 
     @Override
     public synchronized void onFailure( Throwable error )
     {
         assertRecordAndSummaryConsumerInstalled();
-        state = state.onFailure( this, error );
+        state.onFailure( this, error );
     }
 
     @Override
     public synchronized void onRecord( Value[] fields )
     {
         assertRecordAndSummaryConsumerInstalled();
-        state = state.onRecord( this, fields );
+        state.onRecord( this, fields );
     }
 
     @Override
     public synchronized void request( long size )
     {
         assertRecordAndSummaryConsumerInstalled();
-        state = state.request( this, size );
+        state.request( this, size );
     }
 
     @Override
     public synchronized void cancel()
     {
         assertRecordAndSummaryConsumerInstalled();
-        state = state.cancel( this );
+        state.cancel( this );
     }
 
     protected void completeWithFailure( Throwable error )
     {
-        isCompleting = true;
         completionListener.afterFailure( error );
         complete( extractResultSummary( emptyMap() ), error );
     }
 
     protected void completeWithSuccess( Map<String,Value> metadata )
     {
-        isCompleting = true;
         completionListener.afterSuccess( metadata );
         ResultSummary summary = extractResultSummary( metadata );
 
         complete( summary, null );
     }
 
-    protected boolean handleSuccessWithHasMore()
+    protected void successHasMore()
     {
         if ( toRequest > 0 || toRequest == UNLIMITED_FETCH_SIZE )
         {
-            //stay in streaming state writing a new pull message
-            writePull( toRequest );
+            request( toRequest );
             toRequest = 0;
-            summaryConsumer.accept( null, null );
-            return true; //keep streaming
         }
-
         // summary consumer use (null, null) to identify done handling of success with has_more
         summaryConsumer.accept( null, null );
-        return false; //stop streaming
     }
 
     protected void handleRecord( Value[] fields )
@@ -176,11 +167,6 @@ public class BasicPullResponseHandler implements PullResponseHandler
     protected boolean isDone()
     {
         return state.equals( State.SUCCEEDED_STATE ) || state.equals( State.FAILURE_STATE );
-    }
-
-    protected boolean isCompleting()
-    {
-        return isCompleting;
     }
 
     private ResultSummary extractResultSummary( Map<String,Value> metadata )
@@ -243,12 +229,12 @@ public class BasicPullResponseHandler implements PullResponseHandler
         this.summaryConsumer = null;
     }
 
-    protected State state()
+    protected State getState()
     {
         return state;
     }
 
-    protected void state( State state )
+    protected void setState( State state )
     {
         this.state = state;
     }
@@ -258,208 +244,202 @@ public class BasicPullResponseHandler implements PullResponseHandler
         READY_STATE
                 {
                     @Override
-                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    void onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
                     {
+                        context.setState( SUCCEEDED_STATE );
                         context.completeWithSuccess( metadata );
-                        return SUCCEEDED_STATE;
                     }
 
                     @Override
-                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    void onFailure( BasicPullResponseHandler context, Throwable error )
                     {
+                        context.setState( FAILURE_STATE );
                         context.completeWithFailure( error );
-                        return FAILURE_STATE;
                     }
 
                     @Override
-                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    void onRecord( BasicPullResponseHandler context, Value[] fields )
                     {
-                        return READY_STATE;
+                        context.setState( READY_STATE );
                     }
 
                     @Override
-                    State request( BasicPullResponseHandler context, long n )
+                    void request( BasicPullResponseHandler context, long n )
                     {
+                        context.setState( STREAMING_STATE );
                         context.writePull( n );
-                        return STREAMING_STATE;
                     }
 
                     @Override
-                    State cancel( BasicPullResponseHandler context )
+                    void cancel( BasicPullResponseHandler context )
                     {
+                        context.setState( CANCELLED_STATE );
                         context.discardAll();
-                        return CANCELLED_STATE;
                     }
                 },
         STREAMING_STATE
                 {
                     @Override
-                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    void onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
                     {
                         if ( metadata.getOrDefault( "has_more", BooleanValue.FALSE ).asBoolean() )
                         {
-                            if ( context.handleSuccessWithHasMore() )
-                            {
-                                return STREAMING_STATE;
-                            }
-                            else
-                            {
-                                return READY_STATE;
-                            }
+                            context.setState( READY_STATE );
+                            context.successHasMore();
                         }
                         else
                         {
+                            context.setState( SUCCEEDED_STATE );
                             context.completeWithSuccess( metadata );
-                            return SUCCEEDED_STATE;
                         }
                     }
 
                     @Override
-                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    void onFailure( BasicPullResponseHandler context, Throwable error )
                     {
+                        context.setState( FAILURE_STATE );
                         context.completeWithFailure( error );
-                        return FAILURE_STATE;
                     }
 
                     @Override
-                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    void onRecord( BasicPullResponseHandler context, Value[] fields )
                     {
+                        context.setState( STREAMING_STATE );
                         context.handleRecord( fields );
-                        return STREAMING_STATE;
                     }
 
                     @Override
-                    State request( BasicPullResponseHandler context, long n )
+                    void request( BasicPullResponseHandler context, long n )
                     {
+                        context.setState( STREAMING_STATE );
                         context.addToRequest( n );
-                        return STREAMING_STATE;
                     }
 
                     @Override
-                    State cancel( BasicPullResponseHandler context )
+                    void cancel( BasicPullResponseHandler context )
                     {
-                        return CANCELLED_STATE;
+                        context.setState( CANCELLED_STATE );
                     }
                 },
         CANCELLED_STATE
                 {
                     @Override
-                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    void onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
                     {
                         if ( metadata.getOrDefault( "has_more", BooleanValue.FALSE ).asBoolean() )
                         {
+                            context.setState( CANCELLED_STATE );
                             context.discardAll();
-                            return CANCELLED_STATE;
                         }
                         else
                         {
+                            context.setState( SUCCEEDED_STATE );
                             context.completeWithSuccess( metadata );
-                            return SUCCEEDED_STATE;
                         }
                     }
 
                     @Override
-                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    void onFailure( BasicPullResponseHandler context, Throwable error )
                     {
+                        context.setState( FAILURE_STATE );
                         context.completeWithFailure( error );
-                        return FAILURE_STATE;
                     }
 
                     @Override
-                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    void onRecord( BasicPullResponseHandler context, Value[] fields )
                     {
-                        return CANCELLED_STATE;
+                        context.setState( CANCELLED_STATE );
                     }
 
                     @Override
-                    State request( BasicPullResponseHandler context, long n )
+                    void request( BasicPullResponseHandler context, long n )
                     {
-                        return CANCELLED_STATE;
+                        context.setState( CANCELLED_STATE );
                     }
 
                     @Override
-                    State cancel( BasicPullResponseHandler context )
+                    void cancel( BasicPullResponseHandler context )
                     {
-                        return CANCELLED_STATE;
+                        context.setState( CANCELLED_STATE );
                     }
                 },
         SUCCEEDED_STATE
                 {
                     @Override
-                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    void onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
                     {
+                        context.setState( SUCCEEDED_STATE );
                         context.completeWithSuccess( metadata );
-                        return SUCCEEDED_STATE;
                     }
 
                     @Override
-                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    void onFailure( BasicPullResponseHandler context, Throwable error )
                     {
+                        context.setState( FAILURE_STATE );
                         context.completeWithFailure( error );
-                        return FAILURE_STATE;
                     }
 
                     @Override
-                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    void onRecord( BasicPullResponseHandler context, Value[] fields )
                     {
-                        return SUCCEEDED_STATE;
+                        context.setState( SUCCEEDED_STATE );
                     }
 
                     @Override
-                    State request( BasicPullResponseHandler context, long n )
+                    void request( BasicPullResponseHandler context, long n )
                     {
-                        return SUCCEEDED_STATE;
+                        context.setState( SUCCEEDED_STATE );
                     }
 
                     @Override
-                    State cancel( BasicPullResponseHandler context )
+                    void cancel( BasicPullResponseHandler context )
                     {
-                        return SUCCEEDED_STATE;
+                        context.setState( SUCCEEDED_STATE );
                     }
                 },
         FAILURE_STATE
                 {
                     @Override
-                    State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
+                    void onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata )
                     {
+                        context.setState( SUCCEEDED_STATE );
                         context.completeWithSuccess( metadata );
-                        return SUCCEEDED_STATE;
                     }
 
                     @Override
-                    State onFailure( BasicPullResponseHandler context, Throwable error )
+                    void onFailure( BasicPullResponseHandler context, Throwable error )
                     {
+                        context.setState( FAILURE_STATE );
                         context.completeWithFailure( error );
-                        return FAILURE_STATE;
                     }
 
                     @Override
-                    State onRecord( BasicPullResponseHandler context, Value[] fields )
+                    void onRecord( BasicPullResponseHandler context, Value[] fields )
                     {
-                        return FAILURE_STATE;
+                        context.setState( FAILURE_STATE );
                     }
 
                     @Override
-                    State request( BasicPullResponseHandler context, long n )
+                    void request( BasicPullResponseHandler context, long n )
                     {
-                        return FAILURE_STATE;
+                        context.setState( FAILURE_STATE );
                     }
 
                     @Override
-                    State cancel( BasicPullResponseHandler context )
+                    void cancel( BasicPullResponseHandler context )
                     {
-                        return FAILURE_STATE;
+                        context.setState( FAILURE_STATE );
                     }
                 };
 
-        abstract State onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata );
+        abstract void onSuccess( BasicPullResponseHandler context, Map<String,Value> metadata );
 
-        abstract State onFailure( BasicPullResponseHandler context, Throwable error );
+        abstract void onFailure( BasicPullResponseHandler context, Throwable error );
 
-        abstract State onRecord( BasicPullResponseHandler context, Value[] fields );
+        abstract void onRecord( BasicPullResponseHandler context, Value[] fields );
 
-        abstract State request( BasicPullResponseHandler context, long n );
+        abstract void request( BasicPullResponseHandler context, long n );
 
-        abstract State cancel( BasicPullResponseHandler context );
+        abstract void cancel( BasicPullResponseHandler context );
     }
 }

@@ -78,7 +78,7 @@ abstract class BasicPullResponseHandlerTestBase
 
         // Then
         verify( conn ).writeAndFlush( any( PullMessage.class ), eq( handler ) );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
     }
 
     @Test
@@ -97,7 +97,7 @@ abstract class BasicPullResponseHandlerTestBase
         verifyNoMoreInteractions( conn );
         verifyNoMoreInteractions( recordConsumer );
         verify( summaryConsumer ).accept( null, null );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.READY_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.READY_STATE ) );
     }
 
     @Test
@@ -110,7 +110,7 @@ abstract class BasicPullResponseHandlerTestBase
 
         // Then
         verify( conn ).writeAndFlush( any( DiscardMessage.class ), eq( handler ) );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
     }
 
     // on failure
@@ -138,7 +138,7 @@ abstract class BasicPullResponseHandlerTestBase
         verify( recordConsumer ).accept( any( Record.class ), eq( null ) );
         verifyNoMoreInteractions( summaryConsumer );
         verifyNoMoreInteractions( conn );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
     }
 
     @ParameterizedTest
@@ -157,7 +157,7 @@ abstract class BasicPullResponseHandlerTestBase
         // Then
         verifyNoMoreInteractions( recordConsumer );
         verifyNoMoreInteractions( summaryConsumer );
-        assertThat( handler.state(), equalTo( state ) );
+        assertThat( handler.getState(), equalTo( state ) );
     }
 
     // request
@@ -172,7 +172,7 @@ abstract class BasicPullResponseHandlerTestBase
         handler.request( 100 );
 
         // Then
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
     }
 
     @Test
@@ -187,7 +187,7 @@ abstract class BasicPullResponseHandlerTestBase
 
         // Then
         verify( conn ).writeAndFlush( any( PullMessage.class ), eq( handler ) );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.STREAMING_STATE ) );
     }
 
     // cancel
@@ -203,7 +203,7 @@ abstract class BasicPullResponseHandlerTestBase
 
         // Then
         verifyNoMoreInteractions( conn );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
     }
 
     @Test
@@ -218,7 +218,7 @@ abstract class BasicPullResponseHandlerTestBase
 
         // Then
         verifyNoMoreInteractions( conn );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
     }
 
     @Test
@@ -233,7 +233,7 @@ abstract class BasicPullResponseHandlerTestBase
 
         // Then
         verify( conn ).writeAndFlush( any( DiscardMessage.class ), eq( handler ) );
-        assertThat( handler.state(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
+        assertThat( handler.getState(), equalTo( BasicPullResponseHandler.State.CANCELLED_STATE ) );
     }
 
     static Connection mockConnection()

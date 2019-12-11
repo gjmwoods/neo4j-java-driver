@@ -53,9 +53,7 @@ import static org.neo4j.driver.util.TestUtil.newSession;
 import static org.neo4j.driver.util.TestUtil.setupFailingCommit;
 import static org.neo4j.driver.util.TestUtil.setupFailingRollback;
 import static org.neo4j.driver.util.TestUtil.setupFailingRun;
-import static org.neo4j.driver.util.TestUtil.setupFailingRunAsync;
 import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPull;
-import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPullAsync;
 import static org.neo4j.driver.util.TestUtil.verifyCommitTx;
 import static org.neo4j.driver.util.TestUtil.verifyRollbackTx;
 import static org.neo4j.driver.util.TestUtil.verifyRunAndPull;
@@ -92,7 +90,7 @@ class InternalTransactionTest
     @MethodSource( "allSessionRunMethods" )
     void shouldFlushOnRun( Function<Transaction, Result> runReturnOne ) throws Throwable
     {
-        setupSuccessfulRunAndPullAsync( connection );
+        setupSuccessfulRunAndPull( connection );
 
         Result result = runReturnOne.apply( tx );
         ResultSummary summary = result.consume();
@@ -132,7 +130,7 @@ class InternalTransactionTest
     @Test
     void shouldRollbackWhenFailedRun() throws Throwable
     {
-        setupFailingRunAsync( connection, new RuntimeException( "Bang!" ) );
+        setupFailingRun( connection, new RuntimeException( "Bang!" ) );
         assertThrows( RuntimeException.class, () -> tx.run( "RETURN 1" ).consume() );
 
         tx.close();

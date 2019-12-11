@@ -208,7 +208,7 @@ public class AutoPullResponseHandler extends BasicPullResponseHandler implements
 
     private <T> List<T> recordsAsList( Function<Record,T> mapFunction )
     {
-        if ( !(isDone() || isCompleting()) )
+        if ( !isDone() )
         {
             throw new IllegalStateException( "Can't get records as list because SUCCESS or FAILURE did not arrive" );
         }
