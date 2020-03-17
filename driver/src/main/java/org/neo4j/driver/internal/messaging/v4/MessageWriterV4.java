@@ -41,7 +41,7 @@ import org.neo4j.driver.internal.messaging.request.ResetMessage;
 import org.neo4j.driver.internal.messaging.request.RollbackMessage;
 import org.neo4j.driver.internal.messaging.request.RunWithMetadataMessage;
 import org.neo4j.driver.internal.messaging.v2.ValuePackerV2;
-import org.neo4j.driver.internal.packstream.PackOutput;
+import org.neo4j.driver.connector.PackOutput;
 import org.neo4j.driver.internal.util.Iterables;
 
 public class MessageWriterV4 extends AbstractMessageWriter

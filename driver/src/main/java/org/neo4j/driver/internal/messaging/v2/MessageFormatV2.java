@@ -19,8 +19,8 @@
 package org.neo4j.driver.internal.messaging.v2;
 
 import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
-import org.neo4j.driver.internal.packstream.PackInput;
-import org.neo4j.driver.internal.packstream.PackOutput;
+import org.neo4j.driver.connector.PackInput;
+import org.neo4j.driver.connector.PackOutput;
 
 public class MessageFormatV2 extends MessageFormatV1
 {

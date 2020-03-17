@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Test;
 
 import org.neo4j.driver.internal.messaging.MessageFormat;
 import org.neo4j.driver.internal.messaging.v2.MessageReaderV2;
-import org.neo4j.driver.internal.packstream.PackInput;
-import org.neo4j.driver.internal.packstream.PackOutput;
+import org.neo4j.driver.connector.PackInput;
+import org.neo4j.driver.connector.PackOutput;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;

@@ -60,12 +60,12 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.neo4j.driver.Values.point;
 import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.packstream.PackStream.FLOAT_64;
-import static org.neo4j.driver.internal.packstream.PackStream.INT_16;
-import static org.neo4j.driver.internal.packstream.PackStream.INT_32;
-import static org.neo4j.driver.internal.packstream.PackStream.INT_64;
-import static org.neo4j.driver.internal.packstream.PackStream.Packer;
-import static org.neo4j.driver.internal.packstream.PackStream.STRING_8;
+import static org.neo4j.driver.connector.PackStream.FLOAT_64;
+import static org.neo4j.driver.connector.PackStream.INT_16;
+import static org.neo4j.driver.connector.PackStream.INT_32;
+import static org.neo4j.driver.connector.PackStream.INT_64;
+import static org.neo4j.driver.connector.PackStream.Packer;
+import static org.neo4j.driver.connector.PackStream.STRING_8;
 import static org.neo4j.driver.util.TestUtil.assertByteBufContains;
 
 class MessageFormatV2Test

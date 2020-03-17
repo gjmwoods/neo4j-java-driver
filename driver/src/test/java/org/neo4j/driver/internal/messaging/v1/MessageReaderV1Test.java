@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 
 import org.neo4j.driver.internal.util.messaging.AbstractMessageReaderTestBase;
 import org.neo4j.driver.internal.messaging.response.RecordMessage;
-import org.neo4j.driver.internal.packstream.PackInput;
+import org.neo4j.driver.connector.PackInput;
 import org.neo4j.driver.Value;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

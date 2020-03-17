@@ -71,6 +71,11 @@
         <artifactId>reactor-core</artifactId>
         <version>3.3.1.RELEASE</version>
       </dependency>
+      <dependency>
+        <groupId>org.neo4j.driver</groupId>
+        <artifactId>neo4j-java-connector</artifactId>
+        <version>4.1-SNAPSHOT</version>
+      </dependency>
       <!--Compile dependencies only used by Examples-->
       <dependency>
         <groupId>io.reactivex.rxjava2</groupId>

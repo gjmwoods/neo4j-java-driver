@@ -29,7 +29,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
 import org.neo4j.driver.internal.messaging.v1.ValueUnpackerV1;
-import org.neo4j.driver.internal.packstream.PackInput;
+import org.neo4j.driver.connector.PackInput;
 import org.neo4j.driver.internal.types.TypeConstructor;
 import org.neo4j.driver.Value;
 

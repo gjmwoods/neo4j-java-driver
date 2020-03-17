@@ -21,7 +21,7 @@ package org.neo4j.driver.internal.async.outbound;
 import io.netty.buffer.ByteBuf;
 
 import org.neo4j.driver.internal.async.connection.BoltProtocolUtil;
-import org.neo4j.driver.internal.packstream.PackOutput;
+import org.neo4j.driver.connector.PackOutput;
 
 import static java.util.Objects.requireNonNull;
 import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.CHUNK_HEADER_SIZE_BYTES;

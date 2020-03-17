@@ -41,7 +41,7 @@ import org.neo4j.driver.internal.messaging.response.SuccessMessage;
 import org.neo4j.driver.internal.util.messaging.KnowledgeableMessageFormat;
 import org.neo4j.driver.internal.util.messaging.MemorizingInboundMessageDispatcher;
 import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
-import org.neo4j.driver.internal.packstream.PackStream;
+import org.neo4j.driver.connector.PackStream;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.exceptions.ClientException;
 

@@ -39,7 +39,7 @@ import org.neo4j.driver.internal.messaging.response.RecordMessage;
 import org.neo4j.driver.internal.messaging.response.SuccessMessage;
 import org.neo4j.driver.internal.messaging.v2.MessageFormatV2;
 import org.neo4j.driver.internal.messaging.v2.ValuePackerV2;
-import org.neo4j.driver.internal.packstream.PackOutput;
+import org.neo4j.driver.connector.PackOutput;
 import org.neo4j.driver.internal.types.TypeConstructor;
 import org.neo4j.driver.internal.util.Iterables;
 import org.neo4j.driver.internal.value.InternalValue;

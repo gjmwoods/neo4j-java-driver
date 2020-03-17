@@ -20,7 +20,7 @@ package org.neo4j.driver.internal.async.inbound;
 
 import io.netty.buffer.ByteBuf;
 
-import org.neo4j.driver.internal.packstream.PackInput;
+import org.neo4j.driver.connector.PackInput;
 
 import static java.util.Objects.requireNonNull;
 

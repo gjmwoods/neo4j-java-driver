@@ -28,7 +28,7 @@ import org.neo4j.driver.internal.messaging.response.FailureMessage;
 import org.neo4j.driver.internal.messaging.response.IgnoredMessage;
 import org.neo4j.driver.internal.messaging.response.RecordMessage;
 import org.neo4j.driver.internal.messaging.response.SuccessMessage;
-import org.neo4j.driver.internal.packstream.PackInput;
+import org.neo4j.driver.connector.PackInput;
 import org.neo4j.driver.Value;
 
 public class MessageReaderV1 implements MessageFormat.Reader

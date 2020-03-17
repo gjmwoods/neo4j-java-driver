@@ -33,6 +33,8 @@ import java.util.Map;
 import org.neo4j.driver.internal.util.Iterables;
 import org.neo4j.driver.internal.util.io.BufferedChannelInput;
 import org.neo4j.driver.internal.util.io.ChannelOutput;
+import org.neo4j.driver.connector.PackStream;
+import org.neo4j.driver.connector.PackType;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;

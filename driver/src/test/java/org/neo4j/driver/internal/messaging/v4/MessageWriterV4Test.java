@@ -31,7 +31,7 @@ import org.neo4j.driver.internal.messaging.request.HelloMessage;
 import org.neo4j.driver.internal.messaging.request.InitMessage;
 import org.neo4j.driver.internal.messaging.request.PullMessage;
 import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.packstream.PackOutput;
+import org.neo4j.driver.connector.PackOutput;
 import org.neo4j.driver.internal.security.InternalAuthToken;
 import org.neo4j.driver.internal.util.messaging.AbstractMessageWriterTestBase;
 
