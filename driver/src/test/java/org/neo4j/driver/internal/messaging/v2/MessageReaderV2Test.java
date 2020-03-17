@@ -28,7 +28,7 @@ import org.neo4j.driver.internal.util.messaging.AbstractMessageReaderTestBase;
 import org.neo4j.driver.internal.messaging.MessageFormat;
 import org.neo4j.driver.internal.messaging.ResponseMessageHandler;
 import org.neo4j.driver.internal.messaging.response.RecordMessage;
-import org.neo4j.driver.connector.PackInput;
+import org.neo4j.connector.packstream.PackInput;
 import org.neo4j.driver.Value;
 
 import static org.mockito.Mockito.verify;

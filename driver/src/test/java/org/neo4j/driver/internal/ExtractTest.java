@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.neo4j.driver.internal.util.Extract;
-import org.neo4j.driver.internal.util.Iterables;
+import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.driver.util.Pair;

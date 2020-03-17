@@ -20,7 +20,7 @@ package org.neo4j.driver.internal.util.io;
 
 import io.netty.buffer.ByteBuf;
 
-import org.neo4j.driver.connector.PackOutput;
+import org.neo4j.connector.packstream.PackOutput;
 
 public class ByteBufOutput implements PackOutput
 {

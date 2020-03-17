@@ -30,7 +30,7 @@ import java.time.ZonedDateTime;
 import org.neo4j.driver.internal.InternalPoint2D;
 import org.neo4j.driver.internal.InternalPoint3D;
 import org.neo4j.driver.internal.messaging.v1.ValuePackerV1;
-import org.neo4j.driver.connector.PackOutput;
+import org.neo4j.connector.packstream.PackOutput;
 import org.neo4j.driver.internal.types.TypeConstructor;
 import org.neo4j.driver.internal.value.InternalValue;
 import org.neo4j.driver.types.IsoDuration;

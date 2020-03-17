@@ -35,7 +35,7 @@ import org.neo4j.driver.internal.messaging.response.FailureMessage;
 import org.neo4j.driver.internal.messaging.response.IgnoredMessage;
 import org.neo4j.driver.internal.messaging.response.RecordMessage;
 import org.neo4j.driver.internal.messaging.response.SuccessMessage;
-import org.neo4j.driver.connector.PackInput;
+import org.neo4j.connector.packstream.PackInput;
 import org.neo4j.driver.internal.util.io.ByteBufOutput;
 import org.neo4j.driver.Value;
 

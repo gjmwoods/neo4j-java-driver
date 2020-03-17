@@ -28,7 +28,7 @@ import org.neo4j.driver.Result;
 import org.neo4j.driver.types.Node;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.neo4j.driver.internal.util.Iterables.single;
+import static org.neo4j.connector.internal.util.Iterables.single;
 
 public class BlockingReadQuery<C extends AbstractContext> extends AbstractBlockingQuery<C>
 {

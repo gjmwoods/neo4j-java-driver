@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.driver.internal.InternalPair;
 import org.neo4j.driver.internal.value.NodeValue;
 import org.neo4j.driver.internal.value.PathValue;
@@ -43,7 +44,7 @@ import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
-import static org.neo4j.driver.internal.util.Iterables.newHashMapWithSize;
+import static org.neo4j.connector.internal.util.Iterables.newHashMapWithSize;
 import static org.neo4j.driver.Values.value;
 
 /**

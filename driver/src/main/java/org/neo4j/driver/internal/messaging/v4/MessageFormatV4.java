@@ -20,8 +20,8 @@ package org.neo4j.driver.internal.messaging.v4;
 
 import org.neo4j.driver.internal.messaging.MessageFormat;
 import org.neo4j.driver.internal.messaging.v2.MessageReaderV2;
-import org.neo4j.driver.connector.PackInput;
-import org.neo4j.driver.connector.PackOutput;
+import org.neo4j.connector.packstream.PackInput;
+import org.neo4j.connector.packstream.PackOutput;
 
 public class MessageFormatV4 implements MessageFormat
 {

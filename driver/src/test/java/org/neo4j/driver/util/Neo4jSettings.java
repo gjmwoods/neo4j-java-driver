@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.neo4j.driver.internal.util.Iterables.map;
+import static org.neo4j.connector.internal.util.Iterables.map;
 
 public class Neo4jSettings
 {

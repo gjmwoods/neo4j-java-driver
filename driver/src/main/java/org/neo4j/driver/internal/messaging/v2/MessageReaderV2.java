@@ -19,7 +19,7 @@
 package org.neo4j.driver.internal.messaging.v2;
 
 import org.neo4j.driver.internal.messaging.v1.MessageReaderV1;
-import org.neo4j.driver.connector.PackInput;
+import org.neo4j.connector.packstream.PackInput;
 
 public class MessageReaderV2 extends MessageReaderV1
 {

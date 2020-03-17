@@ -27,8 +27,8 @@ import org.neo4j.driver.internal.messaging.Message;
 import org.neo4j.driver.internal.messaging.MessageFormat;
 import org.neo4j.driver.internal.messaging.ResponseMessageHandler;
 import org.neo4j.driver.internal.messaging.response.FailureMessage;
-import org.neo4j.driver.connector.PackInput;
-import org.neo4j.driver.connector.PackOutput;
+import org.neo4j.connector.packstream.PackInput;
+import org.neo4j.connector.packstream.PackOutput;
 
 public class FailingMessageFormat implements MessageFormat
 {

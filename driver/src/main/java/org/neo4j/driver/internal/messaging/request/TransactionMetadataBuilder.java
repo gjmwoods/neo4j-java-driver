@@ -25,7 +25,7 @@ import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Bookmark;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.internal.DatabaseName;
-import org.neo4j.driver.internal.util.Iterables;
+import org.neo4j.connector.internal.util.Iterables;
 
 import static java.util.Collections.emptyMap;
 import static org.neo4j.driver.Values.value;

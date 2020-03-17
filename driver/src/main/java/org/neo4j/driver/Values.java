@@ -67,7 +67,7 @@ import org.neo4j.driver.types.TypeSystem;
 import java.util.function.Function;
 
 import static org.neo4j.driver.internal.util.Extract.assertParameter;
-import static org.neo4j.driver.internal.util.Iterables.newHashMapWithSize;
+import static org.neo4j.connector.internal.util.Iterables.newHashMapWithSize;
 
 /**
  * Utility for wrapping regular Java types and exposing them as {@link Value}

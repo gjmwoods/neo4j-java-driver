@@ -68,7 +68,7 @@ import org.neo4j.driver.async.ResultCursor;
 import org.neo4j.driver.internal.InternalDriver;
 import org.neo4j.driver.internal.logging.DevNullLogger;
 import org.neo4j.driver.internal.util.Futures;
-import org.neo4j.driver.internal.util.Iterables;
+import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.reactive.RxTransaction;
 import org.neo4j.driver.types.Node;

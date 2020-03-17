@@ -20,8 +20,8 @@ package org.neo4j.driver.internal.messaging;
 
 import java.io.IOException;
 
-import org.neo4j.driver.connector.PackInput;
-import org.neo4j.driver.connector.PackOutput;
+import org.neo4j.connector.packstream.PackInput;
+import org.neo4j.connector.packstream.PackOutput;
 
 public interface MessageFormat
 {

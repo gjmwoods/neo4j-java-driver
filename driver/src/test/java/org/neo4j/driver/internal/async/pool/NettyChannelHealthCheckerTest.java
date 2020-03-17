@@ -43,7 +43,7 @@ import static org.neo4j.driver.internal.async.pool.PoolSettings.DEFAULT_IDLE_TIM
 import static org.neo4j.driver.internal.async.pool.PoolSettings.DEFAULT_MAX_CONNECTION_POOL_SIZE;
 import static org.neo4j.driver.internal.async.pool.PoolSettings.NOT_CONFIGURED;
 import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.util.Iterables.single;
+import static org.neo4j.connector.internal.util.Iterables.single;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class NettyChannelHealthCheckerTest

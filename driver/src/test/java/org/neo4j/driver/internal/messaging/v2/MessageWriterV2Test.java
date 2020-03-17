@@ -27,7 +27,7 @@ import org.neo4j.driver.internal.messaging.MessageFormat.Writer;
 import org.neo4j.driver.internal.messaging.request.HelloMessage;
 import org.neo4j.driver.internal.messaging.request.InitMessage;
 import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.connector.PackOutput;
+import org.neo4j.connector.packstream.PackOutput;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonMap;

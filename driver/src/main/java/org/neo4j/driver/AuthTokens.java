@@ -29,7 +29,7 @@ import static org.neo4j.driver.internal.security.InternalAuthToken.PARAMETERS_KE
 import static org.neo4j.driver.internal.security.InternalAuthToken.PRINCIPAL_KEY;
 import static org.neo4j.driver.internal.security.InternalAuthToken.REALM_KEY;
 import static org.neo4j.driver.internal.security.InternalAuthToken.SCHEME_KEY;
-import static org.neo4j.driver.internal.util.Iterables.newHashMapWithSize;
+import static org.neo4j.connector.internal.util.Iterables.newHashMapWithSize;
 import static org.neo4j.driver.Values.value;
 
 /**

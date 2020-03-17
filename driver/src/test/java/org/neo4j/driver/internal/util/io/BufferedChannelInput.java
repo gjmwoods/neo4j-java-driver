@@ -23,8 +23,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
 
-import org.neo4j.driver.connector.PackInput;
-import org.neo4j.driver.connector.PackStream;
+import org.neo4j.connector.packstream.PackInput;
+import org.neo4j.connector.packstream.PackStream;
 
 /**
  * An {@link PackInput} implementation that reads from an input channel into an internal buffer.

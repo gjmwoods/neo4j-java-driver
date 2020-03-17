@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.internal.util.Iterables;
+import org.neo4j.connector.internal.util.Iterables;
 
 import static java.util.Objects.requireNonNull;
 

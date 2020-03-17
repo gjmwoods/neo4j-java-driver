@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.WritableByteChannel;
 
-import org.neo4j.driver.connector.PackOutput;
+import org.neo4j.connector.packstream.PackOutput;
 
 public class ChannelOutput implements PackOutput
 {

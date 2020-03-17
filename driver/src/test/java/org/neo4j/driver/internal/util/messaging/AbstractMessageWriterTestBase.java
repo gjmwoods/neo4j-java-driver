@@ -29,8 +29,8 @@ import java.util.stream.Stream;
 import org.neo4j.driver.internal.async.inbound.ByteBufInput;
 import org.neo4j.driver.internal.messaging.Message;
 import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.connector.PackOutput;
-import org.neo4j.driver.connector.PackStream;
+import org.neo4j.connector.packstream.PackOutput;
+import org.neo4j.connector.packstream.PackStream;
 import org.neo4j.driver.internal.util.io.ByteBufOutput;
 
 import static org.hamcrest.MatcherAssert.assertThat;

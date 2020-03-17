@@ -25,7 +25,7 @@ import org.neo4j.driver.summary.ResultSummary;
 import org.neo4j.driver.util.Immutable;
 
 import static java.lang.String.format;
-import static org.neo4j.driver.internal.util.Iterables.newHashMapWithSize;
+import static org.neo4j.connector.internal.util.Iterables.newHashMapWithSize;
 import static org.neo4j.driver.internal.util.Preconditions.checkArgument;
 import static org.neo4j.driver.Values.ofValue;
 import static org.neo4j.driver.Values.value;
