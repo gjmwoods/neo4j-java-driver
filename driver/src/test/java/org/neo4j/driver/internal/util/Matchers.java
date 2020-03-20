@@ -25,18 +25,18 @@ import org.hamcrest.TypeSafeMatcher;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.DirectConnectionProvider;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.DirectConnectionProvider;
 import org.neo4j.driver.internal.InternalDriver;
 import org.neo4j.driver.internal.SessionFactory;
 import org.neo4j.driver.internal.SessionFactoryImpl;
-import org.neo4j.driver.internal.cluster.AddressSet;
-import org.neo4j.driver.internal.cluster.RoutingTable;
-import org.neo4j.driver.internal.cluster.loadbalancing.LoadBalancer;
-import org.neo4j.driver.internal.spi.ConnectionProvider;
+import org.neo4j.connector.cluster.AddressSet;
+import org.neo4j.connector.cluster.RoutingTable;
+import org.neo4j.connector.cluster.loadbalancing.LoadBalancer;
+import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.summary.ResultSummary;
 
 public final class Matchers
 {

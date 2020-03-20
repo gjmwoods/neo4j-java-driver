@@ -28,14 +28,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.internal.async.connection.ChannelAttributes;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
+import org.neo4j.connector.async.connection.ChannelAttributes;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.outbound.OutboundMessageHandler;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.request.RunMessage;
+import org.neo4j.connector.messaging.v1.MessageFormatV1;
 import org.neo4j.connector.packstream.PackOutput;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.Value;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,11 +47,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.messaging.MessageFormat.Writer;
-import static org.neo4j.driver.internal.messaging.request.PullAllMessage.PULL_ALL;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.util.TestUtil.assertByteBufContains;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.messaging.MessageFormat.Writer;
+import static org.neo4j.connector.messaging.request.PullAllMessage.PULL_ALL;
+import static org.neo4j.connector.Values.value;
 
 class OutboundMessageHandlerTest
 {
@@ -81,7 +82,7 @@ class OutboundMessageHandlerTest
         assertEquals( 1, channel.outboundMessages().size() );
 
         ByteBuf buf = channel.readOutbound();
-        assertByteBufContains(
+        TestUtil.assertByteBufContains(
                 buf,
                 (short) 5, (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, // message body
                 (byte) 0, (byte) 0  // message boundary

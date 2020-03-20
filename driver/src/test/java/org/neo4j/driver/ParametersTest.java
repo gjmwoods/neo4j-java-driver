@@ -24,13 +24,18 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.Values;
+import org.neo4j.connector.exception.ClientException;
 import org.neo4j.driver.internal.DefaultBookmarkHolder;
-import org.neo4j.driver.internal.InternalRecord;
+import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.driver.internal.InternalSession;
-import org.neo4j.driver.internal.async.NetworkSession;
-import org.neo4j.driver.internal.retry.RetryLogic;
-import org.neo4j.driver.internal.spi.ConnectionProvider;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.connector.spi.ConnectionProvider;
+import org.neo4j.driver.internal.util.ValueFactory;
 
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
@@ -40,13 +45,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.util.ValueFactory.emptyNodeValue;
-import static org.neo4j.driver.internal.util.ValueFactory.emptyRelationshipValue;
-import static org.neo4j.driver.internal.util.ValueFactory.filledPathValue;
+import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class ParametersTest
 {
@@ -54,16 +56,16 @@ class ParametersTest
     {
         return Stream.of(
                 // Node
-                Arguments.of( emptyNodeValue(), "Nodes can't be used as parameters." ),
-                Arguments.of( emptyNodeValue().asNode(), "Nodes can't be used as parameters." ),
+                Arguments.of( ValueFactory.emptyNodeValue(), "Nodes can't be used as parameters." ),
+                Arguments.of( ValueFactory.emptyNodeValue().asNode(), "Nodes can't be used as parameters." ),
 
                 // Relationship
-                Arguments.of( emptyRelationshipValue(), "Relationships can't be used as parameters." ),
-                Arguments.of( emptyRelationshipValue().asRelationship(), "Relationships can't be used as parameters." ),
+                Arguments.of( ValueFactory.emptyRelationshipValue(), "Relationships can't be used as parameters." ),
+                Arguments.of( ValueFactory.emptyRelationshipValue().asRelationship(), "Relationships can't be used as parameters." ),
 
                 // Path
-                Arguments.of( filledPathValue(), "Paths can't be used as parameters." ),
-                Arguments.of( filledPathValue().asPath(), "Paths can't be used as parameters." )
+                Arguments.of( ValueFactory.filledPathValue(), "Paths can't be used as parameters." ),
+                Arguments.of( ValueFactory.filledPathValue().asPath(), "Paths can't be used as parameters." )
         );
     }
 

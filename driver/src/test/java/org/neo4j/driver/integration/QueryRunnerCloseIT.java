@@ -27,11 +27,11 @@ import java.util.concurrent.ExecutorService;
 
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.async.AsyncSession;
-import org.neo4j.driver.async.ResultCursor;
-import org.neo4j.driver.exceptions.ResultConsumedException;
-import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.connector.exception.ResultConsumedException;
+import org.neo4j.connector.summary.ResultSummary;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

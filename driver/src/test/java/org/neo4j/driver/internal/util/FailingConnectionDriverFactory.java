@@ -25,16 +25,17 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.neo4j.driver.internal.BoltServerAddress;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.driver.internal.DriverFactory;
-import org.neo4j.driver.internal.messaging.BoltProtocol;
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.metrics.MetricsProvider;
-import org.neo4j.driver.internal.security.SecurityPlan;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.spi.ConnectionPool;
-import org.neo4j.driver.internal.spi.ResponseHandler;
-import org.neo4j.driver.AuthToken;
+import org.neo4j.connector.messaging.BoltProtocol;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.internal.metrics.MetricsProvider;
+import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.spi.ConnectionPool;
+import org.neo4j.connector.spi.ResponseHandler;
+import org.neo4j.connector.AuthToken;
 import org.neo4j.driver.Config;
 
 public class FailingConnectionDriverFactory extends DriverFactory

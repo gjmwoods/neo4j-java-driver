@@ -18,6 +18,7 @@
  */
 package org.neo4j.driver.util.cc;
 
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
@@ -27,15 +28,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.neo4j.driver.AuthToken;
-import org.neo4j.driver.AuthTokens;
+import org.neo4j.connector.AuthToken;
+import org.neo4j.connector.AuthTokens;
 import org.neo4j.driver.util.Neo4jRunner;
 
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.neo4j.driver.util.Neo4jRunner.PASSWORD;
 import static org.neo4j.driver.util.Neo4jRunner.TARGET_DIR;
 import static org.neo4j.driver.util.Neo4jRunner.USER;
-import static org.neo4j.driver.util.cc.CommandLineUtil.boltKitAvailable;
 
 public class ClusterExtension implements BeforeAllCallback, AfterEachCallback, AfterAllCallback
 {
@@ -58,7 +58,7 @@ public class ClusterExtension implements BeforeAllCallback, AfterEachCallback, A
     @Override
     public void beforeAll( ExtensionContext context ) throws Exception
     {
-        assumeTrue( boltKitAvailable(), "BoltKit cluster support unavailable" );
+        Assumptions.assumeTrue( CommandLineUtil.boltKitAvailable(), "BoltKit cluster support unavailable" );
 
         stopSingleInstanceDatabase();
 

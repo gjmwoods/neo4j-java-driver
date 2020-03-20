@@ -20,14 +20,15 @@ package org.neo4j.driver.internal.messaging.encode;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.CommitMessage;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.encode.CommitMessageEncoder;
+import org.neo4j.connector.messaging.request.CommitMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.internal.messaging.request.CommitMessage.COMMIT;
-import static org.neo4j.driver.internal.messaging.request.DiscardAllMessage.DISCARD_ALL;
+import static org.neo4j.connector.messaging.request.CommitMessage.COMMIT;
+import static org.neo4j.connector.messaging.request.DiscardAllMessage.DISCARD_ALL;
 
 class CommitMessageEncoderTest
 {

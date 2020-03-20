@@ -25,8 +25,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeoutException;
 
-import org.neo4j.driver.internal.cursor.AsyncResultCursorImpl;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.async.ResultCursorsHolder;
+import org.neo4j.connector.internal.cursor.AsyncResultCursorImpl;
+import org.neo4j.connector.internal.util.Futures;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.junit.jupiter.api.Assertions.assertEquals;

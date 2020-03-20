@@ -20,17 +20,18 @@ package org.neo4j.driver.internal.value;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.types.InternalTypeSystem;
-import org.neo4j.driver.internal.types.TypeConstructor;
-import org.neo4j.driver.types.TypeSystem;
+import org.neo4j.connector.internal.types.InternalTypeSystem;
+import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.connector.internal.types.TypeSystem;
+import org.neo4j.connector.internal.value.BooleanValue;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.internal.value.BooleanValue.FALSE;
-import static org.neo4j.driver.internal.value.BooleanValue.TRUE;
+import static org.neo4j.connector.internal.value.BooleanValue.FALSE;
+import static org.neo4j.connector.internal.value.BooleanValue.TRUE;
 
 class BooleanValueTest
 {

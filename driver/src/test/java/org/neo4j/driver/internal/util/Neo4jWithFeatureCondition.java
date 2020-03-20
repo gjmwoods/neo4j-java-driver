@@ -25,6 +25,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import java.lang.reflect.AnnotatedElement;
 import java.util.Optional;
 
+import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.util.Neo4jRunner;

@@ -23,7 +23,7 @@ package org.neo4j.docs.driver;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.Session;
 // end::result-consume-import[]
 

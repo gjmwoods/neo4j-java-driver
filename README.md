@@ -30,7 +30,7 @@ The driver is distributed exclusively via [Maven](https://search.maven.org/).
 To use the driver in your Maven project, include the following within your `pom.xml` file:
 ```xml
 <dependency>
-    <groupId>org.neo4j.driver</groupId>
+    <groupId>org.neo4j.connector</groupId>
     <artifactId>neo4j-java-driver</artifactId>
     <version>x.y.z</version>
 </dependency>

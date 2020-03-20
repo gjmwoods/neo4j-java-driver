@@ -18,10 +18,12 @@
  */
 package org.neo4j.driver.internal.util;
 
+import org.neo4j.connector.internal.util.ServerVersion;
+
 import static java.util.Objects.requireNonNull;
-import static org.neo4j.driver.internal.util.ServerVersion.v3_4_0;
-import static org.neo4j.driver.internal.util.ServerVersion.v3_5_0;
-import static org.neo4j.driver.internal.util.ServerVersion.v4_0_0;
+import static org.neo4j.connector.internal.util.ServerVersion.v3_4_0;
+import static org.neo4j.connector.internal.util.ServerVersion.v3_5_0;
+import static org.neo4j.connector.internal.util.ServerVersion.v4_0_0;
 
 public enum Neo4jFeature
 {

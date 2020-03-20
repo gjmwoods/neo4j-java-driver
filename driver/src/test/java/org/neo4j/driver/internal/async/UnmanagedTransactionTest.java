@@ -25,17 +25,18 @@ import org.mockito.InOrder;
 
 import java.util.function.Consumer;
 
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.TransactionConfig;
-import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.connector.async.UnmanagedTransaction;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.TransactionConfig;
+import org.neo4j.connector.exception.ClientException;
 import org.neo4j.driver.internal.DefaultBookmarkHolder;
-import org.neo4j.driver.internal.InternalBookmark;
-import org.neo4j.driver.internal.messaging.request.PullAllMessage;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.messaging.v4.BoltProtocolV4;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.spi.ResponseHandler;
+import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.connector.messaging.request.PullAllMessage;
+import org.neo4j.connector.messaging.request.RunMessage;
+import org.neo4j.connector.messaging.v4.BoltProtocolV4;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.spi.ResponseHandler;
 
 import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,7 +50,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
+import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
 import static org.neo4j.driver.util.TestUtil.runMessageWithQueryMatcher;

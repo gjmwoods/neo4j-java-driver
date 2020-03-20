@@ -20,6 +20,13 @@ package org.neo4j.driver;
 
 import java.util.Map;
 
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.QueryRunner;
+import org.neo4j.connector.Result;
+import org.neo4j.connector.TransactionConfig;
+import org.neo4j.connector.Values;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.util.Resource;
 
@@ -147,7 +154,7 @@ public interface Session extends Resource, QueryRunner
      * @param config configuration for the new transaction.
      * @return a stream of result values and associated metadata.
      */
-    Result run(String query, TransactionConfig config );
+    Result run( String query, TransactionConfig config );
 
     /**
      * Run a query with parameters in a managed auto-commit transaction with the
@@ -210,7 +217,7 @@ public interface Session extends Resource, QueryRunner
      * @param config configuration for the new transaction.
      * @return a stream of result values and associated metadata.
      */
-    Result run(Query query, TransactionConfig config );
+    Result run( Query query, TransactionConfig config );
 
     /**
      * Return the bookmark received following the last completed

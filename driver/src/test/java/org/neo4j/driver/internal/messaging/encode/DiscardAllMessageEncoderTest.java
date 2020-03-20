@@ -20,9 +20,10 @@ package org.neo4j.driver.internal.messaging.encode;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.DiscardAllMessage;
-import org.neo4j.driver.internal.messaging.request.DiscardMessage;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.encode.DiscardAllMessageEncoder;
+import org.neo4j.connector.messaging.request.DiscardAllMessage;
+import org.neo4j.connector.messaging.request.DiscardMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;

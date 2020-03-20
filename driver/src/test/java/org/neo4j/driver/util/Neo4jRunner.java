@@ -18,6 +18,8 @@
  */
 package org.neo4j.driver.util;
 
+import org.junit.jupiter.api.Assumptions;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,24 +31,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.neo4j.driver.AuthToken;
+import org.neo4j.connector.AuthToken;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.util.ErrorUtil;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.util.ErrorUtil;
+import org.neo4j.driver.util.cc.CommandLineUtil;
 
 import static java.util.Arrays.asList;
 import static java.util.logging.Level.INFO;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.neo4j.driver.AuthTokens.basic;
-import static org.neo4j.driver.Logging.console;
+import static org.neo4j.connector.AuthTokens.basic;
+import static org.neo4j.connector.Logging.console;
 import static org.neo4j.driver.util.FileTools.moveFile;
 import static org.neo4j.driver.util.FileTools.updateProperties;
-import static org.neo4j.driver.util.Neo4jSettings.CURRENT_BOLT_PORT;
-import static org.neo4j.driver.util.Neo4jSettings.CURRENT_HTTP_PORT;
-import static org.neo4j.driver.util.Neo4jSettings.TEST_JVM_ID;
-import static org.neo4j.driver.util.cc.CommandLineUtil.boltKitAvailable;
 import static org.neo4j.driver.util.cc.CommandLineUtil.executeCommand;
 
 /**
@@ -69,7 +68,7 @@ public class Neo4jRunner
     private Neo4jSettings currentSettings = Neo4jSettings.TEST_SETTINGS;
 
     public static final String TARGET_DIR = new File( "../target" ).getAbsolutePath();
-    private static final String NEO4J_DIR = new File( TARGET_DIR, "test-server-" + TEST_JVM_ID ).getAbsolutePath();
+    private static final String NEO4J_DIR = new File( TARGET_DIR, "test-server-" + Neo4jSettings.TEST_JVM_ID ).getAbsolutePath();
     public static final String HOME_DIR = new File( NEO4J_DIR, "neo4jHome" ).getAbsolutePath();
 
     private Driver driver;
@@ -77,12 +76,12 @@ public class Neo4jRunner
 
     public int httpPort()
     {
-        return CURRENT_HTTP_PORT;
+        return Neo4jSettings.CURRENT_HTTP_PORT;
     }
 
     public int boltPort()
     {
-        return CURRENT_BOLT_PORT;
+        return Neo4jSettings.CURRENT_BOLT_PORT;
     }
 
     public BoltServerAddress boltAddress()
@@ -98,7 +97,7 @@ public class Neo4jRunner
     /** Global runner controlling a single server, used to avoid having to restart the server between tests */
     public static synchronized Neo4jRunner getOrCreateGlobalRunner() throws IOException
     {
-        assumeTrue( boltKitAvailable(), "BoltKit support unavailable" );
+        Assumptions.assumeTrue( CommandLineUtil.boltKitAvailable(), "BoltKit support unavailable" );
         if ( globalInstance == null )
         {
             globalInstance = new Neo4jRunner();
@@ -184,19 +183,19 @@ public class Neo4jRunner
             commands.addAll( asList( split ) );
             commands.add( NEO4J_DIR );
 
-            String tempHomeDir = executeCommand( commands ).trim();
+            String tempHomeDir = CommandLineUtil.executeCommand( commands ).trim();
             debug( "Downloaded server at `%s`, now renaming to `%s`.", tempHomeDir, HOME_DIR );
 
             moveFile( new File( tempHomeDir ), targetHomeFile );
             debug( "Installed server at `%s`.", HOME_DIR );
-            executeCommand( "neoctrl-create-user", HOME_DIR, USER, PASSWORD );
+            CommandLineUtil.executeCommand( "neoctrl-create-user", HOME_DIR, USER, PASSWORD );
         }
     }
 
     public void startNeo4j()
     {
         debug( "Starting server..." );
-        executeCommand( "neoctrl-start", HOME_DIR, "-v" );
+        CommandLineUtil.executeCommand( "neoctrl-start", HOME_DIR, "-v" );
         debug( "Server started." );
     }
 
@@ -209,7 +208,7 @@ public class Neo4jRunner
         restartDriver = true;
 
         debug( "Stopping server..." );
-        executeCommand( "neoctrl-stop", HOME_DIR );
+        CommandLineUtil.executeCommand( "neoctrl-stop", HOME_DIR );
         debug( "Server stopped." );
     }
 
@@ -222,7 +221,7 @@ public class Neo4jRunner
         restartDriver = true;
 
         debug( "Killing server..." );
-        executeCommand( "neoctrl-stop", "-k", HOME_DIR );
+        CommandLineUtil.executeCommand( "neoctrl-stop", "-k", HOME_DIR );
         debug( "Server killed." );
     }
 

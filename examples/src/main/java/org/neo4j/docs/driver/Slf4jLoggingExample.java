@@ -18,11 +18,11 @@
  */
 package org.neo4j.docs.driver;
 
-import org.neo4j.driver.AuthTokens;
+import org.neo4j.connector.AuthTokens;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.Logging;
+import org.neo4j.connector.Logging;
 import org.neo4j.driver.Session;
 
 import static java.util.Collections.singletonMap;

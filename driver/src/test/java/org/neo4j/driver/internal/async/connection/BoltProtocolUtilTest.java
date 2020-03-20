@@ -22,26 +22,26 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.messaging.v1.BoltProtocolV1;
-import org.neo4j.driver.internal.messaging.v2.BoltProtocolV2;
-import org.neo4j.driver.internal.messaging.v3.BoltProtocolV3;
-import org.neo4j.driver.internal.messaging.v4.BoltProtocolV4;
+import org.neo4j.connector.messaging.v1.BoltProtocolV1;
+import org.neo4j.connector.messaging.v2.BoltProtocolV2;
+import org.neo4j.connector.messaging.v3.BoltProtocolV3;
+import org.neo4j.connector.messaging.v4.BoltProtocolV4;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.BOLT_MAGIC_PREAMBLE;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.handshakeBuf;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.handshakeString;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.writeChunkHeader;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.writeEmptyChunkHeader;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.writeMessageBoundary;
-import static org.neo4j.driver.util.TestUtil.assertByteBufContains;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.BOLT_MAGIC_PREAMBLE;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.handshakeBuf;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.handshakeString;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.writeChunkHeader;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.writeEmptyChunkHeader;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.writeMessageBoundary;
 
 class BoltProtocolUtilTest
 {
     @Test
     void shouldReturnHandshakeBuf()
     {
-        assertByteBufContains(
+        TestUtil.assertByteBufContains(
                 handshakeBuf(),
                 BOLT_MAGIC_PREAMBLE, BoltProtocolV4.VERSION, BoltProtocolV3.VERSION, BoltProtocolV2.VERSION, BoltProtocolV1.VERSION
         );
@@ -63,7 +63,7 @@ class BoltProtocolUtilTest
         buf.writeInt( 3 );
         writeMessageBoundary( buf );
 
-        assertByteBufContains( buf, 1, 2, 3, (byte) 0, (byte) 0 );
+        TestUtil.assertByteBufContains( buf, 1, 2, 3, (byte) 0, (byte) 0 );
     }
 
     @Test
@@ -76,7 +76,7 @@ class BoltProtocolUtilTest
         buf.writeInt( 2 );
         buf.writeInt( 3 );
 
-        assertByteBufContains( buf, (byte) 0, (byte) 0, 1, 2, 3 );
+        TestUtil.assertByteBufContains( buf, (byte) 0, (byte) 0, 1, 2, 3 );
     }
 
     @Test
@@ -90,6 +90,6 @@ class BoltProtocolUtilTest
         buf.writeInt( 3 );
         writeChunkHeader( buf, 0, 42 );
 
-        assertByteBufContains( buf, (short) 42, 1, 2, 3 );
+        TestUtil.assertByteBufContains( buf, (short) 42, 1, 2, 3 );
     }
 }

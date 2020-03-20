@@ -23,14 +23,15 @@ import io.netty.util.concurrent.ImmediateEventExecutor;
 import io.netty.util.concurrent.Promise;
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.Value;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.handlers.PingResponseHandler;
 
 import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.internal.logging.DevNullLogger.DEV_NULL_LOGGER;
+import static org.neo4j.connector.logging.DevNullLogger.DEV_NULL_LOGGER;
 
 class PingResponseHandlerTest
 {

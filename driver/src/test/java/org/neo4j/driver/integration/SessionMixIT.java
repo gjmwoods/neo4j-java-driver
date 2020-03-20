@@ -27,18 +27,18 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.Record;
+import org.neo4j.connector.Record;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Result;
-import org.neo4j.driver.TransactionConfig;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Result;
+import org.neo4j.connector.TransactionConfig;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
 import org.neo4j.driver.async.AsyncTransactionWork;
-import org.neo4j.driver.async.ResultCursor;
-import org.neo4j.driver.internal.async.connection.EventLoopGroupFactory;
-import org.neo4j.driver.internal.util.Futures;
-import org.neo4j.driver.types.Node;
+import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.connector.async.connection.EventLoopGroupFactory;
+import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.connector.internal.types.Node;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 
@@ -48,7 +48,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.Values.parameters;
+import static org.neo4j.connector.Values.parameters;
 import static org.neo4j.driver.internal.util.Matchers.blockingOperationInEventLoopError;
 import static org.neo4j.driver.util.TestUtil.await;
 

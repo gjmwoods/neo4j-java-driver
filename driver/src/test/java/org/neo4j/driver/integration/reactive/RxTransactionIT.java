@@ -37,19 +37,21 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
+import org.neo4j.driver.internal.util.Matchers;
+import org.neo4j.driver.internal.util.Neo4jFeature;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxTransaction;
-import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.summary.QueryType;
-import org.neo4j.driver.types.Node;
+import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.connector.summary.summary.QueryType;
+import org.neo4j.connector.internal.types.Node;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 
@@ -69,15 +71,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.neo4j.driver.SessionConfig.builder;
-import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.driver.internal.InternalBookmark.parse;
+import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.connector.internal.InternalBookmark.parse;
 import static org.neo4j.connector.internal.util.Iterables.single;
-import static org.neo4j.driver.internal.util.Matchers.containsResultAvailableAfterAndResultConsumedAfter;
-import static org.neo4j.driver.internal.util.Matchers.syntaxError;
-import static org.neo4j.driver.internal.util.Neo4jFeature.BOLT_V4;
 import static org.neo4j.driver.util.TestUtil.await;
 
-@EnabledOnNeo4jWith( BOLT_V4 )
+@EnabledOnNeo4jWith( Neo4jFeature.BOLT_V4 )
 @ParallelizableIT
 class RxTransactionIT
 {
@@ -404,7 +403,7 @@ class RxTransactionIT
         assertNull( summary.plan() );
         assertNull( summary.profile() );
         assertEquals( 0, summary.notifications().size() );
-        assertThat( summary, containsResultAvailableAfterAndResultConsumedAfter() );
+        assertThat( summary, Matchers.containsResultAvailableAfterAndResultConsumedAfter() );
 
         assertCanRollback( tx ); // you still need to rollback the tx as tx will not automatically closed
 
@@ -433,7 +432,7 @@ class RxTransactionIT
         assertThat( summary.plan().toString().toLowerCase(), containsString( "scan" ) );
         assertNull( summary.profile() );
         assertEquals( 0, summary.notifications().size() );
-        assertThat( summary, containsResultAvailableAfterAndResultConsumedAfter() );
+        assertThat( summary, Matchers.containsResultAvailableAfterAndResultConsumedAfter() );
 
         assertCanRollback( tx ); // you still need to rollback the tx as tx will not automatically closed
     }
@@ -467,7 +466,7 @@ class RxTransactionIT
         String profileAsString = summary.profile().toString().toLowerCase();
         assertThat( profileAsString, containsString( "hits" ) );
         assertEquals( 0, summary.notifications().size() );
-        assertThat( summary, containsResultAvailableAfterAndResultConsumedAfter() );
+        assertThat( summary, Matchers.containsResultAvailableAfterAndResultConsumedAfter() );
 
         assertCanRollback( tx ); // you still need to rollback the tx as tx will not automatically closed
     }
@@ -899,7 +898,7 @@ class RxTransactionIT
     {
         RxResult result = tx.run( "RETURN" );
         Exception e = assertThrows( Exception.class, () -> await( result.records() ) );
-        assertThat( e, is( syntaxError( "Unexpected end of input" ) ) );
+        assertThat( e, org.hamcrest.Matchers.is( Matchers.syntaxError( "Unexpected end of input" ) ) );
     }
 
     private void assertCanRunReturnOne( RxTransaction tx )

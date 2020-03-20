@@ -35,14 +35,14 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
+import org.neo4j.driver.util.DaemonThreadFactory;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.neo4j.driver.GraphDatabase.driver;
-import static org.neo4j.driver.util.DaemonThreadFactory.daemon;
 
 @ParallelizableIT
 class SessionPoolingStressIT
@@ -62,7 +62,7 @@ class SessionPoolingStressIT
     @BeforeEach
     void setUp()
     {
-        executor = Executors.newFixedThreadPool( N_THREADS, daemon( getClass().getSimpleName() + "-thread-" ) );
+        executor = Executors.newFixedThreadPool( N_THREADS, DaemonThreadFactory.daemon( getClass().getSimpleName() + "-thread-" ) );
     }
 
     @AfterEach

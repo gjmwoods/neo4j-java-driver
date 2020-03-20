@@ -24,13 +24,16 @@ import org.mockito.ArgumentCaptor;
 
 import java.lang.reflect.Method;
 
-import org.neo4j.driver.Logger;
-import org.neo4j.driver.Logging;
-import org.neo4j.driver.TransactionConfig;
+import org.neo4j.connector.async.ConnectionContext;
+import org.neo4j.connector.async.LeakLoggingNetworkSession;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.Logger;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.TransactionConfig;
 import org.neo4j.driver.internal.DefaultBookmarkHolder;
-import org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.spi.ConnectionProvider;
+import org.neo4j.connector.handlers.pulln.FetchSizeUtil;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.driver.internal.util.FixedRetryLogic;
 import org.neo4j.driver.util.TestUtil;
 
@@ -44,8 +47,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.AccessMode.READ;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.driver.util.TestUtil.DEFAULT_TEST_PROTOCOL;
 
 class LeakLoggingNetworkSessionTest

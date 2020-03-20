@@ -31,24 +31,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.AuthTokens;
-import org.neo4j.driver.Bookmark;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.AuthTokens;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.Logger;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Logger;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.async.AsyncSession;
-import org.neo4j.driver.async.ResultCursor;
-import org.neo4j.driver.exceptions.TransientException;
-import org.neo4j.driver.internal.cluster.RoutingSettings;
-import org.neo4j.driver.internal.retry.RetrySettings;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.connector.exception.TransientException;
+import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.io.ChannelTrackingDriverFactory;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxSession;
@@ -71,8 +72,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.neo4j.driver.SessionConfig.builder;
 import static org.neo4j.driver.SessionConfig.forDatabase;
-import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.driver.util.StubServer.INSECURE_CONFIG;
 import static org.neo4j.driver.util.StubServer.insecureBuilder;
 import static org.neo4j.driver.util.TestUtil.asOrderedSet;
@@ -106,7 +107,7 @@ class DirectDriverBoltKitTest
         StubServer server = StubServer.start( "multiple_bookmarks.script", 9001 );
 
         Bookmark bookmarks = InternalBookmark.parse( asOrderedSet( "neo4j:bookmark:v1:tx5", "neo4j:bookmark:v1:tx29",
-                "neo4j:bookmark:v1:tx94", "neo4j:bookmark:v1:tx56", "neo4j:bookmark:v1:tx16", "neo4j:bookmark:v1:tx68" ) );
+                                                                   "neo4j:bookmark:v1:tx94", "neo4j:bookmark:v1:tx56", "neo4j:bookmark:v1:tx16", "neo4j:bookmark:v1:tx68" ) );
 
         try ( Driver driver = GraphDatabase.driver( "bolt://localhost:9001", INSECURE_CONFIG );
               Session session = driver.session( builder().withBookmarks( bookmarks ).build() ) )

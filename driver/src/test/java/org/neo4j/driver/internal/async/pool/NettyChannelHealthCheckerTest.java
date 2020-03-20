@@ -26,23 +26,26 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.messaging.request.ResetMessage;
-import org.neo4j.driver.internal.util.Clock;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.pool.NettyChannelHealthChecker;
+import org.neo4j.connector.async.pool.PoolSettings;
+import org.neo4j.connector.messaging.request.ResetMessage;
+import org.neo4j.connector.internal.util.Clock;
+import org.neo4j.connector.Value;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setCreationTimestamp;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setLastUsedTimestamp;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.async.pool.PoolSettings.DEFAULT_CONNECTION_ACQUISITION_TIMEOUT;
-import static org.neo4j.driver.internal.async.pool.PoolSettings.DEFAULT_IDLE_TIME_BEFORE_CONNECTION_TEST;
-import static org.neo4j.driver.internal.async.pool.PoolSettings.DEFAULT_MAX_CONNECTION_POOL_SIZE;
-import static org.neo4j.driver.internal.async.pool.PoolSettings.NOT_CONFIGURED;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setCreationTimestamp;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setLastUsedTimestamp;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.async.pool.PoolSettings.DEFAULT_CONNECTION_ACQUISITION_TIMEOUT;
+import static org.neo4j.connector.async.pool.PoolSettings.DEFAULT_IDLE_TIME_BEFORE_CONNECTION_TEST;
+import static org.neo4j.connector.async.pool.PoolSettings.DEFAULT_MAX_CONNECTION_POOL_SIZE;
+import static org.neo4j.connector.async.pool.PoolSettings.NOT_CONFIGURED;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.connector.internal.util.Iterables.single;
 import static org.neo4j.driver.util.TestUtil.await;
 
@@ -68,14 +71,14 @@ class NettyChannelHealthCheckerTest
     {
         int maxLifetime = 1000;
         PoolSettings settings = new PoolSettings( DEFAULT_MAX_CONNECTION_POOL_SIZE,
-                DEFAULT_CONNECTION_ACQUISITION_TIMEOUT, maxLifetime, DEFAULT_IDLE_TIME_BEFORE_CONNECTION_TEST );
+                                                  DEFAULT_CONNECTION_ACQUISITION_TIMEOUT, maxLifetime, DEFAULT_IDLE_TIME_BEFORE_CONNECTION_TEST );
         Clock clock = Clock.SYSTEM;
         NettyChannelHealthChecker healthChecker = newHealthChecker( settings, clock );
 
         setCreationTimestamp( channel, clock.millis() - maxLifetime * 2 );
         Future<Boolean> healthy = healthChecker.isHealthy( channel );
 
-        assertThat( await( healthy ), is( false ) );
+        assertThat( TestUtil.await( healthy ), is( false ) );
     }
 
     @Test
@@ -88,7 +91,7 @@ class NettyChannelHealthCheckerTest
         setCreationTimestamp( channel, 0 );
         Future<Boolean> healthy = healthChecker.isHealthy( channel );
 
-        assertThat( await( healthy ), is( true ) );
+        assertThat( TestUtil.await( healthy ), is( true ) );
     }
 
     @Test
@@ -134,12 +137,12 @@ class NettyChannelHealthCheckerTest
         if ( resetMessageSuccessful )
         {
             dispatcher.handleSuccessMessage( Collections.<String,Value>emptyMap() );
-            assertThat( await( healthy ), is( true ) );
+            assertThat( TestUtil.await( healthy ), is( true ) );
         }
         else
         {
             dispatcher.handleFailureMessage( "Neo.ClientError.General.Unknown", "Error!" );
-            assertThat( await( healthy ), is( false ) );
+            assertThat( TestUtil.await( healthy ), is( false ) );
         }
     }
 
@@ -155,13 +158,13 @@ class NettyChannelHealthCheckerTest
         if ( channelActive )
         {
             Future<Boolean> healthy = healthChecker.isHealthy( channel );
-            assertThat( await( healthy ), is( true ) );
+            assertThat( TestUtil.await( healthy ), is( true ) );
         }
         else
         {
             channel.close().syncUninterruptibly();
             Future<Boolean> healthy = healthChecker.isHealthy( channel );
-            assertThat( await( healthy ), is( false ) );
+            assertThat( TestUtil.await( healthy ), is( false ) );
         }
     }
 

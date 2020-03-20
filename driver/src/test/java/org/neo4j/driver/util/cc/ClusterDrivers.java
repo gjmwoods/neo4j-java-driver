@@ -22,21 +22,20 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.driver.AuthTokens;
+import org.neo4j.connector.AuthTokens;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.internal.util.DriverFactoryWithOneEventLoopThread;
-import org.neo4j.driver.util.cc.ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery;
 
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.util.ServerVersion.version;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.util.ServerVersion.version;
 
 public class ClusterDrivers implements AutoCloseable
 {
     private final String user;
     private final String password;
     private final Map<ClusterMember,Driver> membersWithDrivers;
-    private ClusterMemberRoleDiscovery discovery;
+    private ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery discovery;
 
     public ClusterDrivers( String user, String password )
     {
@@ -55,7 +54,7 @@ public class ClusterDrivers implements AutoCloseable
         return driver;
     }
 
-    public ClusterMemberRoleDiscovery getDiscovery()
+    public ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery getDiscovery()
     {
         return discovery;
     }

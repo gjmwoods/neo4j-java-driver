@@ -21,14 +21,16 @@ package org.neo4j.driver.internal.handlers.pulln;
 import java.util.Collections;
 import java.util.function.BiConsumer;
 
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.internal.BookmarkHolder;
-import org.neo4j.driver.internal.handlers.RunResponseHandler;
-import org.neo4j.driver.internal.handlers.SessionPullResponseCompletionListener;
-import org.neo4j.driver.internal.messaging.v4.BoltProtocolV4;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.connector.handlers.pulln.BasicPullResponseHandler;
+import org.neo4j.connector.handlers.pulln.PullResponseHandler;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.handlers.RunResponseHandler;
+import org.neo4j.connector.handlers.SessionPullResponseCompletionListener;
+import org.neo4j.connector.messaging.v4.BoltProtocolV4;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.summary.ResultSummary;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

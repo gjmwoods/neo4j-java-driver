@@ -30,20 +30,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
-import org.neo4j.driver.AuthToken;
-import org.neo4j.driver.AuthTokens;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.AuthenticationException;
-import org.neo4j.driver.internal.ConnectionSettings;
-import org.neo4j.driver.internal.async.connection.BootstrapFactory;
-import org.neo4j.driver.internal.async.connection.ChannelConnectorImpl;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
-import org.neo4j.driver.internal.security.InternalAuthToken;
+import org.neo4j.connector.Values;
+import org.neo4j.connector.async.pool.NettyChannelPool;
+import org.neo4j.connector.async.pool.NettyChannelTracker;
+import org.neo4j.connector.AuthToken;
+import org.neo4j.connector.AuthTokens;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.AuthenticationException;
+import org.neo4j.connector.internal.ConnectionSettings;
+import org.neo4j.connector.async.connection.BootstrapFactory;
+import org.neo4j.connector.async.connection.ChannelConnectorImpl;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.internal.security.InternalAuthToken;
 import org.neo4j.driver.internal.util.FakeClock;
 import org.neo4j.driver.internal.util.ImmediateSchedulingEventExecutor;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.Neo4jRunner;
 import org.neo4j.driver.util.ParallelizableIT;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -53,9 +57,9 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
 import static org.neo4j.driver.util.TestUtil.await;
 
 @ParallelizableIT
@@ -93,12 +97,12 @@ class NettyChannelPoolIT
     {
         pool = newPool( neo4j.authToken() );
 
-        Channel channel = await( pool.acquire() );
+        Channel channel = TestUtil.await( pool.acquire() );
         assertNotNull( channel );
         verify( poolHandler ).channelCreated( eq( channel ), any() );
         verify( poolHandler, never() ).channelReleased( channel );
 
-        await( pool.release( channel ) );
+        TestUtil.await( pool.release( channel ) );
         verify( poolHandler ).channelReleased( channel );
     }
 
@@ -107,7 +111,7 @@ class NettyChannelPoolIT
     {
         pool = newPool( AuthTokens.basic( "wrong", "wrong" ) );
 
-        assertThrows( AuthenticationException.class, () -> await( pool.acquire() ) );
+        assertThrows( AuthenticationException.class, () -> TestUtil.await( pool.acquire() ) );
 
         verify( poolHandler, never() ).channelCreated( any() );
         verify( poolHandler, never() ).channelReleased( any() );
@@ -131,7 +135,7 @@ class NettyChannelPoolIT
             AuthenticationException e = assertThrows( AuthenticationException.class, () -> acquire( pool ) );
         }
 
-        authTokenMap.put( "credentials", value( Neo4jRunner.PASSWORD ) );
+        authTokenMap.put( "credentials", Values.value( Neo4jRunner.PASSWORD ) );
 
         assertNotNull( acquire( pool ) );
     }
@@ -190,11 +194,11 @@ class NettyChannelPoolIT
 
     private static Channel acquire( NettyChannelPool pool ) throws Exception
     {
-        return await( pool.acquire() );
+        return TestUtil.await( pool.acquire() );
     }
 
     private void release( Channel channel ) throws Exception
     {
-        await( pool.release( channel ) );
+        TestUtil.await( pool.release( channel ) );
     }
 }

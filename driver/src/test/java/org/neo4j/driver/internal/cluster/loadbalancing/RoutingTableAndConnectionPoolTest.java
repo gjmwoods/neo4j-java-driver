@@ -38,25 +38,29 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Logging;
-import org.neo4j.driver.exceptions.FatalDiscoveryException;
-import org.neo4j.driver.exceptions.ProtocolException;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.async.connection.BootstrapFactory;
-import org.neo4j.driver.internal.async.pool.NettyChannelTracker;
-import org.neo4j.driver.internal.async.pool.PoolSettings;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.cluster.loadbalancing.LeastConnectedLoadBalancingStrategy;
+import org.neo4j.connector.cluster.loadbalancing.LoadBalancer;
+import org.neo4j.connector.exception.FatalDiscoveryException;
+import org.neo4j.connector.exception.ProtocolException;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.async.connection.BootstrapFactory;
+import org.neo4j.connector.async.pool.NettyChannelTracker;
+import org.neo4j.connector.async.pool.PoolSettings;
 import org.neo4j.driver.internal.async.pool.TestConnectionPool;
-import org.neo4j.driver.internal.cluster.ClusterComposition;
-import org.neo4j.driver.internal.cluster.Rediscovery;
-import org.neo4j.driver.internal.cluster.RoutingTable;
-import org.neo4j.driver.internal.cluster.RoutingTableRegistry;
-import org.neo4j.driver.internal.cluster.RoutingTableRegistryImpl;
-import org.neo4j.driver.internal.metrics.InternalAbstractMetrics;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.spi.ConnectionPool;
-import org.neo4j.driver.internal.util.Clock;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.cluster.ClusterComposition;
+import org.neo4j.connector.cluster.Rediscovery;
+import org.neo4j.connector.cluster.RoutingTable;
+import org.neo4j.connector.cluster.RoutingTableRegistry;
+import org.neo4j.connector.cluster.RoutingTableRegistryImpl;
+import org.neo4j.connector.internal.metrics.InternalAbstractMetrics;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.spi.ConnectionPool;
+import org.neo4j.connector.internal.util.Clock;
+import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.cluster.RediscoveryUtil;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -67,12 +71,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.Logging.none;
-import static org.neo4j.driver.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
-import static org.neo4j.driver.internal.DatabaseNameUtil.database;
-import static org.neo4j.driver.internal.cluster.RediscoveryUtil.contextWithDatabase;
-import static org.neo4j.driver.internal.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
-import static org.neo4j.driver.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
+import static org.neo4j.connector.Logging.none;
+import static org.neo4j.connector.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
+import static org.neo4j.connector.internal.DatabaseNameUtil.database;
+import static org.neo4j.connector.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
+import static org.neo4j.connector.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class RoutingTableAndConnectionPoolTest
@@ -102,7 +105,7 @@ class RoutingTableAndConnectionPoolTest
         LoadBalancer loadBalancer = newLoadBalancer( connectionPool, routingTables );
 
         // When
-        await( loadBalancer.acquireConnection( contextWithDatabase( "neo4j" ) ) );
+        TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "neo4j" ) ) );
 
         // Then
         assertThat( routingTables.allServers().size(), equalTo( 1 ) );
@@ -122,7 +125,7 @@ class RoutingTableAndConnectionPoolTest
         LoadBalancer loadBalancer = newLoadBalancer( connectionPool, routingTables );
 
         // When
-        assertThrows( FatalDiscoveryException.class, () -> await( loadBalancer.acquireConnection( contextWithDatabase( "neo4j" ) ) ) );
+        assertThrows( FatalDiscoveryException.class, () -> TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "neo4j" ) ) ) );
 
         // Then
         assertTrue( routingTables.allServers().isEmpty() );
@@ -141,7 +144,7 @@ class RoutingTableAndConnectionPoolTest
         LoadBalancer loadBalancer = newLoadBalancer( connectionPool, routingTables );
 
         // When
-        assertThrows( ProtocolException.class, () -> await( loadBalancer.acquireConnection( contextWithDatabase( "neo4j" ) ) ) );
+        assertThrows( ProtocolException.class, () -> TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "neo4j" ) ) ) );
 
         // Then
         assertTrue( routingTables.allServers().isEmpty() );
@@ -160,7 +163,7 @@ class RoutingTableAndConnectionPoolTest
         LoadBalancer loadBalancer = newLoadBalancer( connectionPool, routingTables );
 
         // When
-        assertThrows( SecurityException.class, () -> await( loadBalancer.acquireConnection( contextWithDatabase( "neo4j" ) ) ) );
+        assertThrows( SecurityException.class, () -> TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "neo4j" ) ) ) );
 
         // Then
         assertTrue( routingTables.allServers().isEmpty() );
@@ -179,8 +182,8 @@ class RoutingTableAndConnectionPoolTest
         LoadBalancer loadBalancer = newLoadBalancer( connectionPool, routingTables );
 
         // When
-        Connection connection = await( loadBalancer.acquireConnection( contextWithDatabase( "neo4j" ) ) );
-        await( connection.release() );
+        Connection connection = TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "neo4j" ) ) );
+        TestUtil.await( connection.release() );
 
         // Then
         assertTrue( routingTables.contains( database( "neo4j" ) ) );
@@ -202,9 +205,9 @@ class RoutingTableAndConnectionPoolTest
         LoadBalancer loadBalancer = newLoadBalancer( connectionPool, routingTables );
 
         // When
-        Connection connection = await( loadBalancer.acquireConnection( contextWithDatabase( "neo4j" ) ) );
-        await( connection.release() );
-        await( loadBalancer.acquireConnection( contextWithDatabase( "foo"  ) ) );
+        Connection connection = TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "neo4j" ) ) );
+        TestUtil.await( connection.release() );
+        TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "foo"  ) ) );
 
         // Then
         assertFalse( routingTables.contains( database( "neo4j" ) ) );
@@ -227,8 +230,8 @@ class RoutingTableAndConnectionPoolTest
         LoadBalancer loadBalancer = newLoadBalancer( connectionPool, routingTables );
 
         // When
-        await( loadBalancer.acquireConnection( contextWithDatabase("neo4j" ) ) );
-        await( loadBalancer.acquireConnection( contextWithDatabase( "foo" ) ) );
+        TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "neo4j" ) ) );
+        TestUtil.await( loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( "foo" ) ) );
 
         // Then
         assertThat( routingTables.allServers().size(), equalTo( 1 ) );
@@ -281,8 +284,8 @@ class RoutingTableAndConnectionPoolTest
         {
             Future<?> future = executorService.submit( () -> {
                 int index = random.nextInt( DATABASES.length );
-                CompletionStage<Void> task = loadBalancer.acquireConnection( contextWithDatabase( DATABASES[index] ) ).thenCompose( Connection::release );
-                await( task );
+                CompletionStage<Void> task = loadBalancer.acquireConnection( RediscoveryUtil.contextWithDatabase( DATABASES[index] ) ).thenCompose( Connection::release );
+                TestUtil.await( task );
             } );
             futures[i] = future;
         }

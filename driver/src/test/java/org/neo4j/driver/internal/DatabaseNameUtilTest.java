@@ -21,11 +21,11 @@ package org.neo4j.driver.internal;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.neo4j.driver.internal.DatabaseNameUtil.DEFAULT_DATABASE_NAME;
-import static org.neo4j.driver.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
-import static org.neo4j.driver.internal.DatabaseNameUtil.database;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.DatabaseNameUtil.systemDatabase;
+import static org.neo4j.connector.internal.DatabaseNameUtil.DEFAULT_DATABASE_NAME;
+import static org.neo4j.connector.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
+import static org.neo4j.connector.internal.DatabaseNameUtil.database;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.internal.DatabaseNameUtil.systemDatabase;
 
 class DatabaseNameUtilTest
 {

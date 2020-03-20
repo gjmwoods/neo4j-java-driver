@@ -29,21 +29,25 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import javax.net.ssl.SSLHandshakeException;
 
-import org.neo4j.driver.Logging;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.SecurityException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.internal.async.inbound.ChunkDecoder;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.async.inbound.InboundMessageHandler;
-import org.neo4j.driver.internal.async.inbound.MessageDecoder;
-import org.neo4j.driver.internal.async.outbound.OutboundMessageHandler;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.v1.BoltProtocolV1;
-import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
-import org.neo4j.driver.internal.messaging.v2.BoltProtocolV2;
-import org.neo4j.driver.internal.messaging.v2.MessageFormatV2;
-import org.neo4j.driver.internal.util.ErrorUtil;
+import org.neo4j.connector.async.connection.ChannelPipelineBuilder;
+import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
+import org.neo4j.connector.async.connection.HandshakeHandler;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.SecurityException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.async.inbound.ChunkDecoder;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.inbound.InboundMessageHandler;
+import org.neo4j.connector.async.inbound.MessageDecoder;
+import org.neo4j.connector.async.outbound.OutboundMessageHandler;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.v1.BoltProtocolV1;
+import org.neo4j.connector.messaging.v1.MessageFormatV1;
+import org.neo4j.connector.messaging.v2.BoltProtocolV2;
+import org.neo4j.connector.messaging.v2.MessageFormatV2;
+import org.neo4j.connector.internal.util.ErrorUtil;
+import org.neo4j.driver.util.TestUtil;
 
 import static io.netty.buffer.Unpooled.copyInt;
 import static org.hamcrest.Matchers.instanceOf;
@@ -53,10 +57,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.HTTP;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.NO_PROTOCOL_VERSION;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.HTTP;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.NO_PROTOCOL_VERSION;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class HandshakeHandlerTest
@@ -86,11 +90,11 @@ class HandshakeHandlerTest
         channel.pipeline().fireExceptionCaught( cause );
 
         // promise should fail
-        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> await( handshakeCompletedPromise ) );
+        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( cause, error.getCause() );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
     }
 
     @Test
@@ -104,11 +108,11 @@ class HandshakeHandlerTest
         channel.pipeline().fireExceptionCaught( error );
 
         // promise should fail
-        ServiceUnavailableException e = assertThrows( ServiceUnavailableException.class, () -> await( handshakeCompletedPromise ) );
+        ServiceUnavailableException e = assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( error, e );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
     }
 
     @Test
@@ -124,11 +128,11 @@ class HandshakeHandlerTest
         channel.pipeline().fireExceptionCaught( error2 );
 
         // promise should fail
-        ServiceUnavailableException e1 = assertThrows( ServiceUnavailableException.class, () -> await( handshakeCompletedPromise ) );
+        ServiceUnavailableException e1 = assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( error1, e1.getCause() );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
 
         RuntimeException e2 = assertThrows( RuntimeException.class, channel::checkException );
         assertEquals( error2, e2 );
@@ -145,11 +149,11 @@ class HandshakeHandlerTest
         channel.pipeline().fireExceptionCaught( new DecoderException( cause ) );
 
         // promise should fail
-        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> await( handshakeCompletedPromise ) );
+        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( cause, error.getCause() );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
     }
 
     @Test
@@ -162,11 +166,11 @@ class HandshakeHandlerTest
         DecoderException decoderException = new DecoderException( "Unable to decode a message" );
         channel.pipeline().fireExceptionCaught( decoderException );
 
-        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> await( handshakeCompletedPromise ) );
+        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( decoderException, error.getCause() );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
     }
 
     @Test
@@ -180,11 +184,11 @@ class HandshakeHandlerTest
         channel.pipeline().fireExceptionCaught( error );
 
         // promise should fail
-        SecurityException e = assertThrows( SecurityException.class, () -> await( handshakeCompletedPromise ) );
+        SecurityException e = assertThrows( SecurityException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( error, e.getCause() );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
     }
 
     @Test
@@ -227,11 +231,11 @@ class HandshakeHandlerTest
         channel.pipeline().fireChannelInactive();
 
         // promise should fail
-        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> await( handshakeCompletedPromise ) );
+        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( ErrorUtil.newConnectionTerminatedError().getMessage(), error.getMessage() );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
     }
 
     private void testFailure( int serverSuggestedVersion, String expectedMessagePrefix )
@@ -246,12 +250,12 @@ class HandshakeHandlerTest
         assertNull( channel.pipeline().get( HandshakeHandler.class ) );
 
         // promise should fail
-        Exception error = assertThrows( Exception.class, () -> await( handshakeCompletedPromise ) );
+        Exception error = assertThrows( Exception.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertThat( error, instanceOf( ClientException.class ) );
         assertThat( error.getMessage(), startsWith( expectedMessagePrefix ) );
 
         // channel should be closed
-        assertNull( await( channel.closeFuture() ) );
+        assertNull( TestUtil.await( channel.closeFuture() ) );
     }
 
     private void testProtocolSelection( int protocolVersion, Class<? extends MessageFormat> expectedMessageFormatClass )
@@ -278,7 +282,7 @@ class HandshakeHandlerTest
         assertNotNull( channel.pipeline().get( OutboundMessageHandler.class ) );
 
         // promise should be successful
-        assertNull( await( handshakeCompletedPromise ) );
+        assertNull( TestUtil.await( handshakeCompletedPromise ) );
     }
 
     private static HandshakeHandler newHandler( ChannelPromise handshakeCompletedPromise )

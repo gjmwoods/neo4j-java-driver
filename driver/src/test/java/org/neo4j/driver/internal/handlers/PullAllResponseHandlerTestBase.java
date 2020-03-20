@@ -22,24 +22,22 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.channels.ClosedChannelException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.exceptions.SessionExpiredException;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.InternalRecord;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.value.BooleanValue;
-import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.summary.QueryType;
+import org.neo4j.connector.handlers.PullAllResponseHandler;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.InternalRecord;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.connector.summary.summary.QueryType;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -54,8 +52,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.Values.values;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.Values.values;
 import static org.neo4j.driver.util.TestUtil.anyServerVersion;
 import static org.neo4j.driver.util.TestUtil.await;
 

@@ -20,14 +20,15 @@ package org.neo4j.driver.internal.messaging.encode;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.GoodbyeMessage;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.encode.GoodbyeMessageEncoder;
+import org.neo4j.connector.messaging.request.GoodbyeMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.internal.messaging.request.DiscardAllMessage.DISCARD_ALL;
-import static org.neo4j.driver.internal.messaging.request.GoodbyeMessage.GOODBYE;
+import static org.neo4j.connector.messaging.request.DiscardAllMessage.DISCARD_ALL;
+import static org.neo4j.connector.messaging.request.GoodbyeMessage.GOODBYE;
 
 class GoodbyeMessageEncoderTest
 {

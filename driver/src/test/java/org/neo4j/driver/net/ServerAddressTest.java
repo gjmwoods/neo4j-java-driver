@@ -20,6 +20,8 @@ package org.neo4j.driver.net;
 
 import org.junit.jupiter.api.Test;
 
+import org.neo4j.connector.net.ServerAddress;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

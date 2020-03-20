@@ -24,6 +24,7 @@ import io.netty.util.concurrent.FailedFuture;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.ImmediateEventExecutor;
 import io.netty.util.concurrent.SucceededFuture;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -34,7 +35,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.neo4j.driver.internal.async.connection.EventLoopGroupFactory;
+import org.neo4j.connector.async.connection.EventLoopGroupFactory;
+import org.neo4j.connector.internal.util.Futures;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -44,7 +46,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.internal.util.Matchers.blockingOperationInEventLoopError;
 import static org.neo4j.driver.util.DaemonThreadFactory.daemon;
 import static org.neo4j.driver.util.TestUtil.sleep;
 
@@ -164,7 +165,7 @@ class FuturesTest
             Future<String> result = eventExecutor.submit( () -> Futures.blockingGet( future ) );
 
             ExecutionException e = assertThrows( ExecutionException.class, result::get );
-            assertThat( e.getCause(), is( blockingOperationInEventLoopError() ) );
+            assertThat( e.getCause(), Matchers.is( org.neo4j.driver.internal.util.Matchers.blockingOperationInEventLoopError() ) );
         }
         finally
         {

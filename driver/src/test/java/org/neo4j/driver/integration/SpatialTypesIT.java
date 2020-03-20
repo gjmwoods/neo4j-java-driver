@@ -27,9 +27,9 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.types.Point;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.types.Point;
 import org.neo4j.driver.util.ParallelizableIT;
 import org.neo4j.driver.util.SessionExtension;
 
@@ -37,8 +37,8 @@ import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.neo4j.driver.internal.util.Neo4jFeature.SPATIAL_TYPES;
-import static org.neo4j.driver.Values.ofPoint;
-import static org.neo4j.driver.Values.point;
+import static org.neo4j.connector.Values.ofPoint;
+import static org.neo4j.connector.Values.point;
 
 @EnabledOnNeo4jWith( SPATIAL_TYPES )
 @ParallelizableIT

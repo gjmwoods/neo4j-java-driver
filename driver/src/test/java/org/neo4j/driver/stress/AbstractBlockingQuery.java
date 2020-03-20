@@ -18,11 +18,11 @@
  */
 package org.neo4j.driver.stress;
 
-import org.neo4j.driver.AccessMode;
+import org.neo4j.connector.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Transaction;
-import org.neo4j.driver.exceptions.TransientException;
+import org.neo4j.connector.exception.TransientException;
 
 import static org.neo4j.driver.SessionConfig.builder;
 

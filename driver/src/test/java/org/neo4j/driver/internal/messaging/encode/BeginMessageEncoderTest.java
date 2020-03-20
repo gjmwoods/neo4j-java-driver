@@ -27,20 +27,21 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.internal.InternalBookmark;
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.BeginMessage;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.messaging.encode.BeginMessageEncoder;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.request.BeginMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.AccessMode.READ;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.messaging.request.ResetMessage.RESET;
+import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.messaging.request.ResetMessage.RESET;
 
 class BeginMessageEncoderTest
 {

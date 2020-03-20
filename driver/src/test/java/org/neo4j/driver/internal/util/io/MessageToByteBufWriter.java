@@ -23,8 +23,8 @@ import io.netty.buffer.Unpooled;
 
 import java.io.IOException;
 
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.messaging.MessageFormat;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.messaging.MessageFormat;
 
 public class MessageToByteBufWriter
 {

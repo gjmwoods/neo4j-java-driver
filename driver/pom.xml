@@ -6,7 +6,7 @@
   <properties>
     <bundle.name>${project.groupId}.${project.artifactId}</bundle.name>
     <maven.build.timestamp.format>'v'yyyyMMdd-HHmm</maven.build.timestamp.format>
-    <moduleName>org.neo4j.driver</moduleName>
+    <moduleName>org.neo4j.connector</moduleName>
     <rootDir>${project.basedir}/..</rootDir>
   </properties>
 
@@ -124,7 +124,7 @@
           <sourceFileIncludes>
             <sourceFileInclude>org/neo4j/driver/**/*.java</sourceFileInclude>
           </sourceFileIncludes>
-	  <excludePackageNames>org.neo4j.driver.internal</excludePackageNames>
+	  <excludePackageNames>org.neo4j.connector.internal</excludePackageNames>
         </configuration>
       </plugin>
       <plugin>
@@ -226,11 +226,11 @@
               <relocations>
                 <relocation>
                   <pattern>io.netty</pattern>
-                  <shadedPattern>org.neo4j.driver.internal.shaded.io.netty</shadedPattern>
+                  <shadedPattern>org.neo4j.connector.internal.shaded.io.netty</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>reactor</pattern>
-                  <shadedPattern>org.neo4j.driver.internal.shaded.reactor</shadedPattern>
+                  <shadedPattern>org.neo4j.connector.internal.shaded.reactor</shadedPattern>
                 </relocation>
               </relocations>
               <transformers>

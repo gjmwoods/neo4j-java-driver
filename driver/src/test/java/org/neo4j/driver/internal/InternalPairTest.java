@@ -20,12 +20,13 @@ package org.neo4j.driver.internal;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.Value;
-import org.neo4j.driver.util.Pair;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.InternalPair;
+import org.neo4j.connector.internal.util.Pair;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.value;
 
 class InternalPairTest
 {

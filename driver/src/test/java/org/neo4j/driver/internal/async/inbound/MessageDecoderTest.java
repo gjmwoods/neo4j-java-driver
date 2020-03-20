@@ -22,11 +22,13 @@ import io.netty.channel.embedded.EmbeddedChannel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import org.neo4j.connector.async.inbound.MessageDecoder;
+import org.neo4j.driver.util.TestUtil;
+
 import static io.netty.buffer.Unpooled.wrappedBuffer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.util.TestUtil.assertByteBufEquals;
 
 class MessageDecoderTest
 {
@@ -46,7 +48,7 @@ class MessageDecoderTest
         assertTrue( channel.finish() );
 
         assertEquals( 1, channel.inboundMessages().size() );
-        assertByteBufEquals( wrappedBuffer( new byte[]{1, 2, 3, 4, 5} ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[]{1, 2, 3, 4, 5} ), channel.readInbound() );
     }
 
     @Test
@@ -59,7 +61,7 @@ class MessageDecoderTest
         assertTrue( channel.finish() );
 
         assertEquals( 1, channel.inboundMessages().size() );
-        assertByteBufEquals( wrappedBuffer( new byte[]{1, 2, 3, 4, 5, 6, 7, 8} ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[]{1, 2, 3, 4, 5, 6, 7, 8} ), channel.readInbound() );
     }
 
     @Test
@@ -77,8 +79,8 @@ class MessageDecoderTest
         channel.writeInbound( wrappedBuffer( new byte[0] ) );
 
         assertEquals( 3, channel.inboundMessages().size() );
-        assertByteBufEquals( wrappedBuffer( new byte[]{1, 2, 3} ), channel.readInbound() );
-        assertByteBufEquals( wrappedBuffer( new byte[]{4, 5, 6} ), channel.readInbound() );
-        assertByteBufEquals( wrappedBuffer( new byte[]{7, 8, 9, 10} ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[]{1, 2, 3} ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[]{4, 5, 6} ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[]{7, 8, 9, 10} ), channel.readInbound() );
     }
 }

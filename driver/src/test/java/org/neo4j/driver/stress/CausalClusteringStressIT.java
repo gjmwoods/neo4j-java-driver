@@ -32,12 +32,12 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.neo4j.driver.AuthToken;
+import org.neo4j.connector.AuthToken;
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.exceptions.SessionExpiredException;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.util.ServerVersion;
-import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.util.ServerVersion;
+import org.neo4j.connector.summary.ResultSummary;
 import org.neo4j.driver.util.cc.ClusterMemberRole;
 import org.neo4j.driver.util.cc.ClusterMemberRoleDiscoveryFactory;
 import org.neo4j.driver.util.cc.LocalOrRemoteClusterExtension;

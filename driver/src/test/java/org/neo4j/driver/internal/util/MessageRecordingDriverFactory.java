@@ -28,18 +28,19 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.neo4j.driver.internal.ConnectionSettings;
+import org.neo4j.connector.internal.ConnectionSettings;
+import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.DriverFactory;
-import org.neo4j.driver.internal.async.connection.ChannelConnector;
-import org.neo4j.driver.internal.async.connection.ChannelConnectorImpl;
-import org.neo4j.driver.internal.async.connection.ChannelPipelineBuilder;
-import org.neo4j.driver.internal.async.connection.ChannelPipelineBuilderImpl;
-import org.neo4j.driver.internal.async.outbound.OutboundMessageHandler;
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.security.SecurityPlan;
+import org.neo4j.connector.async.connection.ChannelConnector;
+import org.neo4j.connector.async.connection.ChannelConnectorImpl;
+import org.neo4j.connector.async.connection.ChannelPipelineBuilder;
+import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
+import org.neo4j.connector.async.outbound.OutboundMessageHandler;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.internal.security.SecurityPlan;
 import org.neo4j.driver.Config;
-import org.neo4j.driver.Logging;
+import org.neo4j.connector.Logging;
 
 public class MessageRecordingDriverFactory extends DriverFactory
 {

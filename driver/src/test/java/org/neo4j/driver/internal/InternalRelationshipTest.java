@@ -24,14 +24,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.neo4j.driver.Value;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.InternalRelationship;
+
 import java.util.function.Function;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.neo4j.driver.Values.NULL;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.NULL;
+import static org.neo4j.connector.Values.value;
 
 class InternalRelationshipTest
 {

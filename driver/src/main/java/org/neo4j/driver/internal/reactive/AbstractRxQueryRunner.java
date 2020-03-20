@@ -20,18 +20,19 @@ package org.neo4j.driver.internal.reactive;
 
 import java.util.Map;
 
-import org.neo4j.driver.Query;
+import org.neo4j.connector.Query;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxQueryRunner;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.AbstractQueryRunner;
 
-import static org.neo4j.driver.internal.AbstractQueryRunner.parameters;
+import static org.neo4j.connector.AbstractQueryRunner.parameters;
 
 public abstract class AbstractRxQueryRunner implements RxQueryRunner
 {
     @Override
-    public final RxResult run(String query, Value parameters )
+    public final RxResult run( String query, Value parameters )
     {
         return run( new Query( query, parameters ) );
     }
@@ -39,13 +40,13 @@ public abstract class AbstractRxQueryRunner implements RxQueryRunner
     @Override
     public final RxResult run(String query, Map<String,Object> parameters )
     {
-        return run( query, parameters( parameters ) );
+        return run( query, AbstractQueryRunner.parameters( parameters ) );
     }
 
     @Override
     public final RxResult run(String query, Record parameters )
     {
-        return run( query, parameters( parameters ) );
+        return run( query, AbstractQueryRunner.parameters( parameters ) );
     }
 
     @Override

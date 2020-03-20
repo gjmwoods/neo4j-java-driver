@@ -34,19 +34,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.neo4j.driver.Value;
-import org.neo4j.driver.Values;
-import org.neo4j.driver.internal.InternalPoint2D;
-import org.neo4j.driver.internal.InternalPoint3D;
-import org.neo4j.driver.internal.async.inbound.ByteBufInput;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.ResponseMessageHandler;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.messaging.response.RecordMessage;
+import org.neo4j.connector.messaging.v2.MessageFormatV2;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.Values;
+import org.neo4j.connector.InternalPoint2D;
+import org.neo4j.connector.InternalPoint3D;
+import org.neo4j.connector.async.inbound.ByteBufInput;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.ResponseMessageHandler;
+import org.neo4j.connector.messaging.request.RunMessage;
+import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.driver.internal.util.ThrowingConsumer;
 import org.neo4j.driver.internal.util.io.ByteBufOutput;
-import org.neo4j.driver.types.IsoDuration;
-import org.neo4j.driver.types.Point;
+import org.neo4j.connector.internal.types.IsoDuration;
+import org.neo4j.connector.internal.types.Point;
 
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
@@ -58,8 +59,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.Values.point;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.point;
+import static org.neo4j.connector.Values.value;
 import static org.neo4j.connector.packstream.PackStream.FLOAT_64;
 import static org.neo4j.connector.packstream.PackStream.INT_16;
 import static org.neo4j.connector.packstream.PackStream.INT_32;
@@ -84,7 +85,7 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Double.BYTES - Byte.BYTES - Double.BYTES - Byte.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice, (byte) 42, FLOAT_64, 12.99, FLOAT_64, -180.0 );
+        TestUtil.assertByteBufContains( tailSlice, (byte) 42, FLOAT_64, 12.99, FLOAT_64, -180.0 );
     }
 
     @Test
@@ -99,7 +100,7 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Double.BYTES - Byte.BYTES - Double.BYTES - Byte.BYTES - Double.BYTES - Byte.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice, (byte) 42, FLOAT_64, 0.51, FLOAT_64, 2.99, FLOAT_64, 100.123 );
+        TestUtil.assertByteBufContains( tailSlice, (byte) 42, FLOAT_64, 0.51, FLOAT_64, 2.99, FLOAT_64, 100.123 );
     }
 
     @Test
@@ -147,7 +148,7 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Long.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice, INT_64, date.toEpochDay() );
+        TestUtil.assertByteBufContains( tailSlice, INT_64, date.toEpochDay() );
     }
 
     @Test
@@ -176,7 +177,7 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Long.BYTES - Byte.BYTES - Integer.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice, INT_64, time.toLocalTime().toNanoOfDay(), INT_32, time.getOffset().getTotalSeconds() );
+        TestUtil.assertByteBufContains( tailSlice, INT_64, time.toLocalTime().toNanoOfDay(), INT_32, time.getOffset().getTotalSeconds() );
     }
 
     @Test
@@ -206,7 +207,7 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Long.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice, INT_64, time.toNanoOfDay() );
+        TestUtil.assertByteBufContains( tailSlice, INT_64, time.toNanoOfDay() );
     }
 
     @Test
@@ -235,7 +236,7 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Long.BYTES - Byte.BYTES - Short.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice, INT_64, dateTime.toEpochSecond( UTC ), INT_16, (short) dateTime.getNano() );
+        TestUtil.assertByteBufContains( tailSlice, INT_64, dateTime.toEpochSecond( UTC ), INT_16, (short) dateTime.getNano() );
     }
 
     @Test
@@ -266,10 +267,10 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Integer.BYTES - Byte.BYTES - Short.BYTES - Byte.BYTES - Integer.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice,
-                INT_32, (int) localEpochSecondOf( dateTime ),
-                INT_16, (short) dateTime.getNano(),
-                INT_32, zoneOffset.getTotalSeconds() );
+        TestUtil.assertByteBufContains( tailSlice,
+                                        INT_32, (int) localEpochSecondOf( dateTime ),
+                                        INT_16, (short) dateTime.getNano(),
+                                        INT_32, zoneOffset.getTotalSeconds() );
     }
 
     @Test
@@ -314,7 +315,7 @@ class MessageFormatV2Test
             expectedBuf.add( b );
         }
 
-        assertByteBufContains( tailSlice, expectedBuf.toArray( new Number[0] ) );
+        TestUtil.assertByteBufContains( tailSlice, expectedBuf.toArray( new Number[0] ) );
     }
 
     @Test
@@ -348,8 +349,8 @@ class MessageFormatV2Test
         int index = buf.readableBytes() - Long.BYTES - Byte.BYTES - Integer.BYTES - Byte.BYTES - Short.BYTES - Byte.BYTES - Byte.BYTES;
         ByteBuf tailSlice = buf.slice( index, buf.readableBytes() - index );
 
-        assertByteBufContains( tailSlice,
-                INT_64, duration.months(), INT_32, (int) duration.days(), INT_16, (short) duration.seconds(), (byte) duration.nanoseconds() );
+        TestUtil.assertByteBufContains( tailSlice,
+                                        INT_64, duration.months(), INT_32, (int) duration.days(), INT_16, (short) duration.seconds(), (byte) duration.nanoseconds() );
     }
 
     @Test

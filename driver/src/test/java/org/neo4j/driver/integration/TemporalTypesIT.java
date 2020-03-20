@@ -35,10 +35,10 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Result;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.types.IsoDuration;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Result;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.types.IsoDuration;
 import java.util.function.Function;
 import org.neo4j.driver.util.ParallelizableIT;
 import org.neo4j.driver.util.SessionExtension;
@@ -49,9 +49,9 @@ import static java.util.Collections.singletonMap;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.neo4j.driver.internal.util.Neo4jFeature.TEMPORAL_TYPES;
-import static org.neo4j.driver.Values.isoDuration;
-import static org.neo4j.driver.Values.ofOffsetDateTime;
-import static org.neo4j.driver.Values.parameters;
+import static org.neo4j.connector.Values.isoDuration;
+import static org.neo4j.connector.Values.ofOffsetDateTime;
+import static org.neo4j.connector.Values.parameters;
 
 @EnabledOnNeo4jWith( TEMPORAL_TYPES )
 @ParallelizableIT

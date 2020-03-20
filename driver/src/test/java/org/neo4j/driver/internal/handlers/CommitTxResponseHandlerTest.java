@@ -22,16 +22,17 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.internal.InternalBookmark;
+import org.neo4j.connector.handlers.CommitTxResponseHandler;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.InternalBookmark;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.value;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class CommitTxResponseHandlerTest

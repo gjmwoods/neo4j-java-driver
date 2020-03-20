@@ -20,11 +20,13 @@ package org.neo4j.driver.internal.value;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.types.InternalTypeSystem;
-import org.neo4j.driver.internal.types.TypeConstructor;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.value.LossyCoercion;
-import org.neo4j.driver.types.TypeSystem;
+import org.neo4j.connector.internal.types.InternalTypeSystem;
+import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.value.LossyCoercion;
+import org.neo4j.connector.internal.types.TypeSystem;
+import org.neo4j.connector.internal.value.IntegerValue;
+import org.neo4j.connector.internal.value.InternalValue;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;

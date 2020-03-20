@@ -23,10 +23,10 @@ import io.netty.util.internal.PlatformDependent;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.ResponseMessageHandler;
-import org.neo4j.driver.internal.messaging.response.FailureMessage;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.ResponseMessageHandler;
+import org.neo4j.connector.messaging.response.FailureMessage;
 import org.neo4j.connector.packstream.PackInput;
 import org.neo4j.connector.packstream.PackOutput;
 

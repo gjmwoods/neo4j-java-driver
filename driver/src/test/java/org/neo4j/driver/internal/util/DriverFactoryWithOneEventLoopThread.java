@@ -23,13 +23,13 @@ import io.netty.bootstrap.Bootstrap;
 import java.net.URI;
 
 import org.neo4j.driver.internal.DriverFactory;
-import org.neo4j.driver.internal.async.connection.BootstrapFactory;
-import org.neo4j.driver.internal.cluster.RoutingSettings;
-import org.neo4j.driver.internal.retry.RetrySettings;
-import org.neo4j.driver.AuthToken;
+import org.neo4j.connector.async.connection.BootstrapFactory;
+import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.connector.AuthToken;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
 
 public class DriverFactoryWithOneEventLoopThread extends DriverFactory
 {

@@ -20,9 +20,11 @@ package org.neo4j.driver.internal.async;
 
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.Query;
+import org.neo4j.connector.async.AsyncAbstractQueryRunner;
+import org.neo4j.connector.async.UnmanagedTransaction;
+import org.neo4j.connector.Query;
 import org.neo4j.driver.async.AsyncTransaction;
-import org.neo4j.driver.async.ResultCursor;
+import org.neo4j.connector.async.ResultCursor;
 
 public class InternalAsyncTransaction extends AsyncAbstractQueryRunner implements AsyncTransaction
 {
@@ -45,7 +47,7 @@ public class InternalAsyncTransaction extends AsyncAbstractQueryRunner implement
     }
 
     @Override
-    public CompletionStage<ResultCursor> runAsync(Query query)
+    public CompletionStage<ResultCursor> runAsync( Query query)
     {
         return tx.runAsync(query, true );
     }

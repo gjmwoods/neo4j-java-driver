@@ -20,7 +20,7 @@ package org.neo4j.docs.driver;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.net.ServerAddress;
+import org.neo4j.connector.net.ServerAddress;
 import org.neo4j.driver.util.StubServer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

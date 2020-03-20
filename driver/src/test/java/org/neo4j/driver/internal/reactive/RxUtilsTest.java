@@ -25,9 +25,9 @@ import reactor.test.StepVerifier;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.internal.util.Futures;
 
-import static org.neo4j.driver.internal.util.Futures.failedFuture;
+import static org.neo4j.connector.internal.util.Futures.failedFuture;
 import static org.neo4j.driver.internal.reactive.RxUtils.createEmptyPublisher;
 import static org.neo4j.driver.internal.reactive.RxUtils.createMono;
 

@@ -24,8 +24,8 @@ import org.junit.jupiter.api.function.Executable;
 
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.TransactionConfig;
-import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.connector.TransactionConfig;
+import org.neo4j.connector.exception.ClientException;
 import org.neo4j.driver.internal.util.DisabledOnNeo4jWith;
 import org.neo4j.driver.util.DriverExtension;
 import org.neo4j.driver.util.ParallelizableIT;

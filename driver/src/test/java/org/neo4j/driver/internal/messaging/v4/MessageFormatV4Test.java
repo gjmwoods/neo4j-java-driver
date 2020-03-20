@@ -20,8 +20,10 @@ package org.neo4j.driver.internal.messaging.v4;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.v2.MessageReaderV2;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.v2.MessageReaderV2;
+import org.neo4j.connector.messaging.v4.MessageFormatV4;
+import org.neo4j.connector.messaging.v4.MessageWriterV4;
 import org.neo4j.connector.packstream.PackInput;
 import org.neo4j.connector.packstream.PackOutput;
 

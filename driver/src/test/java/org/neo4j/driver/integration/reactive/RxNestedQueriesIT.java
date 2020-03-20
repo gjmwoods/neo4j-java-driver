@@ -26,17 +26,16 @@ import reactor.test.StepVerifier;
 
 import java.util.Collections;
 
-import org.neo4j.driver.exceptions.TransactionNestingException;
+import org.neo4j.connector.exception.TransactionNestingException;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
+import org.neo4j.driver.internal.util.Neo4jFeature;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxTransaction;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 
-import static org.neo4j.driver.internal.util.Neo4jFeature.BOLT_V4;
-
-@EnabledOnNeo4jWith( BOLT_V4 )
+@EnabledOnNeo4jWith( Neo4jFeature.BOLT_V4 )
 @ParallelizableIT
 class RxNestedQueriesIT
 {

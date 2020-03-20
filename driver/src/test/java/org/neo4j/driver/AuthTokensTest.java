@@ -23,22 +23,22 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.AuthToken;
-import org.neo4j.driver.AuthTokens;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.internal.security.InternalAuthToken;
-import org.neo4j.driver.internal.value.ListValue;
-import org.neo4j.driver.internal.value.MapValue;
-import org.neo4j.driver.internal.value.StringValue;
+import org.neo4j.connector.AuthToken;
+import org.neo4j.connector.AuthTokens;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.security.InternalAuthToken;
+import org.neo4j.connector.internal.value.ListValue;
+import org.neo4j.connector.internal.value.MapValue;
+import org.neo4j.connector.internal.value.StringValue;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.AuthTokens.basic;
-import static org.neo4j.driver.AuthTokens.custom;
-import static org.neo4j.driver.Values.values;
+import static org.neo4j.connector.AuthTokens.basic;
+import static org.neo4j.connector.AuthTokens.custom;
+import static org.neo4j.connector.Values.values;
 
 class AuthTokensTest
 {

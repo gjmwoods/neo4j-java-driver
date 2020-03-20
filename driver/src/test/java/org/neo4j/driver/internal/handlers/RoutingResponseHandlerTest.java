@@ -23,13 +23,14 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.concurrent.CompletionException;
 
-import org.neo4j.driver.internal.RoutingErrorHandler;
-import org.neo4j.driver.internal.spi.ResponseHandler;
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.exceptions.SessionExpiredException;
-import org.neo4j.driver.exceptions.TransientException;
+import org.neo4j.connector.handlers.RoutingResponseHandler;
+import org.neo4j.connector.cluster.RoutingErrorHandler;
+import org.neo4j.connector.spi.ResponseHandler;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.connector.exception.TransientException;
 
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -37,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.neo4j.driver.internal.BoltServerAddress.LOCAL_DEFAULT;
+import static org.neo4j.connector.internal.BoltServerAddress.LOCAL_DEFAULT;
 
 class RoutingResponseHandlerTest
 {

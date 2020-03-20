@@ -29,21 +29,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.driver.internal.async.connection.BoltProtocolUtil;
-import org.neo4j.driver.internal.async.connection.ChannelPipelineBuilderImpl;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.async.outbound.ChunkAwareByteBufOutput;
-import org.neo4j.driver.internal.messaging.request.InitMessage;
-import org.neo4j.driver.internal.messaging.response.FailureMessage;
-import org.neo4j.driver.internal.messaging.response.IgnoredMessage;
-import org.neo4j.driver.internal.messaging.response.RecordMessage;
-import org.neo4j.driver.internal.messaging.response.SuccessMessage;
-import org.neo4j.driver.internal.util.messaging.KnowledgeableMessageFormat;
-import org.neo4j.driver.internal.util.messaging.MemorizingInboundMessageDispatcher;
-import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
+import org.neo4j.driver.internal.util.ValueFactory;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.async.connection.BoltProtocolUtil;
+import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.outbound.ChunkAwareByteBufOutput;
+import org.neo4j.connector.messaging.request.InitMessage;
+import org.neo4j.connector.messaging.response.FailureMessage;
+import org.neo4j.connector.messaging.response.IgnoredMessage;
+import org.neo4j.connector.messaging.response.RecordMessage;
+import org.neo4j.connector.messaging.response.SuccessMessage;
+import org.neo4j.connector.messaging.v1.MessageFormatV1;
 import org.neo4j.connector.packstream.PackStream;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.ClientException;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
@@ -54,17 +55,11 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.messageDispatcher;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.util.ValueFactory.emptyNodeValue;
-import static org.neo4j.driver.internal.util.ValueFactory.emptyPathValue;
-import static org.neo4j.driver.internal.util.ValueFactory.emptyRelationshipValue;
-import static org.neo4j.driver.internal.util.ValueFactory.filledNodeValue;
-import static org.neo4j.driver.internal.util.ValueFactory.filledPathValue;
-import static org.neo4j.driver.internal.util.ValueFactory.filledRelationshipValue;
-import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.async.connection.ChannelAttributes.messageDispatcher;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.connector.Values.value;
 
 class MessageFormatTest
 {
@@ -91,12 +86,12 @@ class MessageFormatTest
     void shouldUnpackNodeRelationshipAndPath() throws Throwable
     {
         // Given
-        assertOnlyDeserializesValue( emptyNodeValue() );
-        assertOnlyDeserializesValue( filledNodeValue() );
-        assertOnlyDeserializesValue( emptyRelationshipValue() );
-        assertOnlyDeserializesValue( filledRelationshipValue() );
-        assertOnlyDeserializesValue( emptyPathValue() );
-        assertOnlyDeserializesValue( filledPathValue() );
+        assertOnlyDeserializesValue( ValueFactory.emptyNodeValue() );
+        assertOnlyDeserializesValue( ValueFactory.filledNodeValue() );
+        assertOnlyDeserializesValue( ValueFactory.emptyRelationshipValue() );
+        assertOnlyDeserializesValue( ValueFactory.filledRelationshipValue() );
+        assertOnlyDeserializesValue( ValueFactory.emptyPathValue() );
+        assertOnlyDeserializesValue( ValueFactory.filledPathValue() );
     }
 
 
@@ -104,7 +99,7 @@ class MessageFormatTest
     void shouldErrorPackingNode() throws Throwable
     {
         // Given
-        Value value = filledNodeValue();
+        Value value = ValueFactory.filledNodeValue();
         expectIOExceptionWithMessage( value, "Unknown type: NODE" );
     }
 
@@ -112,7 +107,7 @@ class MessageFormatTest
     void shouldErrorPackingRelationship() throws Throwable
     {
         // Given
-        Value value = filledRelationshipValue();
+        Value value = ValueFactory.filledRelationshipValue();
         expectIOExceptionWithMessage( value, "Unknown type: RELATIONSHIP" );
     }
 
@@ -120,7 +115,7 @@ class MessageFormatTest
     void shouldErrorPackingPath() throws Throwable
     {
         // Given
-        Value value = filledPathValue();
+        Value value = ValueFactory.filledPathValue();
         expectIOExceptionWithMessage( value, "Unknown type: PATH" );
     }
 

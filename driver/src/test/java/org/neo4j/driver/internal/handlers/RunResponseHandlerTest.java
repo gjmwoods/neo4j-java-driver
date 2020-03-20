@@ -23,9 +23,10 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import org.neo4j.driver.internal.messaging.v1.BoltProtocolV1;
-import org.neo4j.driver.internal.messaging.v3.BoltProtocolV3;
-import org.neo4j.driver.internal.util.MetadataExtractor;
+import org.neo4j.connector.handlers.RunResponseHandler;
+import org.neo4j.connector.messaging.v1.BoltProtocolV1;
+import org.neo4j.connector.messaging.v3.BoltProtocolV3;
+import org.neo4j.connector.internal.util.MetadataExtractor;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -37,8 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.Values.values;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.Values.values;
 
 class RunResponseHandlerTest
 {

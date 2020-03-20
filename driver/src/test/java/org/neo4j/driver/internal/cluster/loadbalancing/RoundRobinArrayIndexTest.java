@@ -20,6 +20,8 @@ package org.neo4j.driver.internal.cluster.loadbalancing;
 
 import org.junit.jupiter.api.Test;
 
+import org.neo4j.connector.cluster.loadbalancing.RoundRobinArrayIndex;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RoundRobinArrayIndexTest

@@ -19,7 +19,7 @@
 package org.neo4j.docs.driver;
 
 // tag::database-selection-import[]
-import org.neo4j.driver.AccessMode;
+import org.neo4j.connector.AccessMode;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
 // end::database-selection-import[]

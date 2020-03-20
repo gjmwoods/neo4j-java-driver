@@ -18,22 +18,22 @@
  */
 package org.neo4j.driver.stress;
 
+import org.hamcrest.Matchers;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.AccessMode;
+import org.neo4j.connector.AccessMode;
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.driver.reactive.RxSession;
 
 import static org.hamcrest.Matchers.either;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.neo4j.driver.internal.util.Matchers.arithmeticError;
 
 public class RxFailingQuery<C extends AbstractContext> extends AbstractRxQuery<C>
 {
@@ -54,7 +54,7 @@ public class RxFailingQuery<C extends AbstractContext> extends AbstractRxQuery<C
                     queryFinished.complete( null );
                 }, error -> {
                     Throwable cause = Futures.completionExceptionCause( error );
-                    assertThat( cause, is( arithmeticError() ) );
+                    assertThat( cause, Matchers.is( org.neo4j.driver.internal.util.Matchers.arithmeticError() ) );
                     queryFinished.complete( null );
                 });
         return queryFinished;

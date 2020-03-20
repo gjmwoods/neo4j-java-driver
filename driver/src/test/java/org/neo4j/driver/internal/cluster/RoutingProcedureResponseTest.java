@@ -20,11 +20,12 @@ package org.neo4j.driver.internal.cluster;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.InternalRecord;
-import org.neo4j.driver.internal.value.StringValue;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.cluster.RoutingProcedureResponse;
+import org.neo4j.connector.internal.InternalRecord;
+import org.neo4j.connector.internal.value.StringValue;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Value;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;

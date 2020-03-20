@@ -24,10 +24,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.connector.handlers.LegacyPullAllResponseHandler;
+import org.neo4j.connector.handlers.PullAllResponseHandler;
+import org.neo4j.connector.handlers.PullResponseCompletionListener;
+import org.neo4j.connector.handlers.RunResponseHandler;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.summary.ResultSummary;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -41,9 +45,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.Values.values;
-import static org.neo4j.driver.internal.messaging.v1.BoltProtocolV1.METADATA_EXTRACTOR;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.Values.values;
+import static org.neo4j.connector.messaging.v1.BoltProtocolV1.METADATA_EXTRACTOR;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class LegacyPullAllResponseHandlerTest extends PullAllResponseHandlerTestBase<LegacyPullAllResponseHandler>

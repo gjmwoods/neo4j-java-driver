@@ -28,13 +28,16 @@ import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Stream;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.FatalDiscoveryException;
-import org.neo4j.driver.internal.BookmarkHolder;
-import org.neo4j.driver.internal.spi.Connection;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.cluster.RoutingContext;
+import org.neo4j.connector.cluster.RoutingProcedureResponse;
+import org.neo4j.connector.cluster.RoutingProcedureRunner;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.FatalDiscoveryException;
+import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.spi.Connection;
 
 import static java.util.Collections.EMPTY_MAP;
 import static java.util.Collections.singletonList;
@@ -45,13 +48,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.driver.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
-import static org.neo4j.driver.internal.DatabaseNameUtil.database;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.InternalBookmark.empty;
-import static org.neo4j.driver.internal.cluster.RoutingProcedureRunner.GET_ROUTING_TABLE;
-import static org.neo4j.driver.internal.cluster.RoutingProcedureRunner.ROUTING_CONTEXT;
+import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.connector.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
+import static org.neo4j.connector.internal.DatabaseNameUtil.database;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.internal.InternalBookmark.empty;
+import static org.neo4j.connector.cluster.RoutingProcedureRunner.GET_ROUTING_TABLE;
+import static org.neo4j.connector.cluster.RoutingProcedureRunner.ROUTING_CONTEXT;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class RoutingProcedureRunnerTest extends AbstractRoutingProcedureRunnerTest

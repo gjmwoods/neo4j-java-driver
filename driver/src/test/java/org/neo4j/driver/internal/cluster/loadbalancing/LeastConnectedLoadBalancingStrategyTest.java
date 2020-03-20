@@ -22,10 +22,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.spi.ConnectionPool;
-import org.neo4j.driver.Logger;
-import org.neo4j.driver.Logging;
+import org.neo4j.connector.cluster.loadbalancing.LeastConnectedLoadBalancingStrategy;
+import org.neo4j.connector.cluster.loadbalancing.LoadBalancingStrategy;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.spi.ConnectionPool;
+import org.neo4j.connector.Logger;
+import org.neo4j.connector.Logging;
+import org.neo4j.driver.internal.util.ClusterCompositionUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -37,8 +40,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.A;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class LeastConnectedLoadBalancingStrategyTest
 {
@@ -186,10 +188,10 @@ class LeastConnectedLoadBalancingStrategyTest
 
         LoadBalancingStrategy strategy = new LeastConnectedLoadBalancingStrategy( connectionPool, logging );
 
-        strategy.selectReader( new BoltServerAddress[]{A} );
-        strategy.selectWriter( new BoltServerAddress[]{A} );
+        strategy.selectReader( new BoltServerAddress[]{ClusterCompositionUtil.A} );
+        strategy.selectWriter( new BoltServerAddress[]{ClusterCompositionUtil.A} );
 
-        verify( logger ).trace( startsWith( "Selected" ), eq( "reader" ), eq( A ), eq( 42 ) );
-        verify( logger ).trace( startsWith( "Selected" ), eq( "writer" ), eq( A ), eq( 42 ) );
+        verify( logger ).trace( startsWith( "Selected" ), eq( "reader" ), eq( ClusterCompositionUtil.A ), eq( 42 ) );
+        verify( logger ).trace( startsWith( "Selected" ), eq( "writer" ), eq( ClusterCompositionUtil.A ), eq( 42 ) );
     }
 }

@@ -18,6 +18,7 @@
  */
 package org.neo4j.driver;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,6 +30,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.driver.SessionConfig;
 
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -42,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.neo4j.driver.SessionConfig.builder;
 import static org.neo4j.driver.SessionConfig.defaultConfig;
-import static org.neo4j.driver.internal.InternalBookmark.parse;
+import static org.neo4j.connector.internal.InternalBookmark.parse;
 
 class SessionConfigTest
 {
@@ -51,7 +56,7 @@ class SessionConfigTest
     {
         SessionConfig config = defaultConfig();
 
-        assertEquals( AccessMode.WRITE, config.defaultAccessMode() );
+        Assert.assertEquals( AccessMode.WRITE, config.defaultAccessMode() );
         assertFalse( config.database().isPresent() );
         assertNull( config.bookmarks() );
         assertFalse( config.fetchSize().isPresent() );

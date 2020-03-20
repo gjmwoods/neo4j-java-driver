@@ -18,6 +18,7 @@
  */
 package org.neo4j.driver.internal.value;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -27,8 +28,11 @@ import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 import java.time.ZonedDateTime;
 
-import org.neo4j.driver.internal.types.TypeConstructor;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.value.InternalValue;
+import org.neo4j.connector.internal.value.NullValue;
+
 import java.util.function.Function;
 
 import static java.util.Collections.emptyList;
@@ -36,9 +40,9 @@ import static java.util.Collections.emptyMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.Values.isoDuration;
-import static org.neo4j.driver.Values.ofValue;
-import static org.neo4j.driver.Values.point;
+import static org.neo4j.connector.Values.isoDuration;
+import static org.neo4j.connector.Values.ofValue;
+import static org.neo4j.connector.Values.point;
 
 class NullValueTest
 {
@@ -57,7 +61,7 @@ class NullValueTest
     @Test
     void shouldTypeAsNull()
     {
-        assertThat( ((InternalValue) NullValue.NULL).typeConstructor(), equalTo( TypeConstructor.NULL ) );
+        MatcherAssert.assertThat( ((InternalValue) NullValue.NULL).typeConstructor(), equalTo( TypeConstructor.NULL ) );
     }
 
     @Test

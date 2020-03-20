@@ -24,10 +24,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import org.neo4j.driver.internal.BoltServerAddress;
+import org.neo4j.connector.internal.BoltServerAddress;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.neo4j.driver.internal.BoltServerAddress.DEFAULT_PORT;
+import static org.neo4j.connector.internal.BoltServerAddress.DEFAULT_PORT;
 
 class BoltServerAddressParsingTest
 {

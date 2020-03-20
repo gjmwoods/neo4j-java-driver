@@ -25,9 +25,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.time.Duration;
 import java.util.List;
 
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.cluster.ClusterRoutingTable;
+import org.neo4j.connector.cluster.RoutingTable;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.FakeClock;
+import org.neo4j.driver.internal.util.ClusterCompositionUtil;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -35,17 +38,10 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.AccessMode.READ;
-import static org.neo4j.driver.AccessMode.WRITE;
-import static org.neo4j.driver.internal.DatabaseNameUtil.database;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.A;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.B;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.C;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.D;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.E;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.EMPTY;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.F;
+import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.connector.AccessMode.WRITE;
+import static org.neo4j.connector.internal.DatabaseNameUtil.database;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.driver.internal.util.ClusterCompositionUtil.createClusterComposition;
 
 class ClusterRoutingTableTest
@@ -58,8 +54,8 @@ class ClusterRoutingTableTest
         RoutingTable routingTable = newRoutingTable( clock );
 
         // When
-        routingTable.update( createClusterComposition( 1000,
-                asList( A, B ), asList( C ), asList( D, E ) ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( 1000,
+                                                                              asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ), asList( ClusterCompositionUtil.C ), asList( ClusterCompositionUtil.D, ClusterCompositionUtil.E ) ) );
         clock.progress( 1234 );
 
         // Then
@@ -74,7 +70,7 @@ class ClusterRoutingTableTest
         RoutingTable routingTable = newRoutingTable();
 
         // When
-        routingTable.update( createClusterComposition( EMPTY, asList( C ), asList( D, E ) ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( ClusterCompositionUtil.EMPTY, asList( ClusterCompositionUtil.C ), asList( ClusterCompositionUtil.D, ClusterCompositionUtil.E ) ) );
 
         // Then
         assertTrue( routingTable.isStaleFor( READ ) );
@@ -88,7 +84,8 @@ class ClusterRoutingTableTest
         RoutingTable routingTable = newRoutingTable();
 
         // When
-        routingTable.update( createClusterComposition( asList( A, B ), asList( C ), EMPTY ) );
+        routingTable.update( ClusterCompositionUtil
+                                     .createClusterComposition( asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ), asList( ClusterCompositionUtil.C ), ClusterCompositionUtil.EMPTY ) );
 
         // Then
         assertTrue( routingTable.isStaleFor( READ ) );
@@ -102,7 +99,8 @@ class ClusterRoutingTableTest
         RoutingTable routingTable = newRoutingTable();
 
         // When
-        routingTable.update( createClusterComposition( asList( A, B ), EMPTY, asList( D, E ) ) );
+        routingTable.update( ClusterCompositionUtil
+                                     .createClusterComposition( asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ), ClusterCompositionUtil.EMPTY, asList( ClusterCompositionUtil.D, ClusterCompositionUtil.E ) ) );
 
         // Then
         assertFalse( routingTable.isStaleFor( READ ) );
@@ -116,7 +114,8 @@ class ClusterRoutingTableTest
         RoutingTable routingTable = newRoutingTable();
 
         // When
-        routingTable.update( createClusterComposition( asList( A, B ), asList( C ), asList( D, E ) ) );
+        routingTable.update( ClusterCompositionUtil
+                                     .createClusterComposition( asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ), asList( ClusterCompositionUtil.C ), asList( ClusterCompositionUtil.D, ClusterCompositionUtil.E ) ) );
 
         // Then
         assertFalse( routingTable.isStaleFor( READ ) );
@@ -130,7 +129,7 @@ class ClusterRoutingTableTest
         FakeClock clock = new FakeClock();
 
         // When
-        RoutingTable routingTable = new ClusterRoutingTable( defaultDatabase(), clock, A );
+        RoutingTable routingTable = new ClusterRoutingTable( defaultDatabase(), clock, ClusterCompositionUtil.A );
 
         // Then
         assertTrue( routingTable.isStaleFor( READ ) );
@@ -145,7 +144,7 @@ class ClusterRoutingTableTest
         FakeClock clock = new FakeClock();
 
         // When
-        RoutingTable routingTable = new ClusterRoutingTable( database( db ), clock, A );
+        RoutingTable routingTable = new ClusterRoutingTable( database( db ), clock, ClusterCompositionUtil.A );
 
         // Then
         assertEquals( db, routingTable.database().description() );
@@ -158,10 +157,10 @@ class ClusterRoutingTableTest
         FakeClock clock = new FakeClock();
 
         // When
-        RoutingTable routingTable = new ClusterRoutingTable( defaultDatabase(), clock, A, B, C );
+        RoutingTable routingTable = new ClusterRoutingTable( defaultDatabase(), clock, ClusterCompositionUtil.A, ClusterCompositionUtil.B, ClusterCompositionUtil.C );
 
         // Then
-        assertArrayEquals( new BoltServerAddress[]{A, B, C}, routingTable.routers().toArray() );
+        assertArrayEquals( new BoltServerAddress[]{ClusterCompositionUtil.A, ClusterCompositionUtil.B, ClusterCompositionUtil.C}, routingTable.routers().toArray() );
         assertArrayEquals( new BoltServerAddress[0], routingTable.readers().toArray() );
         assertArrayEquals( new BoltServerAddress[0], routingTable.writers().toArray() );
     }
@@ -170,33 +169,33 @@ class ClusterRoutingTableTest
     void shouldPreserveOrderingOfRouters()
     {
         ClusterRoutingTable routingTable = newRoutingTable();
-        List<BoltServerAddress> routers = asList( A, C, D, F, B, E );
+        List<BoltServerAddress> routers = asList( ClusterCompositionUtil.A, ClusterCompositionUtil.C, ClusterCompositionUtil.D, ClusterCompositionUtil.F, ClusterCompositionUtil.B, ClusterCompositionUtil.E );
 
-        routingTable.update( createClusterComposition( routers, EMPTY, EMPTY ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( routers, ClusterCompositionUtil.EMPTY, ClusterCompositionUtil.EMPTY ) );
 
-        assertArrayEquals( new BoltServerAddress[]{A, C, D, F, B, E}, routingTable.routers().toArray() );
+        assertArrayEquals( new BoltServerAddress[]{ClusterCompositionUtil.A, ClusterCompositionUtil.C, ClusterCompositionUtil.D, ClusterCompositionUtil.F, ClusterCompositionUtil.B, ClusterCompositionUtil.E}, routingTable.routers().toArray() );
     }
 
     @Test
     void shouldPreserveOrderingOfWriters()
     {
         ClusterRoutingTable routingTable = newRoutingTable();
-        List<BoltServerAddress> writers = asList( D, F, A, C, E );
+        List<BoltServerAddress> writers = asList( ClusterCompositionUtil.D, ClusterCompositionUtil.F, ClusterCompositionUtil.A, ClusterCompositionUtil.C, ClusterCompositionUtil.E );
 
-        routingTable.update( createClusterComposition( EMPTY, writers, EMPTY ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( ClusterCompositionUtil.EMPTY, writers, ClusterCompositionUtil.EMPTY ) );
 
-        assertArrayEquals( new BoltServerAddress[]{D, F, A, C, E}, routingTable.writers().toArray() );
+        assertArrayEquals( new BoltServerAddress[]{ClusterCompositionUtil.D, ClusterCompositionUtil.F, ClusterCompositionUtil.A, ClusterCompositionUtil.C, ClusterCompositionUtil.E}, routingTable.writers().toArray() );
     }
 
     @Test
     void shouldPreserveOrderingOfReaders()
     {
         ClusterRoutingTable routingTable = newRoutingTable();
-        List<BoltServerAddress> readers = asList( B, A, F, C, D );
+        List<BoltServerAddress> readers = asList( ClusterCompositionUtil.B, ClusterCompositionUtil.A, ClusterCompositionUtil.F, ClusterCompositionUtil.C, ClusterCompositionUtil.D );
 
-        routingTable.update( createClusterComposition( EMPTY, EMPTY, readers ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( ClusterCompositionUtil.EMPTY, ClusterCompositionUtil.EMPTY, readers ) );
 
-        assertArrayEquals( new BoltServerAddress[]{B, A, F, C, D}, routingTable.readers().toArray() );
+        assertArrayEquals( new BoltServerAddress[]{ClusterCompositionUtil.B, ClusterCompositionUtil.A, ClusterCompositionUtil.F, ClusterCompositionUtil.C, ClusterCompositionUtil.D}, routingTable.readers().toArray() );
     }
 
     @Test
@@ -204,11 +203,11 @@ class ClusterRoutingTableTest
     {
         ClusterRoutingTable routingTable = newRoutingTable();
 
-        List<BoltServerAddress> routers = singletonList( A );
-        List<BoltServerAddress> writers = asList( B, C );
-        List<BoltServerAddress> readers = asList( D, E );
+        List<BoltServerAddress> routers = singletonList( ClusterCompositionUtil.A );
+        List<BoltServerAddress> writers = asList( ClusterCompositionUtil.B, ClusterCompositionUtil.C );
+        List<BoltServerAddress> readers = asList( ClusterCompositionUtil.D, ClusterCompositionUtil.E );
 
-        routingTable.update( createClusterComposition( routers, writers, readers ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( routers, writers, readers ) );
 
         assertFalse( routingTable.isStaleFor( READ ) );
         assertFalse( routingTable.isStaleFor( WRITE ) );
@@ -239,19 +238,21 @@ class ClusterRoutingTableTest
     void shouldPreferInitialRouterIfNoWriter() throws Throwable
     {
         ClusterRoutingTable routingTable = newRoutingTable();
-        routingTable.update( createClusterComposition( EMPTY, EMPTY, EMPTY ) );
+        routingTable.update( ClusterCompositionUtil
+                                     .createClusterComposition( ClusterCompositionUtil.EMPTY, ClusterCompositionUtil.EMPTY, ClusterCompositionUtil.EMPTY ) );
         assertTrue( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( singletonList( A ), EMPTY, singletonList( A ) ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( singletonList( ClusterCompositionUtil.A ), ClusterCompositionUtil.EMPTY, singletonList( ClusterCompositionUtil.A ) ) );
         assertTrue( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( asList( A, B ), EMPTY, asList( A, B ) ) );
+        routingTable.update( ClusterCompositionUtil
+                                     .createClusterComposition( asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ), ClusterCompositionUtil.EMPTY, asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ) ) );
         assertTrue( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( EMPTY, EMPTY, singletonList( A ) ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( ClusterCompositionUtil.EMPTY, ClusterCompositionUtil.EMPTY, singletonList( ClusterCompositionUtil.A ) ) );
         assertTrue( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( singletonList( A ), EMPTY, EMPTY ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( singletonList( ClusterCompositionUtil.A ), ClusterCompositionUtil.EMPTY, ClusterCompositionUtil.EMPTY ) );
         assertTrue( routingTable.preferInitialRouter() );
     }
 
@@ -259,19 +260,19 @@ class ClusterRoutingTableTest
     void shouldNotPreferInitialRouterIfHasWriter() throws Throwable
     {
         ClusterRoutingTable routingTable = newRoutingTable();
-        routingTable.update( createClusterComposition( EMPTY, singletonList( A ), EMPTY ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( ClusterCompositionUtil.EMPTY, singletonList( ClusterCompositionUtil.A ), ClusterCompositionUtil.EMPTY ) );
         assertFalse( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( singletonList( A ), singletonList( A ), singletonList( A ) ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( singletonList( ClusterCompositionUtil.A ), singletonList( ClusterCompositionUtil.A ), singletonList( ClusterCompositionUtil.A ) ) );
         assertFalse( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( asList( A, B ), singletonList( A ), asList( A, B ) ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ), singletonList( ClusterCompositionUtil.A ), asList( ClusterCompositionUtil.A, ClusterCompositionUtil.B ) ) );
         assertFalse( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( EMPTY, singletonList( A ), singletonList( A ) ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( ClusterCompositionUtil.EMPTY, singletonList( ClusterCompositionUtil.A ), singletonList( ClusterCompositionUtil.A ) ) );
         assertFalse( routingTable.preferInitialRouter() );
 
-        routingTable.update( createClusterComposition( singletonList( A ), singletonList( A ), EMPTY ) );
+        routingTable.update( ClusterCompositionUtil.createClusterComposition( singletonList( ClusterCompositionUtil.A ), singletonList( ClusterCompositionUtil.A ), ClusterCompositionUtil.EMPTY ) );
         assertFalse( routingTable.preferInitialRouter() );
     }
 

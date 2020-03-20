@@ -25,15 +25,19 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.connector.async.connection.ChannelConnectedListener;
+import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
+import org.neo4j.connector.async.connection.HandshakeHandler;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.internal.BoltServerAddress.LOCAL_DEFAULT;
-import static org.neo4j.driver.internal.async.connection.BoltProtocolUtil.handshakeBuf;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.BoltServerAddress.LOCAL_DEFAULT;
+import static org.neo4j.connector.async.connection.BoltProtocolUtil.handshakeBuf;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class ChannelConnectedListenerTest
@@ -58,7 +62,7 @@ class ChannelConnectedListenerTest
 
         listener.operationComplete( channelConnectedPromise );
 
-        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> await( handshakeCompletedPromise ) );
+        ServiceUnavailableException error = assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( handshakeCompletedPromise ) );
         assertEquals( cause, error.getCause() );
     }
 

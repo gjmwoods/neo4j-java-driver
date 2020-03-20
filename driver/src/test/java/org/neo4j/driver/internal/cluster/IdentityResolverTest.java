@@ -22,13 +22,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import org.neo4j.driver.net.ServerAddress;
+import org.neo4j.connector.net.ServerAddress;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.internal.cluster.IdentityResolver.IDENTITY_RESOLVER;
+import static org.neo4j.connector.cluster.IdentityResolver.IDENTITY_RESOLVER;
 
 class IdentityResolverTest
 {

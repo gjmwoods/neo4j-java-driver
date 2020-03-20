@@ -26,10 +26,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.internal.async.connection.DirectConnection;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.spi.ConnectionPool;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.async.connection.DirectConnection;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.DirectConnectionProvider;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.spi.ConnectionPool;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.hamcrest.Matchers.instanceOf;
@@ -39,8 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.AccessMode.READ;
-import static org.neo4j.driver.AccessMode.WRITE;
+import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.connector.AccessMode.WRITE;
 import static org.neo4j.driver.internal.cluster.RediscoveryUtil.contextWithDatabase;
 import static org.neo4j.driver.internal.cluster.RediscoveryUtil.contextWithMode;
 import static org.neo4j.driver.util.TestUtil.await;

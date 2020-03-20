@@ -22,12 +22,12 @@ package org.neo4j.docs.driver;
 
 import java.util.List;
 
-import org.neo4j.driver.Record;
+import org.neo4j.connector.Record;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.TransactionWork;
 
-import static org.neo4j.driver.Values.parameters;
+import static org.neo4j.connector.Values.parameters;
 // end::result-retain-import[]
 
 public class ResultRetainExample extends BaseApplication

@@ -28,16 +28,16 @@ import java.util.function.Consumer;
 
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.Record;
+import org.neo4j.connector.Record;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.internal.cluster.RoutingSettings;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.io.ChannelTrackingDriverFactory;
 import org.neo4j.driver.util.ParallelizableIT;
 import org.neo4j.driver.util.SessionExtension;
@@ -55,8 +55,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.retry.RetrySettings.DEFAULT;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.retry.RetrySettings.DEFAULT;
 
 @ParallelizableIT
 class TransactionIT

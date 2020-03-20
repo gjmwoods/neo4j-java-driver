@@ -30,10 +30,11 @@ import javax.net.ssl.SNIServerName;
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLParameters;
 
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
-import org.neo4j.driver.internal.security.SecurityPlan;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.async.connection.NettyChannelInitializer;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.FakeClock;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -45,11 +46,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.BoltServerAddress.LOCAL_DEFAULT;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.creationTimestamp;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.messageDispatcher;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.serverAddress;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.BoltServerAddress.LOCAL_DEFAULT;
+import static org.neo4j.connector.async.connection.ChannelAttributes.creationTimestamp;
+import static org.neo4j.connector.async.connection.ChannelAttributes.messageDispatcher;
+import static org.neo4j.connector.async.connection.ChannelAttributes.serverAddress;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class NettyChannelInitializerTest
 {

@@ -21,24 +21,25 @@ package org.neo4j.driver.internal.messaging.v2;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
-import org.neo4j.driver.internal.util.messaging.AbstractMessageWriterTestBase;
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.messaging.MessageFormat.Writer;
-import org.neo4j.driver.internal.messaging.request.HelloMessage;
-import org.neo4j.driver.internal.messaging.request.InitMessage;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
+import org.neo4j.connector.messaging.v2.MessageWriterV2;
+import org.neo4j.driver.internal.messaging.AbstractMessageWriterTestBase;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.messaging.MessageFormat.Writer;
+import org.neo4j.connector.messaging.request.HelloMessage;
+import org.neo4j.connector.messaging.request.InitMessage;
+import org.neo4j.connector.messaging.request.RunMessage;
 import org.neo4j.connector.packstream.PackOutput;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonMap;
-import static org.neo4j.driver.internal.messaging.request.CommitMessage.COMMIT;
-import static org.neo4j.driver.internal.messaging.request.DiscardAllMessage.DISCARD_ALL;
-import static org.neo4j.driver.internal.messaging.request.GoodbyeMessage.GOODBYE;
-import static org.neo4j.driver.internal.messaging.request.PullAllMessage.PULL_ALL;
-import static org.neo4j.driver.internal.messaging.request.ResetMessage.RESET;
-import static org.neo4j.driver.internal.messaging.request.RollbackMessage.ROLLBACK;
-import static org.neo4j.driver.Values.point;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.messaging.request.CommitMessage.COMMIT;
+import static org.neo4j.connector.messaging.request.DiscardAllMessage.DISCARD_ALL;
+import static org.neo4j.connector.messaging.request.GoodbyeMessage.GOODBYE;
+import static org.neo4j.connector.messaging.request.PullAllMessage.PULL_ALL;
+import static org.neo4j.connector.messaging.request.ResetMessage.RESET;
+import static org.neo4j.connector.messaging.request.RollbackMessage.ROLLBACK;
+import static org.neo4j.connector.Values.point;
+import static org.neo4j.connector.Values.value;
 
 class MessageWriterV2Test extends AbstractMessageWriterTestBase
 {

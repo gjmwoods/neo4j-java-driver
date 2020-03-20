@@ -19,16 +19,15 @@
 package org.neo4j.driver.internal.handlers;
 
 import io.netty.channel.embedded.EmbeddedChannel;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.ImmediateEventExecutor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.async.pool.ExtendedChannelPool;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.pool.ExtendedChannelPool;
+import org.neo4j.connector.handlers.ChannelReleasingResetResponseHandler;
+import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.FakeClock;
 
 import static java.util.Collections.emptyMap;
@@ -40,8 +39,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.lastUsedTimestamp;
-import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.connector.async.connection.ChannelAttributes.lastUsedTimestamp;
+import static org.neo4j.connector.internal.util.Futures.completedWithNull;
 
 class ChannelReleasingResetResponseHandlerTest
 {

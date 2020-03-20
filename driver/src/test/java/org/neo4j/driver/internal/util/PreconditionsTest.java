@@ -28,7 +28,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.internal.util.Preconditions.checkArgument;
+import static org.neo4j.connector.internal.util.Preconditions.checkArgument;
 
 class PreconditionsTest
 {

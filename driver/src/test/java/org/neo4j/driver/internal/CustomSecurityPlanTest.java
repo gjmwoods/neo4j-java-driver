@@ -25,14 +25,17 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.neo4j.driver.AuthToken;
-import org.neo4j.driver.AuthTokens;
+import org.neo4j.connector.AuthToken;
+import org.neo4j.connector.AuthTokens;
 import org.neo4j.driver.Config;
-import org.neo4j.driver.internal.cluster.RoutingSettings;
-import org.neo4j.driver.internal.metrics.MetricsProvider;
-import org.neo4j.driver.internal.retry.RetrySettings;
-import org.neo4j.driver.internal.security.SecurityPlan;
-import org.neo4j.driver.internal.spi.ConnectionPool;
+import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.connector.internal.metrics.MetricsProvider;
+import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.connector.spi.ConnectionPool;
+import org.neo4j.driver.internal.DriverFactory;
+import org.neo4j.driver.internal.InternalDriver;
+import org.neo4j.driver.internal.SessionFactory;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

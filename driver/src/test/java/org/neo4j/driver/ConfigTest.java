@@ -25,7 +25,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.driver.net.ServerAddressResolver;
+import org.neo4j.connector.net.ServerAddressResolver;
+import org.neo4j.driver.Config;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -35,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.DEFAULT_FETCH_SIZE;
+import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.DEFAULT_FETCH_SIZE;
 
 class ConfigTest
 {

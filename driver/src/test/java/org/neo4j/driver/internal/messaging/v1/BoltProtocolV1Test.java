@@ -21,6 +21,7 @@ package org.neo4j.driver.internal.messaging.v1;
 import io.netty.channel.ChannelPromise;
 import io.netty.channel.embedded.EmbeddedChannel;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -31,32 +32,34 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Logging;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.TransactionConfig;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.internal.BookmarkHolder;
-import org.neo4j.driver.internal.InternalBookmark;
-import org.neo4j.driver.internal.async.UnmanagedTransaction;
-import org.neo4j.driver.internal.async.connection.ChannelAttributes;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.cursor.AsyncResultCursor;
-import org.neo4j.driver.internal.handlers.BeginTxResponseHandler;
-import org.neo4j.driver.internal.handlers.CommitTxResponseHandler;
-import org.neo4j.driver.internal.handlers.NoOpResponseHandler;
-import org.neo4j.driver.internal.handlers.PullAllResponseHandler;
-import org.neo4j.driver.internal.handlers.RollbackTxResponseHandler;
-import org.neo4j.driver.internal.handlers.RunResponseHandler;
-import org.neo4j.driver.internal.messaging.BoltProtocol;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.request.InitMessage;
-import org.neo4j.driver.internal.messaging.request.PullAllMessage;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.spi.ResponseHandler;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.messaging.v1.BoltProtocolV1;
+import org.neo4j.connector.messaging.v1.MessageFormatV1;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.TransactionConfig;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.connector.async.UnmanagedTransaction;
+import org.neo4j.connector.async.connection.ChannelAttributes;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.internal.cursor.AsyncResultCursor;
+import org.neo4j.connector.handlers.BeginTxResponseHandler;
+import org.neo4j.connector.handlers.CommitTxResponseHandler;
+import org.neo4j.connector.handlers.NoOpResponseHandler;
+import org.neo4j.connector.handlers.PullAllResponseHandler;
+import org.neo4j.connector.handlers.RollbackTxResponseHandler;
+import org.neo4j.connector.handlers.RunResponseHandler;
+import org.neo4j.connector.messaging.BoltProtocol;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.request.InitMessage;
+import org.neo4j.connector.messaging.request.PullAllMessage;
+import org.neo4j.connector.messaging.request.RunMessage;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.spi.ResponseHandler;
+import org.neo4j.connector.internal.util.Futures;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonMap;
@@ -76,11 +79,11 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
-import static org.neo4j.driver.internal.messaging.v1.BoltProtocolV1.SingleBookmarkHelper.asBeginTransactionParameters;
-import static org.neo4j.driver.internal.util.Futures.blockingGet;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
+import static org.neo4j.connector.messaging.v1.BoltProtocolV1.SingleBookmarkHelper.asBeginTransactionParameters;
+import static org.neo4j.connector.internal.util.Futures.blockingGet;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
 
@@ -151,7 +154,7 @@ public class BoltProtocolV1Test
     @Test
     void shouldBeginTransactionWithoutBookmark()
     {
-        Connection connection = connectionMock( protocol );
+        Connection connection = TestUtil.connectionMock( protocol );
 
         CompletionStage<Void> stage = protocol.beginTransaction( connection, InternalBookmark.empty(), TransactionConfig.empty() );
 
@@ -165,7 +168,7 @@ public class BoltProtocolV1Test
     @Test
     void shouldBeginTransactionWithBookmarks()
     {
-        Connection connection = connectionMock( protocol );
+        Connection connection = TestUtil.connectionMock( protocol );
         Bookmark bookmark = InternalBookmark.parse( "neo4j:bookmark:v1:tx100" );
 
         CompletionStage<Void> stage = protocol.beginTransaction( connection, bookmark, TransactionConfig.empty() );
@@ -197,13 +200,13 @@ public class BoltProtocolV1Test
                 eq( new RunMessage( "COMMIT" ) ), eq( NoOpResponseHandler.INSTANCE ),
                 eq( PullAllMessage.PULL_ALL ), any( CommitTxResponseHandler.class ) );
 
-        assertEquals( InternalBookmark.parse( bookmarkString ), await( stage ) );
+        Assertions.assertEquals( InternalBookmark.parse( bookmarkString ), TestUtil.await( stage ) );
     }
 
     @Test
     void shouldRollbackTransaction()
     {
-        Connection connection = connectionMock( protocol );
+        Connection connection = TestUtil.connectionMock( protocol );
 
         CompletionStage<Void> stage = protocol.rollbackTransaction( connection );
 
@@ -258,9 +261,9 @@ public class BoltProtocolV1Test
                 .withMetadata( singletonMap( "key", "value" ) )
                 .build();
 
-        CompletionStage<Void> txStage = protocol.beginTransaction( connectionMock( protocol ), InternalBookmark.empty(), config );
+        CompletionStage<Void> txStage = protocol.beginTransaction( TestUtil.connectionMock( protocol ), InternalBookmark.empty(), config );
 
-        ClientException e = assertThrows( ClientException.class, () -> await( txStage ) );
+        ClientException e = assertThrows( ClientException.class, () -> TestUtil.await( txStage ) );
         assertThat( e.getMessage(), startsWith( "Driver is connected to the database that does not support transaction configuration" ) );
     }
 
@@ -273,17 +276,17 @@ public class BoltProtocolV1Test
                 .build();
 
         ClientException e = assertThrows( ClientException.class,
-                () -> protocol.runInAutoCommitTransaction( connectionMock( protocol ), new Query( "RETURN 1" ), BookmarkHolder.NO_OP, config, true,
-                        UNLIMITED_FETCH_SIZE ) );
+                () -> protocol.runInAutoCommitTransaction( TestUtil.connectionMock( protocol ), new Query( "RETURN 1" ), BookmarkHolder.NO_OP, config, true,
+                                                           UNLIMITED_FETCH_SIZE ) );
         assertThat( e.getMessage(), startsWith( "Driver is connected to the database that does not support transaction configuration" ) );
     }
 
     @Test
     void shouldNotSupportDatabaseNameInBeginTransaction()
     {
-        CompletionStage<Void> txStage = protocol.beginTransaction( connectionMock( "foo", protocol ), InternalBookmark.empty(), TransactionConfig.empty() );
+        CompletionStage<Void> txStage = protocol.beginTransaction( TestUtil.connectionMock( "foo", protocol ), InternalBookmark.empty(), TransactionConfig.empty() );
 
-        ClientException e = assertThrows( ClientException.class, () -> await( txStage ) );
+        ClientException e = assertThrows( ClientException.class, () -> TestUtil.await( txStage ) );
         assertThat( e.getMessage(), startsWith( "Database name parameter for selecting database is not supported" ) );
     }
 
@@ -291,8 +294,8 @@ public class BoltProtocolV1Test
     void shouldNotSupportDatabaseNameForAutoCommitTransactions()
     {
         ClientException e = assertThrows( ClientException.class,
-                () -> protocol.runInAutoCommitTransaction( connectionMock( "foo", protocol ),
-                        new Query( "RETURN 1" ), BookmarkHolder.NO_OP, TransactionConfig.empty(), true, UNLIMITED_FETCH_SIZE ) );
+                () -> protocol.runInAutoCommitTransaction( TestUtil.connectionMock( "foo", protocol ),
+                                                           new Query( "RETURN 1" ), BookmarkHolder.NO_OP, TransactionConfig.empty(), true, UNLIMITED_FETCH_SIZE ) );
         assertThat( e.getMessage(), startsWith( "Database name parameter for selecting database is not supported" ) );
     }
 

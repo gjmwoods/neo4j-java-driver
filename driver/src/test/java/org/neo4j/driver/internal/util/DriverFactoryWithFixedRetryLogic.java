@@ -21,9 +21,9 @@ package org.neo4j.driver.internal.util;
 import io.netty.util.concurrent.EventExecutorGroup;
 
 import org.neo4j.driver.internal.DriverFactory;
-import org.neo4j.driver.internal.retry.RetryLogic;
-import org.neo4j.driver.internal.retry.RetrySettings;
-import org.neo4j.driver.Logging;
+import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.connector.Logging;
 
 public class DriverFactoryWithFixedRetryLogic extends DriverFactory
 {

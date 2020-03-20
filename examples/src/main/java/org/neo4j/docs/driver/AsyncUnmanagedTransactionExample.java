@@ -25,7 +25,7 @@ import java.util.function.Function;
 
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
-import org.neo4j.driver.async.ResultCursor;
+import org.neo4j.connector.async.ResultCursor;
 // end::async-unmanaged-transaction-import[]
 
 public class AsyncUnmanagedTransactionExample extends BaseApplication

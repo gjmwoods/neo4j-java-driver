@@ -24,10 +24,13 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import org.neo4j.connector.internal.InternalPath;
+import org.neo4j.connector.internal.InternalRelationship;
 import org.neo4j.connector.internal.util.Iterables;
-import org.neo4j.driver.types.Node;
-import org.neo4j.driver.types.Path;
-import org.neo4j.driver.types.Relationship;
+import org.neo4j.connector.internal.types.Node;
+import org.neo4j.connector.internal.types.Path;
+import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.connector.internal.InternalNode;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;

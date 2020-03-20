@@ -18,9 +18,11 @@
  */
 package org.neo4j.driver.internal.messaging.v2;
 
-import org.neo4j.driver.internal.messaging.BoltProtocol;
-import org.neo4j.driver.internal.messaging.MessageFormat;
+import org.neo4j.connector.messaging.BoltProtocol;
+import org.neo4j.connector.messaging.MessageFormat;
 import org.neo4j.driver.internal.messaging.v1.BoltProtocolV1Test;
+import org.neo4j.connector.messaging.v2.BoltProtocolV2;
+import org.neo4j.connector.messaging.v2.MessageFormatV2;
 
 class BoltProtocolV2Test extends BoltProtocolV1Test
 {

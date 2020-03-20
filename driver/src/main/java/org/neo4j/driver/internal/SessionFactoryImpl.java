@@ -21,14 +21,18 @@ package org.neo4j.driver.internal;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.AccessMode;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.DatabaseName;
 import org.neo4j.driver.Config;
-import org.neo4j.driver.Logging;
+import org.neo4j.connector.Logging;
 import org.neo4j.driver.SessionConfig;
-import org.neo4j.driver.internal.async.LeakLoggingNetworkSession;
-import org.neo4j.driver.internal.async.NetworkSession;
-import org.neo4j.driver.internal.retry.RetryLogic;
-import org.neo4j.driver.internal.spi.ConnectionProvider;
+import org.neo4j.connector.async.LeakLoggingNetworkSession;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.internal.DatabaseNameUtil;
+import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.connector.spi.ConnectionProvider;
 
 public class SessionFactoryImpl implements SessionFactory
 {
@@ -60,7 +64,7 @@ public class SessionFactoryImpl implements SessionFactory
         return sessionConfig.fetchSize().orElse( defaultFetchSize );
     }
 
-    private DatabaseName parseDatabaseName( SessionConfig sessionConfig )
+    private DatabaseName parseDatabaseName(SessionConfig sessionConfig )
     {
         return sessionConfig.database()
                 .flatMap( name -> Optional.of( DatabaseNameUtil.database( name ) ) )

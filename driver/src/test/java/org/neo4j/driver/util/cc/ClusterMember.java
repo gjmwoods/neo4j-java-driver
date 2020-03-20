@@ -26,7 +26,7 @@ import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Scanner;
 
-import org.neo4j.driver.internal.BoltServerAddress;
+import org.neo4j.connector.internal.BoltServerAddress;
 
 import static java.util.Objects.requireNonNull;
 

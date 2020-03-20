@@ -29,11 +29,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.driver.internal.util.Extract;
+import org.neo4j.connector.internal.InternalPair;
+import org.neo4j.connector.internal.InternalPath;
+import org.neo4j.connector.internal.InternalRecord;
+import org.neo4j.connector.internal.InternalRelationship;
+import org.neo4j.connector.internal.util.Extract;
 import org.neo4j.connector.internal.util.Iterables;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.util.Pair;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.internal.util.Pair;
+import org.neo4j.connector.internal.InternalNode;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyMap;
@@ -47,7 +52,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.value;
 
 class ExtractTest
 {

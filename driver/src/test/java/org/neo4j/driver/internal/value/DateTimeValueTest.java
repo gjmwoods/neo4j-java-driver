@@ -24,8 +24,9 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
-import org.neo4j.driver.internal.types.InternalTypeSystem;
-import org.neo4j.driver.exceptions.value.Uncoercible;
+import org.neo4j.connector.internal.types.InternalTypeSystem;
+import org.neo4j.connector.exception.value.Uncoercible;
+import org.neo4j.connector.internal.value.DateTimeValue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

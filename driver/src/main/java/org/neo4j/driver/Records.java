@@ -20,6 +20,11 @@ package org.neo4j.driver;
 
 import java.util.function.Function;
 
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Result;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.Values;
+
 /**
  * Static utility methods for retaining records
  *

@@ -20,6 +20,8 @@ package org.neo4j.driver.internal.summary;
 
 import org.junit.jupiter.api.Test;
 
+import org.neo4j.connector.internal.summary.InternalInputPosition;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 

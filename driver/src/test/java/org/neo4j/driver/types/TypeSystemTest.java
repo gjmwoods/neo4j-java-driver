@@ -28,20 +28,22 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.neo4j.driver.internal.InternalNode;
-import org.neo4j.driver.internal.InternalPath;
-import org.neo4j.driver.internal.InternalRelationship;
-import org.neo4j.driver.internal.types.InternalTypeSystem;
-import org.neo4j.driver.internal.value.NodeValue;
-import org.neo4j.driver.internal.value.PathValue;
-import org.neo4j.driver.internal.value.RelationshipValue;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.internal.types.Entity;
+import org.neo4j.connector.internal.types.Type;
+import org.neo4j.connector.internal.InternalNode;
+import org.neo4j.connector.internal.InternalPath;
+import org.neo4j.connector.internal.InternalRelationship;
+import org.neo4j.connector.internal.types.InternalTypeSystem;
+import org.neo4j.connector.internal.value.NodeValue;
+import org.neo4j.connector.internal.value.PathValue;
+import org.neo4j.connector.internal.value.RelationshipValue;
+import org.neo4j.connector.Value;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.neo4j.driver.internal.types.InternalTypeSystem.TYPE_SYSTEM;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.internal.types.InternalTypeSystem.TYPE_SYSTEM;
+import static org.neo4j.connector.Values.value;
 
 class TypeSystemTest
 {

@@ -24,6 +24,8 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.connector.cluster.RoutingContext;
+
 import static java.util.Collections.singletonMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

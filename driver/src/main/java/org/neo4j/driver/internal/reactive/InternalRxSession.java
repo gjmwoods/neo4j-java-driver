@@ -18,20 +18,20 @@
  */
 package org.neo4j.driver.internal.reactive;
 
-import org.neo4j.driver.Query;
+import org.neo4j.connector.Query;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.TransactionConfig;
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.exceptions.TransactionNestingException;
-import org.neo4j.driver.internal.async.NetworkSession;
-import org.neo4j.driver.internal.cursor.RxResultCursor;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.TransactionConfig;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.exception.TransactionNestingException;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.internal.cursor.RxResultCursor;
+import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.reactive.RxTransaction;
@@ -129,7 +129,7 @@ public class InternalRxSession extends AbstractRxQueryRunner implements RxSessio
     }
 
     @Override
-    public RxResult run(String query, TransactionConfig config )
+    public RxResult run( String query, TransactionConfig config )
     {
         return run( new Query( query ), config );
     }

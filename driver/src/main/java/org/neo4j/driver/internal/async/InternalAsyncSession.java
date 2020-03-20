@@ -22,19 +22,20 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.TransactionConfig;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.async.AsyncAbstractQueryRunner;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.async.UnmanagedTransaction;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.TransactionConfig;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
 import org.neo4j.driver.async.AsyncTransactionWork;
-import org.neo4j.driver.async.ResultCursor;
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.internal.util.Futures;
 
 import static java.util.Collections.emptyMap;
-import static org.neo4j.driver.internal.util.Futures.completedWithNull;
-import static org.neo4j.driver.internal.util.Futures.failedFuture;
 
 public class InternalAsyncSession extends AsyncAbstractQueryRunner implements AsyncSession
 {
@@ -46,7 +47,7 @@ public class InternalAsyncSession extends AsyncAbstractQueryRunner implements As
     }
 
     @Override
-    public CompletionStage<ResultCursor> runAsync(Query query)
+    public CompletionStage<ResultCursor> runAsync( Query query)
     {
         return runAsync(query, TransactionConfig.empty() );
     }
@@ -165,12 +166,12 @@ public class InternalAsyncSession extends AsyncAbstractQueryRunner implements As
             CompletionStage<T> result = work.execute( new InternalAsyncTransaction( tx ) );
 
             // protect from given transaction function returning null
-            return result == null ? completedWithNull() : result;
+            return result == null ? Futures.completedWithNull() : result;
         }
         catch ( Throwable workError )
         {
             // work threw an exception, wrap it in a future and proceed
-            return failedFuture( workError );
+            return Futures.failedFuture( workError );
         }
     }
 

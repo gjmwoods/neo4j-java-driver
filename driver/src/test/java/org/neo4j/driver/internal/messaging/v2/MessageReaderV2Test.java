@@ -24,16 +24,17 @@ import java.time.LocalDateTime;
 import java.time.OffsetTime;
 import java.time.ZonedDateTime;
 
+import org.neo4j.connector.messaging.v2.MessageReaderV2;
 import org.neo4j.driver.internal.util.messaging.AbstractMessageReaderTestBase;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.ResponseMessageHandler;
-import org.neo4j.driver.internal.messaging.response.RecordMessage;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.ResponseMessageHandler;
+import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.connector.packstream.PackInput;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.Value;
 
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.Values.point;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.point;
+import static org.neo4j.connector.Values.value;
 
 class MessageReaderV2Test extends AbstractMessageReaderTestBase
 {

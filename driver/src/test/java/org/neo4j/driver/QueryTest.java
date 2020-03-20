@@ -23,10 +23,14 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.Values;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.Values.parameters;
+import static org.neo4j.connector.Values.parameters;
 
 class QueryTest
 {

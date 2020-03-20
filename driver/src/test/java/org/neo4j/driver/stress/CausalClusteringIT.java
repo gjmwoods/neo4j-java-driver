@@ -19,7 +19,9 @@
 package org.neo4j.driver.stress;
 
 import io.netty.channel.Channel;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
@@ -40,41 +42,43 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.AuthToken;
-import org.neo4j.driver.Bookmark;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.AuthToken;
+import org.neo4j.connector.Bookmark;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.QueryRunner;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.QueryRunner;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Transaction;
-import org.neo4j.driver.Values;
+import org.neo4j.connector.Values;
 import org.neo4j.driver.async.AsyncSession;
-import org.neo4j.driver.async.ResultCursor;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.Neo4jException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.exceptions.SessionExpiredException;
+import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.Neo4jException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.exception.SessionExpiredException;
 import org.neo4j.driver.integration.NestedQueries;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.cluster.RoutingSettings;
-import org.neo4j.driver.internal.retry.RetrySettings;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
 import org.neo4j.driver.internal.util.FailingConnectionDriverFactory;
 import org.neo4j.driver.internal.util.FakeClock;
-import org.neo4j.driver.internal.util.ServerVersion;
+import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.driver.internal.util.ThrowingMessageEncoder;
 import org.neo4j.driver.internal.util.io.ChannelTrackingDriverFactory;
-import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.driver.internal.util.Neo4jFeature;
+import org.neo4j.connector.summary.ResultSummary;
 import org.neo4j.driver.util.cc.Cluster;
 import org.neo4j.driver.util.cc.ClusterExtension;
 import org.neo4j.driver.util.cc.ClusterMember;
 import org.neo4j.driver.util.cc.ClusterMemberRole;
 import org.neo4j.driver.util.cc.ClusterMemberRoleDiscoveryFactory;
-import org.neo4j.driver.util.cc.ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery;
+import org.neo4j.driver.util.DaemonThreadFactory;
+import org.neo4j.driver.util.TestUtil;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.MINUTES;
@@ -90,16 +94,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
-import static org.neo4j.driver.Logging.none;
+import static org.neo4j.connector.Logging.none;
 import static org.neo4j.driver.SessionConfig.builder;
-import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.driver.internal.InternalBookmark.parse;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.util.Matchers.connectionAcquisitionTimeoutError;
-import static org.neo4j.driver.internal.util.Neo4jFeature.BOLT_V3;
-import static org.neo4j.driver.util.DaemonThreadFactory.daemon;
+import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.connector.internal.InternalBookmark.parse;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.driver.util.TestUtil.await;
-import static org.neo4j.driver.util.TestUtil.awaitAllFutures;
 
 public class CausalClusteringIT implements NestedQueries
 {
@@ -501,7 +501,7 @@ public class CausalClusteringIT implements NestedQueries
                             session.writeTransactionAsync( tx -> tx.runAsync( "CREATE (:Node1) RETURN 42" )
                                     .thenCompose( cursor2 -> combineCursors( cursor2, cursor1 ) ) ) );
 
-            List<RecordAndSummary> results = await( resultsStage );
+            List<RecordAndSummary> results = TestUtil.await( resultsStage );
             assertEquals( 2, results.size() );
 
             RecordAndSummary first = results.get( 0 );
@@ -518,9 +518,9 @@ public class CausalClusteringIT implements NestedQueries
                             .thenCompose( ResultCursor::singleAsync ) )
                             .thenApply( record -> record.get( 0 ).asInt() );
 
-            assertEquals( 1, await( countStage ).intValue() );
+            Assertions.assertEquals( 1, TestUtil.await( countStage ).intValue() );
 
-            await( session.closeAsync() );
+            TestUtil.await( session.closeAsync() );
         }
     }
 
@@ -547,7 +547,7 @@ public class CausalClusteringIT implements NestedQueries
             // should not be possible to acquire more connections towards leader because limit is 2
             Session writeSession3 = driver.session( builder().withDefaultAccessMode( AccessMode.WRITE ).build() );
             ClientException e = assertThrows( ClientException.class, writeSession3::beginTransaction );
-            assertThat( e, is( connectionAcquisitionTimeoutError( 42 ) ) );
+            assertThat( e, Matchers.is( org.neo4j.driver.internal.util.Matchers.connectionAcquisitionTimeoutError( 42 ) ) );
 
             // should be possible to acquire new connection towards read server
             // it's a different machine, not leader, so different max connection pool size limit applies
@@ -702,7 +702,7 @@ public class CausalClusteringIT implements NestedQueries
             }
             stop.set( true );
 
-            awaitAllFutures( results ); // readers and writers should stop
+            TestUtil.awaitAllFutures( results ); // readers and writers should stop
             assertThat( countNodes( driver.session(), label, property, value ), greaterThan( 0 ) ); // some nodes should be created
         }
     }
@@ -861,7 +861,8 @@ public class CausalClusteringIT implements NestedQueries
         Driver driver = clusterRule.getCluster().getDirectDriver( member );
         try
         {
-            final ClusterMemberRoleDiscovery discovery = ClusterMemberRoleDiscoveryFactory.newInstance( ServerVersion.version( driver ) );
+            final ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery
+                    discovery = ClusterMemberRoleDiscoveryFactory.newInstance( ServerVersion.version( driver ) );
             final Map<BoltServerAddress,ClusterMemberRole> clusterOverview = discovery.findClusterOverview( driver );
             for ( BoltServerAddress address : clusterOverview.keySet() )
             {
@@ -1031,7 +1032,7 @@ public class CausalClusteringIT implements NestedQueries
 
     private static ExecutorService newExecutor()
     {
-        return Executors.newCachedThreadPool( daemon( CausalClusteringIT.class.getSimpleName() + "-thread-" ) );
+        return Executors.newCachedThreadPool( DaemonThreadFactory.daemon( CausalClusteringIT.class.getSimpleName() + "-thread-" ) );
     }
 
     private static boolean isSingleFollowerWithReadReplicas( ClusterOverview overview )
@@ -1050,7 +1051,7 @@ public class CausalClusteringIT implements NestedQueries
         for ( Channel channel : driverFactory.channels() )
         {
             RuntimeException error = new ServiceUnavailableException( "Disconnected" );
-            if ( BOLT_V3.availableIn( dbVersion ) )
+            if ( Neo4jFeature.BOLT_V3.availableIn( dbVersion ) )
             {
                 channel.pipeline().addLast( ThrowingMessageEncoder.forRunWithMetadataMessage( error ) );
             }

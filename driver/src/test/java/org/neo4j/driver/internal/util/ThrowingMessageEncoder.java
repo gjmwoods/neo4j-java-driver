@@ -23,9 +23,9 @@ import io.netty.handler.codec.MessageToMessageEncoder;
 
 import java.util.List;
 
-import org.neo4j.driver.internal.messaging.request.ResetMessage;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.messaging.request.RunWithMetadataMessage;
+import org.neo4j.connector.messaging.request.ResetMessage;
+import org.neo4j.connector.messaging.request.RunMessage;
+import org.neo4j.connector.messaging.request.RunWithMetadataMessage;
 
 public class ThrowingMessageEncoder<T> extends MessageToMessageEncoder<T>
 {

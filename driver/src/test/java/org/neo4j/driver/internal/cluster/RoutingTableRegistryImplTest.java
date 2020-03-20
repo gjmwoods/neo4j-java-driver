@@ -18,6 +18,8 @@
  */
 package org.neo4j.driver.internal.cluster;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -29,14 +31,19 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.DatabaseName;
-import org.neo4j.driver.internal.InternalBookmark;
-import org.neo4j.driver.internal.async.ImmutableConnectionContext;
-import org.neo4j.driver.internal.cluster.RoutingTableRegistryImpl.RoutingTableHandlerFactory;
-import org.neo4j.driver.internal.spi.ConnectionPool;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.cluster.RediscoveryImpl;
+import org.neo4j.connector.cluster.RoutingTable;
+import org.neo4j.connector.cluster.RoutingTableHandler;
+import org.neo4j.connector.cluster.RoutingTableRegistryImpl;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.DatabaseName;
+import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.connector.async.ImmutableConnectionContext;
+import org.neo4j.connector.cluster.RoutingTableRegistryImpl.RoutingTableHandlerFactory;
+import org.neo4j.connector.spi.ConnectionPool;
+import org.neo4j.connector.internal.util.Clock;
+import org.neo4j.driver.internal.util.ClusterCompositionUtil;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -51,17 +58,11 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
-import static org.neo4j.driver.internal.DatabaseNameUtil.database;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
-import static org.neo4j.driver.internal.logging.DevNullLogger.DEV_NULL_LOGGER;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.A;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.B;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.C;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.D;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.E;
-import static org.neo4j.driver.internal.util.ClusterCompositionUtil.F;
+import static org.neo4j.connector.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
+import static org.neo4j.connector.internal.DatabaseNameUtil.database;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
+import static org.neo4j.connector.logging.DevNullLogger.DEV_NULL_LOGGER;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class RoutingTableRegistryImplTest
@@ -72,7 +73,7 @@ class RoutingTableRegistryImplTest
         Clock clock = Clock.SYSTEM;
         RoutingTableHandlerFactory factory =
                 new RoutingTableHandlerFactory( mock( ConnectionPool.class ), mock( RediscoveryImpl.class ), clock, DEV_NULL_LOGGER,
-                        STALE_ROUTING_TABLE_PURGE_DELAY_MS );
+                                                STALE_ROUTING_TABLE_PURGE_DELAY_MS );
 
         RoutingTableHandler handler = factory.newInstance( database( "Molly" ), null );
         RoutingTable table = handler.routingTable();
@@ -151,9 +152,9 @@ class RoutingTableRegistryImplTest
     {
         // Given
         ConcurrentMap<DatabaseName,RoutingTableHandler> map = new ConcurrentHashMap<>();
-        map.put( database( "Apple" ), mockedRoutingTableHandler( A, B, C ) );
-        map.put( database( "Banana" ), mockedRoutingTableHandler( B, C, D ) );
-        map.put( database( "Orange" ), mockedRoutingTableHandler( E, F, C ) );
+        map.put( database( "Apple" ), mockedRoutingTableHandler( ClusterCompositionUtil.A, ClusterCompositionUtil.B, ClusterCompositionUtil.C ) );
+        map.put( database( "Banana" ), mockedRoutingTableHandler( ClusterCompositionUtil.B, ClusterCompositionUtil.C, ClusterCompositionUtil.D ) );
+        map.put( database( "Orange" ), mockedRoutingTableHandler( ClusterCompositionUtil.E, ClusterCompositionUtil.F, ClusterCompositionUtil.C ) );
         RoutingTableHandlerFactory factory = mockedHandlerFactory();
         RoutingTableRegistryImpl routingTables = new RoutingTableRegistryImpl( map, factory, DEV_NULL_LOGGER );
 
@@ -161,7 +162,7 @@ class RoutingTableRegistryImplTest
         Set<BoltServerAddress> servers = routingTables.allServers();
 
         // Then
-        assertThat( servers, containsInAnyOrder( A, B, C, D, E, F ) );
+        assertThat( servers, Matchers.containsInAnyOrder( ClusterCompositionUtil.A, ClusterCompositionUtil.B, ClusterCompositionUtil.C, ClusterCompositionUtil.D, ClusterCompositionUtil.E, ClusterCompositionUtil.F ) );
     }
 
     @Test
@@ -169,9 +170,9 @@ class RoutingTableRegistryImplTest
     {
         // Given
         ConcurrentMap<DatabaseName,RoutingTableHandler> map = new ConcurrentHashMap<>();
-        map.put( database( "Apple" ), mockedRoutingTableHandler( A ) );
-        map.put( database( "Banana" ), mockedRoutingTableHandler( B ) );
-        map.put( database( "Orange" ), mockedRoutingTableHandler( C ) );
+        map.put( database( "Apple" ), mockedRoutingTableHandler( ClusterCompositionUtil.A ) );
+        map.put( database( "Banana" ), mockedRoutingTableHandler( ClusterCompositionUtil.B ) );
+        map.put( database( "Orange" ), mockedRoutingTableHandler( ClusterCompositionUtil.C ) );
 
         RoutingTableHandlerFactory factory = mockedHandlerFactory();
         RoutingTableRegistryImpl routingTables = newRoutingTables( map, factory );
@@ -180,16 +181,16 @@ class RoutingTableRegistryImplTest
         routingTables.remove( database( "Apple" ) );
         routingTables.remove( database( "Banana" ) );
         // Then
-        assertThat( routingTables.allServers(), contains( C ) );
+        MatcherAssert.assertThat( routingTables.allServers(), Matchers.contains( ClusterCompositionUtil.C ) );
     }
 
     @Test
     void shouldRemoveStaleRoutingTableHandlers() throws Throwable
     {
         ConcurrentMap<DatabaseName,RoutingTableHandler> map = new ConcurrentHashMap<>();
-        map.put( database( "Apple" ), mockedRoutingTableHandler( A ) );
-        map.put( database( "Banana" ), mockedRoutingTableHandler( B ) );
-        map.put( database( "Orange" ), mockedRoutingTableHandler( C ) );
+        map.put( database( "Apple" ), mockedRoutingTableHandler( ClusterCompositionUtil.A ) );
+        map.put( database( "Banana" ), mockedRoutingTableHandler( ClusterCompositionUtil.B ) );
+        map.put( database( "Orange" ), mockedRoutingTableHandler( ClusterCompositionUtil.C ) );
 
         RoutingTableHandlerFactory factory = mockedHandlerFactory();
         RoutingTableRegistryImpl routingTables = newRoutingTables( map, factory );

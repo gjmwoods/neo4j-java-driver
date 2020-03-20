@@ -25,12 +25,12 @@ import reactor.core.publisher.Mono;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.AccessMode;
+import org.neo4j.connector.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxSession;
-import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.types.Node;
+import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.connector.internal.types.Node;
 
 public class RxReadQueryWithRetries<C extends AbstractContext> extends AbstractRxQuery<C>
 {

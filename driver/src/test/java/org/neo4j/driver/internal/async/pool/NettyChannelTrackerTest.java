@@ -24,10 +24,11 @@ import io.netty.channel.group.ChannelGroup;
 import org.bouncycastle.util.Arrays;
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.messaging.request.GoodbyeMessage;
-import org.neo4j.driver.internal.messaging.v3.BoltProtocolV3;
+import org.neo4j.connector.async.pool.NettyChannelTracker;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.messaging.request.GoodbyeMessage;
+import org.neo4j.connector.messaging.v3.BoltProtocolV3;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -37,11 +38,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setProtocolVersion;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setServerAddress;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setProtocolVersion;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setServerAddress;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
 
 class NettyChannelTrackerTest
 {

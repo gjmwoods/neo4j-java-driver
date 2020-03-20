@@ -18,6 +18,7 @@
  */
 package org.neo4j.driver;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -25,7 +26,10 @@ import java.net.ServerSocket;
 import java.net.URI;
 import java.util.List;
 
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.connector.AuthTokens;
+import org.neo4j.connector.Logger;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.driver.util.StubServer;
 import org.neo4j.driver.util.TestUtil;
 
@@ -43,9 +47,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.util.Matchers.clusterDriver;
-import static org.neo4j.driver.internal.util.Matchers.directDriver;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.driver.util.StubServer.INSECURE_CONFIG;
 
 class GraphDatabaseTest
@@ -62,7 +64,7 @@ class GraphDatabaseTest
         driver.verifyConnectivity();
 
         // Then
-        assertThat( driver, is( directDriver() ) );
+        assertThat( driver, Matchers.is( org.neo4j.driver.internal.util.Matchers.directDriver() ) );
 
         // Finally
         driver.close();
@@ -81,7 +83,7 @@ class GraphDatabaseTest
         driver.verifyConnectivity();
 
         // Then
-        assertThat( driver, is( clusterDriver() ) );
+        assertThat( driver, Matchers.is( org.neo4j.driver.internal.util.Matchers.clusterDriver() ) );
 
         // Finally
         driver.close();
@@ -105,9 +107,9 @@ class GraphDatabaseTest
         when( logging.getLog( anyString() ) ).thenReturn( logger );
 
         Config config = Config.builder()
-                .withoutEncryption()
-                .withLogging( logging )
-                .build();
+                              .withoutEncryption()
+                              .withLogging( logging )
+                              .build();
 
         List<URI> routingUris = asList(
                 URI.create( "neo4j://localhost:9001" ),

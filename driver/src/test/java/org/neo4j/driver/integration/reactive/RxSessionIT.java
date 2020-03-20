@@ -31,13 +31,14 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.neo4j.driver.Session;
-import org.neo4j.driver.Result;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.DatabaseException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.exceptions.SessionExpiredException;
-import org.neo4j.driver.exceptions.TransientException;
+import org.neo4j.connector.Result;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.DatabaseException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.connector.exception.TransientException;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
+import org.neo4j.driver.internal.util.Neo4jFeature;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxTransaction;
@@ -51,9 +52,8 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.neo4j.driver.internal.util.Neo4jFeature.BOLT_V4;
 
-@EnabledOnNeo4jWith( BOLT_V4 )
+@EnabledOnNeo4jWith( Neo4jFeature.BOLT_V4 )
 @ParallelizableIT
 class RxSessionIT
 {

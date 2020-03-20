@@ -18,6 +18,8 @@
  */
 package org.neo4j.driver.internal.util;
 
+import org.neo4j.connector.internal.util.Clock;
+
 public final class SleeplessClock implements Clock
 {
     private final Clock delegate;

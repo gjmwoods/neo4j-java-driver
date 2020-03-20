@@ -27,23 +27,24 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.internal.InternalBookmark;
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.RunWithMetadataMessage;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.messaging.encode.RunWithMetadataMessageEncoder;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.request.RunWithMetadataMessage;
 
 import static java.util.Collections.singletonMap;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.AccessMode.READ;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.messaging.request.DiscardAllMessage.DISCARD_ALL;
-import static org.neo4j.driver.internal.messaging.request.RunWithMetadataMessage.autoCommitTxRunMessage;
+import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.messaging.request.DiscardAllMessage.DISCARD_ALL;
+import static org.neo4j.connector.messaging.request.RunWithMetadataMessage.autoCommitTxRunMessage;
 
 class RunWithMetadataMessageEncoderTest
 {

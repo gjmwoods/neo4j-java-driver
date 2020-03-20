@@ -23,8 +23,8 @@ import org.hamcrest.Matcher;
 import java.util.HashSet;
 import java.util.List;
 
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.internal.InternalBookmark;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.internal.InternalBookmark;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;

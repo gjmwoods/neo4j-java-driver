@@ -27,20 +27,25 @@ import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.neo4j.driver.Logging;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.async.connection.ChannelConnector;
-import org.neo4j.driver.internal.metrics.ListenerEvent;
-import org.neo4j.driver.internal.metrics.MetricsListener;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.async.pool.ConnectionFactory;
+import org.neo4j.connector.async.pool.ConnectionPoolImpl;
+import org.neo4j.connector.async.pool.ExtendedChannelPool;
+import org.neo4j.connector.async.pool.NettyChannelTracker;
+import org.neo4j.connector.async.pool.PoolSettings;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.async.connection.ChannelConnector;
+import org.neo4j.connector.internal.metrics.ListenerEvent;
+import org.neo4j.connector.internal.metrics.MetricsListener;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.internal.util.Clock;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setPoolId;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setServerAddress;
-import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setPoolId;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setServerAddress;
+import static org.neo4j.connector.internal.util.Futures.completedWithNull;
 
 public class TestConnectionPool extends ConnectionPoolImpl
 {

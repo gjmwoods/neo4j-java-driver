@@ -24,8 +24,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import org.neo4j.driver.Logger;
-import org.neo4j.driver.Logging;
+import org.neo4j.connector.async.inbound.ChunkDecoder;
+import org.neo4j.connector.Logger;
+import org.neo4j.connector.Logging;
+import org.neo4j.driver.util.TestUtil;
 
 import static io.netty.buffer.ByteBufUtil.hexDump;
 import static io.netty.buffer.Unpooled.buffer;
@@ -38,8 +40,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.util.TestUtil.assertByteBufEquals;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class ChunkDecoderTest
 {
@@ -80,7 +81,7 @@ class ChunkDecoderTest
         // there should only be a single chunk available for reading
         assertEquals( 1, channel.inboundMessages().size() );
         // it should have no size header and expected body
-        assertByteBufEquals( input.slice( 2, 7 ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( input.slice( 2, 7 ), channel.readInbound() );
     }
 
     @Test
@@ -121,7 +122,7 @@ class ChunkDecoderTest
         // there should only be a single chunk available for reading
         assertEquals( 1, channel.inboundMessages().size() );
         // it should have no size header and expected body
-        assertByteBufEquals( wrappedBuffer( new byte[]{1, 11, 2, 22, 3, 33, 4, 44, 5} ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[]{1, 11, 2, 22, 3, 33, 4, 44, 5} ), channel.readInbound() );
     }
 
     @Test
@@ -135,7 +136,7 @@ class ChunkDecoderTest
         // there should only be a single chunk available for reading
         assertEquals( 1, channel.inboundMessages().size() );
         // it should have no size header and empty body
-        assertByteBufEquals( wrappedBuffer( new byte[0] ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[0] ), channel.readInbound() );
     }
 
     @Test
@@ -155,7 +156,7 @@ class ChunkDecoderTest
         assertEquals( hexDump( buffer ), messageCaptor.getValue() );
         // single empty chunk should be available for reading
         assertEquals( 1, channel.inboundMessages().size() );
-        assertByteBufEquals( wrappedBuffer( new byte[0] ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( new byte[0] ), channel.readInbound() );
     }
 
     @Test
@@ -179,7 +180,7 @@ class ChunkDecoderTest
         assertEquals( hexDump( buffer ), messageCaptor.getValue() );
         // single chunk should be available for reading
         assertEquals( 1, channel.inboundMessages().size() );
-        assertByteBufEquals( wrappedBuffer( bytes ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( bytes ), channel.readInbound() );
     }
 
     @Test
@@ -195,7 +196,7 @@ class ChunkDecoderTest
         assertTrue( channel.finish() );
 
         assertEquals( 1, channel.inboundMessages().size() );
-        assertByteBufEquals( wrappedBuffer( message ), channel.readInbound() );
+        TestUtil.assertByteBufEquals( wrappedBuffer( message ), channel.readInbound() );
     }
 
     private static ChunkDecoder newChunkDecoder()

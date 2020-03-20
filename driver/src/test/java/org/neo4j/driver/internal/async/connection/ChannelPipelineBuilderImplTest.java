@@ -25,18 +25,20 @@ import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.neo4j.driver.internal.async.inbound.ChannelErrorHandler;
-import org.neo4j.driver.internal.async.inbound.ChunkDecoder;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.async.inbound.InboundMessageHandler;
-import org.neo4j.driver.internal.async.inbound.MessageDecoder;
-import org.neo4j.driver.internal.async.outbound.OutboundMessageHandler;
-import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
+import org.neo4j.connector.async.connection.ChannelAttributes;
+import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
+import org.neo4j.connector.async.inbound.ChannelErrorHandler;
+import org.neo4j.connector.async.inbound.ChunkDecoder;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.inbound.InboundMessageHandler;
+import org.neo4j.connector.async.inbound.MessageDecoder;
+import org.neo4j.connector.async.outbound.OutboundMessageHandler;
+import org.neo4j.connector.messaging.v1.MessageFormatV1;
 
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class ChannelPipelineBuilderImplTest
 {

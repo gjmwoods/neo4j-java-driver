@@ -22,10 +22,13 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.concurrent.Future;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutionException;
+
+import org.neo4j.connector.async.connection.EventLoopGroupFactory;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.hamcrest.Matchers.instanceOf;
@@ -36,7 +39,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.neo4j.connector.internal.util.Iterables.count;
-import static org.neo4j.driver.internal.util.Matchers.blockingOperationInEventLoopError;
 
 class EventLoopGroupFactoryTest
 {
@@ -75,7 +77,7 @@ class EventLoopGroupFactoryTest
         Future<?> assertFuture = eventLoopGroup.submit( EventLoopGroupFactory::assertNotInEventLoopThread );
 
         ExecutionException error = assertThrows( ExecutionException.class, () -> assertFuture.get( 30, SECONDS ) );
-        assertThat( error.getCause(), is( blockingOperationInEventLoopError() ) );
+        assertThat( error.getCause(), Matchers.is( org.neo4j.driver.internal.util.Matchers.blockingOperationInEventLoopError() ) );
     }
 
     @Test

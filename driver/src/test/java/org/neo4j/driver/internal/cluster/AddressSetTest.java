@@ -23,7 +23,8 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.neo4j.driver.internal.BoltServerAddress;
+import org.neo4j.connector.cluster.AddressSet;
+import org.neo4j.connector.internal.BoltServerAddress;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;

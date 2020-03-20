@@ -26,29 +26,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.driver.internal.value.BooleanValue;
-import org.neo4j.driver.internal.value.FloatValue;
-import org.neo4j.driver.internal.value.IntegerValue;
-import org.neo4j.driver.internal.value.ListValue;
-import org.neo4j.driver.internal.value.MapValue;
-import org.neo4j.driver.internal.value.NodeValue;
-import org.neo4j.driver.internal.value.NullValue;
-import org.neo4j.driver.internal.value.PathValue;
-import org.neo4j.driver.internal.value.RelationshipValue;
-import org.neo4j.driver.internal.value.StringValue;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.Values;
-import org.neo4j.driver.types.Entity;
-import org.neo4j.driver.types.Node;
-import org.neo4j.driver.types.Path;
-import org.neo4j.driver.types.Relationship;
+import org.neo4j.connector.internal.InternalPath;
+import org.neo4j.connector.internal.InternalRecord;
+import org.neo4j.connector.internal.InternalRelationship;
+import org.neo4j.connector.internal.value.BooleanValue;
+import org.neo4j.connector.internal.value.FloatValue;
+import org.neo4j.connector.internal.value.IntegerValue;
+import org.neo4j.connector.internal.value.ListValue;
+import org.neo4j.connector.internal.value.MapValue;
+import org.neo4j.connector.internal.value.NodeValue;
+import org.neo4j.connector.internal.value.NullValue;
+import org.neo4j.connector.internal.value.PathValue;
+import org.neo4j.connector.internal.value.RelationshipValue;
+import org.neo4j.connector.internal.value.StringValue;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.Values;
+import org.neo4j.connector.internal.types.Entity;
+import org.neo4j.connector.internal.types.Node;
+import org.neo4j.connector.internal.types.Path;
+import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.connector.internal.InternalNode;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.neo4j.driver.Values.ofInteger;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.ofInteger;
+import static org.neo4j.connector.Values.value;
 
 class InternalMapAccessorWithDefaultValueTest
 {

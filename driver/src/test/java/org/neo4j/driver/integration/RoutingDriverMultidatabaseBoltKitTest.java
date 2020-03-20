@@ -26,18 +26,18 @@ import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.neo4j.driver.AccessMode;
+import org.neo4j.connector.AccessMode;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.Record;
+import org.neo4j.connector.Record;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.exceptions.FatalDiscoveryException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.connector.exception.FatalDiscoveryException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.driver.integration.RoutingDriverBoltKitTest.PortBasedServerAddressComparator;
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.net.ServerAddress;
-import org.neo4j.driver.net.ServerAddressResolver;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.net.ServerAddress;
+import org.neo4j.connector.net.ServerAddressResolver;
 import org.neo4j.driver.util.StubServer;
 
 import static java.util.Arrays.asList;
@@ -47,7 +47,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.neo4j.driver.SessionConfig.builder;
-import static org.neo4j.driver.internal.InternalBookmark.parse;
+import static org.neo4j.connector.internal.InternalBookmark.parse;
 import static org.neo4j.driver.util.StubServer.INSECURE_CONFIG;
 import static org.neo4j.driver.util.StubServer.insecureBuilder;
 

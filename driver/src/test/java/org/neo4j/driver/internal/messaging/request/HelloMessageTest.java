@@ -23,15 +23,16 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.Value;
+import org.neo4j.connector.messaging.request.HelloMessage;
+import org.neo4j.connector.Value;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.neo4j.driver.internal.security.InternalAuthToken.CREDENTIALS_KEY;
-import static org.neo4j.driver.internal.security.InternalAuthToken.PRINCIPAL_KEY;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.internal.security.InternalAuthToken.CREDENTIALS_KEY;
+import static org.neo4j.connector.internal.security.InternalAuthToken.PRINCIPAL_KEY;
+import static org.neo4j.connector.Values.value;
 
 class HelloMessageTest
 {

@@ -22,23 +22,23 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.Logger;
-import org.neo4j.driver.Logging;
-import org.neo4j.driver.Metrics;
+import org.neo4j.connector.Logger;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.Metrics;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.internal.async.InternalAsyncSession;
-import org.neo4j.driver.internal.async.NetworkSession;
-import org.neo4j.driver.internal.metrics.MetricsProvider;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.internal.metrics.MetricsProvider;
 import org.neo4j.driver.internal.reactive.InternalRxSession;
-import org.neo4j.driver.internal.security.SecurityPlan;
-import org.neo4j.driver.internal.types.InternalTypeSystem;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.connector.internal.types.InternalTypeSystem;
+import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.driver.reactive.RxSession;
-import org.neo4j.driver.types.TypeSystem;
+import org.neo4j.connector.internal.types.TypeSystem;
 
-import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.connector.internal.util.Futures.completedWithNull;
 
 public class InternalDriver implements Driver
 {

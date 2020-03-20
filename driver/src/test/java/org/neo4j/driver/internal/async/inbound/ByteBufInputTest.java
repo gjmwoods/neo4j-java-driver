@@ -21,6 +21,8 @@ package org.neo4j.driver.internal.async.inbound;
 import io.netty.buffer.ByteBuf;
 import org.junit.jupiter.api.Test;
 
+import org.neo4j.connector.async.inbound.ByteBufInput;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;

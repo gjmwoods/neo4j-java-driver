@@ -20,18 +20,18 @@ package org.neo4j.driver.internal;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.AccessMode;
+import org.neo4j.connector.AccessMode;
 import org.neo4j.driver.Config;
-import org.neo4j.driver.internal.async.LeakLoggingNetworkSession;
-import org.neo4j.driver.internal.async.NetworkSession;
-import org.neo4j.driver.internal.spi.ConnectionProvider;
+import org.neo4j.connector.async.LeakLoggingNetworkSession;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.driver.internal.util.FixedRetryLogic;
 
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.neo4j.driver.SessionConfig.builder;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class SessionFactoryImplTest
 {

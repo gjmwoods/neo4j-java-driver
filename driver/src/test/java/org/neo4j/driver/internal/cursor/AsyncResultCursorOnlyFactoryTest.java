@@ -27,11 +27,15 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Stream;
 
-import org.neo4j.driver.internal.handlers.PullAllResponseHandler;
-import org.neo4j.driver.internal.handlers.RunResponseHandler;
-import org.neo4j.driver.internal.handlers.pulln.AutoPullResponseHandler;
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.spi.Connection;
+import org.neo4j.connector.handlers.PullAllResponseHandler;
+import org.neo4j.connector.handlers.RunResponseHandler;
+import org.neo4j.connector.handlers.pulln.AutoPullResponseHandler;
+import org.neo4j.connector.internal.cursor.AsyncResultCursor;
+import org.neo4j.connector.internal.cursor.AsyncResultCursorOnlyFactory;
+import org.neo4j.connector.internal.cursor.ResultCursorFactory;
+import org.neo4j.connector.internal.cursor.RxResultCursor;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.spi.Connection;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -43,9 +47,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.util.Futures.completedWithNull;
-import static org.neo4j.driver.internal.util.Futures.failedFuture;
-import static org.neo4j.driver.internal.util.Futures.getNow;
+import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.connector.internal.util.Futures.getNow;
 
 class AsyncResultCursorOnlyFactoryTest
 {

@@ -20,8 +20,9 @@ package org.neo4j.driver.internal.value;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.types.InternalTypeSystem;
-import org.neo4j.driver.internal.types.TypeConstructor;
+import org.neo4j.connector.internal.types.InternalTypeSystem;
+import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.connector.internal.value.InternalValue;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;

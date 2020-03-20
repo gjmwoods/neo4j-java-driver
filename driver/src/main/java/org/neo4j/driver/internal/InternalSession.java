@@ -20,19 +20,20 @@ package org.neo4j.driver.internal;
 
 import java.util.Map;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Query;
+import org.neo4j.connector.AbstractQueryRunner;
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Query;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.driver.TransactionConfig;
+import org.neo4j.connector.TransactionConfig;
 import org.neo4j.driver.TransactionWork;
-import org.neo4j.driver.async.ResultCursor;
-import org.neo4j.driver.internal.async.UnmanagedTransaction;
-import org.neo4j.driver.internal.async.NetworkSession;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.connector.async.UnmanagedTransaction;
+import org.neo4j.connector.async.NetworkSession;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.internal.util.Futures;
 
 import static java.util.Collections.emptyMap;
 

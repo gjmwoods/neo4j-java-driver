@@ -24,15 +24,16 @@ import org.mockito.InOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.InitMessage;
-import org.neo4j.driver.internal.messaging.request.PullAllMessage;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.encode.InitMessageEncoder;
+import org.neo4j.connector.messaging.request.InitMessage;
+import org.neo4j.connector.messaging.request.PullAllMessage;
+import org.neo4j.connector.Value;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.value;
 
 class InitMessageEncoderTest
 {

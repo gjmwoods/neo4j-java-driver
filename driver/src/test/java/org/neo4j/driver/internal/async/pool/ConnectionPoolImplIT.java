@@ -27,17 +27,21 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import java.util.Collections;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.ConnectionSettings;
-import org.neo4j.driver.internal.async.connection.BootstrapFactory;
-import org.neo4j.driver.internal.async.connection.ChannelConnector;
-import org.neo4j.driver.internal.async.connection.ChannelConnectorImpl;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
-import org.neo4j.driver.internal.spi.Connection;
+import org.neo4j.connector.async.pool.ConnectionPoolImpl;
+import org.neo4j.connector.async.pool.ExtendedChannelPool;
+import org.neo4j.connector.async.pool.PoolSettings;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.internal.ConnectionSettings;
+import org.neo4j.connector.async.connection.BootstrapFactory;
+import org.neo4j.connector.async.connection.ChannelConnector;
+import org.neo4j.connector.async.connection.ChannelConnectorImpl;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.spi.Connection;
 import org.neo4j.driver.internal.util.FakeClock;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
@@ -47,8 +51,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
 import static org.neo4j.driver.util.TestUtil.await;
 
 @ParallelizableIT
@@ -74,7 +78,7 @@ class ConnectionPoolImplIT
     @Test
     void shouldAcquireConnectionWhenPoolIsEmpty()
     {
-        Connection connection = await( pool.acquire( neo4j.address() ) );
+        Connection connection = TestUtil.await( pool.acquire( neo4j.address() ) );
 
         assertNotNull( connection );
     }
@@ -82,10 +86,10 @@ class ConnectionPoolImplIT
     @Test
     void shouldAcquireIdleConnection()
     {
-        Connection connection1 = await( pool.acquire( neo4j.address() ) );
-        await( connection1.release() );
+        Connection connection1 = TestUtil.await( pool.acquire( neo4j.address() ) );
+        TestUtil.await( connection1.release() );
 
-        Connection connection2 = await( pool.acquire( neo4j.address() ) );
+        Connection connection2 = TestUtil.await( pool.acquire( neo4j.address() ) );
         assertNotNull( connection2 );
     }
 
@@ -98,14 +102,14 @@ class ConnectionPoolImplIT
                 .whenComplete( ( ignored, error ) -> pool.retainAll( Collections.emptySet() ) );
 
         // We should be able to come to this line.
-        await( future );
+        TestUtil.await( future );
     }
 
     @Test
     void shouldFailToAcquireConnectionToWrongAddress()
     {
         ServiceUnavailableException e = assertThrows( ServiceUnavailableException.class,
-                () -> await( pool.acquire( new BoltServerAddress( "wrong-localhost" ) ) ) );
+                () -> TestUtil.await( pool.acquire( new BoltServerAddress( "wrong-localhost" ) ) ) );
 
         assertThat( e.getMessage(), startsWith( "Unable to connect" ) );
     }
@@ -113,9 +117,9 @@ class ConnectionPoolImplIT
     @Test
     void shouldFailToAcquireWhenPoolClosed()
     {
-        Connection connection = await( pool.acquire( neo4j.address() ) );
-        await( connection.release() );
-        await( pool.close() );
+        Connection connection = TestUtil.await( pool.acquire( neo4j.address() ) );
+        TestUtil.await( connection.release() );
+        TestUtil.await( pool.close() );
 
         IllegalStateException e = assertThrows( IllegalStateException.class, () -> pool.acquire( neo4j.address() ) );
         assertThat( e.getMessage(), startsWith( "Pool closed" ) );
@@ -124,18 +128,18 @@ class ConnectionPoolImplIT
     @Test
     void shouldNotCloseWhenClosed()
     {
-        assertNull( await( pool.close() ) );
+        assertNull( TestUtil.await( pool.close() ) );
         assertTrue( pool.close().toCompletableFuture().isDone() );
     }
 
     @Test
     void shouldFailToAcquireConnectionWhenPoolIsClosed()
     {
-        await( pool.acquire( neo4j.address() ) );
+        TestUtil.await( pool.acquire( neo4j.address() ) );
         ExtendedChannelPool channelPool = this.pool.getPool( neo4j.address() );
-        await( channelPool.close() );
+        TestUtil.await( channelPool.close() );
         ServiceUnavailableException error =
-                assertThrows( ServiceUnavailableException.class, () -> await( pool.acquire( neo4j.address() ) ) );
+                assertThrows( ServiceUnavailableException.class, () -> TestUtil.await( pool.acquire( neo4j.address() ) ) );
         assertThat( error.getMessage(), containsString( "closed while acquiring a connection" ) );
         assertThat( error.getCause(), instanceOf( IllegalStateException.class ) );
         assertThat( error.getCause().getMessage(), containsString( "FixedChannelPool was closed" ) );

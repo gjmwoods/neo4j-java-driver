@@ -18,11 +18,11 @@
  */
 package org.neo4j.driver.internal.util.io;
 
-import org.neo4j.driver.internal.ConnectionSettings;
-import org.neo4j.driver.internal.async.connection.ChannelConnector;
-import org.neo4j.driver.internal.async.connection.ChannelConnectorImpl;
-import org.neo4j.driver.internal.security.SecurityPlan;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.internal.ConnectionSettings;
+import org.neo4j.connector.async.connection.ChannelConnector;
+import org.neo4j.connector.async.connection.ChannelConnectorImpl;
+import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.FailingMessageFormat;
 import org.neo4j.driver.Config;
 

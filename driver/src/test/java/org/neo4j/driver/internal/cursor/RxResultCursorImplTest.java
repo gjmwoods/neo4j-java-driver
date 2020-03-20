@@ -25,9 +25,11 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-import org.neo4j.driver.exceptions.ResultConsumedException;
-import org.neo4j.driver.internal.handlers.RunResponseHandler;
-import org.neo4j.driver.internal.handlers.pulln.PullResponseHandler;
+import org.neo4j.connector.exception.ResultConsumedException;
+import org.neo4j.connector.handlers.RunResponseHandler;
+import org.neo4j.connector.handlers.pulln.PullResponseHandler;
+import org.neo4j.connector.internal.cursor.RxResultCursor;
+import org.neo4j.connector.internal.cursor.RxResultCursorImpl;
 import org.neo4j.driver.internal.reactive.util.ListBasedPullHandler;
 
 import static java.util.Arrays.asList;
@@ -42,10 +44,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.cursor.RxResultCursorImpl.DISCARD_RECORD_CONSUMER;
-import static org.neo4j.driver.internal.messaging.v3.BoltProtocolV3.METADATA_EXTRACTOR;
-import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.internal.cursor.RxResultCursorImpl.DISCARD_RECORD_CONSUMER;
+import static org.neo4j.connector.messaging.v3.BoltProtocolV3.METADATA_EXTRACTOR;
+import static org.neo4j.connector.internal.util.Futures.completedWithNull;
 
 class RxResultCursorImplTest
 {

@@ -23,15 +23,16 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import org.neo4j.connector.messaging.v1.MessageReaderV1;
 import org.neo4j.driver.internal.util.messaging.AbstractMessageReaderTestBase;
-import org.neo4j.driver.internal.messaging.response.RecordMessage;
+import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.connector.packstream.PackInput;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.Value;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.internal.messaging.MessageFormat.Reader;
-import static org.neo4j.driver.Values.point;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.messaging.MessageFormat.Reader;
+import static org.neo4j.connector.Values.point;
+import static org.neo4j.connector.Values.value;
 
 class MessageReaderV1Test extends AbstractMessageReaderTestBase
 {

@@ -23,21 +23,23 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
-import org.neo4j.driver.Query;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.exceptions.SessionExpiredException;
-import org.neo4j.driver.exceptions.TransientException;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.async.UnmanagedTransaction;
-import org.neo4j.driver.internal.handlers.pulln.BasicPullResponseHandler;
-import org.neo4j.driver.internal.handlers.pulln.PullResponseHandler;
-import org.neo4j.driver.internal.spi.Connection;
+import org.neo4j.connector.handlers.RunResponseHandler;
+import org.neo4j.connector.handlers.TransactionPullResponseCompletionListener;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.connector.exception.TransientException;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.async.UnmanagedTransaction;
+import org.neo4j.connector.handlers.pulln.BasicPullResponseHandler;
+import org.neo4j.connector.handlers.pulln.PullResponseHandler;
+import org.neo4j.connector.spi.Connection;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.messaging.v1.BoltProtocolV1.METADATA_EXTRACTOR;
+import static org.neo4j.connector.messaging.v1.BoltProtocolV1.METADATA_EXTRACTOR;
 import static org.neo4j.driver.util.TestUtil.anyServerVersion;
 
 class TransactionPullResponseCompletionListenerTest

@@ -26,15 +26,16 @@ import java.util.HashMap;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.messaging.request.DiscardMessage;
-import org.neo4j.driver.internal.messaging.request.PullMessage;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.util.ServerVersion;
-import org.neo4j.driver.internal.value.BooleanValue;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.connector.handlers.pulln.BasicPullResponseHandler;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.messaging.request.DiscardMessage;
+import org.neo4j.connector.messaging.request.PullMessage;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.internal.util.ServerVersion;
+import org.neo4j.connector.internal.value.BooleanValue;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.summary.ResultSummary;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

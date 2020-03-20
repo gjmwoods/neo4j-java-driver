@@ -26,9 +26,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import org.neo4j.driver.internal.async.inbound.ChannelErrorHandler;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.connector.async.inbound.ChannelErrorHandler;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.exception.ServiceUnavailableException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
@@ -36,9 +36,9 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setTerminationReason;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setTerminationReason;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class ChannelErrorHandlerTest
 {

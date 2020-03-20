@@ -25,12 +25,11 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.net.URI;
 
-import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.internal.BoltServerAddress;
+import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 
@@ -38,7 +37,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.driver.internal.util.Matchers.directDriverWithAddress;
 
 @ParallelizableIT

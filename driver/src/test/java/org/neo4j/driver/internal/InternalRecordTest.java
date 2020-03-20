@@ -27,9 +27,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.neo4j.driver.internal.util.Extract;
-import org.neo4j.driver.internal.value.NullValue;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.internal.util.Extract;
+import org.neo4j.connector.internal.value.NullValue;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.internal.InternalRecord;
+
 import java.util.function.Function;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -39,7 +41,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.Values.value;
 
 class InternalRecordTest
 {

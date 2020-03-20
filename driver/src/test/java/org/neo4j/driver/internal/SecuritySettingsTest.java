@@ -28,8 +28,8 @@ import java.util.stream.Stream;
 import javax.net.ssl.SSLContext;
 
 import org.neo4j.driver.Config;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.internal.security.SecurityPlan;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.internal.security.SecurityPlan;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -18,14 +18,14 @@
  */
 package org.neo4j.driver.internal.reactive;
 
-import org.neo4j.driver.Query;
+import org.neo4j.connector.Query;
 import org.reactivestreams.Publisher;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.neo4j.driver.internal.async.UnmanagedTransaction;
-import org.neo4j.driver.internal.cursor.RxResultCursor;
-import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.connector.async.UnmanagedTransaction;
+import org.neo4j.connector.internal.cursor.RxResultCursor;
+import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxTransaction;
 
@@ -41,7 +41,7 @@ public class InternalRxTransaction extends AbstractRxQueryRunner implements RxTr
     }
 
     @Override
-    public RxResult run(Query query)
+    public RxResult run( Query query)
     {
         return new InternalRxResult( () -> {
             CompletableFuture<RxResultCursor> cursorFuture = new CompletableFuture<>();

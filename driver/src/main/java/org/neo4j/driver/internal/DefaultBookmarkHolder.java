@@ -18,7 +18,9 @@
  */
 package org.neo4j.driver.internal;
 
-import org.neo4j.driver.Bookmark;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.internal.InternalBookmark;
 
 /**
  * @since 2.0

@@ -18,9 +18,13 @@
  */
 package org.neo4j.driver.internal;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.Bookmark;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.driver.internal.DefaultBookmarkHolder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,7 +34,7 @@ class DefaultBookmarkHolderTest
     void shouldAllowToGetAndSetBookmarks()
     {
         BookmarkHolder bookmarkHolder = new DefaultBookmarkHolder();
-        assertEquals( InternalBookmark.empty(), bookmarkHolder.getBookmark() );
+        Assertions.assertEquals( InternalBookmark.empty(), bookmarkHolder.getBookmark() );
 
         bookmarkHolder.setBookmark( null );
         assertEquals( InternalBookmark.empty(), bookmarkHolder.getBookmark() );

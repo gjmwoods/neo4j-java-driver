@@ -24,16 +24,17 @@ import org.mockito.InOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.DiscardAllMessage;
-import org.neo4j.driver.internal.messaging.request.DiscardMessage;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.encode.DiscardMessageEncoder;
+import org.neo4j.connector.messaging.request.DiscardAllMessage;
+import org.neo4j.connector.messaging.request.DiscardMessage;
+import org.neo4j.connector.Value;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.messaging.request.DiscardMessage.newDiscardAllMessage;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.messaging.request.DiscardMessage.newDiscardAllMessage;
 
 class DiscardMessageEncoderTest
 {

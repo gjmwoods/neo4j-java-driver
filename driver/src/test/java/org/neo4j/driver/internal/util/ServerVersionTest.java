@@ -18,7 +18,10 @@
  */
 package org.neo4j.driver.internal.util;
 
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
+
+import org.neo4j.connector.internal.util.ServerVersion;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -30,7 +33,7 @@ class ServerVersionTest
     @Test
     void version()
     {
-        assertThat( ServerVersion.version( "Neo4j/dev" ), is( ServerVersion.vInDev ) );
+        MatcherAssert.assertThat( ServerVersion.version( "Neo4j/dev" ), is( ServerVersion.vInDev ) );
         assertThat( ServerVersion.version( "Neo4j/4.0.0" ), is( ServerVersion.v4_0_0 ) );
     }
 

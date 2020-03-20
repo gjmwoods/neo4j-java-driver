@@ -29,24 +29,25 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.driver.Value;
-import org.neo4j.driver.Values;
-import org.neo4j.driver.exceptions.UntrustedServerException;
-import org.neo4j.driver.internal.async.inbound.ChannelErrorHandler;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.async.outbound.OutboundMessageHandler;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.handlers.InitResponseHandler;
+import org.neo4j.connector.Values;
+import org.neo4j.connector.exception.UntrustedServerException;
+import org.neo4j.connector.async.inbound.ChannelErrorHandler;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.outbound.OutboundMessageHandler;
+import org.neo4j.connector.messaging.request.RunMessage;
+import org.neo4j.connector.messaging.v1.MessageFormatV1;
 
 import static java.util.Collections.singletonMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.serverVersion;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.async.outbound.OutboundMessageHandler.NAME;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.async.connection.ChannelAttributes.serverVersion;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.async.outbound.OutboundMessageHandler.NAME;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.driver.util.TestUtil.anyServerVersion;
 
 class InitResponseHandlerTest

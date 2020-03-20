@@ -21,20 +21,21 @@ package org.neo4j.driver.internal.async.connection;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import org.neo4j.driver.internal.RoutingErrorHandler;
-import org.neo4j.driver.internal.handlers.RoutingResponseHandler;
-import org.neo4j.driver.internal.spi.Connection;
-import org.neo4j.driver.internal.spi.ResponseHandler;
+import org.neo4j.connector.async.connection.RoutingConnection;
+import org.neo4j.connector.cluster.RoutingErrorHandler;
+import org.neo4j.connector.handlers.RoutingResponseHandler;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.connector.spi.ResponseHandler;
 
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.AccessMode.READ;
-import static org.neo4j.driver.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.driver.internal.messaging.request.DiscardAllMessage.DISCARD_ALL;
-import static org.neo4j.driver.internal.messaging.request.PullAllMessage.PULL_ALL;
+import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
+import static org.neo4j.connector.messaging.request.DiscardAllMessage.DISCARD_ALL;
+import static org.neo4j.connector.messaging.request.PullAllMessage.PULL_ALL;
 
 class RoutingConnectionTest
 {

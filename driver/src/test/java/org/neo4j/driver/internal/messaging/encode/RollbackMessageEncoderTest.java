@@ -20,14 +20,15 @@ package org.neo4j.driver.internal.messaging.encode;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.messaging.ValuePacker;
-import org.neo4j.driver.internal.messaging.request.RollbackMessage;
+import org.neo4j.connector.messaging.ValuePacker;
+import org.neo4j.connector.messaging.encode.RollbackMessageEncoder;
+import org.neo4j.connector.messaging.request.RollbackMessage;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.internal.messaging.request.ResetMessage.RESET;
-import static org.neo4j.driver.internal.messaging.request.RollbackMessage.ROLLBACK;
+import static org.neo4j.connector.messaging.request.ResetMessage.RESET;
+import static org.neo4j.connector.messaging.request.RollbackMessage.ROLLBACK;
 
 class RollbackMessageEncoderTest
 {

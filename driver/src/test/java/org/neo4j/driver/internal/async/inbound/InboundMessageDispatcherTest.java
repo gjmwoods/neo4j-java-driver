@@ -29,11 +29,12 @@ import org.mockito.InOrder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.internal.spi.ResponseHandler;
-import org.neo4j.driver.internal.value.IntegerValue;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.Neo4jException;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.spi.ResponseHandler;
+import org.neo4j.connector.internal.value.IntegerValue;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.Neo4jException;
 
 import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,9 +50,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.messaging.request.ResetMessage.RESET;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.messaging.request.ResetMessage.RESET;
+import static org.neo4j.connector.Values.value;
 
 class InboundMessageDispatcherTest
 {

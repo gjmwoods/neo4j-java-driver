@@ -22,13 +22,13 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 
 import org.neo4j.driver.Config;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.internal.security.SecurityPlan;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
 
 import static org.neo4j.driver.internal.Scheme.isHighTrustScheme;
 import static org.neo4j.driver.internal.Scheme.isSecurityScheme;
-import static org.neo4j.driver.internal.security.SecurityPlanImpl.insecure;
+import static org.neo4j.connector.internal.security.SecurityPlanImpl.insecure;
 
 public class SecuritySettings
 {

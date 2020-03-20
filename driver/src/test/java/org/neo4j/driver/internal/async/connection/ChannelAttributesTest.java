@@ -21,31 +21,31 @@ package org.neo4j.driver.internal.async.connection;
 import io.netty.channel.embedded.EmbeddedChannel;
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.util.ServerVersion;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.internal.util.ServerVersion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.connectionId;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.creationTimestamp;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.lastUsedTimestamp;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.messageDispatcher;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.protocolVersion;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.serverAddress;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.serverVersion;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setConnectionId;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setCreationTimestamp;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setLastUsedTimestamp;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setProtocolVersion;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setServerAddress;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setServerVersion;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setTerminationReason;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.terminationReason;
-import static org.neo4j.driver.internal.util.ServerVersion.version;
+import static org.neo4j.connector.async.connection.ChannelAttributes.connectionId;
+import static org.neo4j.connector.async.connection.ChannelAttributes.creationTimestamp;
+import static org.neo4j.connector.async.connection.ChannelAttributes.lastUsedTimestamp;
+import static org.neo4j.connector.async.connection.ChannelAttributes.messageDispatcher;
+import static org.neo4j.connector.async.connection.ChannelAttributes.protocolVersion;
+import static org.neo4j.connector.async.connection.ChannelAttributes.serverAddress;
+import static org.neo4j.connector.async.connection.ChannelAttributes.serverVersion;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setConnectionId;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setCreationTimestamp;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setLastUsedTimestamp;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setProtocolVersion;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setServerAddress;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setServerVersion;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setTerminationReason;
+import static org.neo4j.connector.async.connection.ChannelAttributes.terminationReason;
+import static org.neo4j.connector.internal.util.ServerVersion.version;
 
 class ChannelAttributesTest
 {

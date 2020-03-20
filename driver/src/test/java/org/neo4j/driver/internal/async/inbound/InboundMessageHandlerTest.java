@@ -29,19 +29,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.internal.async.connection.ChannelAttributes;
+import org.neo4j.connector.async.connection.ChannelAttributes;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.async.inbound.InboundMessageHandler;
 import org.neo4j.driver.internal.util.messaging.KnowledgeableMessageFormat;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.MessageFormat.Reader;
-import org.neo4j.driver.internal.messaging.response.FailureMessage;
-import org.neo4j.driver.internal.messaging.response.IgnoredMessage;
-import org.neo4j.driver.internal.messaging.response.RecordMessage;
-import org.neo4j.driver.internal.messaging.response.SuccessMessage;
-import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
-import org.neo4j.driver.internal.spi.ResponseHandler;
+import org.neo4j.connector.messaging.MessageFormat;
+import org.neo4j.connector.messaging.MessageFormat.Reader;
+import org.neo4j.connector.messaging.response.FailureMessage;
+import org.neo4j.connector.messaging.response.IgnoredMessage;
+import org.neo4j.connector.messaging.response.RecordMessage;
+import org.neo4j.connector.messaging.response.SuccessMessage;
+import org.neo4j.connector.messaging.v1.MessageFormatV1;
+import org.neo4j.connector.spi.ResponseHandler;
 import org.neo4j.driver.internal.util.io.MessageToByteBufWriter;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.exceptions.Neo4jException;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.exception.Neo4jException;
 
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -52,9 +54,9 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.messaging.request.ResetMessage.RESET;
-import static org.neo4j.driver.Values.value;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.messaging.request.ResetMessage.RESET;
+import static org.neo4j.connector.Values.value;
 
 class InboundMessageHandlerTest
 {

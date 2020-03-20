@@ -18,6 +18,7 @@
  */
 package org.neo4j.driver.integration.async;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,28 +36,29 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.neo4j.driver.Bookmark;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
+import org.neo4j.connector.Bookmark;
+import org.neo4j.connector.Query;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.Value;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
 import org.neo4j.driver.async.AsyncTransactionWork;
-import org.neo4j.driver.async.ResultCursor;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.DatabaseException;
-import org.neo4j.driver.exceptions.NoSuchRecordException;
-import org.neo4j.driver.exceptions.ResultConsumedException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.exceptions.SessionExpiredException;
-import org.neo4j.driver.exceptions.TransientException;
-import org.neo4j.driver.internal.InternalBookmark;
+import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.DatabaseException;
+import org.neo4j.connector.exception.NoSuchRecordException;
+import org.neo4j.connector.exception.ResultConsumedException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.connector.exception.TransientException;
+import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.driver.internal.util.DisabledOnNeo4jWith;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
-import org.neo4j.driver.internal.util.Futures;
-import org.neo4j.driver.summary.QueryType;
-import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.types.Node;
+import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Neo4jFeature;
+import org.neo4j.connector.summary.summary.QueryType;
+import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.connector.internal.types.Node;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 
@@ -75,14 +77,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.neo4j.driver.SessionConfig.builder;
-import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.driver.internal.util.Futures.failedFuture;
+import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.connector.internal.util.Futures.failedFuture;
 import static org.neo4j.connector.internal.util.Iterables.single;
-import static org.neo4j.driver.internal.util.Matchers.arithmeticError;
-import static org.neo4j.driver.internal.util.Matchers.containsResultAvailableAfterAndResultConsumedAfter;
-import static org.neo4j.driver.internal.util.Matchers.syntaxError;
-import static org.neo4j.driver.internal.util.Neo4jFeature.BOLT_V3;
-import static org.neo4j.driver.internal.util.Neo4jFeature.BOLT_V4;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.awaitAll;
 
@@ -154,7 +151,7 @@ class AsyncSessionIT
         ResultCursor cursor = await( session.runAsync( "RETURN" ) );
 
         Exception e = assertThrows( Exception.class, () -> await( cursor.nextAsync() ) );
-        assertThat( e, is( syntaxError( "Unexpected end of input" ) ) );
+        assertThat( e, Matchers.is( org.neo4j.driver.internal.util.Matchers.syntaxError( "Unexpected end of input" ) ) );
     }
 
     @Test
@@ -171,7 +168,7 @@ class AsyncSessionIT
         assertEquals( 5, record2.get( 0 ).asInt() );
 
         Exception e = assertThrows( Exception.class, () -> await( cursor.nextAsync() ) );
-        assertThat( e, is( arithmeticError() ) );
+        assertThat( e, Matchers.is( org.neo4j.driver.internal.util.Matchers.arithmeticError() ) );
     }
 
     @Test
@@ -272,7 +269,7 @@ class AsyncSessionIT
         assertNull( summary.plan() );
         assertNull( summary.profile() );
         assertEquals( 0, summary.notifications().size() );
-        assertThat( summary, containsResultAvailableAfterAndResultConsumedAfter() );
+        assertThat( summary, org.neo4j.driver.internal.util.Matchers.containsResultAvailableAfterAndResultConsumedAfter() );
     }
 
     @Test
@@ -298,7 +295,7 @@ class AsyncSessionIT
         assertThat( planAsString, containsString( "expand" ) );
         assertNull( summary.profile() );
         assertEquals( 0, summary.notifications().size() );
-        assertThat( summary, containsResultAvailableAfterAndResultConsumedAfter() );
+        assertThat( summary, org.neo4j.driver.internal.util.Matchers.containsResultAvailableAfterAndResultConsumedAfter() );
     }
 
     @Test
@@ -323,7 +320,7 @@ class AsyncSessionIT
         String profileAsString = summary.profile().toString().toLowerCase();
         assertThat( profileAsString, containsString( "hits" ) );
         assertEquals( 0, summary.notifications().size() );
-        assertThat( summary, containsResultAvailableAfterAndResultConsumedAfter() );
+        assertThat( summary, org.neo4j.driver.internal.util.Matchers.containsResultAvailableAfterAndResultConsumedAfter() );
     }
 
     @Test
@@ -554,7 +551,7 @@ class AsyncSessionIT
     }
 
     @Test
-    @DisabledOnNeo4jWith( BOLT_V3 )
+    @DisabledOnNeo4jWith( Neo4jFeature.BOLT_V3 )
     void shouldRunAfterBeginTxFailureOnBookmark()
     {
         Bookmark illegalBookmark = InternalBookmark.parse( "Illegal Bookmark" );
@@ -577,7 +574,7 @@ class AsyncSessionIT
     }
 
     @Test
-    @EnabledOnNeo4jWith( BOLT_V3 )
+    @EnabledOnNeo4jWith( Neo4jFeature.BOLT_V3 )
     void shouldNotRunAfterBeginTxFailureOnBookmark()
     {
         Bookmark illegalBookmark = InternalBookmark.parse( "Illegal Bookmark" );
@@ -716,7 +713,7 @@ class AsyncSessionIT
     }
 
     @Test
-    @EnabledOnNeo4jWith( BOLT_V4 )
+    @EnabledOnNeo4jWith( Neo4jFeature.BOLT_V4 )
     void shouldNotPropagateFailureWhenStreamingIsCancelled()
     {
         session.runAsync( "UNWIND range(20000, 0, -1) AS x RETURN 10 / x" );
@@ -725,7 +722,7 @@ class AsyncSessionIT
     }
 
     @Test
-    @EnabledOnNeo4jWith( BOLT_V4 )
+    @EnabledOnNeo4jWith( Neo4jFeature.BOLT_V4 )
     void shouldNotPropagateBlockedPullAllFailureWhenClosed()
     {
         await( session.runAsync( "UNWIND range(20000, 0, -1) AS x RETURN 10 / x" ) );
@@ -796,7 +793,7 @@ class AsyncSessionIT
                 .thenCompose( ignore -> session.runAsync( "CREATE (:Node3)" ) );
 
         ClientException e = assertThrows( ClientException.class, () -> await( allQueries ) );
-        assertThat( e, is( syntaxError( "Variable `invalid` not defined" ) ) );
+        assertThat( e, Matchers.is( org.neo4j.driver.internal.util.Matchers.syntaxError( "Variable `invalid` not defined" ) ) );
 
         assertEquals( 1, countNodesByLabel( "Node1" ) );
         assertEquals( 1, countNodesByLabel( "Node2" ) );

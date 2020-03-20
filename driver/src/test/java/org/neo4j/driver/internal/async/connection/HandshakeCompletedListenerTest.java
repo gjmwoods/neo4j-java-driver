@@ -27,17 +27,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.Value;
-import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
-import org.neo4j.driver.internal.handlers.HelloResponseHandler;
-import org.neo4j.driver.internal.handlers.InitResponseHandler;
-import org.neo4j.driver.internal.messaging.Message;
-import org.neo4j.driver.internal.messaging.request.HelloMessage;
-import org.neo4j.driver.internal.messaging.request.InitMessage;
-import org.neo4j.driver.internal.messaging.v1.BoltProtocolV1;
-import org.neo4j.driver.internal.messaging.v2.BoltProtocolV2;
-import org.neo4j.driver.internal.messaging.v3.BoltProtocolV3;
-import org.neo4j.driver.internal.spi.ResponseHandler;
+import org.neo4j.connector.async.connection.HandshakeCompletedListener;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
+import org.neo4j.connector.handlers.HelloResponseHandler;
+import org.neo4j.connector.handlers.InitResponseHandler;
+import org.neo4j.connector.messaging.Message;
+import org.neo4j.connector.messaging.request.HelloMessage;
+import org.neo4j.connector.messaging.request.InitMessage;
+import org.neo4j.connector.messaging.v1.BoltProtocolV1;
+import org.neo4j.connector.messaging.v2.BoltProtocolV2;
+import org.neo4j.connector.messaging.v3.BoltProtocolV3;
+import org.neo4j.connector.spi.ResponseHandler;
+import org.neo4j.driver.util.TestUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -45,9 +47,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.driver.Values.value;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
-import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setProtocolVersion;
+import static org.neo4j.connector.Values.value;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
+import static org.neo4j.connector.async.connection.ChannelAttributes.setProtocolVersion;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class HandshakeCompletedListenerTest
@@ -67,7 +69,7 @@ class HandshakeCompletedListenerTest
     {
         ChannelPromise channelInitializedPromise = channel.newPromise();
         HandshakeCompletedListener listener = new HandshakeCompletedListener( "user-agent", authToken(),
-                channelInitializedPromise );
+                                                                              channelInitializedPromise );
 
         ChannelPromise handshakeCompletedPromise = channel.newPromise();
         IOException cause = new IOException( "Bad handshake" );
@@ -75,7 +77,7 @@ class HandshakeCompletedListenerTest
 
         listener.operationComplete( handshakeCompletedPromise );
 
-        Exception error = assertThrows( Exception.class, () -> await( channelInitializedPromise ) );
+        Exception error = assertThrows( Exception.class, () -> TestUtil.await( channelInitializedPromise ) );
         assertEquals( cause, error );
     }
 

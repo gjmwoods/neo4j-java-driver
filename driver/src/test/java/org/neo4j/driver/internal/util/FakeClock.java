@@ -23,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.LockSupport;
 
+import org.neo4j.connector.internal.util.Clock;
+
 public class FakeClock implements Clock
 {
     private final AtomicLong timestamp = new AtomicLong();

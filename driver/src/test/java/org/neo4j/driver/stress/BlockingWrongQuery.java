@@ -18,14 +18,15 @@
  */
 package org.neo4j.driver.stress;
 
-import org.neo4j.driver.AccessMode;
+import org.hamcrest.Matchers;
+
+import org.neo4j.connector.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.driver.internal.util.Matchers.syntaxError;
 
 public class BlockingWrongQuery<C extends AbstractContext> extends AbstractBlockingQuery<C>
 {
@@ -40,7 +41,7 @@ public class BlockingWrongQuery<C extends AbstractContext> extends AbstractBlock
         try ( Session session = newSession( AccessMode.READ, context ) )
         {
             Exception e = assertThrows( Exception.class, () -> session.run( "RETURN" ).consume() );
-            assertThat( e, is( syntaxError( "Unexpected end of input" ) ) );
+            assertThat( e, Matchers.is( org.neo4j.driver.internal.util.Matchers.syntaxError( "Unexpected end of input" ) ) );
         }
     }
 }

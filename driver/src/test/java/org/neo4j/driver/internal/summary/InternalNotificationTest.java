@@ -23,12 +23,13 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.driver.internal.value.IntegerValue;
-import org.neo4j.driver.internal.value.MapValue;
-import org.neo4j.driver.internal.value.StringValue;
-import org.neo4j.driver.Value;
-import org.neo4j.driver.summary.InputPosition;
-import org.neo4j.driver.summary.Notification;
+import org.neo4j.connector.internal.summary.InternalNotification;
+import org.neo4j.connector.internal.value.IntegerValue;
+import org.neo4j.connector.internal.value.MapValue;
+import org.neo4j.connector.internal.value.StringValue;
+import org.neo4j.connector.Value;
+import org.neo4j.connector.summary.summary.InputPosition;
+import org.neo4j.connector.summary.summary.Notification;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;

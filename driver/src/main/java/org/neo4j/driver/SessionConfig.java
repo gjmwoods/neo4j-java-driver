@@ -24,11 +24,13 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.Bookmark;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.reactive.RxSession;
 
 import static java.util.Objects.requireNonNull;
-import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.assertValidFetchSize;
+import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.assertValidFetchSize;
 
 /**
  * The session configurations used to configure a session.

@@ -26,7 +26,8 @@ import java.time.Period;
 import java.time.temporal.Temporal;
 import java.time.temporal.UnsupportedTemporalTypeException;
 
-import org.neo4j.driver.types.IsoDuration;
+import org.neo4j.connector.InternalIsoDuration;
+import org.neo4j.connector.internal.types.IsoDuration;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.time.temporal.ChronoUnit.MONTHS;

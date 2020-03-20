@@ -20,15 +20,17 @@ package org.neo4j.driver;
 
 import java.net.URI;
 
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.connector.AuthToken;
+import org.neo4j.connector.AuthTokens;
+import org.neo4j.connector.Logger;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.driver.internal.DriverFactory;
 import org.neo4j.driver.internal.Scheme;
 import org.neo4j.driver.internal.SecuritySettings;
-import org.neo4j.driver.internal.cluster.RoutingSettings;
-import org.neo4j.driver.internal.retry.RetrySettings;
-import org.neo4j.driver.internal.security.SecurityPlan;
-
-import static org.neo4j.driver.internal.Scheme.NEO4J_URI_SCHEME;
+import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.connector.internal.security.SecurityPlan;
 
 /**
  * Creates {@link Driver drivers}, optionally letting you {@link #driver(URI, Config)} to configure them.
@@ -197,10 +199,10 @@ public class GraphDatabase
     {
         for ( URI uri : uris )
         {
-            if ( !NEO4J_URI_SCHEME.equals( uri.getScheme() ) )
+            if ( !Scheme.NEO4J_URI_SCHEME.equals( uri.getScheme() ) )
             {
                 throw new IllegalArgumentException(
-                        "Illegal URI scheme, expected '" + NEO4J_URI_SCHEME + "' in '" + uri + "'" );
+                        "Illegal URI scheme, expected '" + Scheme.NEO4J_URI_SCHEME + "' in '" + uri + "'" );
             }
         }
     }

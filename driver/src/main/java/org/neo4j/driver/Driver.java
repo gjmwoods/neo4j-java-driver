@@ -20,11 +20,14 @@ package org.neo4j.driver;
 
 import java.util.concurrent.CompletionStage;
 
+import org.neo4j.connector.AccessMode;
+import org.neo4j.connector.AuthToken;
+import org.neo4j.connector.Metrics;
 import org.neo4j.driver.async.AsyncSession;
-import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.connector.exception.ClientException;
 import org.neo4j.driver.reactive.RxSession;
-import org.neo4j.driver.types.TypeSystem;
-import org.neo4j.driver.util.Experimental;
+import org.neo4j.connector.internal.types.TypeSystem;
+import org.neo4j.connector.internal.util.Experimental;
 
 /**
  * Accessor for a specific Neo4j graph database.

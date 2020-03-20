@@ -33,19 +33,19 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import org.neo4j.driver.AuthToken;
+import org.neo4j.connector.AuthToken;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 import org.neo4j.driver.Session;
-import org.neo4j.driver.Result;
+import org.neo4j.connector.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.internal.cluster.RoutingSettings;
-import org.neo4j.driver.internal.messaging.response.FailureMessage;
-import org.neo4j.driver.internal.retry.RetrySettings;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.connector.messaging.response.FailureMessage;
+import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
 import org.neo4j.driver.internal.util.FailingMessageFormat;
 import org.neo4j.driver.internal.util.FakeClock;
 import org.neo4j.driver.internal.util.io.ChannelTrackingDriverFactory;
@@ -67,7 +67,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.connector.internal.util.Iterables.single;
 
 @ParallelizableIT

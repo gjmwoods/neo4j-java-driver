@@ -23,13 +23,13 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.CompletableFuture;
 
 import org.neo4j.driver.Config;
-import org.neo4j.driver.Metrics;
-import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.driver.exceptions.ServiceUnavailableException;
-import org.neo4j.driver.internal.metrics.InternalMetrics;
-import org.neo4j.driver.internal.metrics.MetricsProvider;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
-import org.neo4j.driver.internal.util.Clock;
+import org.neo4j.connector.Metrics;
+import org.neo4j.connector.exception.ClientException;
+import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.connector.internal.metrics.InternalMetrics;
+import org.neo4j.connector.internal.metrics.MetricsProvider;
+import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.connector.internal.util.Clock;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,10 +38,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.driver.internal.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.driver.internal.metrics.MetricsProvider.METRICS_DISABLED_PROVIDER;
-import static org.neo4j.driver.internal.util.Futures.completedWithNull;
-import static org.neo4j.driver.internal.util.Futures.failedFuture;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.connector.internal.metrics.MetricsProvider.METRICS_DISABLED_PROVIDER;
+import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.connector.internal.util.Futures.failedFuture;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class InternalDriverTest

@@ -30,11 +30,10 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import org.neo4j.driver.Driver;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.internal.BoltServerAddress;
-import org.neo4j.driver.Bookmark;
+import org.neo4j.connector.Record;
+import org.neo4j.connector.internal.BoltServerAddress;
+import org.neo4j.connector.Bookmark;
 import org.neo4j.driver.util.TestUtil;
-import org.neo4j.driver.util.cc.ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery;
 
 import static java.util.Collections.emptySet;
 import static java.util.Collections.unmodifiableSet;
@@ -238,7 +237,7 @@ public class Cluster implements AutoCloseable
         Set<ClusterMember> membersWithRole = new HashSet<>();
 
         Driver driver = driverToAnyCore( members, clusterDrivers );
-        final ClusterMemberRoleDiscovery discovery = clusterDrivers.getDiscovery();
+        final ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery discovery = clusterDrivers.getDiscovery();
         final Map<BoltServerAddress,ClusterMemberRole> clusterOverview = discovery.findClusterOverview( driver );
         for ( BoltServerAddress boltAddress : clusterOverview.keySet() )
         {
@@ -293,7 +292,7 @@ public class Cluster implements AutoCloseable
             assertDeadlineNotReached( deadline, expectedOnlineAddresses, actualOnlineAddresses, error );
 
             Driver driver = driverToAnyCore( members, clusterDrivers );
-            final ClusterMemberRoleDiscovery discovery = clusterDrivers.getDiscovery();
+            final ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery discovery = clusterDrivers.getDiscovery();
             try
             {
                 final Map<BoltServerAddress,ClusterMemberRole> clusterOverview = discovery.findClusterOverview( driver );
@@ -325,7 +324,7 @@ public class Cluster implements AutoCloseable
         for ( ClusterMember member : members )
         {
             Driver driver = clusterDrivers.getDriver( member );
-            final ClusterMemberRoleDiscovery discovery = clusterDrivers.getDiscovery();
+            final ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery discovery = clusterDrivers.getDiscovery();
             if ( discovery.isCoreMember( driver ) )
             {
                 return driver;

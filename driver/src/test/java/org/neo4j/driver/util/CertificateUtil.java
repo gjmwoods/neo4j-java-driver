@@ -57,9 +57,10 @@ import java.util.Date;
 import java.util.Objects;
 import javax.security.auth.x500.X500Principal;
 
-import org.neo4j.driver.internal.InternalPair;
+import org.neo4j.connector.internal.InternalPair;
+import org.neo4j.connector.internal.util.Pair;
 
-import static org.neo4j.driver.internal.util.CertificateTool.saveX509Cert;
+import static org.neo4j.connector.internal.util.CertificateTool.saveX509Cert;
 import static org.neo4j.driver.util.FileTools.tempFile;
 
 public class CertificateUtil

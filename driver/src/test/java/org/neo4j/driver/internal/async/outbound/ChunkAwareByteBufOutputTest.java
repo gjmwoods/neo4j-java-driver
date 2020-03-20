@@ -27,9 +27,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.neo4j.connector.async.outbound.ChunkAwareByteBufOutput;
+import org.neo4j.driver.util.TestUtil;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.util.TestUtil.assertByteBufContains;
 
 class ChunkAwareByteBufOutputTest
 {
@@ -72,7 +74,7 @@ class ChunkAwareByteBufOutputTest
         output.writeByte( (byte) 42 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 1, (byte) 42 );
+        TestUtil.assertByteBufContains( buf, (short) 1, (byte) 42 );
     }
 
     @ParameterizedTest
@@ -89,7 +91,7 @@ class ChunkAwareByteBufOutputTest
         output.writeByte( (byte) 42 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 4, (byte) 1, (byte) 2, (byte) -24, (byte) 42 );
+        TestUtil.assertByteBufContains( buf, (short) 4, (byte) 1, (byte) 2, (byte) -24, (byte) 42 );
     }
 
     @ParameterizedTest
@@ -106,9 +108,9 @@ class ChunkAwareByteBufOutputTest
         output.writeByte( (byte) 42 );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 3, (byte) 5, (byte) 3, (byte) -5, // chunk 1
-                (short) 1, (byte) 42 // chunk 2
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 3, (byte) 5, (byte) 3, (byte) -5, // chunk 1
+                                        (short) 1, (byte) 42 // chunk 2
         );
     }
 
@@ -122,7 +124,7 @@ class ChunkAwareByteBufOutputTest
         output.writeShort( Short.MAX_VALUE );
         output.stop();
 
-        assertByteBufContains( buf, (short) 2, Short.MAX_VALUE );
+        TestUtil.assertByteBufContains( buf, (short) 2, Short.MAX_VALUE );
     }
 
     @ParameterizedTest
@@ -140,7 +142,7 @@ class ChunkAwareByteBufOutputTest
         output.writeShort( (short) -30 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 10, (short) 1, (short) 42, (short) 4242, (short) 4242, (short) -30 );
+        TestUtil.assertByteBufContains( buf, (short) 10, (short) 1, (short) 42, (short) 4242, (short) 4242, (short) -30 );
     }
 
     @ParameterizedTest
@@ -157,9 +159,9 @@ class ChunkAwareByteBufOutputTest
         output.writeShort( Short.MIN_VALUE );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 6, (short) 14, (short) -99, (short) 202, // chunk 1
-                (short) 2, Short.MIN_VALUE // chunk 2
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 6, (short) 14, (short) -99, (short) 202, // chunk 1
+                                        (short) 2, Short.MIN_VALUE // chunk 2
         );
     }
 
@@ -173,7 +175,7 @@ class ChunkAwareByteBufOutputTest
         output.writeInt( 73649 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 4, 73649 );
+        TestUtil.assertByteBufContains( buf, (short) 4, 73649 );
     }
 
     @ParameterizedTest
@@ -190,7 +192,7 @@ class ChunkAwareByteBufOutputTest
         output.writeInt( Integer.MIN_VALUE );
         output.stop();
 
-        assertByteBufContains( buf, (short) 16, Integer.MAX_VALUE, 20, -173, Integer.MIN_VALUE );
+        TestUtil.assertByteBufContains( buf, (short) 16, Integer.MAX_VALUE, 20, -173, Integer.MIN_VALUE );
     }
 
     @ParameterizedTest
@@ -210,9 +212,9 @@ class ChunkAwareByteBufOutputTest
         output.writeInt( 42 );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 24, 42, -73467193, 373, -93, 1312345, 785, // chunk 1
-                (short) 4, 42 // chunk 2
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 24, 42, -73467193, 373, -93, 1312345, 785, // chunk 1
+                                        (short) 4, 42 // chunk 2
         );
     }
 
@@ -226,7 +228,7 @@ class ChunkAwareByteBufOutputTest
         output.writeLong( 15 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 8, 15L );
+        TestUtil.assertByteBufContains( buf, (short) 8, 15L );
     }
 
     @ParameterizedTest
@@ -243,7 +245,7 @@ class ChunkAwareByteBufOutputTest
         output.writeLong( Long.MIN_VALUE / 2 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 32, Long.MAX_VALUE, -1L, -100L, Long.MIN_VALUE / 2 );
+        TestUtil.assertByteBufContains( buf, (short) 32, Long.MAX_VALUE, -1L, -100L, Long.MIN_VALUE / 2 );
     }
 
     @ParameterizedTest
@@ -261,9 +263,9 @@ class ChunkAwareByteBufOutputTest
         output.writeLong( -57999999 );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 32, 12L, 8741L, 2314L, -85793L, // chunk 1
-                (short) 8, -57999999L // chunk 2
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 32, 12L, 8741L, 2314L, -85793L, // chunk 1
+                                        (short) 8, -57999999L // chunk 2
         );
     }
 
@@ -277,7 +279,7 @@ class ChunkAwareByteBufOutputTest
         output.writeDouble( 12.99937 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 8, 12.99937D );
+        TestUtil.assertByteBufContains( buf, (short) 8, 12.99937D );
     }
 
     @ParameterizedTest
@@ -292,7 +294,7 @@ class ChunkAwareByteBufOutputTest
         output.writeDouble( 991.3333 );
         output.stop();
 
-        assertByteBufContains( buf, (short) 16, -5D, 991.3333D );
+        TestUtil.assertByteBufContains( buf, (short) 16, -5D, 991.3333D );
     }
 
     @ParameterizedTest
@@ -308,9 +310,9 @@ class ChunkAwareByteBufOutputTest
         output.writeDouble( -47389.333399 );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 16, 1839D, 5710923.34873D, // chunk 1
-                (short) 8, -47389.333399D // chunk 2
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 16, 1839D, 5710923.34873D, // chunk 1
+                                        (short) 8, -47389.333399D // chunk 2
         );
     }
 
@@ -324,8 +326,8 @@ class ChunkAwareByteBufOutputTest
         output.writeBytes( new byte[]{1, 2, 3, -1, -2, -3, 127} );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 7, (byte) 1, (byte) 2, (byte) 3, (byte) -1, (byte) -2, (byte) -3, (byte) 127 );
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 7, (byte) 1, (byte) 2, (byte) 3, (byte) -1, (byte) -2, (byte) -3, (byte) 127 );
     }
 
     @ParameterizedTest
@@ -342,8 +344,8 @@ class ChunkAwareByteBufOutputTest
         output.writeBytes( new byte[]{-42, 42} );
         output.stop();
 
-        assertByteBufContains( buf, (short) 11, (byte) 9, (byte) 8, (byte) -10, (byte) 127, (byte) 126, (byte) -128,
-                (byte) -126, (byte) 0, (byte) 99, (byte) -42, (byte) 42 );
+        TestUtil.assertByteBufContains( buf, (short) 11, (byte) 9, (byte) 8, (byte) -10, (byte) 127, (byte) 126, (byte) -128,
+                                        (byte) -126, (byte) 0, (byte) 99, (byte) -42, (byte) 42 );
     }
 
     @ParameterizedTest
@@ -360,9 +362,9 @@ class ChunkAwareByteBufOutputTest
         output.writeBytes( new byte[]{-1, -42, -43} );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 7, (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, (byte) 10, (byte) -1, // chunk 1
-                (short) 2, (byte) -42, (byte) -43 // chunk 2
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 7, (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, (byte) 10, (byte) -1, // chunk 1
+                                        (short) 2, (byte) -42, (byte) -43 // chunk 2
         );
     }
 
@@ -376,11 +378,11 @@ class ChunkAwareByteBufOutputTest
         output.writeBytes( new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18} );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 5, (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, // chunk 1
-                (short) 5, (byte) 6, (byte) 7, (byte) 8, (byte) 9, (byte) 10, // chunk 2
-                (short) 5, (byte) 11, (byte) 12, (byte) 13, (byte) 14, (byte) 15, // chunk 3
-                (short) 3, (byte) 16, (byte) 17, (byte) 18 // chunk 4
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 5, (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, // chunk 1
+                                        (short) 5, (byte) 6, (byte) 7, (byte) 8, (byte) 9, (byte) 10, // chunk 2
+                                        (short) 5, (byte) 11, (byte) 12, (byte) 13, (byte) 14, (byte) 15, // chunk 3
+                                        (short) 3, (byte) 16, (byte) 17, (byte) 18 // chunk 4
         );
     }
 
@@ -404,13 +406,13 @@ class ChunkAwareByteBufOutputTest
         output.writeBytes( new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10} );
         output.stop();
 
-        assertByteBufContains( buf,
-                (short) 9, 12.3D, (byte) 42, // chunk 1
-                (short) 8, -10, 99, // chunk 2
-                (short) 11, 99L, (byte) 9, (byte) 8, (byte) 7, // chunk 3
-                (short) 11, (byte) 6, 0.333D, (short) 0, // chunk 4
-                (short) 11, (short) 1, 12345, (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, // chunk 5
-                (short) 5, (byte) 6, (byte) 7, (byte) 8, (byte) 9, (byte) 10 // chunk 6
+        TestUtil.assertByteBufContains( buf,
+                                        (short) 9, 12.3D, (byte) 42, // chunk 1
+                                        (short) 8, -10, 99, // chunk 2
+                                        (short) 11, 99L, (byte) 9, (byte) 8, (byte) 7, // chunk 3
+                                        (short) 11, (byte) 6, 0.333D, (short) 0, // chunk 4
+                                        (short) 11, (short) 1, 12345, (byte) 1, (byte) 2, (byte) 3, (byte) 4, (byte) 5, // chunk 5
+                                        (short) 5, (byte) 6, (byte) 7, (byte) 8, (byte) 9, (byte) 10 // chunk 6
         );
     }
 }
