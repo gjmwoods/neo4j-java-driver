@@ -1,0 +1,71 @@
+/*
+ * Copyright (c) 2002-2020 "Neo4j,"
+ * Neo4j Sweden AB [http://neo4j.com]
+ *
+ * This file is part of Neo4j.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.neo4j.connector.async;
+
+import org.neo4j.connector.AccessMode;
+
+import org.neo4j.connector.DatabaseName;
+import org.neo4j.connector.Logging;
+import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.connector.spi.ConnectionProvider;
+
+
+import static java.lang.System.lineSeparator;
+import static org.neo4j.connector.internal.util.Futures.blockingGet;
+
+public class LeakLoggingNetworkSession extends NetworkSession
+{
+    private final String stackTrace;
+
+    public LeakLoggingNetworkSession( ConnectionProvider connectionProvider, RetryLogic retryLogic, DatabaseName databaseName, AccessMode mode,
+                                      BookmarkHolder bookmarkHolder, long fetchSize, Logging logging )
+    {
+        super( connectionProvider, retryLogic, databaseName, mode, bookmarkHolder, fetchSize, logging );
+        this.stackTrace = captureStackTrace();
+    }
+
+    @Override
+    protected void finalize() throws Throwable
+    {
+        logLeakIfNeeded();
+        super.finalize();
+    }
+
+    private void logLeakIfNeeded()
+    {
+        Boolean isOpen = blockingGet( currentConnectionIsOpen() );
+        if ( isOpen )
+        {
+            logger.error( "Neo4j Session object leaked, please ensure that your application " +
+                          "fully consumes results in Sessions or explicitly calls `close` on Sessions before disposing of the objects.\n" +
+                          "Session was create at:\n" + stackTrace, null );
+        }
+    }
+    private static String captureStackTrace()
+    {
+        StringBuilder result = new StringBuilder();
+        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+        for ( StackTraceElement element : elements )
+        {
+            result.append( "\t" ).append( element ).append( lineSeparator() );
+        }
+        return result.toString();
+    }
+}
