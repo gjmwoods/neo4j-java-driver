@@ -26,6 +26,7 @@
   <url>https://github.com/neo4j/neo4j-java-driver</url>
 
   <modules>
+    <module>connector</module>
     <module>driver</module>
     <module>examples</module>
   </modules>
