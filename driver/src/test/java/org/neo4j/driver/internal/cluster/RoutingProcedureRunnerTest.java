@@ -145,7 +145,7 @@ class RoutingProcedureRunnerTest extends AbstractRoutingProcedureRunnerTest
         }
 
         @Override
-        CompletionStage<List<Record>> runProcedure(Connection connection, Query procedure, BookmarkHolder bookmarkHolder )
+        public CompletionStage<List<Record>> runProcedure(Connection connection, Query procedure, BookmarkHolder bookmarkHolder )
         {
             this.connection = connection;
             this.procedure = procedure;

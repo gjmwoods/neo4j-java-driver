@@ -60,13 +60,13 @@ public class TestConnectionPool extends ConnectionPoolImpl
         this.nettyChannelTracker = nettyChannelTracker;
     }
 
-    ExtendedChannelPool getPool( BoltServerAddress address )
+    public ExtendedChannelPool getPool( BoltServerAddress address )
     {
         return channelPoolsByAddress.get( address );
     }
 
     @Override
-    ExtendedChannelPool newPool( BoltServerAddress address )
+    public ExtendedChannelPool newPool( BoltServerAddress address )
     {
         ExtendedChannelPool channelPool = new ExtendedChannelPool()
         {

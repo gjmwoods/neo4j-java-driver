@@ -28,7 +28,7 @@ import org.neo4j.driver.Driver;
 import org.neo4j.driver.internal.util.DriverFactoryWithOneEventLoopThread;
 
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.connector.internal.util.ServerVersion.version;
+import static org.neo4j.driver.util.ServerVersionUtil.fromDriverQuery;
 
 public class ClusterDrivers implements AutoCloseable
 {
@@ -49,7 +49,7 @@ public class ClusterDrivers implements AutoCloseable
         final Driver driver = membersWithDrivers.computeIfAbsent( member, this::createDriver );
         if ( discovery == null )
         {
-            discovery = ClusterMemberRoleDiscoveryFactory.newInstance( version( driver ) );
+            discovery = ClusterMemberRoleDiscoveryFactory.newInstance( fromDriverQuery( driver ) );
         }
         return driver;
     }

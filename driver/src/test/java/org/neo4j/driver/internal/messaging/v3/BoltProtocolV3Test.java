@@ -67,6 +67,7 @@ import org.neo4j.connector.messaging.request.RollbackMessage;
 import org.neo4j.connector.messaging.request.RunWithMetadataMessage;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ResponseHandler;
+import org.neo4j.driver.util.TestUtil;
 
 import static java.time.Duration.ofSeconds;
 import static java.util.Collections.emptyMap;

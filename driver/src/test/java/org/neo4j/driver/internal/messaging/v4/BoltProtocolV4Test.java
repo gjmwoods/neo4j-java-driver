@@ -47,6 +47,7 @@ import org.neo4j.connector.messaging.request.PullMessage;
 import org.neo4j.connector.messaging.request.RunWithMetadataMessage;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ResponseHandler;
+import org.neo4j.driver.util.TestUtil;
 
 import static java.util.Collections.emptyMap;
 import static org.hamcrest.Matchers.instanceOf;

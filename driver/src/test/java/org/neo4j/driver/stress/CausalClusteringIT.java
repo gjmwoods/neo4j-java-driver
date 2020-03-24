@@ -99,6 +99,7 @@ import static org.neo4j.driver.SessionConfig.builder;
 import static org.neo4j.connector.Values.parameters;
 import static org.neo4j.connector.internal.InternalBookmark.parse;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
+import static org.neo4j.driver.util.ServerVersionUtil.fromDriverQuery;
 import static org.neo4j.driver.util.TestUtil.await;
 
 public class CausalClusteringIT implements NestedQueries
@@ -623,7 +624,7 @@ public class CausalClusteringIT implements NestedQueries
 
             // now driver should have connections towards every cluster member
             // make all those connections throw and seem broken
-            makeAllChannelsFailToRunQueries( driverFactory, ServerVersion.version( driver ) );
+            makeAllChannelsFailToRunQueries( driverFactory, fromDriverQuery( driver ) );
 
             // observe that connection towards writer is broken
             try ( Session session = driver.session( builder().withDefaultAccessMode( AccessMode.WRITE ).build() ) )
@@ -862,7 +863,7 @@ public class CausalClusteringIT implements NestedQueries
         try
         {
             final ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery
-                    discovery = ClusterMemberRoleDiscoveryFactory.newInstance( ServerVersion.version( driver ) );
+                    discovery = ClusterMemberRoleDiscoveryFactory.newInstance( fromDriverQuery( driver ) );
             final Map<BoltServerAddress,ClusterMemberRole> clusterOverview = discovery.findClusterOverview( driver );
             for ( BoltServerAddress address : clusterOverview.keySet() )
             {

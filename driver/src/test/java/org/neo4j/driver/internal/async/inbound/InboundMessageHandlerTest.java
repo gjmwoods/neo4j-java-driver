@@ -32,7 +32,7 @@ import java.util.Map;
 import org.neo4j.connector.async.connection.ChannelAttributes;
 import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
 import org.neo4j.connector.async.inbound.InboundMessageHandler;
-import org.neo4j.driver.internal.util.messaging.KnowledgeableMessageFormat;
+import org.neo4j.driver.internal.messaging.KnowledgeableMessageFormat;
 import org.neo4j.connector.messaging.MessageFormat;
 import org.neo4j.connector.messaging.MessageFormat.Reader;
 import org.neo4j.connector.messaging.response.FailureMessage;

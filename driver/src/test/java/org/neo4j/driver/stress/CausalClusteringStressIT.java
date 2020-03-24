@@ -47,6 +47,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
+import static org.neo4j.driver.util.ServerVersionUtil.fromDriverQuery;
 
 class CausalClusteringStressIT extends AbstractStressTestBase<CausalClusteringStressIT.Context>
 {
@@ -140,7 +141,7 @@ class CausalClusteringStressIT extends AbstractStressTestBase<CausalClusteringSt
         Set<String> readReplicas = new HashSet<>();
 
         final ClusterMemberRoleDiscoveryFactory.ClusterMemberRoleDiscovery discovery =
-                ClusterMemberRoleDiscoveryFactory.newInstance( ServerVersion.version( driver ) );
+                ClusterMemberRoleDiscoveryFactory.newInstance( fromDriverQuery( driver ) );
         final Map<BoltServerAddress,ClusterMemberRole> clusterOverview = discovery.findClusterOverview( driver );
 
         for ( BoltServerAddress address : clusterOverview.keySet() )

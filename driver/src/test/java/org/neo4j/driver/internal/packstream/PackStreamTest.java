@@ -37,6 +37,8 @@ import java.util.Map;
 import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.connector.packstream.PackStream;
 import org.neo4j.connector.packstream.PackType;
+import org.neo4j.driver.internal.util.io.BufferedChannelInput;
+import org.neo4j.driver.internal.util.io.ChannelOutput;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;

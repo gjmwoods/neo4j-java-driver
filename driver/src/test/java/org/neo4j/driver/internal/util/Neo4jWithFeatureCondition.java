@@ -33,6 +33,7 @@ import org.neo4j.driver.util.Neo4jSettings;
 
 import static org.junit.jupiter.api.extension.ConditionEvaluationResult.disabled;
 import static org.junit.jupiter.api.extension.ConditionEvaluationResult.enabled;
+import static org.neo4j.driver.util.ServerVersionUtil.fromDriverQuery;
 
 public class Neo4jWithFeatureCondition implements ExecutionCondition
 {
@@ -71,7 +72,7 @@ public class Neo4jWithFeatureCondition implements ExecutionCondition
         Driver driver = getSharedNeo4jDriver();
         if ( driver != null )
         {
-            ServerVersion version = ServerVersion.version( driver );
+            ServerVersion version = fromDriverQuery( driver );
             return createResult( version, feature, negated );
         }
         return ENABLED_UNKNOWN_DB_VERSION;

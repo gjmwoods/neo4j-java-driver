@@ -40,6 +40,7 @@ import static org.neo4j.driver.util.Neo4jRunner.debug;
 import static org.neo4j.driver.util.Neo4jRunner.getOrCreateGlobalRunner;
 import static org.neo4j.driver.util.Neo4jSettings.DEFAULT_TLS_CERT_PATH;
 import static org.neo4j.driver.util.Neo4jSettings.DEFAULT_TLS_KEY_PATH;
+import static org.neo4j.driver.util.ServerVersionUtil.fromDriverQuery;
 
 public class DatabaseExtension implements BeforeEachCallback
 {
@@ -166,7 +167,7 @@ public class DatabaseExtension implements BeforeEachCallback
 
     public ServerVersion version()
     {
-        return ServerVersion.version( driver() );
+        return fromDriverQuery( driver() );
     }
 
     public void dumpLogs()

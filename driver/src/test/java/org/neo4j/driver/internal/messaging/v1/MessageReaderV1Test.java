@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.neo4j.connector.messaging.v1.MessageReaderV1;
-import org.neo4j.driver.internal.util.messaging.AbstractMessageReaderTestBase;
+import org.neo4j.driver.internal.messaging.AbstractMessageReaderTestBase;
 import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.connector.packstream.PackInput;
 import org.neo4j.connector.Value;

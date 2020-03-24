@@ -25,12 +25,12 @@ import java.time.OffsetTime;
 import java.time.ZonedDateTime;
 
 import org.neo4j.connector.messaging.v2.MessageReaderV2;
-import org.neo4j.driver.internal.util.messaging.AbstractMessageReaderTestBase;
 import org.neo4j.connector.messaging.MessageFormat;
 import org.neo4j.connector.messaging.ResponseMessageHandler;
 import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.connector.packstream.PackInput;
 import org.neo4j.connector.Value;
+import org.neo4j.driver.internal.messaging.AbstractMessageReaderTestBase;
 
 import static org.mockito.Mockito.verify;
 import static org.neo4j.connector.Values.point;

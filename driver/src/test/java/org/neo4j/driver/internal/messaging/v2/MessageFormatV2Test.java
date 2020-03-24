@@ -48,6 +48,7 @@ import org.neo4j.driver.internal.util.ThrowingConsumer;
 import org.neo4j.driver.internal.util.io.ByteBufOutput;
 import org.neo4j.connector.internal.types.IsoDuration;
 import org.neo4j.connector.internal.types.Point;
+import org.neo4j.driver.util.TestUtil;
 
 import static java.time.Month.APRIL;
 import static java.time.Month.AUGUST;
