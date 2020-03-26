@@ -44,7 +44,7 @@ import org.neo4j.connector.TransactionConfig;
 import org.neo4j.connector.Value;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.BookmarkHolder;
-import org.neo4j.driver.internal.DefaultBookmarkHolder;
+import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.async.connection.ChannelAttributes;
@@ -92,7 +92,6 @@ import static org.neo4j.connector.AccessMode.WRITE;
 import static org.neo4j.connector.Values.value;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
-import static org.neo4j.driver.util.TestUtil.anyServerVersion;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
 

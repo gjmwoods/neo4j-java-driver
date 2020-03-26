@@ -30,7 +30,7 @@ import org.neo4j.connector.Bookmark;
 import org.neo4j.connector.Query;
 import org.neo4j.connector.TransactionConfig;
 import org.neo4j.connector.exception.ClientException;
-import org.neo4j.driver.internal.DefaultBookmarkHolder;
+import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.messaging.request.PullAllMessage;
 import org.neo4j.connector.messaging.request.RunMessage;

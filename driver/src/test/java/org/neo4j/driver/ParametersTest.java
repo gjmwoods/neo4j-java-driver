@@ -29,7 +29,7 @@ import org.neo4j.connector.Record;
 import org.neo4j.connector.Value;
 import org.neo4j.connector.Values;
 import org.neo4j.connector.exception.ClientException;
-import org.neo4j.driver.internal.DefaultBookmarkHolder;
+import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.driver.internal.InternalSession;
 import org.neo4j.connector.async.NetworkSession;

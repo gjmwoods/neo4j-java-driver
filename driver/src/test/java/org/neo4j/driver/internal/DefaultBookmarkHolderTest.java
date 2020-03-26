@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 
 import org.neo4j.connector.Bookmark;
 import org.neo4j.connector.internal.BookmarkHolder;
+import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
-import org.neo4j.driver.internal.DefaultBookmarkHolder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

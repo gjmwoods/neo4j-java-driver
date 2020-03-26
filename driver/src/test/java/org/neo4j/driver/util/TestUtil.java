@@ -52,7 +52,7 @@ import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.driver.internal.DefaultBookmarkHolder;
+import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.async.connection.EventLoopGroupFactory;
 import org.neo4j.connector.handlers.BeginTxResponseHandler;

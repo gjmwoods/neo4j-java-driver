@@ -16,41 +16,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.driver.internal;
+package org.neo4j.driver.internal.util;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.internal.BookmarkHolder;
-import org.neo4j.connector.internal.InternalBookmark;
+import org.neo4j.connector.internal.util.Clock;
 
-/**
- * @since 2.0
- */
-public class DefaultBookmarkHolder implements BookmarkHolder
+public final class SleeplessClock implements Clock
 {
-    private volatile Bookmark bookmark;
+    private final Clock delegate;
 
-    public DefaultBookmarkHolder()
+    public SleeplessClock()
     {
-        this( InternalBookmark.empty() );
+        this( Clock.SYSTEM );
     }
 
-    public DefaultBookmarkHolder( Bookmark bookmark )
+    public SleeplessClock( Clock delegate )
     {
-        this.bookmark = bookmark;
-    }
-
-    @Override
-    public Bookmark getBookmark()
-    {
-        return bookmark;
+        this.delegate = delegate;
     }
 
     @Override
-    public void setBookmark( Bookmark bookmark )
+    public long millis()
     {
-        if ( bookmark != null && !bookmark.isEmpty() )
-        {
-            this.bookmark = bookmark;
-        }
+        return delegate.millis();
+    }
+
+    @Override
+    public void sleep( long millis ) throws InterruptedException
+    {
     }
 }

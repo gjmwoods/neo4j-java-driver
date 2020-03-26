@@ -75,7 +75,7 @@
       <dependency>
         <groupId>org.neo4j.driver</groupId>
         <artifactId>neo4j-java-connector</artifactId>
-        <version>4.1-SNAPSHOT</version>
+        <version>${project.version}</version>
       </dependency>
       <!--Compile dependencies only used by Examples-->
       <dependency>

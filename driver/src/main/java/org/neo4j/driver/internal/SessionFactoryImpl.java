@@ -23,16 +23,17 @@ import java.util.concurrent.CompletionStage;
 
 import org.neo4j.connector.AccessMode;
 import org.neo4j.connector.DatabaseName;
-import org.neo4j.driver.Config;
 import org.neo4j.connector.Logging;
-import org.neo4j.driver.SessionConfig;
 import org.neo4j.connector.async.LeakLoggingNetworkSession;
 import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.DatabaseNameUtil;
+import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.internal.retry.RetryLogic;
 import org.neo4j.connector.spi.ConnectionProvider;
+import org.neo4j.driver.Config;
+import org.neo4j.driver.SessionConfig;
 
 public class SessionFactoryImpl implements SessionFactory
 {
