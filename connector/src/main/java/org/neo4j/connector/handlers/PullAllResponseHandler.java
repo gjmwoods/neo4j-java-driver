@@ -22,9 +22,9 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.spi.ResponseHandler;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 public interface PullAllResponseHandler extends ResponseHandler
 {

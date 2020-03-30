@@ -19,9 +19,9 @@
 package org.neo4j.connector.internal.summary;
 
 import java.util.function.Function;
-import org.neo4j.connector.summary.summary.InputPosition;
-import org.neo4j.connector.summary.summary.Notification;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.summary.summary.InputPosition;
+import org.neo4j.driver.summary.summary.Notification;
+import org.neo4j.driver.Value;
 
 import static org.neo4j.connector.internal.value.NullValue.NULL;
 

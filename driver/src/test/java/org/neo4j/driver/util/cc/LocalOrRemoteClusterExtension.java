@@ -25,8 +25,8 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 import java.net.URI;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.internal.util.DriverFactoryWithOneEventLoopThread;
 import org.neo4j.driver.util.TestUtil;

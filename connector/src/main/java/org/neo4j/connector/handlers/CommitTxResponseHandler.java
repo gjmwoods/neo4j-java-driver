@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.spi.ResponseHandler;
 

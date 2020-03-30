@@ -32,8 +32,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.async.connection.ChannelConnector;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.exception.ClientException;

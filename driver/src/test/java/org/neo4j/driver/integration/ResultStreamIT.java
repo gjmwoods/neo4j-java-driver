@@ -27,13 +27,13 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.IntStream;
 
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.NoSuchRecordException;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 import org.neo4j.driver.util.ParallelizableIT;
 import org.neo4j.driver.util.SessionExtension;
 
@@ -49,7 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 
 @ParallelizableIT
 class ResultStreamIT

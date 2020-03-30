@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal.value;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.AsValue;
 import org.neo4j.connector.internal.types.TypeConstructor;
 

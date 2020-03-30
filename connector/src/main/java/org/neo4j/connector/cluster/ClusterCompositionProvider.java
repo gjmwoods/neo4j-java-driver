@@ -20,8 +20,8 @@ package org.neo4j.connector.cluster;
 
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.spi.Connection;
 
 public interface ClusterCompositionProvider

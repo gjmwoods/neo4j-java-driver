@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
-import org.neo4j.connector.Logging;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.exception.SessionExpiredException;
@@ -41,7 +40,7 @@ import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.connector.internal.util.Immutable;
 import org.neo4j.driver.util.Resource;
 
-import static org.neo4j.connector.Logging.javaUtilLogging;
+import static org.neo4j.driver.Logging.javaUtilLogging;
 
 /**
  * A configuration class to config driver properties.

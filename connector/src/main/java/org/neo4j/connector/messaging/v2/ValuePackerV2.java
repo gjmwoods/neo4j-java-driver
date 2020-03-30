@@ -27,8 +27,8 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
-import org.neo4j.connector.InternalPoint2D;
-import org.neo4j.connector.InternalPoint3D;
+import org.neo4j.driver.InternalPoint2D;
+import org.neo4j.driver.InternalPoint3D;
 import org.neo4j.connector.internal.types.IsoDuration;
 import org.neo4j.connector.internal.types.Point;
 import org.neo4j.connector.internal.types.TypeConstructor;
@@ -37,7 +37,6 @@ import org.neo4j.connector.packstream.PackOutput;
 import org.neo4j.connector.internal.value.InternalValue;
 
 import static java.time.ZoneOffset.UTC;
-import static org.neo4j.connector.internal.types.TypeConstructor.*;
 
 public class ValuePackerV2 extends ValuePackerV1
 {

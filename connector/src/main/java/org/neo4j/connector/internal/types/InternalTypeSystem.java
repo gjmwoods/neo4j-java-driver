@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal.types;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 /**
  * Utility class for determining and working with the Cypher types of values

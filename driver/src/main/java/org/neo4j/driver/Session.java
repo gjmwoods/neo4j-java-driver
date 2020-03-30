@@ -20,13 +20,6 @@ package org.neo4j.driver;
 
 import java.util.Map;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.QueryRunner;
-import org.neo4j.connector.Result;
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Values;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.util.Resource;
 

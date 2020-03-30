@@ -28,11 +28,11 @@ import java.util.function.Consumer;
 
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.cluster.RoutingSettings;

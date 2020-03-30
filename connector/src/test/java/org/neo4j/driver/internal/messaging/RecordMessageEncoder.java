@@ -24,9 +24,9 @@ import org.neo4j.connector.messaging.Message;
 import org.neo4j.connector.messaging.MessageEncoder;
 import org.neo4j.connector.messaging.ValuePacker;
 import org.neo4j.connector.messaging.response.RecordMessage;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 public class RecordMessageEncoder implements MessageEncoder
 {

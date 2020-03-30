@@ -24,8 +24,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Bookmark;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.reactive.RxSession;
 

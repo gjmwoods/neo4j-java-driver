@@ -44,7 +44,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.internal.cursor.RxResultCursorImpl.DISCARD_RECORD_CONSUMER;
 import static org.neo4j.connector.messaging.v3.BoltProtocolV3.METADATA_EXTRACTOR;
 import static org.neo4j.connector.internal.util.Futures.completedWithNull;

@@ -22,9 +22,9 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.Logger;
+import org.neo4j.driver.Logger;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.async.ConnectionContext;
 import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.connector.spi.ConnectionPool;

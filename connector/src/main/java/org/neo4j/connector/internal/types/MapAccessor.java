@@ -21,8 +21,8 @@ package org.neo4j.connector.internal.types;
 import java.util.Map;
 
 import org.neo4j.connector.internal.value.NullValue;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.exception.ClientException;
 import java.util.function.Function;
 

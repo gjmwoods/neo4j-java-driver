@@ -28,8 +28,8 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.neo4j.connector.async.ConnectionContext;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Value;
 import org.neo4j.driver.async.AsyncTransaction;
 import org.neo4j.connector.async.ResultCursor;
 import org.neo4j.connector.exception.ClientException;
@@ -38,7 +38,7 @@ import org.neo4j.connector.messaging.v4.BoltProtocolV4;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.connector.internal.value.IntegerValue;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
@@ -51,7 +51,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
 import static org.neo4j.driver.util.TestUtil.newSession;

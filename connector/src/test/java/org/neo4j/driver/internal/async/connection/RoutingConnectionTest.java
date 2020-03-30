@@ -32,7 +32,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.driver.AccessMode.READ;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.messaging.request.DiscardAllMessage.DISCARD_ALL;
 import static org.neo4j.connector.messaging.request.PullAllMessage.PULL_ALL;

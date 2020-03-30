@@ -21,7 +21,7 @@ package org.neo4j.connector.messaging.v1;
 import java.io.IOException;
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.value.InternalValue;
 import org.neo4j.connector.messaging.ValuePacker;
 import org.neo4j.connector.packstream.PackOutput;

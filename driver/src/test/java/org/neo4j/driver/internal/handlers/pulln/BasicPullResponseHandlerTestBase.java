@@ -33,9 +33,9 @@ import org.neo4j.connector.messaging.request.PullMessage;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.connector.internal.value.BooleanValue;
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

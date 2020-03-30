@@ -21,7 +21,7 @@ package org.neo4j.connector.cluster;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.Bookmark;
+import org.neo4j.driver.Bookmark;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.spi.ConnectionPool;
 

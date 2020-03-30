@@ -31,10 +31,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.driver.SessionConfig;
-
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.startsWith;

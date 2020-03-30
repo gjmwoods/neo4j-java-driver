@@ -16,19 +16,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector.summary.summary;
+package org.neo4j.driver;
 
-import org.neo4j.connector.summary.ResultSummary;
+import java.util.Collection;
+
+import org.neo4j.connector.internal.util.Experimental;
 
 /**
- * Provides basic information about where a {@link ResultSummary} is obtained from.
+ * Provides driver internal metrics.
  */
-public interface DatabaseInfo
+@Experimental
+public interface Metrics
 {
     /**
-     * The name of the database where a {@link ResultSummary} is obtained from.
-     * Default to {@code null} if servers does not support multi-databases.
-     * @return the name of the database where a {@link ResultSummary} is obtained from
+     * Connection pool metrics records metrics of connection pools that are currently in use.
+     * As the connection pools are dynamically added and removed while the server topology changes, the metrics collection changes over time.
+     * @return Connection pool metrics for all current active pools.
      */
-    String name();
+    Collection<ConnectionPoolMetrics> connectionPoolMetrics();
 }

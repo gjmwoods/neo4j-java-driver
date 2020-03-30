@@ -37,7 +37,7 @@ import static java.util.Collections.singletonList;
 import static java.util.concurrent.Executors.newCachedThreadPool;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
-import static org.neo4j.connector.Logging.none;
+import static org.neo4j.driver.Logging.none;
 import static org.neo4j.driver.util.DaemonThreadFactory.daemon;
 
 public class StubServer

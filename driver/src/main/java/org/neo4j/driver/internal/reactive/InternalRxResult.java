@@ -28,11 +28,11 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
 import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.driver.reactive.RxResult;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static org.neo4j.connector.internal.util.ErrorUtil.newResultConsumedError;
 import static reactor.core.publisher.FluxSink.OverflowStrategy.IGNORE;

@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.handlers.TransactionPullResponseCompletionListener;
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.exception.SessionExpiredException;

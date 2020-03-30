@@ -24,10 +24,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalRecord;
@@ -45,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;

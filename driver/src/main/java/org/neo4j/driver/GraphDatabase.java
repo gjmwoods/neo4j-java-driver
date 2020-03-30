@@ -20,10 +20,6 @@ package org.neo4j.driver;
 
 import java.net.URI;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.driver.internal.DriverFactory;
 import org.neo4j.driver.internal.Scheme;

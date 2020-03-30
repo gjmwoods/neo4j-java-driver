@@ -26,9 +26,9 @@ import org.mockito.InOrder;
 import java.util.function.Consumer;
 
 import org.neo4j.connector.async.UnmanagedTransaction;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.TransactionConfig;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.TransactionConfig;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;

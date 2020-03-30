@@ -27,10 +27,10 @@ import io.netty.channel.ChannelPromise;
 
 import java.util.Map;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
-import org.neo4j.connector.Logging;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Logging;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.async.inbound.ConnectTimeoutHandler;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.BoltServerAddress;

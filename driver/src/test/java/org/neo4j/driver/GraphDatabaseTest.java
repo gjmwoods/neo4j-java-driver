@@ -26,9 +26,6 @@ import java.net.ServerSocket;
 import java.net.URI;
 import java.util.List;
 
-import org.neo4j.connector.AuthTokens;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.driver.util.StubServer;
 import org.neo4j.driver.util.TestUtil;

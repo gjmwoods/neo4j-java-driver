@@ -22,7 +22,7 @@ package org.neo4j.docs.driver;
 
 import org.neo4j.driver.Session;
 
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 // end::session-import[]
 
 public class SessionExample extends BaseApplication

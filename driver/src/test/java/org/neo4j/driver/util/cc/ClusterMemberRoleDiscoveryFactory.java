@@ -24,16 +24,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Result;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Result;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.util.ServerVersion;
 
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.driver.SessionConfig.builder;
 import static org.neo4j.connector.internal.util.Iterables.single;
 

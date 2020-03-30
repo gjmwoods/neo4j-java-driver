@@ -22,9 +22,9 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
-import org.neo4j.connector.Metrics;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
+import org.neo4j.driver.Metrics;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.SessionConfig;
 import org.neo4j.driver.async.AsyncSession;

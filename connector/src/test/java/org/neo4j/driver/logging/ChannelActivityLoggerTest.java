@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.async.connection.ChannelAttributes;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.logging.ChannelActivityLogger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.async.connection.ChannelAttributes;
 import org.neo4j.connector.exception.ClientException;
@@ -45,12 +45,12 @@ import org.neo4j.connector.messaging.request.InitMessage;
 import org.neo4j.connector.messaging.request.MultiDatabaseUtil;
 import org.neo4j.connector.messaging.request.PullAllMessage;
 import org.neo4j.connector.messaging.request.RunMessage;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.TransactionConfig;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.BookmarkHolder;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.internal.cursor.AsyncResultCursorOnlyFactory;
 import org.neo4j.connector.internal.cursor.ResultCursorFactory;
 
@@ -60,7 +60,7 @@ import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.connector.internal.util.MetadataExtractor;
 
 import static java.util.Collections.emptyMap;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.internal.util.Iterables.newHashMapWithSize;
 
 public class BoltProtocolV1 implements BoltProtocol

@@ -27,7 +27,7 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URL;
 
-import org.neo4j.connector.AuthToken;
+import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.Driver;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.util.ServerVersion;

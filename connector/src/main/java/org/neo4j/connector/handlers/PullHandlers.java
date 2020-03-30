@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.handlers;
 
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.handlers.pulln.AutoPullResponseHandler;
 import org.neo4j.connector.handlers.pulln.BasicPullResponseHandler;

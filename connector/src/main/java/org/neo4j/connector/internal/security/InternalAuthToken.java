@@ -20,8 +20,8 @@ package org.neo4j.connector.internal.security;
 
 import java.util.Map;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.Value;
 
 /**
  * A simple common token for authentication schemes that easily convert to

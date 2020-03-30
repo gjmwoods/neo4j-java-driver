@@ -42,7 +42,7 @@ import org.neo4j.connector.messaging.response.SuccessMessage;
 import org.neo4j.connector.messaging.v1.MessageFormatV1;
 import org.neo4j.connector.spi.ResponseHandler;
 import org.neo4j.driver.internal.util.io.MessageToByteBufWriter;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.Neo4jException;
 
 import static org.hamcrest.Matchers.startsWith;
@@ -56,7 +56,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.connector.messaging.request.ResetMessage.RESET;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class InboundMessageHandlerTest
 {

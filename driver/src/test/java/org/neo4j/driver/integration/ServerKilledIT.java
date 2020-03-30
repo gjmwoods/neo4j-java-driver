@@ -37,7 +37,7 @@ import org.neo4j.driver.internal.util.FakeClock;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.Session;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.driver.util.DatabaseExtension;

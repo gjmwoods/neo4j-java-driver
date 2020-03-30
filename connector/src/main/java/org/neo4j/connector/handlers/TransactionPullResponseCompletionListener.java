@@ -20,7 +20,7 @@ package org.neo4j.connector.handlers;
 
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.async.UnmanagedTransaction;
 
 import static java.util.Objects.requireNonNull;

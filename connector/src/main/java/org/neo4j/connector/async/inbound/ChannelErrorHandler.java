@@ -24,8 +24,8 @@ import io.netty.handler.codec.CodecException;
 
 import java.io.IOException;
 
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.internal.util.ErrorUtil;
 import org.neo4j.connector.logging.ChannelActivityLogger;

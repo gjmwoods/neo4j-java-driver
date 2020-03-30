@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.connector.Logger;
+import org.neo4j.driver.Logger;
 import org.neo4j.connector.cluster.AddressSet;
 import org.neo4j.connector.cluster.ClusterComposition;
 import org.neo4j.connector.cluster.ClusterCompositionProvider;
@@ -42,7 +42,7 @@ import org.neo4j.connector.exception.ProtocolException;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.exception.SessionExpiredException;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;

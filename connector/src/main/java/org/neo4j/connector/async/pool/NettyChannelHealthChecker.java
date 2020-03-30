@@ -23,8 +23,8 @@ import io.netty.channel.pool.ChannelHealthChecker;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.Promise;
 
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.async.connection.ChannelAttributes;
 
 import org.neo4j.connector.handlers.PingResponseHandler;

@@ -18,8 +18,8 @@
  */
 package org.neo4j.connector.logging;
 
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 
 public class DevNullLogging implements Logging
 {

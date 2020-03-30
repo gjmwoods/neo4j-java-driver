@@ -20,7 +20,7 @@ package org.neo4j.driver.stress;
 
 import org.hamcrest.Matchers;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
 

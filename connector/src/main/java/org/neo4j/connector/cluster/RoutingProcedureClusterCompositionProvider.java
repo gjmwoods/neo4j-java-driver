@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.exception.ProtocolException;
 import org.neo4j.connector.exception.value.ValueException;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.internal.util.Clock;
 

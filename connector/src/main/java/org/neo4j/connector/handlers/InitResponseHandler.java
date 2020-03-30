@@ -23,7 +23,7 @@ import io.netty.channel.ChannelPromise;
 
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.util.MetadataExtractor;
 import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.connector.spi.ResponseHandler;

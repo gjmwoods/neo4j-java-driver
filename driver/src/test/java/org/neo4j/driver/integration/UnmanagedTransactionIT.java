@@ -31,8 +31,8 @@ import java.util.concurrent.CompletionStage;
 
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.TransactionConfig;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.TransactionConfig;
 import org.neo4j.connector.async.ResultCursor;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.ServiceUnavailableException;
@@ -55,7 +55,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.driver.util.TestUtil.await;
 

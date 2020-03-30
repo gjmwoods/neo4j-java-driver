@@ -16,13 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector;
+package org.neo4j.driver;
 
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
 import org.neo4j.connector.internal.value.NullValue;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.NoSuchRecordException;

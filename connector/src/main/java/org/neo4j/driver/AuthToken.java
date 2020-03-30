@@ -16,13 +16,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector;
+package org.neo4j.driver;
 
-import java.util.Optional;
-
-public interface DatabaseName
+/**
+ * Token for holding authentication details, such as <em>user name</em> and <em>password</em>.
+ * Such a token is required by a {@link Driver} to authenticate with a Neo4j
+ * instance.
+ *
+ * @see AuthTokens
+ * @see GraphDatabase#driver(String, AuthToken)
+ * @since 1.0
+ */
+public interface AuthToken
 {
-    Optional<String> databaseName();
 
-    String description();
 }

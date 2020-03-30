@@ -20,7 +20,7 @@ package org.neo4j.connector.messaging.request;
 
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.messaging.Message;
 
 abstract class MessageWithMetadata implements Message

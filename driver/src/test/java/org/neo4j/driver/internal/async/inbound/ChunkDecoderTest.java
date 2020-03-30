@@ -25,8 +25,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 import org.neo4j.connector.async.inbound.ChunkDecoder;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.driver.util.TestUtil;
 
 import static io.netty.buffer.ByteBufUtil.hexDump;

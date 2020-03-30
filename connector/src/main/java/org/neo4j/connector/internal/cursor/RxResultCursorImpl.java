@@ -24,11 +24,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiConsumer;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.exception.TransactionNestingException;
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.handlers.pulln.PullResponseHandler;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static org.neo4j.connector.internal.cursor.RxResultCursorImpl.RecordConsumerStatus.DISCARD_INSTALLED;
 import static org.neo4j.connector.internal.cursor.RxResultCursorImpl.RecordConsumerStatus.INSTALLED;

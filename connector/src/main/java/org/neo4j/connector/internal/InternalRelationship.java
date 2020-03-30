@@ -21,10 +21,9 @@ package org.neo4j.connector.internal;
 import java.util.Collections;
 import java.util.Map;
 
-import org.neo4j.connector.internal.InternalEntity;
 import org.neo4j.connector.internal.value.RelationshipValue;
 import org.neo4j.connector.internal.types.Relationship;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 /**
  * {@link Relationship} implementation that directly contains type and properties.

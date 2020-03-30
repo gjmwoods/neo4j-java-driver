@@ -20,7 +20,7 @@ package org.neo4j.connector.async.connection;
 
 import io.netty.channel.ChannelPipeline;
 
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.async.inbound.ChannelErrorHandler;
 import org.neo4j.connector.async.inbound.InboundMessageHandler;
 import org.neo4j.connector.async.outbound.OutboundMessageHandler;

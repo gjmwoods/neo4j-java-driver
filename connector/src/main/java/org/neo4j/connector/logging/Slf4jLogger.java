@@ -20,7 +20,7 @@ package org.neo4j.connector.logging;
 
 import java.util.Objects;
 
-import org.neo4j.connector.Logger;
+import org.neo4j.driver.Logger;
 
 public class Slf4jLogger implements Logger
 {

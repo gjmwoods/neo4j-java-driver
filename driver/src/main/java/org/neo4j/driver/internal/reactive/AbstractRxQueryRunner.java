@@ -20,14 +20,14 @@ package org.neo4j.driver.internal.reactive;
 
 import java.util.Map;
 
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxQueryRunner;
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.AbstractQueryRunner;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.AbstractQueryRunner;
 
-import static org.neo4j.connector.AbstractQueryRunner.parameters;
+import static org.neo4j.driver.AbstractQueryRunner.parameters;
 
 public abstract class AbstractRxQueryRunner implements RxQueryRunner
 {

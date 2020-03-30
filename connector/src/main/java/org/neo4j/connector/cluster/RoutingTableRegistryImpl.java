@@ -24,9 +24,9 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.neo4j.connector.Logger;
+import org.neo4j.driver.Logger;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.async.ConnectionContext;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.internal.util.Clock;

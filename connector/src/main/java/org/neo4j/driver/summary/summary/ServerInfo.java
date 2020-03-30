@@ -16,18 +16,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector;
+package org.neo4j.driver.summary.summary;
 
 /**
- * Token for holding authentication details, such as <em>user name</em> and <em>password</em>.
- * Such a token is required by a {@link Driver} to authenticate with a Neo4j
- * instance.
- *
- * @see AuthTokens
- * @see GraphDatabase#driver(String, AuthToken)
- * @since 1.0
+ * Provides some basic information of the server where the result is obtained from.
  */
-public interface AuthToken
+public interface ServerInfo
 {
 
+    /**
+     * Returns a string telling the address of the server the query was executed.
+     * @return The address of the server the query was executed.
+     */
+    String address();
+
+    /**
+     * Returns a string telling which version of the server the query was executed.
+     * Supported since neo4j 3.1.
+     * @return The server version.
+     */
+    String version();
 }

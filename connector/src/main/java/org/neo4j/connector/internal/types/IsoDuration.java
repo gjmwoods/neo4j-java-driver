@@ -20,7 +20,7 @@ package org.neo4j.connector.internal.types;
 
 import java.time.temporal.TemporalAmount;
 
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.internal.util.Immutable;
 
 /**

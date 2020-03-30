@@ -18,7 +18,7 @@
  */
 package org.neo4j.driver.internal.reactive;
 
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.reactivestreams.Publisher;
 
 import java.util.concurrent.CompletableFuture;

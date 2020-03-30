@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector;
+package org.neo4j.driver;
 
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.neo4j.connector.exception.NoSuchRecordException;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 
 /**

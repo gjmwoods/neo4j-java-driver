@@ -25,9 +25,9 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.exception.NoSuchRecordException;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 /**
  * The result of asynchronous execution of a Cypher query, conceptually an asynchronous stream of

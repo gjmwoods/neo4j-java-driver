@@ -16,23 +16,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector;
+package org.neo4j.driver;
 
 import java.util.Objects;
 
 import org.neo4j.connector.internal.types.Point;
 
-public class InternalPoint2D implements Point
+public class InternalPoint3D implements Point
 {
     private final int srid;
     private final double x;
     private final double y;
+    private final double z;
 
-    public InternalPoint2D( int srid, double x, double y )
+    public InternalPoint3D( int srid, double x, double y, double z )
     {
         this.srid = srid;
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
     @Override
@@ -56,7 +58,7 @@ public class InternalPoint2D implements Point
     @Override
     public double z()
     {
-        return Double.NaN;
+        return z;
     }
 
     @Override
@@ -70,16 +72,17 @@ public class InternalPoint2D implements Point
         {
             return false;
         }
-        InternalPoint2D that = (InternalPoint2D) o;
+        InternalPoint3D that = (InternalPoint3D) o;
         return srid == that.srid &&
                Double.compare( that.x, x ) == 0 &&
-               Double.compare( that.y, y ) == 0;
+               Double.compare( that.y, y ) == 0 &&
+               Double.compare( that.z, z ) == 0;
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash( srid, x, y );
+        return Objects.hash( srid, x, y, z );
     }
 
     @Override
@@ -89,6 +92,7 @@ public class InternalPoint2D implements Point
                "srid=" + srid +
                ", x=" + x +
                ", y=" + y +
+               ", z=" + z +
                '}';
     }
 }

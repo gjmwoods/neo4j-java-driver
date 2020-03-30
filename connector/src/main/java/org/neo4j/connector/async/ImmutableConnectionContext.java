@@ -18,9 +18,9 @@
  */
 package org.neo4j.connector.async;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.internal.DatabaseNameUtil;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.spi.Connection;

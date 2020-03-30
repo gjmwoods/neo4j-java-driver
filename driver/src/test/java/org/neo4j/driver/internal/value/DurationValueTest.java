@@ -20,7 +20,7 @@ package org.neo4j.driver.internal.value;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.connector.InternalIsoDuration;
+import org.neo4j.driver.InternalIsoDuration;
 import org.neo4j.connector.internal.types.InternalTypeSystem;
 import org.neo4j.connector.exception.value.Uncoercible;
 import org.neo4j.connector.internal.types.IsoDuration;

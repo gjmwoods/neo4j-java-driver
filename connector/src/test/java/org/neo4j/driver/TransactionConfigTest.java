@@ -24,8 +24,6 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Value;
 import org.neo4j.connector.internal.InternalNode;
 import org.neo4j.connector.internal.InternalPath;
 import org.neo4j.connector.internal.InternalRelationship;
@@ -36,7 +34,7 @@ import static java.util.Collections.singletonMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class TransactionConfigTest
 {

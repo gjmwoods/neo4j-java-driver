@@ -22,7 +22,7 @@ import java.util.Objects;
 
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.util.ServerVersion;
-import org.neo4j.connector.summary.summary.ServerInfo;
+import org.neo4j.driver.summary.summary.ServerInfo;
 
 public class InternalServerInfo implements ServerInfo
 {

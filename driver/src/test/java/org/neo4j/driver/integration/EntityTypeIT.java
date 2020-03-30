@@ -21,7 +21,7 @@ package org.neo4j.driver.integration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Result;
 import org.neo4j.connector.internal.types.Node;
 import org.neo4j.connector.internal.types.Path;
 import org.neo4j.connector.internal.types.Relationship;

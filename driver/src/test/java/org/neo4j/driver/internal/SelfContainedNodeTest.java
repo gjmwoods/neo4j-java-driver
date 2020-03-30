@@ -23,15 +23,15 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import org.neo4j.connector.internal.util.Iterables;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.internal.types.Node;
 import org.neo4j.connector.internal.InternalNode;
 
 import static java.util.Collections.singletonList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.neo4j.connector.Values.ofValue;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.ofValue;
+import static org.neo4j.driver.Values.parameters;
 
 class SelfContainedNodeTest
 {

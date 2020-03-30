@@ -21,8 +21,8 @@ package org.neo4j.driver.stress;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.summary.ResultSummary;
 
 public abstract class AbstractContext
 {

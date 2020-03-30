@@ -31,7 +31,7 @@ import java.util.logging.Level;
 
 import org.neo4j.connector.logging.ConsoleLogging;
 import org.neo4j.connector.logging.ConsoleLogging.ConsoleLogger;
-import org.neo4j.connector.Logger;
+import org.neo4j.driver.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

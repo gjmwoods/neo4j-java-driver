@@ -20,7 +20,7 @@ package org.neo4j.driver.logging;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.connector.Logger;
+import org.neo4j.driver.Logger;
 import org.neo4j.connector.logging.PrefixedLogger;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

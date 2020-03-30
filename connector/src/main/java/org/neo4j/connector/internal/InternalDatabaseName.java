@@ -21,7 +21,7 @@ package org.neo4j.connector.internal;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 
 import static java.util.Objects.requireNonNull;
 

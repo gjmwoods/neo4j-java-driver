@@ -18,16 +18,16 @@
  */
 package org.neo4j.driver.reactive;
 
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.util.List;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.exception.ResultConsumedException;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 /**
  * A reactive result provides a reactive way to execute query on the server and receives records back.

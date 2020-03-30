@@ -27,8 +27,8 @@ import io.netty.handler.codec.ReplayingDecoder;
 import java.util.List;
 import javax.net.ssl.SSLHandshakeException;
 
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.exception.SecurityException;
 import org.neo4j.connector.exception.ClientException;

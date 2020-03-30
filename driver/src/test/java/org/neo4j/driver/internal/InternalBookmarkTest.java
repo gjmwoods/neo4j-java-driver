@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Set;
 
-import org.neo4j.connector.Bookmark;
+import org.neo4j.driver.Bookmark;
 import org.neo4j.connector.internal.InternalBookmark;
 
 import static java.util.Collections.emptyList;

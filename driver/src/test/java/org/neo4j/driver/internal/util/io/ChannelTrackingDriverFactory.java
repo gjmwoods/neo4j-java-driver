@@ -34,7 +34,7 @@ import org.neo4j.connector.internal.security.SecurityPlan;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.DriverFactoryWithClock;
-import org.neo4j.connector.AuthToken;
+import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.Config;
 
 public class ChannelTrackingDriverFactory extends DriverFactoryWithClock

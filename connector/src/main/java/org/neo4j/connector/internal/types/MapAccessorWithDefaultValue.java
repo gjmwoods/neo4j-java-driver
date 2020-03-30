@@ -21,7 +21,7 @@ package org.neo4j.connector.internal.types;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import java.util.function.Function;
 
 /**

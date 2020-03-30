@@ -23,7 +23,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.connector.async.connection.DirectConnection;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.messaging.BoltProtocol;
@@ -38,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.connector.AccessMode.READ;
+import static org.neo4j.driver.AccessMode.READ;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 
 class DecoratedConnectionTest

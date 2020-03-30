@@ -25,9 +25,9 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.handlers.ResetResponseHandler;
 import org.neo4j.connector.internal.util.ErrorUtil;

@@ -24,12 +24,12 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.exception.NoSuchRecordException;
 import org.neo4j.connector.handlers.PullAllResponseHandler;
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.internal.util.Futures;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 public class AsyncResultCursorImpl implements AsyncResultCursor
 {

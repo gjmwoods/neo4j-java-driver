@@ -26,10 +26,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Result;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Result;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
 import org.neo4j.driver.util.ParallelizableIT;
 import org.neo4j.driver.util.SessionExtension;
 
@@ -37,7 +37,7 @@ import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 
 @ParallelizableIT
 class QueryIT

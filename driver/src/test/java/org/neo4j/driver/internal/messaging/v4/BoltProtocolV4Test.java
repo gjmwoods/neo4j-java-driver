@@ -23,12 +23,12 @@ import org.mockito.ArgumentCaptor;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.internal.messaging.v3.BoltProtocolV3Test;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.TransactionConfig;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.TransactionConfig;
 import org.neo4j.connector.internal.BookmarkHolder;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.messaging.v4.BoltProtocolV4;
 import org.neo4j.connector.messaging.v4.MessageFormatV4;
 import org.neo4j.connector.internal.DefaultBookmarkHolder;

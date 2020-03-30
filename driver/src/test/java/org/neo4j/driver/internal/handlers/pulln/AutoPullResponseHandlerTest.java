@@ -28,8 +28,8 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import org.neo4j.connector.handlers.pulln.AutoPullResponseHandler;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Value;
 import org.neo4j.driver.internal.handlers.PullAllResponseHandlerTestBase;
 import org.neo4j.connector.handlers.PullResponseCompletionListener;
 import org.neo4j.connector.handlers.RunResponseHandler;
@@ -44,8 +44,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.connector.Values.value;
-import static org.neo4j.connector.Values.values;
+import static org.neo4j.driver.Values.value;
+import static org.neo4j.driver.Values.values;
 import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.DEFAULT_FETCH_SIZE;
 import static org.neo4j.connector.messaging.v1.BoltProtocolV1.METADATA_EXTRACTOR;
 

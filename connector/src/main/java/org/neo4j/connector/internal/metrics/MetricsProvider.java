@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal.metrics;
 
-import org.neo4j.connector.Metrics;
+import org.neo4j.driver.Metrics;
 import org.neo4j.connector.exception.ClientException;
 
 public interface MetricsProvider

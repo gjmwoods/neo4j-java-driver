@@ -24,8 +24,8 @@ import java.util.Objects;
 
 import org.neo4j.connector.internal.util.MetadataExtractor;
 import org.neo4j.connector.messaging.Message;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
 
 public abstract class AbstractStreamingMessage implements Message
 {

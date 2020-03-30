@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.neo4j.connector.ConnectionPoolMetrics;
+import org.neo4j.driver.ConnectionPoolMetrics;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.spi.ConnectionPool;
 

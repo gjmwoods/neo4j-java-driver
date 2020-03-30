@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.util.Neo4jRunner;
 
 import static org.junit.jupiter.api.Assumptions.assumeTrue;

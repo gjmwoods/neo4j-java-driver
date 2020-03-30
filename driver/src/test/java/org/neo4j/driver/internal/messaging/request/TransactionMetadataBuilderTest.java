@@ -29,17 +29,17 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.InternalBookmark;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.connector.AccessMode.READ;
-import static org.neo4j.connector.AccessMode.WRITE;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.AccessMode.READ;
+import static org.neo4j.driver.AccessMode.WRITE;
+import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.internal.DatabaseNameUtil.database;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.messaging.request.TransactionMetadataBuilder.buildMetadata;

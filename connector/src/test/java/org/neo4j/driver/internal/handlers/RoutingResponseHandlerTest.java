@@ -26,7 +26,7 @@ import java.util.concurrent.CompletionException;
 import org.neo4j.connector.handlers.RoutingResponseHandler;
 import org.neo4j.connector.cluster.RoutingErrorHandler;
 import org.neo4j.connector.spi.ResponseHandler;
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.exception.SessionExpiredException;

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector;
+package org.neo4j.driver;
 
 /**
  * Used by Routing Driver to decide if a transaction should be routed to a write server or a read server in a cluster.

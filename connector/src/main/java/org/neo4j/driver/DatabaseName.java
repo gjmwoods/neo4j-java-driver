@@ -16,22 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector;
+package org.neo4j.driver;
 
-import java.util.Collection;
+import java.util.Optional;
 
-import org.neo4j.connector.internal.util.Experimental;
-
-/**
- * Provides driver internal metrics.
- */
-@Experimental
-public interface Metrics
+public interface DatabaseName
 {
-    /**
-     * Connection pool metrics records metrics of connection pools that are currently in use.
-     * As the connection pools are dynamically added and removed while the server topology changes, the metrics collection changes over time.
-     * @return Connection pool metrics for all current active pools.
-     */
-    Collection<ConnectionPoolMetrics> connectionPoolMetrics();
+    Optional<String> databaseName();
+
+    String description();
 }

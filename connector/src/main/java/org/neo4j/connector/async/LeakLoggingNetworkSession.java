@@ -18,10 +18,10 @@
  */
 package org.neo4j.connector.async;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 
-import org.neo4j.connector.DatabaseName;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.DatabaseName;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.retry.RetryLogic;
 import org.neo4j.connector.spi.ConnectionProvider;

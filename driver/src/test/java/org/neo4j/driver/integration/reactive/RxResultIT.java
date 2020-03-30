@@ -26,14 +26,14 @@ import reactor.test.StepVerifier;
 
 import java.util.List;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
 import org.neo4j.driver.internal.util.Neo4jFeature;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.reactive.RxResult;
-import org.neo4j.connector.summary.ResultSummary;
-import org.neo4j.connector.summary.summary.QueryType;
+import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.driver.summary.summary.QueryType;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 
@@ -48,7 +48,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 
 @EnabledOnNeo4jWith( Neo4jFeature.BOLT_V4 )
 @ParallelizableIT

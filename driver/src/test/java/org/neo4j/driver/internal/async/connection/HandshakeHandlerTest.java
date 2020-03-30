@@ -32,7 +32,7 @@ import javax.net.ssl.SSLHandshakeException;
 import org.neo4j.connector.async.connection.ChannelPipelineBuilder;
 import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
 import org.neo4j.connector.async.connection.HandshakeHandler;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.SecurityException;
 import org.neo4j.connector.exception.ServiceUnavailableException;

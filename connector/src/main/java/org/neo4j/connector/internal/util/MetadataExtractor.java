@@ -23,9 +23,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.UntrustedServerException;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.internal.summary.InternalDatabaseInfo;
@@ -37,16 +37,15 @@ import org.neo4j.connector.internal.summary.InternalServerInfo;
 import org.neo4j.connector.internal.summary.InternalSummaryCounters;
 import org.neo4j.connector.internal.types.InternalTypeSystem;
 import org.neo4j.connector.spi.Connection;
-import org.neo4j.connector.summary.ResultSummary;
-import org.neo4j.connector.summary.summary.DatabaseInfo;
-import org.neo4j.connector.summary.summary.Notification;
-import org.neo4j.connector.summary.summary.Plan;
-import org.neo4j.connector.summary.summary.ProfiledPlan;
-import org.neo4j.connector.summary.summary.QueryType;
-import org.neo4j.connector.summary.summary.ServerInfo;
+import org.neo4j.driver.summary.ResultSummary;
+import org.neo4j.driver.summary.summary.DatabaseInfo;
+import org.neo4j.driver.summary.summary.Notification;
+import org.neo4j.driver.summary.summary.Plan;
+import org.neo4j.driver.summary.summary.ProfiledPlan;
+import org.neo4j.driver.summary.summary.QueryType;
+import org.neo4j.driver.summary.summary.ServerInfo;
 
 import static java.util.Collections.emptyList;
-import static org.neo4j.connector.internal.summary.InternalDatabaseInfo.DEFAULT_DATABASE_INFO;
 
 public class MetadataExtractor
 {

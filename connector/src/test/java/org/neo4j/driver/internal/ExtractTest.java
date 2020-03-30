@@ -35,7 +35,7 @@ import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.connector.internal.InternalRelationship;
 import org.neo4j.connector.internal.util.Extract;
 import org.neo4j.connector.internal.util.Iterables;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.util.Pair;
 import org.neo4j.connector.internal.InternalNode;
@@ -52,7 +52,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class ExtractTest
 {

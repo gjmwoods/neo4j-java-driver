@@ -27,13 +27,13 @@ import org.neo4j.connector.messaging.ValuePacker;
 import org.neo4j.connector.messaging.encode.RunMessageEncoder;
 import org.neo4j.connector.messaging.request.DiscardAllMessage;
 import org.neo4j.connector.messaging.request.RunMessage;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 import static java.util.Collections.singletonMap;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class RunMessageEncoderTest
 {

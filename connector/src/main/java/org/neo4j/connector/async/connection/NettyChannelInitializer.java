@@ -26,7 +26,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLParameters;
 
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.security.SecurityPlan;

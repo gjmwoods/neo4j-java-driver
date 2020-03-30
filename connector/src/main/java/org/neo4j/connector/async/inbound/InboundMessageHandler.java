@@ -19,13 +19,12 @@
 package org.neo4j.connector.async.inbound;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.DecoderException;
 
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.logging.ChannelActivityLogger;
 import org.neo4j.connector.messaging.MessageFormat;
 import static io.netty.buffer.ByteBufUtil.hexDump;

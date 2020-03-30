@@ -22,17 +22,17 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.connector.async.AsyncAbstractQueryRunner;
 import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.async.UnmanagedTransaction;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.TransactionConfig;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
 import org.neo4j.driver.async.AsyncTransactionWork;
 import org.neo4j.connector.async.ResultCursor;
-import org.neo4j.connector.Bookmark;
+import org.neo4j.driver.Bookmark;
 import org.neo4j.connector.internal.util.Futures;
 
 import static java.util.Collections.emptyMap;

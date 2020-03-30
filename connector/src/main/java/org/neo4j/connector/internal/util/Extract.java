@@ -23,12 +23,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.internal.InternalPair;
 import org.neo4j.connector.internal.value.NodeValue;
 import org.neo4j.connector.internal.value.PathValue;
 import org.neo4j.connector.internal.value.RelationshipValue;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.types.MapAccessor;
 import org.neo4j.connector.internal.types.Node;
@@ -43,7 +43,7 @@ import static java.util.Collections.singletonMap;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
 import static org.neo4j.connector.internal.util.Iterables.newHashMapWithSize;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 /**
  * Utility class for extracting data.

@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
 import org.neo4j.driver.async.AsyncSession;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 // end::async-transaction-function-import[]
 public class AsyncTransactionFunctionExample extends BaseApplication
 {

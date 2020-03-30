@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.CompletableFuture;
 
 import org.neo4j.driver.Config;
-import org.neo4j.connector.Metrics;
+import org.neo4j.driver.Metrics;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.internal.metrics.InternalMetrics;

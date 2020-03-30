@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.neo4j.connector.messaging.Message;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 import static java.lang.String.format;
 

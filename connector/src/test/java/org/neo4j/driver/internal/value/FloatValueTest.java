@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import org.neo4j.connector.internal.types.InternalTypeSystem;
 import org.neo4j.connector.internal.types.TypeConstructor;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.value.LossyCoercion;
 import org.neo4j.connector.internal.types.TypeSystem;
 import org.neo4j.connector.internal.value.FloatValue;

@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal.types;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.util.Experimental;
 import org.neo4j.connector.internal.util.Immutable;
 

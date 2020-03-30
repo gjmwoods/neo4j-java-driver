@@ -27,7 +27,7 @@ import java.util.function.Supplier;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
 import org.neo4j.connector.exception.SecurityException;
 import org.neo4j.driver.util.CertificateExtension;

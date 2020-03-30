@@ -30,8 +30,8 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Logger;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Logger;
 import org.neo4j.connector.exception.DiscoveryException;
 import org.neo4j.connector.exception.FatalDiscoveryException;
 import org.neo4j.connector.exception.SecurityException;

@@ -23,8 +23,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.BoltServerAddress;
 
 public final class ClusterComposition

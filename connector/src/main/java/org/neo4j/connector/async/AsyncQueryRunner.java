@@ -24,10 +24,10 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 
-import org.neo4j.connector.Query;
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
 
 /**
  * Asynchronous interface for components that can execute Neo4j queries.

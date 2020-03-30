@@ -36,8 +36,8 @@ import java.security.GeneralSecurityException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.AuthTokens;
 import org.neo4j.connector.exception.AuthenticationException;
 import org.neo4j.connector.exception.ServiceUnavailableException;
 import org.neo4j.connector.internal.BoltServerAddress;

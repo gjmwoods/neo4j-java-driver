@@ -35,7 +35,7 @@ import org.neo4j.connector.internal.security.SecurityPlan;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.spi.ResponseHandler;
-import org.neo4j.connector.AuthToken;
+import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.Config;
 
 public class FailingConnectionDriverFactory extends DriverFactory

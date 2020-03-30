@@ -26,8 +26,8 @@ import org.neo4j.connector.cluster.loadbalancing.LeastConnectedLoadBalancingStra
 import org.neo4j.connector.cluster.loadbalancing.LoadBalancingStrategy;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.spi.ConnectionPool;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.driver.internal.util.ClusterCompositionUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

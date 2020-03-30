@@ -25,7 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.InternalNode;
 import org.neo4j.connector.internal.InternalPath;
@@ -44,9 +44,9 @@ import org.neo4j.connector.internal.value.MapValue;
 import org.neo4j.connector.internal.value.NodeValue;
 import org.neo4j.connector.internal.value.PathValue;
 import org.neo4j.connector.internal.value.RelationshipValue;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 public class ValueUnpackerV1 implements ValueUnpacker
 {

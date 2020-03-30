@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.neo4j.connector.async.connection.HandshakeCompletedListener;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
 import org.neo4j.connector.handlers.HelloResponseHandler;
 import org.neo4j.connector.handlers.InitResponseHandler;
@@ -47,7 +47,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
 import static org.neo4j.connector.async.connection.ChannelAttributes.setProtocolVersion;
 import static org.neo4j.driver.util.TestUtil.await;

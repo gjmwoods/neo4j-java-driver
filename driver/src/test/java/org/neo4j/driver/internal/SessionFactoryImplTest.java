@@ -20,7 +20,7 @@ package org.neo4j.driver.internal;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Config;
 import org.neo4j.connector.async.LeakLoggingNetworkSession;
 import org.neo4j.connector.async.NetworkSession;

@@ -36,8 +36,8 @@ import org.neo4j.connector.internal.util.Futures;
 import org.neo4j.driver.internal.reactive.util.ListBasedPullHandler;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
-import org.neo4j.connector.Record;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static java.util.Arrays.asList;
 import static java.util.concurrent.CompletableFuture.completedFuture;
@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.neo4j.connector.internal.util.Futures.failedFuture;
-import static org.neo4j.connector.Values.values;
+import static org.neo4j.driver.Values.values;
 
 class InternalRxResultTest
 {

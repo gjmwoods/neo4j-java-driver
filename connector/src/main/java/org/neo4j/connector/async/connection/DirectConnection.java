@@ -21,13 +21,13 @@ package org.neo4j.connector.async.connection;
 import java.util.concurrent.CompletionStage;
 
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.messaging.BoltProtocol;
 import org.neo4j.connector.messaging.Message;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ResponseHandler;
 import org.neo4j.connector.internal.util.ServerVersion;
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 
 /**
  * This is a connection used by {@link DirectConnectionProvider} to connect to a remote database.

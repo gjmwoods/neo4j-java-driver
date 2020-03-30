@@ -24,14 +24,14 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Query;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.Query;
 import org.neo4j.connector.async.AsyncQueryRunner;
 import org.neo4j.connector.async.ResultCursor;
 import org.neo4j.driver.Transaction;
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Values;
-import org.neo4j.connector.Bookmark;
+import org.neo4j.driver.TransactionConfig;
+import org.neo4j.driver.Values;
+import org.neo4j.driver.Bookmark;
 
 /**
  * Provides a context of work for database interactions.

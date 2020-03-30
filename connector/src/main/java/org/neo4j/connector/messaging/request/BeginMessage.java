@@ -22,11 +22,11 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.DatabaseName;
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.DatabaseName;
+import org.neo4j.driver.TransactionConfig;
+import org.neo4j.driver.Value;
 
 import static org.neo4j.connector.messaging.request.TransactionMetadataBuilder.buildMetadata;
 

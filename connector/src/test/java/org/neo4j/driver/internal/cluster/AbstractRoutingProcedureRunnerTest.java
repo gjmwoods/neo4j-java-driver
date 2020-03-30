@@ -26,7 +26,7 @@ import java.util.concurrent.CompletionStage;
 import org.neo4j.connector.cluster.RoutingContext;
 import org.neo4j.connector.cluster.RoutingProcedureResponse;
 import org.neo4j.connector.cluster.RoutingProcedureRunner;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.spi.Connection;
 

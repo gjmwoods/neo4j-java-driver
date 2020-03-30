@@ -18,10 +18,10 @@
  */
 package org.neo4j.driver.stress;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Result;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

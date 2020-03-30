@@ -21,7 +21,7 @@ package org.neo4j.driver.internal.reactive;
 import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.reactivestreams.Publisher;
 import reactor.test.StepVerifier;
 
@@ -30,7 +30,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
@@ -50,7 +50,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 
 class InternalRxTransactionTest
 {

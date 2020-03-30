@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
 import org.neo4j.connector.spi.ResponseHandler;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 public class ResetResponseHandler implements ResponseHandler
 {

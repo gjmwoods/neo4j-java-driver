@@ -38,8 +38,8 @@ import static org.neo4j.connector.messaging.request.GoodbyeMessage.GOODBYE;
 import static org.neo4j.connector.messaging.request.PullAllMessage.PULL_ALL;
 import static org.neo4j.connector.messaging.request.ResetMessage.RESET;
 import static org.neo4j.connector.messaging.request.RollbackMessage.ROLLBACK;
-import static org.neo4j.connector.Values.point;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.point;
+import static org.neo4j.driver.Values.value;
 
 class MessageWriterV2Test extends AbstractMessageWriterTestBase
 {

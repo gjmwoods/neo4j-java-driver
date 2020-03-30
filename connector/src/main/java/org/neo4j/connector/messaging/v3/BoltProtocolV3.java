@@ -25,12 +25,12 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.DatabaseName;
 
-import org.neo4j.connector.Query;
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.TransactionConfig;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.async.connection.ChannelAttributes;
 import org.neo4j.connector.handlers.BeginTxResponseHandler;

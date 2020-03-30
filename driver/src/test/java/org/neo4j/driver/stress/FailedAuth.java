@@ -23,13 +23,13 @@ import java.net.URI;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.exception.SecurityException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.connector.AuthTokens.basic;
+import static org.neo4j.driver.AuthTokens.basic;
 
 public class FailedAuth<C extends AbstractContext> implements BlockingCommand<C>
 {

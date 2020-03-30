@@ -16,35 +16,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector.summary.summary;
+package org.neo4j.driver.summary.summary;
 
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.summary.ResultSummary;
 
 /**
- * The type of query executed.
- * @since 1.0
+ * Provides basic information about where a {@link ResultSummary} is obtained from.
  */
-public enum QueryType
+public interface DatabaseInfo
 {
-    READ_ONLY,
-    READ_WRITE,
-    WRITE_ONLY,
-    SCHEMA_WRITE;
-
-    public static QueryType fromCode(String type )
-    {
-        switch ( type )
-        {
-        case "r":
-            return QueryType.READ_ONLY;
-        case "rw":
-            return QueryType.READ_WRITE;
-        case "w":
-            return QueryType.WRITE_ONLY;
-        case "s":
-            return QueryType.SCHEMA_WRITE;
-        default:
-            throw new ClientException( "Unknown query type: `" + type + "`." );
-        }
-    }
+    /**
+     * The name of the database where a {@link ResultSummary} is obtained from.
+     * Default to {@code null} if servers does not support multi-databases.
+     * @return the name of the database where a {@link ResultSummary} is obtained from
+     */
+    String name();
 }

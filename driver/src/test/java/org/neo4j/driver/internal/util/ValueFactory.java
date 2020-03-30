@@ -26,11 +26,11 @@ import org.neo4j.connector.internal.InternalRelationship;
 import org.neo4j.connector.internal.value.NodeValue;
 import org.neo4j.connector.internal.value.PathValue;
 import org.neo4j.connector.internal.value.RelationshipValue;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 public class ValueFactory
 {

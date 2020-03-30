@@ -27,7 +27,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.value.NotMultiValued;
 import org.neo4j.connector.exception.value.Uncoercible;
 import org.neo4j.connector.exception.value.Unsizable;
@@ -45,8 +45,8 @@ import org.neo4j.connector.internal.types.TypeRepresentation;
 import java.util.function.Function;
 
 import static java.util.Collections.emptyList;
-import static org.neo4j.connector.Values.ofObject;
-import static org.neo4j.connector.Values.ofValue;
+import static org.neo4j.driver.Values.ofObject;
+import static org.neo4j.driver.Values.ofValue;
 
 public abstract class ValueAdapter extends InternalMapAccessorWithDefaultValue implements InternalValue
 {

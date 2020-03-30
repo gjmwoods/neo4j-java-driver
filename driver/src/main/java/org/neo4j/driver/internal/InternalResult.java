@@ -26,14 +26,14 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Result;
 import org.neo4j.connector.async.ResultCursor;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.exception.NoSuchRecordException;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.internal.util.Futures;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 public class InternalResult implements Result
 {

@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.async.ConnectionContext;
 import org.neo4j.connector.async.connection.RoutingConnection;
 import org.neo4j.connector.cluster.AddressSet;

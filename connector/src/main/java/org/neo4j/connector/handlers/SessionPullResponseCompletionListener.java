@@ -20,7 +20,7 @@ package org.neo4j.connector.handlers;
 
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.util.MetadataExtractor;
 import org.neo4j.connector.spi.Connection;

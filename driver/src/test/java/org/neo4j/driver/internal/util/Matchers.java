@@ -36,7 +36,7 @@ import org.neo4j.connector.cluster.loadbalancing.LoadBalancer;
 import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.driver.Driver;
 import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 public final class Matchers
 {

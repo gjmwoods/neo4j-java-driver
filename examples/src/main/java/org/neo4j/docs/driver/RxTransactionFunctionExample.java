@@ -28,7 +28,7 @@ import java.util.Map;
 
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxSession;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 // end::rx-transaction-function-import[]
 
 public class RxTransactionFunctionExample extends BaseApplication

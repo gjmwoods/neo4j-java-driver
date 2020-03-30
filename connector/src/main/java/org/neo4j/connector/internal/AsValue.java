@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 public interface AsValue
 {

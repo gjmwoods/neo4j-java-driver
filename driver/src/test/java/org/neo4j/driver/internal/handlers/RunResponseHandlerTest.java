@@ -38,8 +38,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.connector.Values.value;
-import static org.neo4j.connector.Values.values;
+import static org.neo4j.driver.Values.value;
+import static org.neo4j.driver.Values.values;
 
 class RunResponseHandlerTest
 {

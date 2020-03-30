@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal;
 
-import org.neo4j.connector.Bookmark;
+import org.neo4j.driver.Bookmark;
 
 public interface BookmarkHolder
 {

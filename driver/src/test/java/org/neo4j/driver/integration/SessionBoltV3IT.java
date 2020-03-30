@@ -30,13 +30,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.Bookmark;
+import org.neo4j.driver.Bookmark;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.connector.TransactionConfig;
+import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.connector.async.ResultCursor;
 import org.neo4j.connector.exception.TransientException;
@@ -48,7 +48,7 @@ import org.neo4j.connector.internal.retry.RetrySettings;
 import org.neo4j.connector.internal.security.SecurityPlanImpl;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
 import org.neo4j.driver.internal.util.MessageRecordingDriverFactory;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 import org.neo4j.driver.util.DriverExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

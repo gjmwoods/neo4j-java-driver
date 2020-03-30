@@ -22,9 +22,9 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiFunction;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.TransactionConfig;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.TransactionConfig;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.cursor.AsyncResultCursor;

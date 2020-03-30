@@ -21,8 +21,8 @@ package org.neo4j.connector.internal.metrics;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.neo4j.connector.ConnectionPoolMetrics;
-import org.neo4j.connector.Metrics;
+import org.neo4j.driver.ConnectionPoolMetrics;
+import org.neo4j.driver.Metrics;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.async.pool.ConnectionPoolImpl;
 

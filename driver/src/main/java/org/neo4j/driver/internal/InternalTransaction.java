@@ -18,9 +18,9 @@
  */
 package org.neo4j.driver.internal;
 
-import org.neo4j.connector.AbstractQueryRunner;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.AbstractQueryRunner;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
 import org.neo4j.connector.async.ResultCursor;
 import org.neo4j.connector.async.UnmanagedTransaction;

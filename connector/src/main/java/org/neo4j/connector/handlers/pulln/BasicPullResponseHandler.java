@@ -21,17 +21,17 @@ package org.neo4j.connector.handlers.pulln;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.neo4j.connector.handlers.PullResponseCompletionListener;
 import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.connector.internal.util.MetadataExtractor;
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.internal.value.BooleanValue;
 import org.neo4j.connector.messaging.request.PullMessage;
 import org.neo4j.connector.spi.Connection;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static java.lang.String.format;
 import static java.util.Collections.emptyMap;

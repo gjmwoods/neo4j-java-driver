@@ -25,12 +25,12 @@ import io.netty.util.internal.logging.InternalLoggerFactory;
 
 import java.net.URI;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 import org.neo4j.connector.async.connection.BootstrapFactory;
 import org.neo4j.connector.async.connection.ChannelConnector;
 import org.neo4j.connector.async.connection.ChannelConnectorImpl;

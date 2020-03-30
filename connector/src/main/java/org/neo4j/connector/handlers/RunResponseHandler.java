@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.neo4j.connector.internal.util.MetadataExtractor;
 import org.neo4j.connector.spi.ResponseHandler;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 import static java.util.Collections.emptyList;
 

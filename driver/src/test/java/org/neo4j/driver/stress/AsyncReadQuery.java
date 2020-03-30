@@ -20,12 +20,12 @@ package org.neo4j.driver.stress;
 
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.connector.async.ResultCursor;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 import org.neo4j.connector.internal.types.Node;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

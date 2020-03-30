@@ -27,10 +27,10 @@ import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Result;
+import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.TransactionConfig;
+import org.neo4j.driver.Value;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
 import org.neo4j.connector.async.ResultCursor;

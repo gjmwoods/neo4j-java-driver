@@ -19,7 +19,7 @@
 package org.neo4j.connector.internal;
 
 
-import org.neo4j.connector.AuthToken;
+import org.neo4j.driver.AuthToken;
 
 import static java.lang.String.format;
 

@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.internal.security.InternalAuthToken;
 
 public class HelloMessage extends MessageWithMetadata

@@ -25,8 +25,8 @@ import java.util.function.Function;
 
 import org.neo4j.connector.async.AsyncQueryRunner;
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Query;
-import org.neo4j.connector.QueryRunner;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.QueryRunner;
 
 /**
  * Logical container for an atomic unit of work.

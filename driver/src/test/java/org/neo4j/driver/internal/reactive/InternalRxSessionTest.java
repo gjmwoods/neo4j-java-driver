@@ -21,7 +21,7 @@ package org.neo4j.driver.internal.reactive;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -34,9 +34,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.TransactionConfig;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.TransactionConfig;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.async.NetworkSession;
@@ -61,8 +61,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
-import static org.neo4j.connector.TransactionConfig.empty;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.TransactionConfig.empty;
+import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.connector.internal.util.Futures.completedWithNull;
 
 class InternalRxSessionTest

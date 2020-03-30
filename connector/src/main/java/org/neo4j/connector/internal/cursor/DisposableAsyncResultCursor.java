@@ -24,8 +24,8 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import org.neo4j.connector.Record;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static org.neo4j.connector.internal.util.ErrorUtil.newResultConsumedError;
 import static org.neo4j.connector.internal.util.Futures.completedWithNull;

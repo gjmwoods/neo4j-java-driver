@@ -31,13 +31,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.connector.cluster.RediscoveryImpl;
 import org.neo4j.connector.cluster.RoutingTable;
 import org.neo4j.connector.cluster.RoutingTableHandler;
 import org.neo4j.connector.cluster.RoutingTableRegistryImpl;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.async.ImmutableConnectionContext;
 import org.neo4j.connector.cluster.RoutingTableRegistryImpl.RoutingTableHandlerFactory;

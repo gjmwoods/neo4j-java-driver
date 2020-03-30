@@ -16,24 +16,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector.summary.summary;
+package org.neo4j.driver.summary.summary;
+
+import org.neo4j.connector.exception.ClientException;
 
 /**
- * Provides some basic information of the server where the result is obtained from.
+ * The type of query executed.
+ * @since 1.0
  */
-public interface ServerInfo
+public enum QueryType
 {
+    READ_ONLY,
+    READ_WRITE,
+    WRITE_ONLY,
+    SCHEMA_WRITE;
 
-    /**
-     * Returns a string telling the address of the server the query was executed.
-     * @return The address of the server the query was executed.
-     */
-    String address();
-
-    /**
-     * Returns a string telling which version of the server the query was executed.
-     * Supported since neo4j 3.1.
-     * @return The server version.
-     */
-    String version();
+    public static QueryType fromCode(String type )
+    {
+        switch ( type )
+        {
+        case "r":
+            return QueryType.READ_ONLY;
+        case "rw":
+            return QueryType.READ_WRITE;
+        case "w":
+            return QueryType.WRITE_ONLY;
+        case "s":
+            return QueryType.SCHEMA_WRITE;
+        default:
+            throw new ClientException( "Unknown query type: `" + type + "`." );
+        }
+    }
 }

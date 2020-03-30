@@ -22,11 +22,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.Record;
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Result;
-import org.neo4j.connector.QueryRunner;
+import org.neo4j.driver.Result;
+import org.neo4j.driver.QueryRunner;
 import org.neo4j.driver.Transaction;
 
 import static org.junit.Assert.assertEquals;

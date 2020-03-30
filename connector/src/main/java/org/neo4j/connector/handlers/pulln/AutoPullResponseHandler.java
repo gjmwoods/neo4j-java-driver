@@ -26,15 +26,15 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.neo4j.connector.handlers.PullAllResponseHandler;
 import org.neo4j.connector.handlers.PullResponseCompletionListener;
 import org.neo4j.connector.internal.util.MetadataExtractor;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Record;
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.internal.util.Iterables;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.summary.ResultSummary;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;

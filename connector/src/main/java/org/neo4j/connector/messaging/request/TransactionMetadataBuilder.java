@@ -21,12 +21,12 @@ package org.neo4j.connector.messaging.request;
 import java.time.Duration;
 import java.util.Map;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 
-import org.neo4j.connector.Bookmark;
-import org.neo4j.connector.DatabaseName;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
+import org.neo4j.driver.Bookmark;
+import org.neo4j.driver.DatabaseName;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
 import org.neo4j.connector.internal.DatabaseNameUtil;
 import org.neo4j.connector.internal.util.Iterables;
 

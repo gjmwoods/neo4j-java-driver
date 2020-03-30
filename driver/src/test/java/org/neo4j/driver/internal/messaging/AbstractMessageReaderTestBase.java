@@ -37,13 +37,13 @@ import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.connector.messaging.response.SuccessMessage;
 import org.neo4j.connector.packstream.PackInput;
 import org.neo4j.driver.internal.util.io.ByteBufOutput;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 import static java.util.Collections.singletonMap;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 public abstract class AbstractMessageReaderTestBase
 {

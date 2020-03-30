@@ -43,7 +43,7 @@ import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.connector.messaging.response.SuccessMessage;
 import org.neo4j.connector.messaging.v1.MessageFormatV1;
 import org.neo4j.connector.packstream.PackStream;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.ClientException;
 
 import static java.util.Arrays.asList;
@@ -58,8 +58,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.neo4j.connector.async.connection.ChannelAttributes.messageDispatcher;
 import static org.neo4j.connector.async.connection.ChannelAttributes.setMessageDispatcher;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.connector.Values.parameters;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.parameters;
+import static org.neo4j.driver.Values.value;
 
 class MessageFormatTest
 {

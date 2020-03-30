@@ -28,12 +28,12 @@ import org.neo4j.connector.messaging.ValuePacker;
 import org.neo4j.connector.messaging.encode.PullMessageEncoder;
 import org.neo4j.connector.messaging.request.PullAllMessage;
 import org.neo4j.connector.messaging.request.PullMessage;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class PullMessageEncoderTest
 {

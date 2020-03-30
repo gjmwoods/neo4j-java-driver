@@ -31,8 +31,8 @@ import java.util.Set;
 import org.neo4j.connector.cluster.ClusterComposition;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.InternalRecord;
-import org.neo4j.connector.Record;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Value;
 import org.neo4j.driver.internal.util.ClusterCompositionUtil;
 
 import static java.util.Arrays.asList;
@@ -41,7 +41,7 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class ClusterCompositionTest
 {

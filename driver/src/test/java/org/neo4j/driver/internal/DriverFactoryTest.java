@@ -27,12 +27,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.net.URI;
 import java.util.stream.Stream;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.AuthTokens;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logging;
 import org.neo4j.driver.SessionConfig;
 import org.neo4j.connector.async.LeakLoggingNetworkSession;
 import org.neo4j.connector.async.NetworkSession;
@@ -49,9 +49,6 @@ import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.connector.internal.util.Clock;
-import org.neo4j.driver.internal.DriverFactory;
-import org.neo4j.driver.internal.InternalDriver;
-import org.neo4j.driver.internal.SessionFactory;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.hamcrest.Matchers.instanceOf;

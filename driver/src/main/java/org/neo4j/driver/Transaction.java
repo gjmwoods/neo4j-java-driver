@@ -18,8 +18,6 @@
  */
 package org.neo4j.driver;
 
-import org.neo4j.connector.Query;
-import org.neo4j.connector.QueryRunner;
 import org.neo4j.driver.util.Resource;
 
 /**

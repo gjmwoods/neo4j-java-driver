@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.messaging.request;
 
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.exception.ClientException;
 import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.connector.messaging.v4.BoltProtocolV4;

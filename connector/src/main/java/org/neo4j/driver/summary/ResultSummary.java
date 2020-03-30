@@ -16,20 +16,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector.summary;
+package org.neo4j.driver.summary;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.neo4j.connector.internal.util.Immutable;
-import org.neo4j.connector.summary.summary.DatabaseInfo;
-import org.neo4j.connector.summary.summary.Notification;
-import org.neo4j.connector.summary.summary.Plan;
-import org.neo4j.connector.summary.summary.ProfiledPlan;
-import org.neo4j.connector.summary.summary.QueryType;
-import org.neo4j.connector.summary.summary.ServerInfo;
-import org.neo4j.connector.summary.summary.SummaryCounters;
+import org.neo4j.driver.summary.summary.DatabaseInfo;
+import org.neo4j.driver.summary.summary.Notification;
+import org.neo4j.driver.summary.summary.Plan;
+import org.neo4j.driver.summary.summary.ProfiledPlan;
+import org.neo4j.driver.summary.summary.QueryType;
+import org.neo4j.driver.summary.summary.ServerInfo;
+import org.neo4j.driver.summary.summary.SummaryCounters;
 
 /**
  * The result summary of running a query. The result summary interface can be used to investigate

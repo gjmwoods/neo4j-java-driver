@@ -36,7 +36,7 @@ import org.neo4j.connector.messaging.MessageFormat;
 import org.neo4j.connector.messaging.request.RunMessage;
 import org.neo4j.connector.messaging.v1.MessageFormatV1;
 import org.neo4j.connector.packstream.PackOutput;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.driver.util.TestUtil;
 
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -50,7 +50,7 @@ import static org.mockito.Mockito.when;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.connector.messaging.MessageFormat.Writer;
 import static org.neo4j.connector.messaging.request.PullAllMessage.PULL_ALL;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class OutboundMessageHandlerTest
 {

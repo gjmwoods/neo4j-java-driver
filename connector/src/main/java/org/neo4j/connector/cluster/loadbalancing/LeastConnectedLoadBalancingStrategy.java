@@ -20,8 +20,8 @@ package org.neo4j.connector.cluster.loadbalancing;
 
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.spi.ConnectionPool;
-import org.neo4j.connector.Logger;
-import org.neo4j.connector.Logging;
+import org.neo4j.driver.Logger;
+import org.neo4j.driver.Logging;
 
 /**
  * Load balancing strategy that finds server with least amount of active (checked out of the pool) connections from

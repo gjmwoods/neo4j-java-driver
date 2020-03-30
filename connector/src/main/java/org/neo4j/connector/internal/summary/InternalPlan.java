@@ -22,13 +22,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
-import org.neo4j.connector.summary.summary.Plan;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
+import org.neo4j.driver.summary.summary.Plan;
 import java.util.function.Function;
 
 import static java.lang.String.format;
-import static org.neo4j.connector.Values.ofString;
+import static org.neo4j.driver.Values.ofString;
 
 public class InternalPlan<T extends Plan> implements Plan
 {

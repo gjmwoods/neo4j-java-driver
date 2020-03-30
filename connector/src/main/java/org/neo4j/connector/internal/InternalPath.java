@@ -29,7 +29,7 @@ import org.neo4j.connector.internal.types.Entity;
 import org.neo4j.connector.internal.types.Node;
 import org.neo4j.connector.internal.types.Path;
 import org.neo4j.connector.internal.types.Relationship;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 /**
  * {@link Path} implementation that directly contains all nodes and relationships.

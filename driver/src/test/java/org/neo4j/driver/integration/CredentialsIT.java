@@ -26,13 +26,13 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 import org.neo4j.connector.internal.security.InternalAuthToken;
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.AuthTokens;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 import org.neo4j.driver.Session;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.exception.AuthenticationException;
 import org.neo4j.connector.exception.SecurityException;
 import org.neo4j.driver.internal.util.DisabledOnNeo4jWith;
@@ -46,10 +46,10 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.connector.AuthTokens.basic;
-import static org.neo4j.connector.AuthTokens.custom;
-import static org.neo4j.connector.Values.ofValue;
-import static org.neo4j.connector.Values.parameters;
+import static org.neo4j.driver.AuthTokens.basic;
+import static org.neo4j.driver.AuthTokens.custom;
+import static org.neo4j.driver.Values.ofValue;
+import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.driver.util.Neo4jRunner.PASSWORD;
 
 @ParallelizableIT

@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.concurrent.CompletionStage;
 
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.async.ConnectionContext;
 
 /**

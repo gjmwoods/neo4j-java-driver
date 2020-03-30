@@ -20,8 +20,8 @@ package org.neo4j.connector.spi;
 
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.AccessMode;
-import org.neo4j.connector.DatabaseName;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.internal.BoltServerAddress;
 
 import org.neo4j.connector.internal.util.ServerVersion;

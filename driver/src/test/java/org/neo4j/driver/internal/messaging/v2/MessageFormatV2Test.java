@@ -35,10 +35,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.neo4j.connector.messaging.v2.MessageFormatV2;
-import org.neo4j.connector.Value;
-import org.neo4j.connector.Values;
-import org.neo4j.connector.InternalPoint2D;
-import org.neo4j.connector.InternalPoint3D;
+import org.neo4j.driver.Value;
+import org.neo4j.driver.Values;
+import org.neo4j.driver.InternalPoint2D;
+import org.neo4j.driver.InternalPoint3D;
 import org.neo4j.connector.async.inbound.ByteBufInput;
 import org.neo4j.connector.messaging.MessageFormat;
 import org.neo4j.connector.messaging.ResponseMessageHandler;
@@ -60,15 +60,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.connector.Values.point;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.point;
+import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.packstream.PackStream.FLOAT_64;
 import static org.neo4j.connector.packstream.PackStream.INT_16;
 import static org.neo4j.connector.packstream.PackStream.INT_32;
 import static org.neo4j.connector.packstream.PackStream.INT_64;
 import static org.neo4j.connector.packstream.PackStream.Packer;
 import static org.neo4j.connector.packstream.PackStream.STRING_8;
-import static org.neo4j.driver.util.TestUtil.assertByteBufContains;
 
 class MessageFormatV2Test
 {

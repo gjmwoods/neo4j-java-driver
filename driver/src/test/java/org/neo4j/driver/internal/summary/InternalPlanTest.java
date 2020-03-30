@@ -23,16 +23,16 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.summary.InternalPlan;
-import org.neo4j.connector.summary.summary.Plan;
+import org.neo4j.driver.summary.summary.Plan;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
-import static org.neo4j.connector.Values.ofValue;
-import static org.neo4j.connector.Values.parameters;
-import static org.neo4j.connector.Values.value;
-import static org.neo4j.connector.Values.values;
+import static org.neo4j.driver.Values.ofValue;
+import static org.neo4j.driver.Values.parameters;
+import static org.neo4j.driver.Values.value;
+import static org.neo4j.driver.Values.values;
 
 class InternalPlanTest
 {

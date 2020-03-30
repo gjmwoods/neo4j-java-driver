@@ -30,7 +30,7 @@ import org.neo4j.driver.util.StubServer;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.neo4j.connector.Logging.none;
+import static org.neo4j.driver.Logging.none;
 
 class TrustedServerProductTest
 {

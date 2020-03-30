@@ -21,7 +21,7 @@ package org.neo4j.connector.messaging;
 import java.io.IOException;
 import java.util.Map;
 
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 public interface ResponseMessageHandler
 {

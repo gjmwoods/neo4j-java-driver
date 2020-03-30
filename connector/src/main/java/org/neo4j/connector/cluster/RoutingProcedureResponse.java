@@ -20,8 +20,8 @@ package org.neo4j.connector.cluster;
 
 import java.util.List;
 
-import org.neo4j.connector.Query;
-import org.neo4j.connector.Record;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Record;
 
 public class RoutingProcedureResponse
 {

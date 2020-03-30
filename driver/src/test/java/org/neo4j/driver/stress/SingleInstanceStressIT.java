@@ -25,8 +25,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.neo4j.connector.AuthToken;
-import org.neo4j.connector.summary.ResultSummary;
+import org.neo4j.driver.AuthToken;
+import org.neo4j.driver.summary.ResultSummary;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

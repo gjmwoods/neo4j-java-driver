@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 import org.neo4j.connector.handlers.PullResponseCompletionListener;
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.handlers.SessionPullResponseCompletionListener;
-import org.neo4j.connector.Query;
+import org.neo4j.driver.Query;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
@@ -38,7 +38,7 @@ import static java.util.Collections.singletonMap;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.messaging.v1.BoltProtocolV1.METADATA_EXTRACTOR;
 import static org.neo4j.driver.util.TestUtil.anyServerVersion;
 

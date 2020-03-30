@@ -31,7 +31,7 @@ import org.neo4j.connector.async.pool.NettyChannelHealthChecker;
 import org.neo4j.connector.async.pool.PoolSettings;
 import org.neo4j.connector.messaging.request.ResetMessage;
 import org.neo4j.connector.internal.util.Clock;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 import org.neo4j.driver.util.TestUtil;
 
 import static org.hamcrest.Matchers.is;

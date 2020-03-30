@@ -18,7 +18,7 @@
  */
 package org.neo4j.driver.internal.cluster;
 
-import org.neo4j.connector.AccessMode;
+import org.neo4j.driver.AccessMode;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.async.ConnectionContext;
 import org.neo4j.connector.async.ImmutableConnectionContext;

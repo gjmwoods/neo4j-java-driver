@@ -37,13 +37,13 @@ import org.neo4j.connector.internal.types.InternalTypeSystem;
 import org.neo4j.connector.internal.value.NodeValue;
 import org.neo4j.connector.internal.value.PathValue;
 import org.neo4j.connector.internal.value.RelationshipValue;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Value;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.neo4j.connector.internal.types.InternalTypeSystem.TYPE_SYSTEM;
-import static org.neo4j.connector.Values.value;
+import static org.neo4j.driver.Values.value;
 
 class TypeSystemTest
 {

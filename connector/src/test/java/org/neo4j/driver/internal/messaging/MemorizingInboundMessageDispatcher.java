@@ -31,8 +31,8 @@ import org.neo4j.connector.messaging.response.FailureMessage;
 import org.neo4j.connector.messaging.response.IgnoredMessage;
 import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.connector.messaging.response.SuccessMessage;
-import org.neo4j.connector.Logging;
-import org.neo4j.connector.Value;
+import org.neo4j.driver.Logging;
+import org.neo4j.driver.Value;
 
 public class MemorizingInboundMessageDispatcher extends InboundMessageDispatcher
 {
