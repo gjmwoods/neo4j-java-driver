@@ -26,7 +26,7 @@ import io.netty.channel.ChannelPromise;
 
 import org.neo4j.driver.Logger;
 import org.neo4j.driver.Logging;
-import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.logging.ChannelActivityLogger;
 

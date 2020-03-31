@@ -44,7 +44,7 @@ import org.neo4j.connector.messaging.response.SuccessMessage;
 import org.neo4j.connector.messaging.v1.MessageFormatV1;
 import org.neo4j.connector.packstream.PackStream;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;

@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.connector.exception.UntrustedServerException;
+import org.neo4j.driver.exceptions.UntrustedServerException;
 import org.neo4j.driver.util.StubServer;
 
 import static org.hamcrest.core.IsEqual.equalTo;

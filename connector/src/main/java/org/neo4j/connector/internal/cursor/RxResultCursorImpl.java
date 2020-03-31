@@ -25,7 +25,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.BiConsumer;
 
 import org.neo4j.driver.Record;
-import org.neo4j.connector.exception.TransactionNestingException;
+import org.neo4j.driver.exceptions.TransactionNestingException;
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.handlers.pulln.PullResponseHandler;
 import org.neo4j.driver.summary.ResultSummary;

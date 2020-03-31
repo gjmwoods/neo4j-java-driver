@@ -21,14 +21,14 @@ package org.neo4j.driver;
 import java.util.Map;
 import java.util.Objects;
 
-import org.neo4j.connector.internal.security.InternalAuthToken;
+import org.neo4j.driver.internal.security.InternalAuthToken;
 
 import static java.util.Collections.singletonMap;
-import static org.neo4j.connector.internal.security.InternalAuthToken.CREDENTIALS_KEY;
-import static org.neo4j.connector.internal.security.InternalAuthToken.PARAMETERS_KEY;
-import static org.neo4j.connector.internal.security.InternalAuthToken.PRINCIPAL_KEY;
-import static org.neo4j.connector.internal.security.InternalAuthToken.REALM_KEY;
-import static org.neo4j.connector.internal.security.InternalAuthToken.SCHEME_KEY;
+import static org.neo4j.driver.internal.security.InternalAuthToken.CREDENTIALS_KEY;
+import static org.neo4j.driver.internal.security.InternalAuthToken.PARAMETERS_KEY;
+import static org.neo4j.driver.internal.security.InternalAuthToken.PRINCIPAL_KEY;
+import static org.neo4j.driver.internal.security.InternalAuthToken.REALM_KEY;
+import static org.neo4j.driver.internal.security.InternalAuthToken.SCHEME_KEY;
 import static org.neo4j.connector.internal.util.Iterables.newHashMapWithSize;
 
 /**

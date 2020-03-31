@@ -29,11 +29,11 @@ import org.neo4j.connector.internal.value.NodeValue;
 import org.neo4j.connector.internal.value.PathValue;
 import org.neo4j.connector.internal.value.RelationshipValue;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.internal.types.MapAccessor;
-import org.neo4j.connector.internal.types.Node;
-import org.neo4j.connector.internal.types.Path;
-import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.types.MapAccessor;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Relationship;
 import java.util.function.Function;
 
 import static java.util.Collections.emptyList;

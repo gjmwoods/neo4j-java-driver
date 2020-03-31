@@ -31,7 +31,7 @@ import org.neo4j.connector.messaging.Message;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ResponseHandler;
 import org.neo4j.connector.internal.util.ServerVersion;
-import org.neo4j.connector.net.ServerAddress;
+import org.neo4j.driver.net.ServerAddress;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;

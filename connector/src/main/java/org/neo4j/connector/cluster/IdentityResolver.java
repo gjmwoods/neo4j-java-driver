@@ -20,8 +20,8 @@ package org.neo4j.connector.cluster;
 
 import java.util.Set;
 
-import org.neo4j.connector.net.ServerAddress;
-import org.neo4j.connector.net.ServerAddressResolver;
+import org.neo4j.driver.net.ServerAddress;
+import org.neo4j.driver.net.ServerAddressResolver;
 
 import static java.util.Collections.singleton;
 

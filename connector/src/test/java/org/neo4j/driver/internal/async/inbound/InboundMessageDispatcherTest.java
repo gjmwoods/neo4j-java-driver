@@ -33,8 +33,8 @@ import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
 import org.neo4j.connector.spi.ResponseHandler;
 import org.neo4j.connector.internal.value.IntegerValue;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.Neo4jException;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.Neo4jException;
 
 import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;

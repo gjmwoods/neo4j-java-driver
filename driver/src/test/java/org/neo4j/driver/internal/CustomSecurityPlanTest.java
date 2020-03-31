@@ -28,10 +28,10 @@ import java.util.List;
 import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Config;
-import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.driver.internal.cluster.RoutingSettings;
 import org.neo4j.connector.internal.metrics.MetricsProvider;
-import org.neo4j.connector.internal.retry.RetrySettings;
-import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.retry.RetrySettings;
+import org.neo4j.driver.internal.security.SecurityPlan;
 import org.neo4j.connector.spi.ConnectionPool;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

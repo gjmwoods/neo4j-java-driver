@@ -29,7 +29,7 @@ import java.util.stream.Stream;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.internal.types.Point;
+import org.neo4j.driver.types.Point;
 import org.neo4j.driver.util.ParallelizableIT;
 import org.neo4j.driver.util.SessionExtension;
 

@@ -54,10 +54,10 @@ import org.neo4j.driver.Session;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.QueryRunner;
 import org.neo4j.driver.Transaction;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.Neo4jException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.TransientException;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.Neo4jException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.TransientException;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

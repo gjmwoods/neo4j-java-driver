@@ -29,7 +29,7 @@ import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.driver.Bookmark;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.TransactionConfig;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.messaging.request.PullAllMessage;

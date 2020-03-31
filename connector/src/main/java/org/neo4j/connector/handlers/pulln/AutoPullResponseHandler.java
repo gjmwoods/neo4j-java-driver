@@ -38,8 +38,8 @@ import org.neo4j.driver.summary.ResultSummary;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
 import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 
 /**
  * Built on top of {@link BasicPullResponseHandler} to be able to pull in batches.

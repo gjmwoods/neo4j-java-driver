@@ -28,7 +28,7 @@ import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 import java.time.ZonedDateTime;
 
-import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.driver.types.TypeConstructor;
 import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.value.InternalValue;
 import org.neo4j.connector.internal.value.NullValue;

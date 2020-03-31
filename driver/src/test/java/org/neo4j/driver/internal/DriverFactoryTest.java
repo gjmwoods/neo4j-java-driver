@@ -37,14 +37,14 @@ import org.neo4j.driver.SessionConfig;
 import org.neo4j.connector.async.LeakLoggingNetworkSession;
 import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.async.connection.BootstrapFactory;
-import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.driver.internal.cluster.RoutingSettings;
 import org.neo4j.connector.cluster.loadbalancing.LoadBalancer;
 import org.neo4j.connector.internal.metrics.InternalMetricsProvider;
 import org.neo4j.connector.internal.metrics.MetricsProvider;
-import org.neo4j.connector.internal.retry.RetryLogic;
-import org.neo4j.connector.internal.retry.RetrySettings;
-import org.neo4j.connector.internal.security.SecurityPlan;
-import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.driver.internal.retry.RetryLogic;
+import org.neo4j.driver.internal.retry.RetrySettings;
+import org.neo4j.driver.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.security.SecurityPlanImpl;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.spi.ConnectionProvider;
@@ -64,8 +64,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.neo4j.driver.Config.defaultConfig;
 import static org.neo4j.connector.internal.metrics.MetricsProvider.METRICS_DISABLED_PROVIDER;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 
 class DriverFactoryTest
 {

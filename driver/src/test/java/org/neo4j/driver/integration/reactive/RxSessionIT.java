@@ -32,11 +32,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Result;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.DatabaseException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.SessionExpiredException;
-import org.neo4j.connector.exception.TransientException;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.DatabaseException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.SessionExpiredException;
+import org.neo4j.driver.exceptions.TransientException;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
 import org.neo4j.driver.internal.util.Neo4jFeature;
 import org.neo4j.driver.reactive.RxSession;

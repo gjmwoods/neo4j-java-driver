@@ -27,7 +27,7 @@ import java.util.concurrent.CompletionStage;
 
 import org.neo4j.connector.internal.FailableCursor;
 
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
 
 public class ResultCursorsHolder
 {

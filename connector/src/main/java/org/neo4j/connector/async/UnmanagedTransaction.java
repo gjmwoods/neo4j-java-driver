@@ -25,11 +25,12 @@ import java.util.function.BiFunction;
 import org.neo4j.driver.Bookmark;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.TransactionConfig;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.async.ResultCursor;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.cursor.AsyncResultCursor;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.messaging.BoltProtocol;
 import org.neo4j.connector.spi.Connection;
 
@@ -134,7 +135,7 @@ public class UnmanagedTransaction
         }
     }
 
-    public CompletionStage<ResultCursor> runAsync(Query query, boolean waitForRunResponse )
+    public CompletionStage<ResultCursor> runAsync( Query query, boolean waitForRunResponse )
     {
         ensureCanRunQueries();
         CompletionStage<AsyncResultCursor> cursorStage =

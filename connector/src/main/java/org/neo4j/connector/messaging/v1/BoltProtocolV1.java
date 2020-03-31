@@ -29,7 +29,7 @@ import java.util.concurrent.CompletionStage;
 import org.neo4j.driver.Values;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.async.connection.ChannelAttributes;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.handlers.BeginTxResponseHandler;
 import org.neo4j.connector.handlers.CommitTxResponseHandler;
 import org.neo4j.connector.handlers.InitResponseHandler;
@@ -56,7 +56,7 @@ import org.neo4j.connector.internal.cursor.ResultCursorFactory;
 
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ResponseHandler;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.internal.util.MetadataExtractor;
 
 import static java.util.Collections.emptyMap;

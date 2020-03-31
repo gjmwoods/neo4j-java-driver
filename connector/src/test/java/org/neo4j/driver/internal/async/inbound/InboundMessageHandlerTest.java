@@ -43,7 +43,7 @@ import org.neo4j.connector.messaging.v1.MessageFormatV1;
 import org.neo4j.connector.spi.ResponseHandler;
 import org.neo4j.driver.internal.util.io.MessageToByteBufWriter;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.Neo4jException;
+import org.neo4j.driver.exceptions.Neo4jException;
 
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.junit.MatcherAssert.assertThat;

@@ -20,8 +20,8 @@ package org.neo4j.driver.internal.util;
 
 import io.netty.util.concurrent.EventExecutorGroup;
 
-import org.neo4j.connector.internal.retry.ExponentialBackoffRetryLogic;
-import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.driver.internal.retry.ExponentialBackoffRetryLogic;
+import org.neo4j.driver.internal.retry.RetrySettings;
 
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 

@@ -42,10 +42,10 @@ import org.neo4j.connector.internal.value.StringValue;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.internal.types.Entity;
-import org.neo4j.connector.internal.types.Node;
-import org.neo4j.connector.internal.types.Path;
-import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.driver.types.Entity;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Relationship;
 import org.neo4j.connector.internal.InternalNode;
 
 import static java.util.Arrays.asList;

@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxTransaction;
 

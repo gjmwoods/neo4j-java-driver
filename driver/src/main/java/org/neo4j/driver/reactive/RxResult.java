@@ -26,7 +26,7 @@ import org.reactivestreams.Subscription;
 import java.util.List;
 
 import org.neo4j.driver.Record;
-import org.neo4j.connector.exception.ResultConsumedException;
+import org.neo4j.driver.exceptions.ResultConsumedException;
 import org.neo4j.driver.summary.ResultSummary;
 
 /**

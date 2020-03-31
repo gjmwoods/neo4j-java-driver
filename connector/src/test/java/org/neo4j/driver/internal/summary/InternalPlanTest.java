@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.summary.InternalPlan;
-import org.neo4j.driver.summary.summary.Plan;
+import org.neo4j.driver.summary.Plan;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.junit.MatcherAssert.assertThat;

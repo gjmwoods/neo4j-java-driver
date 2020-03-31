@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import org.neo4j.connector.internal.cursor.AsyncResultCursor;
 import org.neo4j.connector.internal.cursor.DisposableAsyncResultCursor;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

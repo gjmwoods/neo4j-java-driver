@@ -47,9 +47,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
-import static org.neo4j.connector.internal.util.Futures.getNow;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.getNow;
 
 class AsyncResultCursorOnlyFactoryTest
 {

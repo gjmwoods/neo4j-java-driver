@@ -31,7 +31,7 @@ import org.neo4j.driver.internal.DriverFactory;
 import org.neo4j.connector.messaging.BoltProtocol;
 import org.neo4j.connector.messaging.Message;
 import org.neo4j.connector.internal.metrics.MetricsProvider;
-import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.security.SecurityPlan;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.spi.ResponseHandler;

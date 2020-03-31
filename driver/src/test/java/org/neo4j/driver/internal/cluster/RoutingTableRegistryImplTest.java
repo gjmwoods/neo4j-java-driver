@@ -61,7 +61,7 @@ import static org.mockito.Mockito.when;
 import static org.neo4j.connector.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
 import static org.neo4j.connector.internal.DatabaseNameUtil.database;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
-import static org.neo4j.connector.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
+import static org.neo4j.driver.internal.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
 import static org.neo4j.connector.logging.DevNullLogger.DEV_NULL_LOGGER;
 import static org.neo4j.driver.util.TestUtil.await;
 

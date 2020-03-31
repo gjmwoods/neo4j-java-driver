@@ -38,7 +38,7 @@ import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
 import org.neo4j.connector.async.outbound.OutboundMessageHandler;
 import org.neo4j.connector.messaging.Message;
 import org.neo4j.connector.messaging.MessageFormat;
-import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.security.SecurityPlan;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Logging;
 

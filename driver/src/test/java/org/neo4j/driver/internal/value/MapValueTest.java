@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
-import org.neo4j.connector.internal.types.InternalTypeSystem;
+import org.neo4j.driver.types.InternalTypeSystem;
 import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.value.MapValue;
 

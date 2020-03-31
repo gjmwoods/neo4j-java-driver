@@ -29,9 +29,9 @@ import java.time.ZonedDateTime;
 
 import org.neo4j.driver.InternalPoint2D;
 import org.neo4j.driver.InternalPoint3D;
-import org.neo4j.connector.internal.types.IsoDuration;
-import org.neo4j.connector.internal.types.Point;
-import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.driver.types.IsoDuration;
+import org.neo4j.driver.types.Point;
+import org.neo4j.driver.types.TypeConstructor;
 import org.neo4j.connector.messaging.v1.ValuePackerV1;
 import org.neo4j.connector.packstream.PackOutput;
 import org.neo4j.connector.internal.value.InternalValue;

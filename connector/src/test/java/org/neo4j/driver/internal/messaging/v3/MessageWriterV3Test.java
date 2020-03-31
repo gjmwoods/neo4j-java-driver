@@ -31,7 +31,7 @@ import org.neo4j.connector.messaging.request.HelloMessage;
 import org.neo4j.connector.messaging.request.InitMessage;
 import org.neo4j.connector.messaging.request.RunMessage;
 import org.neo4j.connector.packstream.PackOutput;
-import org.neo4j.connector.internal.security.InternalAuthToken;
+import org.neo4j.driver.internal.security.InternalAuthToken;
 import org.neo4j.driver.internal.messaging.AbstractMessageWriterTestBase;
 
 import static java.time.Duration.ofSeconds;

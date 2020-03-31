@@ -26,7 +26,7 @@ import org.neo4j.driver.Logger;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.async.ConnectionContext;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.spi.ConnectionPool;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;

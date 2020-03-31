@@ -18,9 +18,9 @@
  */
 package org.neo4j.connector.internal.value;
 
-import org.neo4j.connector.internal.types.InternalTypeSystem;
-import org.neo4j.connector.internal.types.Path;
-import org.neo4j.connector.internal.types.Type;
+import org.neo4j.driver.types.InternalTypeSystem;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Type;
 
 public class PathValue extends ObjectValueAdapter<Path>
 {

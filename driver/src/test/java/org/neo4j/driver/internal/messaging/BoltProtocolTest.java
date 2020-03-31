@@ -25,7 +25,7 @@ import org.neo4j.connector.messaging.BoltProtocol;
 import org.neo4j.connector.messaging.v1.BoltProtocolV1;
 import org.neo4j.connector.messaging.v2.BoltProtocolV2;
 import org.neo4j.connector.messaging.v3.BoltProtocolV3;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;

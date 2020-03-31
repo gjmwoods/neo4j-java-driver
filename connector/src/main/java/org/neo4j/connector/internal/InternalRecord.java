@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.neo4j.connector.internal.types.InternalMapAccessorWithDefaultValue;
+import org.neo4j.driver.types.InternalMapAccessorWithDefaultValue;
 import org.neo4j.connector.internal.util.Extract;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;

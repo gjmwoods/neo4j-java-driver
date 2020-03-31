@@ -39,7 +39,7 @@ import org.neo4j.driver.Logging;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.async.UnmanagedTransaction;
@@ -59,7 +59,7 @@ import org.neo4j.connector.messaging.request.PullAllMessage;
 import org.neo4j.connector.messaging.request.RunMessage;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ResponseHandler;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.driver.util.TestUtil;
 
 import static java.util.Collections.emptyMap;
@@ -84,7 +84,7 @@ import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
 import static org.neo4j.connector.messaging.v1.BoltProtocolV1.SingleBookmarkHelper.asBeginTransactionParameters;
-import static org.neo4j.connector.internal.util.Futures.blockingGet;
+import static org.neo4j.driver.internal.util.Futures.blockingGet;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
 

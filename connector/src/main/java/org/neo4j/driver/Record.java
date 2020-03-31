@@ -22,9 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.neo4j.connector.internal.value.NullValue;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.NoSuchRecordException;
-import org.neo4j.connector.internal.types.MapAccessorWithDefaultValue;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.NoSuchRecordException;
+import org.neo4j.driver.types.MapAccessorWithDefaultValue;
 import java.util.function.Function;
 import org.neo4j.connector.internal.util.Immutable;
 import org.neo4j.connector.internal.util.Pair;

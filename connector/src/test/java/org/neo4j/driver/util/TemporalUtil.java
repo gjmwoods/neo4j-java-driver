@@ -34,7 +34,7 @@ import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.neo4j.driver.InternalIsoDuration;
-import org.neo4j.connector.internal.types.IsoDuration;
+import org.neo4j.driver.types.IsoDuration;
 
 import static java.time.temporal.ChronoField.DAY_OF_MONTH;
 import static java.time.temporal.ChronoField.HOUR_OF_DAY;

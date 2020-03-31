@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal.cursor;
 
-import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.driver.async.ResultCursor;
 import org.neo4j.connector.internal.FailableCursor;
 
 public interface AsyncResultCursor extends ResultCursor, FailableCursor

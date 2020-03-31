@@ -29,15 +29,15 @@ import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.async.ResultCursor;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.FatalDiscoveryException;
+import org.neo4j.driver.async.ResultCursor;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.FatalDiscoveryException;
 
 import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.async.connection.DirectConnection;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.DatabaseNameUtil;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.internal.util.ServerVersion;
 

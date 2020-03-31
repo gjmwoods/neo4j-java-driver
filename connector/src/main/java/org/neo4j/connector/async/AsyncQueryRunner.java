@@ -28,6 +28,7 @@ import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
+import org.neo4j.driver.async.ResultCursor;
 
 /**
  * Asynchronous interface for components that can execute Neo4j queries.

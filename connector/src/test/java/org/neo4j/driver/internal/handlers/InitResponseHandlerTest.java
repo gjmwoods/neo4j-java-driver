@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 import org.neo4j.driver.Value;
 import org.neo4j.connector.handlers.InitResponseHandler;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.exception.UntrustedServerException;
+import org.neo4j.driver.exceptions.UntrustedServerException;
 import org.neo4j.connector.async.inbound.ChannelErrorHandler;
 import org.neo4j.connector.async.inbound.InboundMessageDispatcher;
 import org.neo4j.connector.async.outbound.OutboundMessageHandler;

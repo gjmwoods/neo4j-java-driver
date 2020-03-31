@@ -28,8 +28,8 @@ import org.neo4j.driver.Record;
 import org.neo4j.driver.summary.ResultSummary;
 
 import static org.neo4j.connector.internal.util.ErrorUtil.newResultConsumedError;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 
 public class DisposableAsyncResultCursor implements AsyncResultCursor
 {

@@ -24,12 +24,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.driver.internal.InternalSession;
 import org.neo4j.connector.async.NetworkSession;
-import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.driver.internal.retry.RetryLogic;
 import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.driver.internal.util.ValueFactory;
 

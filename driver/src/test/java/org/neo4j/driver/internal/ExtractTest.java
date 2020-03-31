@@ -36,7 +36,7 @@ import org.neo4j.connector.internal.InternalRelationship;
 import org.neo4j.connector.internal.util.Extract;
 import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.util.Pair;
 import org.neo4j.connector.internal.InternalNode;
 

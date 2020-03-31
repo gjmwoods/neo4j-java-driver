@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 import java.time.OffsetTime;
 import java.time.ZoneOffset;
 
-import org.neo4j.connector.internal.types.InternalTypeSystem;
-import org.neo4j.connector.exception.value.Uncoercible;
+import org.neo4j.driver.types.InternalTypeSystem;
+import org.neo4j.driver.exceptions.value.Uncoercible;
 import org.neo4j.connector.internal.value.TimeValue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

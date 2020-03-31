@@ -20,7 +20,7 @@ package org.neo4j.driver.internal.value;
 
 import org.junit.jupiter.api.Test;
 
-import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.driver.types.TypeConstructor;
 import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.value.InternalValue;
 

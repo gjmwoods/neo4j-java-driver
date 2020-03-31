@@ -30,7 +30,7 @@ import org.neo4j.driver.Driver;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.connector.internal.types.Node;
+import org.neo4j.driver.types.Node;
 
 public class RxReadQueryWithRetries<C extends AbstractContext> extends AbstractRxQuery<C>
 {

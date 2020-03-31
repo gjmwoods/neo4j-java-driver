@@ -24,7 +24,7 @@ import java.util.Map;
 
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
-import org.neo4j.driver.summary.summary.Plan;
+import org.neo4j.driver.summary.Plan;
 import java.util.function.Function;
 
 import static java.lang.String.format;

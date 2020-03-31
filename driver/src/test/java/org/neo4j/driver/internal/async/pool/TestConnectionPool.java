@@ -45,7 +45,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.neo4j.connector.async.connection.ChannelAttributes.setPoolId;
 import static org.neo4j.connector.async.connection.ChannelAttributes.setServerAddress;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
 
 public class TestConnectionPool extends ConnectionPoolImpl
 {

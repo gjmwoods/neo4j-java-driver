@@ -32,15 +32,16 @@ import java.util.stream.Stream;
 
 import org.neo4j.driver.Bookmark;
 import org.neo4j.driver.Logger;
-import org.neo4j.connector.exception.DiscoveryException;
-import org.neo4j.connector.exception.FatalDiscoveryException;
-import org.neo4j.connector.exception.SecurityException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.DiscoveryException;
+import org.neo4j.driver.exceptions.FatalDiscoveryException;
+import org.neo4j.driver.exceptions.SecurityException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;
-import org.neo4j.connector.internal.util.Futures;
-import org.neo4j.connector.net.ServerAddressResolver;
+import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.driver.net.ServerAddressResolver;
+import org.neo4j.driver.internal.cluster.RoutingSettings;
 
 import static java.lang.String.format;
 import static java.util.Collections.emptySet;

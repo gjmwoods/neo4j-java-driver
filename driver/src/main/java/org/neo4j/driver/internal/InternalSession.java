@@ -29,11 +29,11 @@ import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.TransactionWork;
-import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.driver.async.ResultCursor;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.spi.Connection;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 
 import static java.util.Collections.emptyMap;
 

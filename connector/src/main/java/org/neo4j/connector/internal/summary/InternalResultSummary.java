@@ -24,14 +24,14 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import org.neo4j.driver.Query;
-import org.neo4j.driver.summary.summary.DatabaseInfo;
-import org.neo4j.driver.summary.summary.Notification;
-import org.neo4j.driver.summary.summary.Plan;
-import org.neo4j.driver.summary.summary.ProfiledPlan;
+import org.neo4j.driver.summary.DatabaseInfo;
+import org.neo4j.driver.summary.Notification;
+import org.neo4j.driver.summary.Plan;
+import org.neo4j.driver.summary.ProfiledPlan;
 import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.summary.summary.ServerInfo;
-import org.neo4j.driver.summary.summary.QueryType;
-import org.neo4j.driver.summary.summary.SummaryCounters;
+import org.neo4j.driver.summary.ServerInfo;
+import org.neo4j.driver.summary.QueryType;
+import org.neo4j.driver.summary.SummaryCounters;
 
 public class InternalResultSummary implements ResultSummary
 {

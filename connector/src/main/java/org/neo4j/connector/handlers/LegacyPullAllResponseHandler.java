@@ -31,7 +31,7 @@ import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.InternalRecord;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.connector.internal.util.MetadataExtractor;
 import org.neo4j.connector.messaging.request.PullAllMessage;
@@ -41,8 +41,8 @@ import org.neo4j.driver.summary.ResultSummary;
 import static java.util.Collections.emptyMap;
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.CompletableFuture.completedFuture;
-import static org.neo4j.connector.internal.util.Futures.asCompletionException;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.asCompletionException;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
 
 /**
  * This is the Pull All response handler that handles pull all messages in Bolt v3 and previous protocol versions.

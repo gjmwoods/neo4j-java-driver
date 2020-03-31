@@ -40,7 +40,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.neo4j.connector.async.connection.ChannelAttributes.lastUsedTimestamp;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
 
 class ChannelReleasingResetResponseHandlerTest
 {

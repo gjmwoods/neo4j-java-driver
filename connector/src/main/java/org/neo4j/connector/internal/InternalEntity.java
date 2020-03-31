@@ -25,7 +25,7 @@ import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.connector.internal.value.MapValue;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.internal.types.Entity;
+import org.neo4j.driver.types.Entity;
 import java.util.function.Function;
 
 import static org.neo4j.driver.Values.ofObject;

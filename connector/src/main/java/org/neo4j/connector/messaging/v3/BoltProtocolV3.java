@@ -53,8 +53,8 @@ import org.neo4j.connector.messaging.request.RunWithMetadataMessage;
 import org.neo4j.connector.spi.Connection;
 
 import static org.neo4j.connector.handlers.PullHandlers.newBoltV3PullAllHandler;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 import static org.neo4j.connector.messaging.request.CommitMessage.COMMIT;
 import static org.neo4j.connector.messaging.request.MultiDatabaseUtil.assertEmptyDatabaseName;
 import static org.neo4j.connector.messaging.request.RollbackMessage.ROLLBACK;

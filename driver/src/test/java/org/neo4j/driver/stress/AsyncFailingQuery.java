@@ -25,8 +25,8 @@ import java.util.concurrent.CompletionStage;
 import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.async.AsyncSession;
-import org.neo4j.connector.async.ResultCursor;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.async.ResultCursor;
+import org.neo4j.driver.internal.util.Futures;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;

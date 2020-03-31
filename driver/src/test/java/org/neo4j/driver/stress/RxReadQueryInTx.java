@@ -31,7 +31,7 @@ import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxSession;
 import org.neo4j.driver.reactive.RxTransaction;
 import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.connector.internal.types.Node;
+import org.neo4j.driver.types.Node;
 
 public class RxReadQueryInTx<C extends AbstractContext> extends AbstractRxQuery<C>
 {

@@ -40,13 +40,13 @@ import org.neo4j.connector.messaging.response.SuccessMessage;
 import org.neo4j.connector.messaging.v2.MessageFormatV2;
 import org.neo4j.connector.messaging.v2.ValuePackerV2;
 import org.neo4j.connector.packstream.PackOutput;
-import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.driver.types.TypeConstructor;
 import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.connector.internal.value.InternalValue;
-import org.neo4j.connector.internal.types.Entity;
-import org.neo4j.connector.internal.types.Node;
-import org.neo4j.connector.internal.types.Path;
-import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.driver.types.Entity;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Relationship;
 
 /**
  * This class provides the missing server side packing methods to serialize Node, Relationship and Path.

@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.neo4j.connector.internal.value.NodeValue;
-import org.neo4j.connector.internal.types.Node;
+import org.neo4j.driver.types.Node;
 import org.neo4j.driver.Value;
 
 /**

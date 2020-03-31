@@ -20,12 +20,12 @@ package org.neo4j.connector.internal.cursor;
 
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.handlers.PullAllResponseHandler;
 import org.neo4j.connector.handlers.RunResponseHandler;
 import org.neo4j.connector.messaging.Message;
 import org.neo4j.connector.spi.Connection;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.concurrent.CompletableFuture.completedFuture;

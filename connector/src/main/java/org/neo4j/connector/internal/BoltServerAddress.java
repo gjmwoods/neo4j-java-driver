@@ -18,7 +18,7 @@
  */
 package org.neo4j.connector.internal;
 
-import org.neo4j.connector.net.ServerAddress;
+import org.neo4j.driver.net.ServerAddress;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;

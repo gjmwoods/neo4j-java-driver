@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 
 import org.neo4j.driver.Record;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.summary.ResultSummary;
 

@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import org.neo4j.connector.internal.types.InternalTypeSystem;
-import org.neo4j.connector.exception.value.Uncoercible;
+import org.neo4j.driver.types.InternalTypeSystem;
+import org.neo4j.driver.exceptions.value.Uncoercible;
 import org.neo4j.connector.internal.value.LocalDateTimeValue;
 
 import static java.time.Month.AUGUST;

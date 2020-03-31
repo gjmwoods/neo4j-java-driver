@@ -35,7 +35,7 @@ import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
 import org.neo4j.connector.internal.cursor.RxResultCursorImpl;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.internal.value.IntegerValue;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxTransaction;

@@ -30,7 +30,7 @@ import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.DatabaseNameUtil;
 import org.neo4j.connector.internal.DefaultBookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
-import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.driver.internal.retry.RetryLogic;
 import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.SessionConfig;

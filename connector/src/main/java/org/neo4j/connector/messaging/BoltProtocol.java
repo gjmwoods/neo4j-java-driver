@@ -30,7 +30,7 @@ import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.Value;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.connector.async.connection.ChannelAttributes;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.InternalBookmark;
 import org.neo4j.connector.internal.cursor.ResultCursorFactory;

@@ -30,7 +30,7 @@ import org.neo4j.connector.internal.ConnectionSettings;
 import org.neo4j.connector.async.connection.BootstrapFactory;
 import org.neo4j.connector.async.connection.ChannelConnector;
 import org.neo4j.connector.internal.metrics.MetricsProvider;
-import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.security.SecurityPlan;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.DriverFactoryWithClock;

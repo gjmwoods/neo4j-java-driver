@@ -29,19 +29,24 @@ import java.util.Map;
 
 import java.util.function.Function;
 
-import org.neo4j.connector.internal.types.MapAccessor;
-import org.neo4j.connector.internal.types.MapAccessorWithDefaultValue;
-import org.neo4j.connector.internal.types.Type;
-import org.neo4j.connector.internal.types.TypeSystem;
+import org.neo4j.driver.types.Entity;
+import org.neo4j.driver.types.IsoDuration;
+import org.neo4j.driver.types.MapAccessor;
+import org.neo4j.driver.types.MapAccessorWithDefaultValue;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Point;
+import org.neo4j.driver.types.Relationship;
+import org.neo4j.driver.types.Type;
+import org.neo4j.driver.types.TypeSystem;
 import org.neo4j.connector.internal.util.Experimental;
 import org.neo4j.connector.internal.util.Immutable;
 
-import org.neo4j.connector.internal.types.*;
 import org.neo4j.connector.internal.value.*;
 
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.value.Uncoercible;
-import org.neo4j.connector.exception.value.LossyCoercion;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.value.Uncoercible;
+import org.neo4j.driver.exceptions.value.LossyCoercion;
 
 
 /**

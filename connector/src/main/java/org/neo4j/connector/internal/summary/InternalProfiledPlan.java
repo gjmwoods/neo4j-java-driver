@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import org.neo4j.driver.Value;
-import org.neo4j.driver.summary.summary.ProfiledPlan;
+import org.neo4j.driver.summary.ProfiledPlan;
 
 public class InternalProfiledPlan extends InternalPlan<ProfiledPlan> implements ProfiledPlan
 {

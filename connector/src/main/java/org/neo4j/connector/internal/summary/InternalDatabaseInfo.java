@@ -20,7 +20,7 @@ package org.neo4j.connector.internal.summary;
 
 import java.util.Objects;
 
-import org.neo4j.driver.summary.summary.DatabaseInfo;
+import org.neo4j.driver.summary.DatabaseInfo;
 
 public class InternalDatabaseInfo implements DatabaseInfo
 {

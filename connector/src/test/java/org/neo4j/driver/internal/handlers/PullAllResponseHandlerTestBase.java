@@ -31,13 +31,13 @@ import org.neo4j.connector.handlers.PullAllResponseHandler;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.SessionExpiredException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.summary.summary.QueryType;
+import org.neo4j.driver.summary.QueryType;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;

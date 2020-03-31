@@ -28,8 +28,8 @@ import java.util.List;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
-import org.neo4j.connector.async.ResultCursor;
-import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.async.ResultCursor;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

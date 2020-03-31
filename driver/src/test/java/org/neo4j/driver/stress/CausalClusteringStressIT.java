@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.driver.exceptions.SessionExpiredException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.summary.ResultSummary;
 import org.neo4j.driver.util.cc.ClusterMemberRole;

@@ -35,7 +35,7 @@ import org.neo4j.connector.cluster.RoutingTable;
 import org.neo4j.connector.cluster.loadbalancing.LoadBalancer;
 import org.neo4j.connector.spi.ConnectionProvider;
 import org.neo4j.driver.Driver;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.driver.summary.ResultSummary;
 
 public final class Matchers

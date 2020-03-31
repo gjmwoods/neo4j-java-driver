@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import org.neo4j.connector.net.ServerAddress;
+import org.neo4j.driver.net.ServerAddress;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

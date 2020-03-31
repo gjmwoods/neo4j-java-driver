@@ -22,12 +22,12 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import org.neo4j.connector.exception.AuthenticationException;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.DatabaseException;
-import org.neo4j.connector.exception.Neo4jException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.TransientException;
+import org.neo4j.driver.exceptions.AuthenticationException;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.DatabaseException;
+import org.neo4j.driver.exceptions.Neo4jException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.TransientException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;

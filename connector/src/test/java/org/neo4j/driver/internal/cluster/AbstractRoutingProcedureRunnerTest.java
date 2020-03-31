@@ -27,7 +27,7 @@ import org.neo4j.connector.cluster.RoutingContext;
 import org.neo4j.connector.cluster.RoutingProcedureResponse;
 import org.neo4j.connector.cluster.RoutingProcedureRunner;
 import org.neo4j.driver.Record;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.spi.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,8 +39,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.internal.InternalBookmark.empty;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 import static org.neo4j.driver.util.TestUtil.await;
 
 abstract class AbstractRoutingProcedureRunnerTest

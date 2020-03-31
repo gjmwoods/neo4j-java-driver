@@ -28,7 +28,7 @@ import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Result;
-import org.neo4j.connector.net.ServerAddress;
+import org.neo4j.driver.net.ServerAddress;
 
 import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.driver.SessionConfig.builder;

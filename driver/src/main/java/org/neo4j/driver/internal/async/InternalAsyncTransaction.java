@@ -24,7 +24,7 @@ import org.neo4j.connector.async.AsyncAbstractQueryRunner;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.async.AsyncTransaction;
-import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.driver.async.ResultCursor;
 
 public class InternalAsyncTransaction extends AsyncAbstractQueryRunner implements AsyncTransaction
 {

@@ -34,7 +34,7 @@ import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.metrics.ListenerEvent;
 
 import static java.util.Objects.requireNonNull;
-import static org.neo4j.connector.internal.util.Futures.asCompletionStage;
+import static org.neo4j.driver.internal.util.Futures.asCompletionStage;
 
 public class NettyChannelPool implements ExtendedChannelPool
 {

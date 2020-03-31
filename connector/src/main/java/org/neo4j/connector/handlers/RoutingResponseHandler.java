@@ -23,14 +23,14 @@ import java.util.Objects;
 
 import org.neo4j.connector.cluster.RoutingErrorHandler;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.spi.ResponseHandler;
 import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.SessionExpiredException;
-import org.neo4j.connector.exception.TransientException;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.SessionExpiredException;
+import org.neo4j.driver.exceptions.TransientException;
 
 import static java.lang.String.format;
 

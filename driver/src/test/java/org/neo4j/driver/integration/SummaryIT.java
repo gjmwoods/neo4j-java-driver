@@ -32,11 +32,11 @@ import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
 import org.neo4j.driver.internal.util.Neo4jFeature;
-import org.neo4j.driver.summary.summary.Notification;
-import org.neo4j.driver.summary.summary.Plan;
-import org.neo4j.driver.summary.summary.ProfiledPlan;
+import org.neo4j.driver.summary.Notification;
+import org.neo4j.driver.summary.Plan;
+import org.neo4j.driver.summary.ProfiledPlan;
 import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.summary.summary.QueryType;
+import org.neo4j.driver.summary.QueryType;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

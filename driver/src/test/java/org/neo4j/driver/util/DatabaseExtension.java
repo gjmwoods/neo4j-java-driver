@@ -31,7 +31,7 @@ import org.neo4j.driver.AuthToken;
 import org.neo4j.driver.Driver;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.util.ServerVersion;
-import org.neo4j.connector.internal.types.TypeSystem;
+import org.neo4j.driver.types.TypeSystem;
 
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.neo4j.driver.util.Neo4jRunner.DEFAULT_AUTH_TOKEN;

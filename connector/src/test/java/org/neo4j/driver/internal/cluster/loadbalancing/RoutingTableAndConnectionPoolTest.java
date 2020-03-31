@@ -42,8 +42,8 @@ import org.neo4j.driver.Bookmark;
 import org.neo4j.driver.Logging;
 import org.neo4j.connector.cluster.loadbalancing.LeastConnectedLoadBalancingStrategy;
 import org.neo4j.connector.cluster.loadbalancing.LoadBalancer;
-import org.neo4j.connector.exception.FatalDiscoveryException;
-import org.neo4j.connector.exception.ProtocolException;
+import org.neo4j.driver.exceptions.FatalDiscoveryException;
+import org.neo4j.driver.exceptions.ProtocolException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.async.connection.BootstrapFactory;
 import org.neo4j.connector.async.pool.NettyChannelTracker;
@@ -58,7 +58,7 @@ import org.neo4j.connector.internal.metrics.InternalAbstractMetrics;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.internal.util.Clock;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.driver.internal.cluster.RediscoveryUtil;
 import org.neo4j.driver.util.TestUtil;
 
@@ -74,7 +74,7 @@ import static org.mockito.Mockito.when;
 import static org.neo4j.driver.Logging.none;
 import static org.neo4j.connector.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
 import static org.neo4j.connector.internal.DatabaseNameUtil.database;
-import static org.neo4j.connector.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
+import static org.neo4j.driver.internal.cluster.RoutingSettings.STALE_ROUTING_TABLE_PURGE_DELAY_MS;
 import static org.neo4j.connector.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
 import static org.neo4j.driver.util.TestUtil.await;
 

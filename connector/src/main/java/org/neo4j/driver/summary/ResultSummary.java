@@ -23,13 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.neo4j.driver.Query;
 import org.neo4j.connector.internal.util.Immutable;
-import org.neo4j.driver.summary.summary.DatabaseInfo;
-import org.neo4j.driver.summary.summary.Notification;
-import org.neo4j.driver.summary.summary.Plan;
-import org.neo4j.driver.summary.summary.ProfiledPlan;
-import org.neo4j.driver.summary.summary.QueryType;
-import org.neo4j.driver.summary.summary.ServerInfo;
-import org.neo4j.driver.summary.summary.SummaryCounters;
 
 /**
  * The result summary of running a query. The result summary interface can be used to investigate

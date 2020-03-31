@@ -34,27 +34,27 @@ import org.neo4j.connector.cluster.ClusterCompositionProvider;
 import org.neo4j.connector.cluster.Rediscovery;
 import org.neo4j.connector.cluster.RediscoveryImpl;
 import org.neo4j.connector.cluster.RoutingProcedureClusterCompositionProvider;
-import org.neo4j.connector.cluster.RoutingSettings;
+import org.neo4j.driver.internal.cluster.RoutingSettings;
 import org.neo4j.connector.cluster.RoutingTable;
 import org.neo4j.connector.cluster.RoutingTableRegistry;
 import org.neo4j.connector.cluster.RoutingTableRegistryImpl;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.SecurityException;
-import org.neo4j.connector.exception.SessionExpiredException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.SecurityException;
+import org.neo4j.driver.exceptions.SessionExpiredException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.util.Clock;
-import org.neo4j.connector.net.ServerAddressResolver;
+import org.neo4j.driver.net.ServerAddressResolver;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionPool;
 import org.neo4j.connector.spi.ConnectionProvider;
 
 import static java.lang.String.format;
 import static org.neo4j.connector.async.ImmutableConnectionContext.simple;
-import static org.neo4j.connector.internal.util.Futures.asCompletionException;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.completionExceptionCause;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
-import static org.neo4j.connector.internal.util.Futures.onErrorContinue;
+import static org.neo4j.driver.internal.util.Futures.asCompletionException;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.completionExceptionCause;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.onErrorContinue;
 import static org.neo4j.connector.messaging.request.MultiDatabaseUtil.supportsMultiDatabase;
 
 public class LoadBalancer implements ConnectionProvider

@@ -41,12 +41,9 @@ import java.util.stream.Stream;
 
 import org.neo4j.driver.Logger;
 import org.neo4j.driver.Logging;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.SessionExpiredException;
-import org.neo4j.connector.exception.TransientException;
-import org.neo4j.connector.internal.retry.ExponentialBackoffRetryLogic;
-import org.neo4j.connector.internal.retry.RetryLogic;
-import org.neo4j.connector.internal.retry.RetrySettings;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.SessionExpiredException;
+import org.neo4j.driver.exceptions.TransientException;
 import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.ImmediateSchedulingEventExecutor;
 
@@ -76,7 +73,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class ExponentialBackoffRetryLogicTest

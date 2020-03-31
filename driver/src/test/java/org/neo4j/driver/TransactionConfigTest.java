@@ -27,7 +27,7 @@ import java.util.Map;
 import org.neo4j.connector.internal.InternalNode;
 import org.neo4j.connector.internal.InternalPath;
 import org.neo4j.connector.internal.InternalRelationship;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonMap;

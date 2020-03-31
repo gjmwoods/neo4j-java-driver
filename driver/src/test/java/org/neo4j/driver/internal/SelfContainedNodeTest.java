@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.neo4j.connector.internal.util.Iterables;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.internal.types.Node;
+import org.neo4j.driver.types.Node;
 import org.neo4j.connector.internal.InternalNode;
 
 import static java.util.Collections.singletonList;

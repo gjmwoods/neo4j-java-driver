@@ -26,12 +26,13 @@ import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
+import org.neo4j.driver.async.ResultCursor;
 
 //todo not sure about this class. Do query runners form part of the connector API?
 public abstract class AsyncAbstractQueryRunner implements AsyncQueryRunner
 {
     @Override
-    public final CompletionStage<ResultCursor> runAsync(String query, Value parameters )
+    public final CompletionStage<ResultCursor> runAsync( String query, Value parameters )
     {
         return runAsync( new Query(query, parameters ) );
     }

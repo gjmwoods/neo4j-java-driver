@@ -28,7 +28,7 @@ import java.io.IOException;
 import org.neo4j.connector.async.connection.ChannelConnectedListener;
 import org.neo4j.connector.async.connection.ChannelPipelineBuilderImpl;
 import org.neo4j.connector.async.connection.HandshakeHandler;
-import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.driver.util.TestUtil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

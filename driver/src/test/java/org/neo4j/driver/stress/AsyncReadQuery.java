@@ -24,9 +24,9 @@ import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.async.AsyncSession;
-import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.driver.async.ResultCursor;
 import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.connector.internal.types.Node;
+import org.neo4j.driver.types.Node;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

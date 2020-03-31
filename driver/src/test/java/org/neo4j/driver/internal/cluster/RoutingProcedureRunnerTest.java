@@ -35,7 +35,7 @@ import org.neo4j.connector.cluster.RoutingProcedureRunner;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.FatalDiscoveryException;
+import org.neo4j.driver.exceptions.FatalDiscoveryException;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.spi.Connection;
 

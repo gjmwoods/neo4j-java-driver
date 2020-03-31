@@ -25,7 +25,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.net.ServerAddress;
+import org.neo4j.driver.net.ServerAddress;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.anyOf;

@@ -35,10 +35,10 @@ import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.async.AsyncSession;
 import org.neo4j.driver.async.AsyncTransaction;
 import org.neo4j.driver.async.AsyncTransactionWork;
-import org.neo4j.connector.async.ResultCursor;
+import org.neo4j.driver.async.ResultCursor;
 import org.neo4j.connector.async.connection.EventLoopGroupFactory;
-import org.neo4j.connector.internal.util.Futures;
-import org.neo4j.connector.internal.types.Node;
+import org.neo4j.driver.internal.util.Futures;
+import org.neo4j.driver.types.Node;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

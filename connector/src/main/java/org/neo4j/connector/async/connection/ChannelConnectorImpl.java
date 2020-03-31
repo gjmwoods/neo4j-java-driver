@@ -32,11 +32,11 @@ import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Logging;
 import org.neo4j.driver.Value;
 import org.neo4j.connector.async.inbound.ConnectTimeoutHandler;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.ConnectionSettings;
-import org.neo4j.connector.internal.security.InternalAuthToken;
-import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.security.InternalAuthToken;
+import org.neo4j.driver.internal.security.SecurityPlan;
 import org.neo4j.connector.internal.util.Clock;
 
 import static java.util.Objects.requireNonNull;

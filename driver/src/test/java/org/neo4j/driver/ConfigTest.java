@@ -25,8 +25,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import org.neo4j.connector.net.ServerAddressResolver;
-import org.neo4j.driver.Config;
+import org.neo4j.driver.net.ServerAddressResolver;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

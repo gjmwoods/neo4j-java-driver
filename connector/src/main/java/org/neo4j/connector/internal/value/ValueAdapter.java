@@ -28,19 +28,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.value.NotMultiValued;
-import org.neo4j.connector.exception.value.Uncoercible;
-import org.neo4j.connector.exception.value.Unsizable;
-import org.neo4j.connector.internal.types.Entity;
-import org.neo4j.connector.internal.types.InternalMapAccessorWithDefaultValue;
-import org.neo4j.connector.internal.types.IsoDuration;
-import org.neo4j.connector.internal.types.Node;
-import org.neo4j.connector.internal.types.Path;
-import org.neo4j.connector.internal.types.Point;
-import org.neo4j.connector.internal.types.Relationship;
-import org.neo4j.connector.internal.types.Type;
-import org.neo4j.connector.internal.types.TypeConstructor;
-import org.neo4j.connector.internal.types.TypeRepresentation;
+import org.neo4j.driver.exceptions.value.NotMultiValued;
+import org.neo4j.driver.exceptions.value.Uncoercible;
+import org.neo4j.driver.exceptions.value.Unsizable;
+import org.neo4j.driver.types.Entity;
+import org.neo4j.driver.types.InternalMapAccessorWithDefaultValue;
+import org.neo4j.driver.types.IsoDuration;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Point;
+import org.neo4j.driver.types.Relationship;
+import org.neo4j.driver.types.Type;
+import org.neo4j.driver.types.TypeConstructor;
+import org.neo4j.driver.types.TypeRepresentation;
 
 import java.util.function.Function;
 

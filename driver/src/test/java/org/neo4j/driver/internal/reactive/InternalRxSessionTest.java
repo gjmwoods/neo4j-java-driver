@@ -43,7 +43,7 @@ import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
 import org.neo4j.connector.internal.cursor.RxResultCursorImpl;
 import org.neo4j.driver.internal.util.FixedRetryLogic;
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.connector.internal.value.IntegerValue;
 import org.neo4j.driver.reactive.RxResult;
 import org.neo4j.driver.reactive.RxSession;
@@ -63,7 +63,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.neo4j.driver.TransactionConfig.empty;
 import static org.neo4j.driver.Values.parameters;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
 
 class InternalRxSessionTest
 {

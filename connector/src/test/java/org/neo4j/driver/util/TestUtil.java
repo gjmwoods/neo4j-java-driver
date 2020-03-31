@@ -48,11 +48,11 @@ import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Bookmark;
 import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.async.connection.EventLoopGroupFactory;
-import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.connector.handlers.BeginTxResponseHandler;
 import org.neo4j.connector.handlers.NoOpResponseHandler;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.driver.internal.retry.RetryLogic;
 import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.connector.messaging.BoltProtocol;
 import org.neo4j.connector.messaging.Message;
@@ -92,7 +92,7 @@ import static org.neo4j.connector.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_S
 import static org.neo4j.connector.internal.DatabaseNameUtil.database;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.internal.InternalBookmark.empty;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
 import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 public final class TestUtil

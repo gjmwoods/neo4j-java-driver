@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.neo4j.connector.internal.security.InternalAuthToken;
+import org.neo4j.driver.internal.security.InternalAuthToken;
 import org.neo4j.connector.internal.value.ListValue;
 import org.neo4j.connector.internal.value.MapValue;
 import org.neo4j.connector.internal.value.StringValue;

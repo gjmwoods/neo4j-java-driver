@@ -24,7 +24,7 @@ import java.util.Objects;
 
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.internal.security.InternalAuthToken;
+import org.neo4j.driver.internal.security.InternalAuthToken;
 
 public class HelloMessage extends MessageWithMetadata
 {

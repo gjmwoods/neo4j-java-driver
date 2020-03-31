@@ -20,8 +20,8 @@ package org.neo4j.connector.internal.value;
 
 import java.time.LocalDateTime;
 
-import org.neo4j.connector.internal.types.InternalTypeSystem;
-import org.neo4j.connector.internal.types.Type;
+import org.neo4j.driver.types.InternalTypeSystem;
+import org.neo4j.driver.types.Type;
 
 public class LocalDateTimeValue extends ObjectValueAdapter<LocalDateTime>
 {

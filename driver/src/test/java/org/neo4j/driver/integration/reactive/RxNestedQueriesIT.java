@@ -26,7 +26,7 @@ import reactor.test.StepVerifier;
 
 import java.util.Collections;
 
-import org.neo4j.connector.exception.TransactionNestingException;
+import org.neo4j.driver.exceptions.TransactionNestingException;
 import org.neo4j.driver.internal.util.EnabledOnNeo4jWith;
 import org.neo4j.driver.internal.util.Neo4jFeature;
 import org.neo4j.driver.reactive.RxSession;

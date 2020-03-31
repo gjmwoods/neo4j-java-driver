@@ -29,9 +29,9 @@ import javax.net.ssl.SSLHandshakeException;
 
 import org.neo4j.driver.Logger;
 import org.neo4j.driver.Logging;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.SecurityException;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.SecurityException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.util.ErrorUtil;
 import org.neo4j.connector.logging.ChannelActivityLogger;
 import org.neo4j.connector.messaging.BoltProtocol;

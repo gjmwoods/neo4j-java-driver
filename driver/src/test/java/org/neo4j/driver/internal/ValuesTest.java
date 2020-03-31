@@ -52,12 +52,12 @@ import org.neo4j.connector.internal.value.RelationshipValue;
 import org.neo4j.connector.internal.value.TimeValue;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.internal.types.IsoDuration;
-import org.neo4j.connector.internal.types.Node;
-import org.neo4j.connector.internal.types.Path;
-import org.neo4j.connector.internal.types.Point;
-import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.types.IsoDuration;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Point;
+import org.neo4j.driver.types.Relationship;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;

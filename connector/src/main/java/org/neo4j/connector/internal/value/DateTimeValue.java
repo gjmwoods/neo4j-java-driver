@@ -21,8 +21,8 @@ package org.neo4j.connector.internal.value;
 import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 
-import org.neo4j.connector.internal.types.InternalTypeSystem;
-import org.neo4j.connector.internal.types.Type;
+import org.neo4j.driver.types.InternalTypeSystem;
+import org.neo4j.driver.types.Type;
 
 public class DateTimeValue extends ObjectValueAdapter<ZonedDateTime>
 {

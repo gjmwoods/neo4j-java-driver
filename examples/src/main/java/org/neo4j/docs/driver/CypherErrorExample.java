@@ -24,7 +24,7 @@ import org.neo4j.driver.Session;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.TransactionWork;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 
 import static org.neo4j.driver.Values.parameters;
 // end::cypher-error-import[]

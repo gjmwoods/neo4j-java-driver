@@ -32,8 +32,8 @@ import javax.net.ssl.SSLParameters;
 
 import org.neo4j.connector.async.connection.NettyChannelInitializer;
 import org.neo4j.connector.internal.BoltServerAddress;
-import org.neo4j.connector.internal.security.SecurityPlanImpl;
-import org.neo4j.connector.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.security.SecurityPlanImpl;
+import org.neo4j.driver.internal.security.SecurityPlan;
 import org.neo4j.connector.internal.util.Clock;
 import org.neo4j.driver.internal.util.FakeClock;
 

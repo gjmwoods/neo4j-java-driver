@@ -29,9 +29,9 @@ import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.internal.DriverFactory;
-import org.neo4j.connector.cluster.RoutingSettings;
-import org.neo4j.connector.internal.retry.RetrySettings;
-import org.neo4j.connector.internal.security.SecurityPlanImpl;
+import org.neo4j.driver.internal.cluster.RoutingSettings;
+import org.neo4j.driver.internal.retry.RetrySettings;
+import org.neo4j.driver.internal.security.SecurityPlanImpl;
 import org.neo4j.driver.util.DatabaseExtension;
 import org.neo4j.driver.util.ParallelizableIT;
 

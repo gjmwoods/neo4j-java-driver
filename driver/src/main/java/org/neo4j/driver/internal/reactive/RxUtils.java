@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
-import org.neo4j.connector.internal.util.Futures;
+import org.neo4j.driver.internal.util.Futures;
 
 public class RxUtils
 {

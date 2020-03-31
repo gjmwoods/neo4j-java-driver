@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.neo4j.connector.internal.types.InternalTypeSystem;
-import org.neo4j.connector.internal.types.Type;
+import org.neo4j.driver.types.InternalTypeSystem;
+import org.neo4j.driver.types.Type;
 import org.neo4j.connector.internal.util.Extract;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;

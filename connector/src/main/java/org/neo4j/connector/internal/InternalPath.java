@@ -25,10 +25,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.neo4j.connector.internal.value.PathValue;
-import org.neo4j.connector.internal.types.Entity;
-import org.neo4j.connector.internal.types.Node;
-import org.neo4j.connector.internal.types.Path;
-import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.driver.types.Entity;
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+import org.neo4j.driver.types.Relationship;
 import org.neo4j.driver.Value;
 
 /**

@@ -34,8 +34,8 @@ import org.neo4j.connector.cluster.RoutingProcedureRunner;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Value;
-import org.neo4j.connector.exception.ProtocolException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.ProtocolException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.DatabaseName;
 import org.neo4j.connector.internal.InternalBookmark;
@@ -61,8 +61,8 @@ import static org.mockito.Mockito.when;
 import static org.neo4j.driver.Values.value;
 import static org.neo4j.connector.internal.DatabaseNameUtil.defaultDatabase;
 import static org.neo4j.connector.internal.InternalBookmark.empty;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class RoutingProcedureClusterCompositionProviderTest

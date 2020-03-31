@@ -31,7 +31,7 @@ import java.time.ZonedDateTime;
 import org.neo4j.driver.Values;
 import org.neo4j.connector.messaging.v1.ValueUnpackerV1;
 import org.neo4j.connector.packstream.PackInput;
-import org.neo4j.connector.internal.types.TypeConstructor;
+import org.neo4j.driver.types.TypeConstructor;
 import org.neo4j.driver.Value;
 
 import static java.time.ZoneOffset.UTC;

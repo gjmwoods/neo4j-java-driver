@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.neo4j.connector.cluster.AddressSet;
 import org.neo4j.connector.cluster.RoutingTable;
-import org.neo4j.connector.exception.ClientException;
+import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.summary.ResultSummary;
 

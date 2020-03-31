@@ -27,7 +27,6 @@ import java.util.function.Function;
 import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Query;
 import org.neo4j.connector.async.AsyncQueryRunner;
-import org.neo4j.connector.async.ResultCursor;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.Values;

@@ -23,12 +23,12 @@ import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.DatabaseName;
 import org.neo4j.driver.Logging;
 import org.neo4j.connector.internal.BookmarkHolder;
-import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.driver.internal.retry.RetryLogic;
 import org.neo4j.connector.spi.ConnectionProvider;
 
 
 import static java.lang.System.lineSeparator;
-import static org.neo4j.connector.internal.util.Futures.blockingGet;
+import static org.neo4j.driver.internal.util.Futures.blockingGet;
 
 public class LeakLoggingNetworkSession extends NetworkSession
 {

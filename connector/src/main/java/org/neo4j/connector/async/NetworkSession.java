@@ -29,22 +29,23 @@ import org.neo4j.driver.Logger;
 import org.neo4j.driver.Logging;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.TransactionConfig;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.TransactionNestingException;
+import org.neo4j.driver.async.ResultCursor;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.TransactionNestingException;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.FailableCursor;
 import org.neo4j.connector.internal.cursor.AsyncResultCursor;
 import org.neo4j.connector.internal.cursor.ResultCursorFactory;
 import org.neo4j.connector.internal.cursor.RxResultCursor;
-import org.neo4j.connector.internal.retry.RetryLogic;
+import org.neo4j.driver.internal.retry.RetryLogic;
 import org.neo4j.connector.logging.PrefixedLogger;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.spi.ConnectionProvider;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
-import static org.neo4j.connector.internal.util.Futures.combineErrors;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.combineErrors;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 
 //todo ResultCursor
 public class NetworkSession

@@ -26,7 +26,7 @@ import org.neo4j.driver.Record;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.Transaction;
-import org.neo4j.connector.internal.types.Node;
+import org.neo4j.driver.types.Node;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.neo4j.connector.internal.util.Iterables.single;

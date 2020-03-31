@@ -27,8 +27,8 @@ import java.util.concurrent.TimeUnit;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
-import org.neo4j.connector.exception.UntrustedServerException;
-import org.neo4j.connector.exception.value.Uncoercible;
+import org.neo4j.driver.exceptions.UntrustedServerException;
+import org.neo4j.driver.exceptions.value.Uncoercible;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.Bookmark;
 import org.neo4j.connector.internal.InternalBookmark;
@@ -36,10 +36,10 @@ import org.neo4j.connector.internal.util.MetadataExtractor;
 import org.neo4j.connector.internal.util.ServerVersion;
 import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.internal.summary.InternalInputPosition;
-import org.neo4j.driver.summary.summary.DatabaseInfo;
-import org.neo4j.driver.summary.summary.Notification;
-import org.neo4j.driver.summary.summary.Plan;
-import org.neo4j.driver.summary.summary.ProfiledPlan;
+import org.neo4j.driver.summary.DatabaseInfo;
+import org.neo4j.driver.summary.Notification;
+import org.neo4j.driver.summary.Plan;
+import org.neo4j.driver.summary.ProfiledPlan;
 import org.neo4j.driver.summary.ResultSummary;
 
 import static java.util.Arrays.asList;
@@ -62,10 +62,10 @@ import static org.neo4j.connector.internal.summary.InternalSummaryCounters.EMPTY
 import static org.neo4j.connector.internal.util.MetadataExtractor.extractDatabaseInfo;
 import static org.neo4j.connector.internal.util.MetadataExtractor.extractNeo4jServerVersion;
 import static org.neo4j.connector.internal.util.ServerVersion.v4_0_0;
-import static org.neo4j.driver.summary.summary.QueryType.READ_ONLY;
-import static org.neo4j.driver.summary.summary.QueryType.READ_WRITE;
-import static org.neo4j.driver.summary.summary.QueryType.SCHEMA_WRITE;
-import static org.neo4j.driver.summary.summary.QueryType.WRITE_ONLY;
+import static org.neo4j.driver.summary.QueryType.READ_ONLY;
+import static org.neo4j.driver.summary.QueryType.READ_WRITE;
+import static org.neo4j.driver.summary.QueryType.SCHEMA_WRITE;
+import static org.neo4j.driver.summary.QueryType.WRITE_ONLY;
 import static org.neo4j.driver.util.TestUtil.anyServerVersion;
 
 class MetadataExtractorTest

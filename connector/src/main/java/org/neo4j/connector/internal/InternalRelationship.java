@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.neo4j.connector.internal.value.RelationshipValue;
-import org.neo4j.connector.internal.types.Relationship;
+import org.neo4j.driver.types.Relationship;
 import org.neo4j.driver.Value;
 
 /**

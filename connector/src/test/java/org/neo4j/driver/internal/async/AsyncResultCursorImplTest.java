@@ -29,8 +29,8 @@ import java.util.function.Function;
 
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Query;
-import org.neo4j.connector.exception.NoSuchRecordException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.NoSuchRecordException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.InternalRecord;
 import org.neo4j.connector.internal.cursor.AsyncResultCursorImpl;
@@ -41,7 +41,7 @@ import org.neo4j.connector.internal.summary.InternalResultSummary;
 import org.neo4j.connector.internal.summary.InternalServerInfo;
 import org.neo4j.connector.internal.summary.InternalSummaryCounters;
 import org.neo4j.driver.summary.ResultSummary;
-import org.neo4j.driver.summary.summary.QueryType;
+import org.neo4j.driver.summary.QueryType;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -60,8 +60,8 @@ import static org.mockito.Mockito.when;
 import static org.neo4j.driver.Values.value;
 import static org.neo4j.driver.Values.values;
 import static org.neo4j.connector.internal.summary.InternalDatabaseInfo.DEFAULT_DATABASE_INFO;
-import static org.neo4j.connector.internal.util.Futures.completedWithNull;
-import static org.neo4j.connector.internal.util.Futures.failedFuture;
+import static org.neo4j.driver.internal.util.Futures.completedWithNull;
+import static org.neo4j.driver.internal.util.Futures.failedFuture;
 import static org.neo4j.driver.util.TestUtil.anyServerVersion;
 import static org.neo4j.driver.util.TestUtil.await;
 

@@ -24,14 +24,14 @@ import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
-import org.neo4j.connector.exception.Neo4jException;
-import org.neo4j.connector.exception.ServiceUnavailableException;
-import org.neo4j.connector.exception.AuthenticationException;
-import org.neo4j.connector.exception.ClientException;
-import org.neo4j.connector.exception.DatabaseException;
-import org.neo4j.connector.exception.FatalDiscoveryException;
-import org.neo4j.connector.exception.ResultConsumedException;
-import org.neo4j.connector.exception.TransientException;
+import org.neo4j.driver.exceptions.Neo4jException;
+import org.neo4j.driver.exceptions.ServiceUnavailableException;
+import org.neo4j.driver.exceptions.AuthenticationException;
+import org.neo4j.driver.exceptions.ClientException;
+import org.neo4j.driver.exceptions.DatabaseException;
+import org.neo4j.driver.exceptions.FatalDiscoveryException;
+import org.neo4j.driver.exceptions.ResultConsumedException;
+import org.neo4j.driver.exceptions.TransientException;
 
 public final class ErrorUtil
 {

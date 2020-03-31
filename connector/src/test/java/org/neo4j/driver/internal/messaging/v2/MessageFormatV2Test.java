@@ -46,8 +46,8 @@ import org.neo4j.connector.messaging.request.RunMessage;
 import org.neo4j.connector.messaging.response.RecordMessage;
 import org.neo4j.driver.internal.util.ThrowingConsumer;
 import org.neo4j.driver.internal.util.io.ByteBufOutput;
-import org.neo4j.connector.internal.types.IsoDuration;
-import org.neo4j.connector.internal.types.Point;
+import org.neo4j.driver.types.IsoDuration;
+import org.neo4j.driver.types.Point;
 import org.neo4j.driver.util.TestUtil;
 
 import static java.time.Month.APRIL;
