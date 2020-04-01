@@ -22,10 +22,10 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
 
+
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
-import static org.neo4j.connector.internal.util.Extract.mapOfValues;
 import static org.neo4j.connector.internal.util.Preconditions.checkArgument;
 
 /**
@@ -33,13 +33,13 @@ import static org.neo4j.connector.internal.util.Preconditions.checkArgument;
  * Instances are immutable and can be reused for multiple transactions.
  * <p>
  * Configuration is supported for:
- * <ul> todo taken links away
- * <li>queries executed in auto-commit transactions - using various overloads of {link Session#run(String, TransactionConfig)} and
- * @link AsyncSession#runAsync(String, TransactionConfig)}</li>
- * <li>transactions started by transaction functions - using {link Session#readTransaction(TransactionWork, TransactionConfig)},
- * @link Session#writeTransaction(TransactionWork, TransactionConfig)}, {link AsyncSession#readTransactionAsync(AsyncTransactionWork, TransactionConfig)} and
- * {link AsyncSession#writeTransactionAsync(AsyncTransactionWork, TransactionConfig)}</li>
- * <li>unmanaged transactions - using {link Session#beginTransaction(TransactionConfig)} and {link AsyncSession#beginTransactionAsync(TransactionConfig)}</li>
+ * <ul>
+ * <li>queries executed in auto-commit transactions - using various overloads of {@link Session#run(String, TransactionConfig)} and
+ * {@link AsyncSession#runAsync(String, TransactionConfig)}</li>
+ * <li>transactions started by transaction functions - using {@link Session#readTransaction(TransactionWork, TransactionConfig)},
+ * {@link Session#writeTransaction(TransactionWork, TransactionConfig)}, {@link AsyncSession#readTransactionAsync(AsyncTransactionWork, TransactionConfig)} and
+ * {@link AsyncSession#writeTransactionAsync(AsyncTransactionWork, TransactionConfig)}</li>
+ * <li>unmanaged transactions - using {@link Session#beginTransaction(TransactionConfig)} and {@link AsyncSession#beginTransactionAsync(TransactionConfig)}</li>
  * </ul>
  * <p>
  * Creation of configuration objects can be done using the builder API:
@@ -56,7 +56,7 @@ import static org.neo4j.connector.internal.util.Preconditions.checkArgument;
  * }
  * </pre>
  *
- * see Session
+ * @see Session
  */
 public class TransactionConfig
 {
@@ -200,7 +200,7 @@ public class TransactionConfig
         {
             requireNonNull( metadata, "Transaction metadata should not be null" );
 
-            this.metadata = mapOfValues( metadata );
+            this.metadata = Extract.mapOfValues( metadata );
             return this;
         }
 

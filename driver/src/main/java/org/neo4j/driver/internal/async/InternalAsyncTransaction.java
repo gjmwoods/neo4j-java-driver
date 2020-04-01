@@ -20,7 +20,6 @@ package org.neo4j.driver.internal.async;
 
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.async.AsyncAbstractQueryRunner;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.async.AsyncTransaction;

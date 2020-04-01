@@ -16,11 +16,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.connector.async;
+package org.neo4j.driver.internal.async;
 
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
+import org.neo4j.connector.async.AsyncQueryRunner;
 import org.neo4j.driver.AbstractQueryRunner;
 import org.neo4j.driver.Query;
 import org.neo4j.driver.Record;

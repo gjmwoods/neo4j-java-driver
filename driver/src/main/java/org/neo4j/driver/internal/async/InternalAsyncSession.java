@@ -23,7 +23,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import org.neo4j.driver.AccessMode;
-import org.neo4j.connector.async.AsyncAbstractQueryRunner;
 import org.neo4j.connector.async.NetworkSession;
 import org.neo4j.connector.async.UnmanagedTransaction;
 import org.neo4j.driver.Query;
