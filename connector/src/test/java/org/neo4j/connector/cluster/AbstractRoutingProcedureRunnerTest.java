@@ -23,12 +23,9 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.connector.cluster.RoutingContext;
-import org.neo4j.connector.cluster.RoutingProcedureResponse;
-import org.neo4j.connector.cluster.RoutingProcedureRunner;
+import org.neo4j.connector.spi.Connection;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.exceptions.ClientException;
-import org.neo4j.connector.spi.Connection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
