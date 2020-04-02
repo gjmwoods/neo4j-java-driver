@@ -26,6 +26,7 @@ import java.util.Objects;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
+import static org.neo4j.connector.internal.util.Extract.mapOfValues;
 import static org.neo4j.connector.internal.util.Preconditions.checkArgument;
 
 /**
@@ -200,7 +201,7 @@ public class TransactionConfig
         {
             requireNonNull( metadata, "Transaction metadata should not be null" );
 
-            this.metadata = Extract.mapOfValues( metadata );
+            this.metadata = mapOfValues( metadata );
             return this;
         }
 

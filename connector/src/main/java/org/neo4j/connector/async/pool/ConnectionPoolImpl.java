@@ -235,12 +235,12 @@ public class ConnectionPoolImpl implements ConnectionPool
     }
 
     // for testing only
-    public ExtendedChannelPool getPool( BoltServerAddress address )
+    ExtendedChannelPool getPool( BoltServerAddress address )
     {
         return pools.get( address );
     }
 
-    public ExtendedChannelPool newPool( BoltServerAddress address )
+    ExtendedChannelPool newPool( BoltServerAddress address )
     {
         return new NettyChannelPool( address, connector, bootstrap, nettyChannelTracker, channelHealthChecker, settings.connectionAcquisitionTimeout(),
                 settings.maxConnectionPoolSize() );

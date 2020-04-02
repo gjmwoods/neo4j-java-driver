@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.driver.internal.cluster;
+package org.neo4j.connector.cluster;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -26,17 +26,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 
-import org.neo4j.driver.AccessMode;
-import org.neo4j.connector.cluster.MultiDatabasesRoutingProcedureRunner;
-import org.neo4j.connector.cluster.RoutingContext;
-import org.neo4j.connector.cluster.RoutingProcedureResponse;
-import org.neo4j.connector.cluster.RoutingProcedureRunner;
-import org.neo4j.driver.Query;
-import org.neo4j.driver.Record;
-import org.neo4j.driver.Value;
 import org.neo4j.connector.internal.BookmarkHolder;
 import org.neo4j.connector.internal.ReadOnlyBookmarkHolder;
 import org.neo4j.connector.spi.Connection;
+import org.neo4j.driver.AccessMode;
+import org.neo4j.driver.Query;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Value;
 
 import static java.util.Collections.EMPTY_MAP;
 import static java.util.Collections.singletonList;
@@ -47,14 +43,14 @@ import static org.hamcrest.junit.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.neo4j.driver.Values.parameters;
+import static org.neo4j.connector.cluster.MultiDatabasesRoutingProcedureRunner.DATABASE_NAME;
+import static org.neo4j.connector.cluster.MultiDatabasesRoutingProcedureRunner.MULTI_DB_GET_ROUTING_TABLE;
+import static org.neo4j.connector.cluster.RoutingProcedureRunner.ROUTING_CONTEXT;
 import static org.neo4j.connector.internal.DatabaseNameUtil.SYSTEM_DATABASE_NAME;
 import static org.neo4j.connector.internal.DatabaseNameUtil.database;
 import static org.neo4j.connector.internal.DatabaseNameUtil.systemDatabase;
 import static org.neo4j.connector.internal.InternalBookmark.empty;
-import static org.neo4j.connector.cluster.MultiDatabasesRoutingProcedureRunner.DATABASE_NAME;
-import static org.neo4j.connector.cluster.MultiDatabasesRoutingProcedureRunner.MULTI_DB_GET_ROUTING_TABLE;
-import static org.neo4j.connector.cluster.RoutingProcedureRunner.ROUTING_CONTEXT;
+import static org.neo4j.driver.Values.parameters;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class MultiDatabasesRoutingProcedureRunnerTest extends AbstractRoutingProcedureRunnerTest
@@ -136,7 +132,7 @@ class MultiDatabasesRoutingProcedureRunnerTest extends AbstractRoutingProcedureR
         }
 
         @Override
-        public CompletionStage<List<Record>> runProcedure(Connection connection, Query procedure, BookmarkHolder bookmarkHolder )
+        CompletionStage<List<Record>> runProcedure(Connection connection, Query procedure, BookmarkHolder bookmarkHolder )
         {
             this.connection = connection;
             this.procedure = procedure;

@@ -87,7 +87,7 @@ public class RoutingProcedureRunner
         return BookmarkHolder.NO_OP;
     }
 
-    public CompletionStage<List<Record>> runProcedure( Connection connection, Query procedure, BookmarkHolder bookmarkHolder )
+    CompletionStage<List<Record>> runProcedure( Connection connection, Query procedure, BookmarkHolder bookmarkHolder )
     {
         return connection.protocol()
                 .runInAutoCommitTransaction( connection, procedure, bookmarkHolder, TransactionConfig.empty(), true, UNLIMITED_FETCH_SIZE )

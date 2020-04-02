@@ -16,16 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.driver.internal.async.pool;
+package org.neo4j.connector.async.pool;
 
 import io.netty.bootstrap.Bootstrap;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
-import org.neo4j.connector.async.pool.ExtendedChannelPool;
-import org.neo4j.connector.async.pool.NettyChannelTracker;
-import org.neo4j.connector.async.pool.PoolSettings;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.internal.util.FakeClock;
 
@@ -37,8 +34,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.neo4j.connector.internal.BoltServerAddress.LOCAL_DEFAULT;
-import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 import static org.neo4j.connector.internal.metrics.InternalAbstractMetrics.DEV_NULL_METRICS;
+import static org.neo4j.connector.logging.DevNullLogging.DEV_NULL_LOGGING;
 
 class ConnectionPoolImplTest
 {

@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Stream;
 
+import org.neo4j.connector.cluster.AbstractRoutingProcedureRunnerTest;
 import org.neo4j.driver.AccessMode;
 import org.neo4j.connector.cluster.RoutingContext;
 import org.neo4j.connector.cluster.RoutingProcedureResponse;

@@ -48,7 +48,7 @@ import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.async.connection.BootstrapFactory;
 import org.neo4j.connector.async.pool.NettyChannelTracker;
 import org.neo4j.connector.async.pool.PoolSettings;
-import org.neo4j.driver.internal.async.pool.TestConnectionPool;
+import org.neo4j.connector.async.pool.TestConnectionPool;
 import org.neo4j.connector.cluster.ClusterComposition;
 import org.neo4j.connector.cluster.Rediscovery;
 import org.neo4j.connector.cluster.RoutingTable;

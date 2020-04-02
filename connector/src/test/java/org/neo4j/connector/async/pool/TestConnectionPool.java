@@ -16,33 +16,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.driver.internal.async.pool;
+package org.neo4j.connector.async.pool;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.embedded.EmbeddedChannel;
+import org.mockito.Mockito;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.neo4j.connector.async.pool.ConnectionFactory;
-import org.neo4j.connector.async.pool.ConnectionPoolImpl;
-import org.neo4j.connector.async.pool.ExtendedChannelPool;
-import org.neo4j.connector.async.pool.NettyChannelTracker;
-import org.neo4j.connector.async.pool.PoolSettings;
-import org.neo4j.driver.Logging;
-import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.async.connection.ChannelConnector;
+import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.metrics.ListenerEvent;
 import org.neo4j.connector.internal.metrics.MetricsListener;
-import org.neo4j.connector.spi.Connection;
 import org.neo4j.connector.internal.util.Clock;
+import org.neo4j.connector.spi.Connection;
+import org.neo4j.driver.Logging;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.neo4j.connector.async.connection.ChannelAttributes.setPoolId;
 import static org.neo4j.connector.async.connection.ChannelAttributes.setServerAddress;
 import static org.neo4j.driver.internal.util.Futures.completedWithNull;
@@ -55,18 +49,18 @@ public class TestConnectionPool extends ConnectionPoolImpl
     public TestConnectionPool( Bootstrap bootstrap, NettyChannelTracker nettyChannelTracker, PoolSettings settings,
             MetricsListener metricsListener, Logging logging, Clock clock, boolean ownsEventLoopGroup )
     {
-        super( mock( ChannelConnector.class ), bootstrap, nettyChannelTracker, settings, metricsListener, logging, clock, ownsEventLoopGroup,
-                newConnectionFactory() );
+        super( Mockito.mock( ChannelConnector.class ), bootstrap, nettyChannelTracker, settings, metricsListener, logging, clock, ownsEventLoopGroup,
+               newConnectionFactory() );
         this.nettyChannelTracker = nettyChannelTracker;
     }
 
-    public ExtendedChannelPool getPool( BoltServerAddress address )
+    ExtendedChannelPool getPool( BoltServerAddress address )
     {
         return channelPoolsByAddress.get( address );
     }
 
     @Override
-    public ExtendedChannelPool newPool( BoltServerAddress address )
+    ExtendedChannelPool newPool( BoltServerAddress address )
     {
         ExtendedChannelPool channelPool = new ExtendedChannelPool()
         {
@@ -119,8 +113,8 @@ public class TestConnectionPool extends ConnectionPoolImpl
     private static ConnectionFactory newConnectionFactory()
     {
         return ( channel, pool ) -> {
-            Connection conn = mock( Connection.class );
-            when( conn.release() ).thenAnswer( invocation -> pool.release( channel ) );
+            Connection conn = Mockito.mock( Connection.class );
+            Mockito.when( conn.release() ).thenAnswer( invocation -> pool.release( channel ) );
             return conn;
         };
     }
