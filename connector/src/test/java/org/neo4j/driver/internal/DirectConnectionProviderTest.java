@@ -43,8 +43,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.neo4j.driver.AccessMode.READ;
 import static org.neo4j.driver.AccessMode.WRITE;
-import static org.neo4j.driver.internal.cluster.RediscoveryUtil.contextWithDatabase;
-import static org.neo4j.driver.internal.cluster.RediscoveryUtil.contextWithMode;
+import static org.neo4j.connector.cluster.RediscoveryUtil.contextWithDatabase;
+import static org.neo4j.connector.cluster.RediscoveryUtil.contextWithMode;
 import static org.neo4j.driver.util.TestUtil.await;
 
 class DirectConnectionProviderTest

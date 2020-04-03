@@ -29,6 +29,11 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.neo4j.connector.async.connection.ChannelConnector;
+import org.neo4j.connector.async.pool.ConnectionFactory;
+import org.neo4j.connector.async.pool.ConnectionPoolImpl;
+import org.neo4j.connector.async.pool.ExtendedChannelPool;
+import org.neo4j.connector.async.pool.NettyChannelTracker;
+import org.neo4j.connector.async.pool.PoolSettings;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.connector.internal.metrics.ListenerEvent;
 import org.neo4j.connector.internal.metrics.MetricsListener;

@@ -23,6 +23,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
+import org.neo4j.connector.async.pool.ExtendedChannelPool;
+import org.neo4j.connector.async.pool.NettyChannelTracker;
+import org.neo4j.connector.async.pool.PoolSettings;
+import org.neo4j.connector.async.pool.TestConnectionPool;
 import org.neo4j.connector.internal.BoltServerAddress;
 import org.neo4j.driver.internal.util.FakeClock;
 
