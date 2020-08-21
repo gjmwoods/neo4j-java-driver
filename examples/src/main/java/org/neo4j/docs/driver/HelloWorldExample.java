@@ -20,11 +20,14 @@ package org.neo4j.docs.driver;
 
 // tag::hello-world-import[]
 
+import java.io.File;
+
 import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
-import org.neo4j.driver.Session;
 import org.neo4j.driver.Result;
+import org.neo4j.driver.Session;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.TransactionWork;
 
@@ -38,7 +41,17 @@ public class HelloWorldExample implements AutoCloseable
 
     public HelloWorldExample( String uri, String user, String password )
     {
-        driver = GraphDatabase.driver( uri, AuthTokens.basic( user, password ) );
+        Config customCert = Config.builder()
+                                  .withEncryption()
+                                  .withTrustStrategy( Config.TrustStrategy
+                                                              .trustCustomCertificateSignedBy( new File( "/Users/gregwoods/Documents/GlobalSign.cer") )
+                                                              //.trustCustomCertificateSignedBy( new File( "/Users/gregwoods/Documents/AnotherCert.cer") )
+                                                              .trustSystemCertificates()
+                                                              .withCertificateRevocationCheck()
+                                                              .withoutHostnameVerification()).build();
+
+driver = GraphDatabase.driver( "bolt://digicert.com:443", AuthTokens.basic( user, password ), customCert );
+        //driver = GraphDatabase.driver( "bolt://google.com:443", AuthTokens.basic( user, password ), customCert );
     }
 
     @Override

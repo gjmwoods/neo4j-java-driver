@@ -22,10 +22,18 @@ import java.io.File;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
+import java.security.cert.CertPathValidator;
+import java.security.cert.CertPathValidatorException;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.PKIXBuilderParameters;
+import java.security.cert.PKIXRevocationChecker;
 import java.security.cert.X509CertSelector;
 import java.security.cert.X509Certificate;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import javax.net.ssl.CertPathTrustManagerParameters;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
@@ -63,7 +71,7 @@ public class SecurityPlanImpl implements SecurityPlan
         return new SecurityPlanImpl( true, sslContext, requiresHostnameVerification, requiresRevocationChecking );
     }
 
-    public static SSLContext configureSSLContext( File customCertFile, boolean requiresRevocationChecking )
+    private static SSLContext configureSSLContext( File customCertFile, boolean requiresRevocationChecking )
             throws GeneralSecurityException, IOException
     {
         KeyStore trustedKeyStore = KeyStore.getInstance( KeyStore.getDefaultType() );
@@ -83,20 +91,27 @@ public class SecurityPlanImpl implements SecurityPlan
         PKIXBuilderParameters pkixBuilderParameters = new PKIXBuilderParameters( trustedKeyStore, new X509CertSelector() );
 
         // sets checking of stapled ocsp response
-        pkixBuilderParameters.setRevocationEnabled( requiresRevocationChecking );
+        if ( requiresRevocationChecking )
+        {
+            CertPathValidator certPathValidator = CertPathValidator.getInstance( "PKIX");
+            PKIXRevocationChecker defaultRevocationChecker = (PKIXRevocationChecker)certPathValidator.getRevocationChecker();
 
-        // enables status_request exentension in client hello
+
+
+            pkixBuilderParameters.setRevocationEnabled(false);
+            pkixBuilderParameters.addCertPathChecker( new MustStapleRevocationChecker( defaultRevocationChecker ) );
+        }
+
+        // enables status_request extension in client hello
         if ( requiresRevocationChecking )
         {
             System.setProperty( "jdk.tls.client.enableStatusRequestExtension", "true" );
         }
 
-        // Create TrustManager from TrustedKeyStore
-        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance( TrustManagerFactory.getDefaultAlgorithm() );
-        trustManagerFactory.init( new CertPathTrustManagerParameters( pkixBuilderParameters ) );
-
         SSLContext sslContext = SSLContext.getInstance( "TLS" );
 
+        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance( TrustManagerFactory.getDefaultAlgorithm() );
+        trustManagerFactory.init( new CertPathTrustManagerParameters( pkixBuilderParameters ) );
         sslContext.init( new KeyManager[0], trustManagerFactory.getTrustManagers(), null );
 
         return sslContext;
@@ -187,6 +202,65 @@ public class SecurityPlanImpl implements SecurityPlan
         public X509Certificate[] getAcceptedIssuers()
         {
             return new X509Certificate[0];
+        }
+    }
+
+    private static class MustStapleRevocationChecker extends PKIXRevocationChecker
+    {
+        private final PKIXRevocationChecker delegatedChecker;
+        private final String MUST_STAPLE_OID = "1.3.6.1.5.5.7.1.24";
+        private final Set<String> supportedExtensions = Collections.singleton( MUST_STAPLE_OID );
+
+        MustStapleRevocationChecker( PKIXRevocationChecker delegatedChecker )
+        {
+            super();
+            this.delegatedChecker = delegatedChecker;
+        }
+
+        @Override
+        public void init( boolean forward ) throws CertPathValidatorException
+        {
+            System.out.println("Init");
+            delegatedChecker.init( forward );
+        }
+
+        @Override
+        public boolean isForwardCheckingSupported()
+        {
+            return false;
+        }
+
+        @Override
+        public Set<String> getSupportedExtensions()
+        {
+            return supportedExtensions;
+        }
+
+        @Override
+        public void check( Certificate cert, Collection<String> unresolvedCritExts ) throws CertPathValidatorException
+        {
+            X509Certificate x509Certificate = (X509Certificate) cert;
+            byte[] mustStapleExtension = x509Certificate.getExtensionValue( MUST_STAPLE_OID );
+
+            // if we see must staple extension but no valid ocsp response then fail
+            if ( mustStapleExtension != null )
+            {
+                System.out.println( "Must staple found");
+            }
+            // otherwise validate if we have a stapled response
+            else
+            {
+                System.out.println( delegatedChecker.getOcspResponses().size() );
+                System.out.println( "BRuh!!!!!" );
+                delegatedChecker.check( cert );
+            }
+            System.out.println( "Checking!!!!!" );
+        }
+
+        @Override
+        public List<CertPathValidatorException> getSoftFailExceptions()
+        {
+            return null;
         }
     }
 }

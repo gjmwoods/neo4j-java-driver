@@ -36,7 +36,7 @@ import java.util.Base64;
 /**
  * A tool used to save, load certs, etc.
  */
-public class CertificateTool
+public final class CertificateTool
 {
     private static final String BEGIN_CERT = "-----BEGIN CERTIFICATE-----";
     private static final String END_CERT = "-----END CERTIFICATE-----";
@@ -140,6 +140,13 @@ public class CertificateTool
         }
     }
 
+    /**
+     * Loads each certificate in the array into a key store.
+     * @param certificates the certificates to load into the key store.
+     * @param keyStore the key store to load the certificates into.
+     * @throws GeneralSecurityException
+     * @throws IOException
+     */
     public static void loadX509Cert( X509Certificate[] certificates, KeyStore keyStore ) throws GeneralSecurityException, IOException
     {
         for ( int i = 0; i < certificates.length; i++ )
@@ -169,6 +176,10 @@ public class CertificateTool
     {
         String cert64CharPerLine = cert.replaceAll( "(.{64})", "$1\n" );
         return BEGIN_CERT + "\n" + cert64CharPerLine + "\n"+ END_CERT + "\n";
+    }
+
+    private CertificateTool()
+    {
     }
 }
 

@@ -79,6 +79,7 @@ class SecuritySettingsTest
 
         assertTrue( securityPlan.requiresEncryption() );
         assertTrue( securityPlan.requiresHostnameVerification() );
+
         assertEquals( defaultContext, securityPlan.sslContext() );
     }
 
@@ -140,7 +141,7 @@ class SecuritySettingsTest
         assertTrue( ex.getMessage().contains( String.format( "Scheme %s is not configurable with manual encryption and trust settings", scheme ) ));
     }
 
-    @ParameterizedTest()
+    @ParameterizedTest
     @MethodSource( "unencryptedSchemes" )
     void testNoEncryption( String scheme )
     {
@@ -151,7 +152,7 @@ class SecuritySettingsTest
         assertFalse( securityPlan.requiresEncryption() );
     }
 
-    @ParameterizedTest()
+    @ParameterizedTest
     @MethodSource( "unencryptedSchemes" )
     void testConfiguredEncryption( String scheme )
     {
@@ -163,7 +164,7 @@ class SecuritySettingsTest
         assertTrue( securityPlan.requiresEncryption() );
     }
 
-    @ParameterizedTest()
+    @ParameterizedTest
     @MethodSource( "unencryptedSchemes" )
     void testConfiguredAllCertificates( String scheme)
     {
@@ -177,7 +178,7 @@ class SecuritySettingsTest
         assertTrue( securityPlan.requiresEncryption() );
     }
 
-    @ParameterizedTest()
+    @ParameterizedTest
     @MethodSource( "unencryptedSchemes" )
     void testConfigureRevocationChecking( String scheme )
     {
@@ -191,7 +192,7 @@ class SecuritySettingsTest
         assertTrue( securityPlan.requiresRevocationChecking() );
     }
 
-    @ParameterizedTest()
+    @ParameterizedTest
     @MethodSource( "unencryptedSchemes" )
     void testRevocationCheckingDisabledByDefault( String scheme )
     {
