@@ -24,11 +24,10 @@ import io.netty.channel.ChannelPromise;
 import io.netty.channel.embedded.EmbeddedChannel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
+import org.neo4j.driver.Query;
 import org.neo4j.driver.Value;
 import org.neo4j.driver.Values;
 import org.neo4j.driver.exceptions.UntrustedServerException;
@@ -36,12 +35,13 @@ import org.neo4j.driver.internal.async.inbound.ChannelErrorHandler;
 import org.neo4j.driver.internal.async.inbound.InboundMessageDispatcher;
 import org.neo4j.driver.internal.async.outbound.OutboundMessageHandler;
 import org.neo4j.driver.internal.messaging.request.RunMessage;
-import org.neo4j.driver.internal.messaging.v1.MessageFormatV1;
+import org.neo4j.driver.internal.messaging.v3.MessageFormatV3;
+
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static java.util.Collections.singletonMap;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.neo4j.driver.Values.value;
 import static org.neo4j.driver.internal.async.connection.ChannelAttributes.serverVersion;
 import static org.neo4j.driver.internal.async.connection.ChannelAttributes.setMessageDispatcher;
@@ -58,7 +58,7 @@ class InitResponseHandlerTest
     {
         setMessageDispatcher( channel, new InboundMessageDispatcher( channel, DEV_NULL_LOGGING ) );
         ChannelPipeline pipeline = channel.pipeline();
-        pipeline.addLast( NAME, new OutboundMessageHandler( new MessageFormatV1(), DEV_NULL_LOGGING ) );
+        pipeline.addLast( NAME, new OutboundMessageHandler( new MessageFormatV3(), DEV_NULL_LOGGING ) );
         pipeline.addLast( new ChannelErrorHandler( DEV_NULL_LOGGING ) );
     }
 
@@ -100,7 +100,7 @@ class InitResponseHandlerTest
         handler.onSuccess( metadata );
 
         Map<String,Value> params = singletonMap( "array", value( new byte[]{1, 2, 3} ) );
-        assertTrue( channel.writeOutbound( new RunMessage( "RETURN 1", params ) ) );
+        assertTrue( channel.writeOutbound( new Query( "RETURN 1", Values.value( params ) ) ) );
         assertTrue( channel.finish() );
     }
 

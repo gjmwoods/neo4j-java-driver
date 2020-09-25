@@ -16,15 +16,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.driver.internal.messaging.v2;
 
-import org.neo4j.driver.internal.messaging.v1.MessageWriterV1;
-import org.neo4j.driver.internal.packstream.PackOutput;
+import org.neo4j.driver.Session;
 
-public class MessageWriterV2 extends MessageWriterV1
+public class SessionState
 {
-    public MessageWriterV2( PackOutput output )
-    {
-        super( new ValuePackerV2( output ) );
+    public Session session;
+    public int     retryableState;
+    public String  retryableErrorId;
+
+    public SessionState(Session session) {
+        this.session = session;
+        this.retryableState = 0;
+        this.retryableErrorId = "";
     }
 }

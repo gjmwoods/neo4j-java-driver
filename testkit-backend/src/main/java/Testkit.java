@@ -16,23 +16,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.neo4j.driver.internal.messaging.v2;
 
-import org.neo4j.driver.internal.messaging.BoltProtocol;
-import org.neo4j.driver.internal.messaging.MessageFormat;
-import org.neo4j.driver.internal.messaging.v1.BoltProtocolV1Test;
-
-class BoltProtocolV2Test extends BoltProtocolV1Test
+public class Testkit
 {
-    @Override
-    protected BoltProtocol createProtocol()
+    public static String wrap(String name, String data)
     {
-        return BoltProtocolV2.INSTANCE;
+        return String.format("{\"name\": \"%s\", \"data\":%s}", name, data);
     }
 
-    @Override
-    protected Class<? extends MessageFormat> expectedMessageFormatType()
-    {
-        return MessageFormatV2.class;
+    public static String value(String v) {
+        return "{\"value\":"+v+"}";
+    }
+
+    public static String values(String v) {
+        return "{\"values\":["+v+"]}";
+    }
+
+    public static String id(String v) {
+        return "{\"id\":"+v+"}";
+    }
+
+    public static String msg(String msg) {
+        return "{\"msg\":\""+msg+"\"}";
     }
 }
+
+

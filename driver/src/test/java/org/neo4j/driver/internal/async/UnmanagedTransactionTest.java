@@ -18,6 +18,7 @@
  */
 package org.neo4j.driver.internal.async;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -31,8 +32,6 @@ import org.neo4j.driver.TransactionConfig;
 import org.neo4j.driver.exceptions.ClientException;
 import org.neo4j.driver.internal.DefaultBookmarkHolder;
 import org.neo4j.driver.internal.InternalBookmark;
-import org.neo4j.driver.internal.messaging.request.PullAllMessage;
-import org.neo4j.driver.internal.messaging.request.RunMessage;
 import org.neo4j.driver.internal.messaging.v4.BoltProtocolV4;
 import org.neo4j.driver.internal.spi.Connection;
 import org.neo4j.driver.internal.spi.ResponseHandler;
@@ -44,7 +43,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
@@ -52,9 +50,11 @@ import static org.mockito.Mockito.verify;
 import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
-import static org.neo4j.driver.util.TestUtil.runMessageWithQueryMatcher;
+import static org.neo4j.driver.util.TestUtil.beginMessage;
 import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPull;
 import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunRx;
+import static org.neo4j.driver.util.TestUtil.verifyBeginTx;
+import static org.neo4j.driver.util.TestUtil.verifyRollbackTx;
 import static org.neo4j.driver.util.TestUtil.verifyRunAndPull;
 import static org.neo4j.driver.util.TestUtil.verifyRunRx;
 
@@ -103,8 +103,8 @@ class UnmanagedTransactionTest
 
         // Then
         InOrder order = inOrder( connection );
-        order.verify( connection ).write( eq( new RunMessage( "BEGIN" ) ), any(), eq( PullAllMessage.PULL_ALL ), any() );
-        order.verify( connection ).writeAndFlush( eq( new RunMessage( "ROLLBACK" ) ), any(), eq( PullAllMessage.PULL_ALL ), any() );
+        verifyBeginTx( connection );
+        verifyRollbackTx( connection );
         order.verify( connection ).release();
     }
 
@@ -115,7 +115,7 @@ class UnmanagedTransactionTest
 
         beginTx( connection, InternalBookmark.empty() );
 
-        verify( connection ).write( eq( new RunMessage( "BEGIN" ) ), any(), eq( PullAllMessage.PULL_ALL ), any() );
+        verifyBeginTx( connection );
         verify( connection, never() ).writeAndFlush( any(), any(), any(), any() );
     }
 
@@ -127,7 +127,7 @@ class UnmanagedTransactionTest
 
         beginTx( connection, bookmark );
 
-        verify( connection ).writeAndFlush( any(), any(), eq( PullAllMessage.PULL_ALL ), any() );
+        verifyBeginTx( connection, bookmark );
         verify( connection, never() ).write( any(), any(), any(), any() );
     }
 
@@ -244,10 +244,10 @@ class UnmanagedTransactionTest
 
         doAnswer( invocation ->
         {
-            ResponseHandler beginHandler = invocation.getArgument( 3 );
+            ResponseHandler beginHandler = invocation.getArgument( 1 );
             beginBehaviour.accept( beginHandler );
             return null;
-        } ).when( connection ).writeAndFlush( argThat( runMessageWithQueryMatcher( "BEGIN" ) ), any(), any(), any() );
+        } ).when( connection ).writeAndFlush( argThat( beginMessage() ), any() );
 
         return connection;
     }
