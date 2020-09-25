@@ -311,23 +311,19 @@ public final class BoltProtocolV41Test
     }
 
     @Test
-    @Disabled("Inspect why it's failing")
-    void shouldNotSupportDatabaseNameInBeginTransaction()
+    void shouldSupportDatabaseNameInBeginTransaction()
     {
         CompletionStage<Void> txStage = protocol.beginTransaction( connectionMock( "foo", protocol ), InternalBookmark.empty(), TransactionConfig.empty() );
 
-        ClientException e = assertThrows( ClientException.class, () -> await( txStage ) );
-        assertThat( e.getMessage(), startsWith( "Database name parameter for selecting database is not supported" ) );
+        assertDoesNotThrow( () -> await( txStage ) );
     }
 
     @Test
-    @Disabled("Inspect why it's failing")
     void shouldNotSupportDatabaseNameForAutoCommitTransactions()
     {
-        ClientException e = assertThrows( ClientException.class,
+        assertDoesNotThrow(
                 () -> protocol.runInAutoCommitTransaction( connectionMock( "foo", protocol ),
-                        new Query( "RETURN 1" ), BookmarkHolder.NO_OP, TransactionConfig.empty(), true, UNLIMITED_FETCH_SIZE ) );
-        assertThat( e.getMessage(), startsWith( "Database name parameter for selecting database is not supported" ) );
+                                                           new Query( "RETURN 1" ), BookmarkHolder.NO_OP, TransactionConfig.empty(), true, UNLIMITED_FETCH_SIZE ) );
     }
 
     private Class<? extends MessageFormat> expectedMessageFormatType()
