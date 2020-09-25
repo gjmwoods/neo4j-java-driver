@@ -50,7 +50,7 @@ import static org.mockito.Mockito.verify;
 import static org.neo4j.driver.internal.handlers.pulln.FetchSizeUtil.UNLIMITED_FETCH_SIZE;
 import static org.neo4j.driver.util.TestUtil.await;
 import static org.neo4j.driver.util.TestUtil.connectionMock;
-import static org.neo4j.driver.util.TestUtil.runMessageWithQueryMatcher;
+import static org.neo4j.driver.util.TestUtil.beginMessage;
 import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunAndPull;
 import static org.neo4j.driver.util.TestUtil.setupSuccessfulRunRx;
 import static org.neo4j.driver.util.TestUtil.verifyBeginTx;
@@ -161,7 +161,6 @@ class UnmanagedTransactionTest
     }
 
     @Test
-    @Disabled("It's expecting an old behaviour")
     void shouldReleaseConnectionWhenBeginFails()
     {
         RuntimeException error = new RuntimeException( "Wrong bookmark!" );
@@ -245,10 +244,10 @@ class UnmanagedTransactionTest
 
         doAnswer( invocation ->
         {
-            ResponseHandler beginHandler = invocation.getArgument( 3 );
+            ResponseHandler beginHandler = invocation.getArgument( 1 );
             beginBehaviour.accept( beginHandler );
             return null;
-        } ).when( connection ).writeAndFlush( argThat( runMessageWithQueryMatcher( "BEGIN" ) ), any(), any(), any() );
+        } ).when( connection ).writeAndFlush( argThat( beginMessage() ), any() );
 
         return connection;
     }

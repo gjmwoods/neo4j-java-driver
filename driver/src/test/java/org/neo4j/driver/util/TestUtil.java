@@ -43,6 +43,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Bookmark;
@@ -630,6 +631,15 @@ public final class TestUtil
     public static ArgumentMatcher<Message> runWithMetaMessageWithQueryMatcher(String query )
     {
         return message -> message instanceof RunWithMetadataMessage && Objects.equals( query, ((RunWithMetadataMessage) message).query() );
+    }
+
+    public static ArgumentMatcher<Message> beginMessage() {
+        return beginMessageWithPredicate( ignored -> true );
+    }
+
+    public static ArgumentMatcher<Message> beginMessageWithPredicate( Predicate<BeginMessage> predicate )
+    {
+        return message -> message instanceof BeginMessage && predicate.test( (BeginMessage) message ) ;
     }
 
     /**
