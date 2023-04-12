@@ -78,6 +78,17 @@ public class DriverFactory {
             SecurityPlan securityPlan,
             EventLoopGroup eventLoopGroup,
             Supplier<Rediscovery> rediscoverySupplier) {
+        return newInstance(uri, authToken, config, securityPlan, eventLoopGroup, rediscoverySupplier, false);
+    }
+
+    public final Driver newInstance(
+            URI uri,
+            AuthToken authToken,
+            Config config,
+            SecurityPlan securityPlan,
+            EventLoopGroup eventLoopGroup,
+            Supplier<Rediscovery> rediscoverySupplier,
+            boolean isEmbedded) {
 
         Bootstrap bootstrap;
         boolean ownsEventLoopGroup;
@@ -85,7 +96,7 @@ public class DriverFactory {
             bootstrap = createBootstrap(config.eventLoopThreads());
             ownsEventLoopGroup = true;
         } else {
-            bootstrap = createBootstrap(eventLoopGroup);
+            bootstrap = createBootstrap(eventLoopGroup, isEmbedded);
             ownsEventLoopGroup = false;
         }
 
@@ -373,8 +384,8 @@ public class DriverFactory {
      * <p>
      * <b>This method is protected only for testing</b>
      */
-    protected Bootstrap createBootstrap(EventLoopGroup eventLoopGroup) {
-        return BootstrapFactory.newBootstrap(eventLoopGroup);
+    protected Bootstrap createBootstrap(EventLoopGroup eventLoopGroup, boolean isEmbedded) {
+        return BootstrapFactory.newBootstrap(eventLoopGroup, isEmbedded);
     }
 
     /**

@@ -26,6 +26,7 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.ChannelPromise;
+import io.netty.channel.local.LocalAddress;
 import io.netty.resolver.AddressResolverGroup;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -102,7 +103,7 @@ public class ChannelConnectorImpl implements ChannelConnector {
             socketAddress = InetSocketAddress.createUnresolved(address.connectionHost(), address.port());
         }
 
-        ChannelFuture channelConnected = bootstrap.connect(socketAddress);
+        ChannelFuture channelConnected = bootstrap.connect(new LocalAddress("GimmeLocalBolt"));
 
         Channel channel = channelConnected.channel();
         ChannelPromise handshakeCompleted = channel.newPromise();
