@@ -78,9 +78,17 @@ public class ChannelTrackingDriverFactory extends DriverFactoryWithClock {
             MetricsProvider metricsProvider,
             Config config,
             boolean ownsEventLoopGroup,
-            RoutingContext routingContext) {
+            RoutingContext routingContext,
+            boolean isEmbeddedChannel) {
         pool = super.createConnectionPool(
-                authToken, securityPlan, bootstrap, metricsProvider, config, ownsEventLoopGroup, routingContext);
+                authToken,
+                securityPlan,
+                bootstrap,
+                metricsProvider,
+                config,
+                ownsEventLoopGroup,
+                routingContext,
+                isEmbeddedChannel);
         return pool;
     }
 

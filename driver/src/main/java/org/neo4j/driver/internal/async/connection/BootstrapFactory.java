@@ -38,7 +38,6 @@ public final class BootstrapFactory {
         } else {
             bootstrap.channel(LocalChannel.class);
         }
-        bootstrap.channel(LocalChannel.class);
         bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
         bootstrap.option(ChannelOption.SO_REUSEADDR, true);
         return bootstrap;

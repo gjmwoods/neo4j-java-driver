@@ -40,6 +40,7 @@ import org.neo4j.driver.MetricsAdapter;
 import org.neo4j.driver.internal.async.connection.BootstrapFactory;
 import org.neo4j.driver.internal.async.connection.ChannelConnector;
 import org.neo4j.driver.internal.async.connection.ChannelConnectorImpl;
+import org.neo4j.driver.internal.async.connection.EmbeddedChannelConnector;
 import org.neo4j.driver.internal.async.pool.ConnectionPoolImpl;
 import org.neo4j.driver.internal.async.pool.PoolSettings;
 import org.neo4j.driver.internal.cluster.Rediscovery;
@@ -124,7 +125,8 @@ public class DriverFactory {
                 metricsProvider,
                 config,
                 ownsEventLoopGroup,
-                routingSettings.routingContext());
+                routingSettings.routingContext(),
+                false);
 
         return createDriver(
                 uri,
@@ -146,11 +148,14 @@ public class DriverFactory {
             MetricsProvider metricsProvider,
             Config config,
             boolean ownsEventLoopGroup,
-            RoutingContext routingContext) {
+            RoutingContext routingContext,
+            boolean isEmbeddedChannel) {
         Clock clock = createClock();
         ConnectionSettings settings =
                 new ConnectionSettings(authToken, config.userAgent(), config.connectionTimeoutMillis());
-        ChannelConnector connector = createConnector(settings, securityPlan, config, clock, routingContext);
+        ChannelConnector connector = isEmbeddedChannel
+                ? createEmbeddedConnector(settings.userAgent(), authToken, clock, config.logging())
+                : createConnector(settings, securityPlan, config, clock, routingContext);
         PoolSettings poolSettings = new PoolSettings(
                 config.maxConnectionPoolSize(),
                 config.connectionAcquisitionTimeoutMillis(),
@@ -191,6 +196,11 @@ public class DriverFactory {
             RoutingContext routingContext) {
         return new ChannelConnectorImpl(
                 settings, securityPlan, config.logging(), clock, routingContext, getDomainNameResolver());
+    }
+
+    protected ChannelConnector createEmbeddedConnector(
+            String userAgent, AuthToken authToken, Clock clock, Logging logging) {
+        return new EmbeddedChannelConnector(userAgent, authToken, clock, logging);
     }
 
     private InternalDriver createDriver(

@@ -103,20 +103,27 @@ public class ChannelConnectorImpl implements ChannelConnector {
             socketAddress = InetSocketAddress.createUnresolved(address.connectionHost(), address.port());
         }
 
-        ChannelFuture channelConnected = bootstrap.connect(new LocalAddress("GimmeLocalBolt"));
+        ChannelFuture channelConnected = bootstrap.connect(socketAddress);
 
         Channel channel = channelConnected.channel();
         ChannelPromise handshakeCompleted = channel.newPromise();
         ChannelPromise connectionInitialized = channel.newPromise();
 
-        installChannelConnectedListeners(address, channelConnected, handshakeCompleted);
-        installHandshakeCompletedListeners(handshakeCompleted, connectionInitialized);
+        installChannelConnectedListeners(
+                address, channelConnected, handshakeCompleted, connectTimeoutMillis, pipelineBuilder, logging);
+        installHandshakeCompletedListeners(
+                handshakeCompleted, connectionInitialized, userAgent, authToken, routingContext);
 
         return connectionInitialized;
     }
 
-    private void installChannelConnectedListeners(
-            BoltServerAddress address, ChannelFuture channelConnected, ChannelPromise handshakeCompleted) {
+    public static void installChannelConnectedListeners(
+            BoltServerAddress address,
+            ChannelFuture channelConnected,
+            ChannelPromise handshakeCompleted,
+            int connectTimeoutMillis,
+            ChannelPipelineBuilder pipelineBuilder,
+            Logging logging) {
         ChannelPipeline pipeline = channelConnected.channel().pipeline();
 
         // add timeout handler to the pipeline when channel is connected. it's needed to limit amount of time code
@@ -128,8 +135,12 @@ public class ChannelConnectorImpl implements ChannelConnector {
                 new ChannelConnectedListener(address, pipelineBuilder, handshakeCompleted, logging));
     }
 
-    private void installHandshakeCompletedListeners(
-            ChannelPromise handshakeCompleted, ChannelPromise connectionInitialized) {
+    public static void installHandshakeCompletedListeners(
+            ChannelPromise handshakeCompleted,
+            ChannelPromise connectionInitialized,
+            String userAgent,
+            AuthToken authToken,
+            RoutingContext routingContext) {
         ChannelPipeline pipeline = handshakeCompleted.channel().pipeline();
 
         // remove timeout handler from the pipeline once TLS and Bolt handshakes are completed. regular protocol

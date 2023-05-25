@@ -293,7 +293,8 @@ class DriverFactoryTest {
                 MetricsProvider metricsProvider,
                 Config config,
                 boolean ownsEventLoopGroup,
-                RoutingContext routingContext) {
+                RoutingContext routingContext,
+                boolean isEmbeddedChannel) {
             return connectionPool;
         }
     }
@@ -339,7 +340,8 @@ class DriverFactoryTest {
                 MetricsProvider metricsProvider,
                 Config config,
                 boolean ownsEventLoopGroup,
-                RoutingContext routingContext) {
+                RoutingContext routingContext,
+                boolean isEmbeddedChannel) {
             return connectionPoolMock();
         }
     }
@@ -364,7 +366,8 @@ class DriverFactoryTest {
                 MetricsProvider metricsProvider,
                 Config config,
                 boolean ownsEventLoopGroup,
-                RoutingContext routingContext) {
+                RoutingContext routingContext,
+                boolean isEmbeddedChannel) {
             return connectionPoolMock();
         }
 

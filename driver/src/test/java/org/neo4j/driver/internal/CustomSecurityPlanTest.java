@@ -75,10 +75,18 @@ class CustomSecurityPlanTest {
                 MetricsProvider metricsProvider,
                 Config config,
                 boolean ownsEventLoopGroup,
-                RoutingContext routingContext) {
+                RoutingContext routingContext,
+                boolean isEmbeddedChannel) {
             capturedSecurityPlans.add(securityPlan);
             return super.createConnectionPool(
-                    authToken, securityPlan, bootstrap, metricsProvider, config, ownsEventLoopGroup, routingContext);
+                    authToken,
+                    securityPlan,
+                    bootstrap,
+                    metricsProvider,
+                    config,
+                    ownsEventLoopGroup,
+                    routingContext,
+                    isEmbeddedChannel);
         }
     }
 }

@@ -48,9 +48,17 @@ public class FailingConnectionDriverFactory extends DriverFactory {
             MetricsProvider metricsProvider,
             Config config,
             boolean ownsEventLoopGroup,
-            RoutingContext routingContext) {
+            RoutingContext routingContext,
+            boolean isEmbeddedChannel) {
         ConnectionPool pool = super.createConnectionPool(
-                authToken, securityPlan, bootstrap, metricsProvider, config, ownsEventLoopGroup, routingContext);
+                authToken,
+                securityPlan,
+                bootstrap,
+                metricsProvider,
+                config,
+                ownsEventLoopGroup,
+                routingContext,
+                isEmbeddedChannel);
         return new ConnectionPoolWithFailingConnections(pool, nextRunFailure);
     }
 
