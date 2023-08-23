@@ -25,6 +25,7 @@ import static org.neo4j.driver.internal.util.ErrorUtil.addSuppressed;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.local.LocalAddress;
 import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 import java.net.URI;
@@ -38,7 +39,10 @@ import org.neo4j.driver.MetricsAdapter;
 import org.neo4j.driver.internal.async.connection.BootstrapFactory;
 import org.neo4j.driver.internal.async.connection.ChannelConnector;
 import org.neo4j.driver.internal.async.connection.ChannelConnectorImpl;
+import org.neo4j.driver.internal.async.connection.LocalChannelConnector;
+import org.neo4j.driver.internal.async.connection.LocalChannelConnectorImpl;
 import org.neo4j.driver.internal.async.pool.ConnectionPoolImpl;
+import org.neo4j.driver.internal.async.pool.LocalConnectionPoolImpl;
 import org.neo4j.driver.internal.async.pool.PoolSettings;
 import org.neo4j.driver.internal.cluster.Rediscovery;
 import org.neo4j.driver.internal.cluster.RediscoveryImpl;
@@ -55,9 +59,11 @@ import org.neo4j.driver.internal.metrics.MicrometerMetricsProvider;
 import org.neo4j.driver.internal.retry.ExponentialBackoffRetryLogic;
 import org.neo4j.driver.internal.retry.RetryLogic;
 import org.neo4j.driver.internal.security.SecurityPlan;
+import org.neo4j.driver.internal.security.SecurityPlanImpl;
 import org.neo4j.driver.internal.security.SecurityPlans;
 import org.neo4j.driver.internal.spi.ConnectionPool;
 import org.neo4j.driver.internal.spi.ConnectionProvider;
+import org.neo4j.driver.internal.spi.LocalConnectionPool;
 import org.neo4j.driver.internal.util.DriverInfoUtil;
 import org.neo4j.driver.internal.util.Futures;
 import org.neo4j.driver.net.ServerAddressResolver;
@@ -124,6 +130,34 @@ public class DriverFactory {
                 config);
     }
 
+    public final Driver newInstance(
+            LocalAddress address,
+            AuthTokenManager authTokenManager,
+            Config config,
+            EventLoopGroup eventLoopGroup,
+            Supplier<Rediscovery> rediscoverySupplier) {
+        requireNonNull(authTokenManager, "authTokenProvider must not be null");
+
+        Bootstrap bootstrap;
+        boolean ownsEventLoopGroup;
+        if (eventLoopGroup == null) {
+            bootstrap = createBootstrap(config.eventLoopThreads());
+            ownsEventLoopGroup = true;
+        } else {
+            bootstrap = createBootstrap(eventLoopGroup);
+            ownsEventLoopGroup = false;
+        }
+
+        InternalLoggerFactory.setDefaultFactory(new NettyLogging(config.logging()));
+        EventExecutorGroup eventExecutorGroup = bootstrap.config().group();
+        var retryLogic = createRetryLogic(config.maxTransactionRetryTimeMillis(), eventExecutorGroup, config.logging());
+        var metricsProvider = getOrCreateMetricsProvider(config, createClock());
+        var localConnectionPool =
+                createLocalConnectionPool(authTokenManager, bootstrap, metricsProvider, config, ownsEventLoopGroup);
+
+        return createLocalDriver(address, localConnectionPool, retryLogic, config, metricsProvider);
+    }
+
     protected ConnectionPool createConnectionPool(
             AuthTokenManager authTokenManager,
             SecurityPlan securityPlan,
@@ -149,6 +183,36 @@ public class DriverFactory {
                 config.logging(),
                 clock,
                 ownsEventLoopGroup);
+    }
+
+    protected LocalConnectionPool createLocalConnectionPool(
+            AuthTokenManager authTokenManager,
+            Bootstrap bootstrap,
+            MetricsProvider metricsProvider,
+            Config config,
+            boolean ownsEventLoopGroup) {
+        var clock = createClock();
+        var settings = new ConnectionSettings(authTokenManager, config.userAgent(), config.connectionTimeoutMillis());
+        var boltAgent = DriverInfoUtil.boltAgent();
+        var localConnector = createLocalConnector(settings, boltAgent, config, clock);
+        var poolSettings = new PoolSettings(
+                config.maxConnectionPoolSize(),
+                config.connectionAcquisitionTimeoutMillis(),
+                config.maxConnectionLifetimeMillis(),
+                config.idleTimeBeforeConnectionTest());
+        return new LocalConnectionPoolImpl(
+                localConnector,
+                bootstrap,
+                poolSettings,
+                metricsProvider.metricsListener(),
+                config.logging(),
+                clock,
+                ownsEventLoopGroup);
+    }
+
+    private LocalChannelConnector createLocalConnector(
+            ConnectionSettings connectionSettings, BoltAgent boltAgent, Config config, Clock clock) {
+        return new LocalChannelConnectorImpl(connectionSettings, boltAgent, config, clock);
     }
 
     protected static MetricsProvider getOrCreateMetricsProvider(Config config, Clock clock) {
@@ -180,6 +244,20 @@ public class DriverFactory {
                 getDomainNameResolver(),
                 config.notificationConfig(),
                 boltAgent);
+    }
+
+    private InternalDriver createLocalDriver(
+            LocalAddress localAddress,
+            LocalConnectionPool localConnectionpool,
+            RetryLogic retryLogic,
+            Config config,
+            MetricsProvider metricsProvider) {
+        ConnectionProvider connectionProvider = new LocalConnectionProvider(localAddress, localConnectionpool);
+        var sessionFactory = createSessionFactory(connectionProvider, retryLogic, config);
+        var driver = createDriver(SecurityPlanImpl.insecure(), sessionFactory, metricsProvider, config);
+        var log = config.logging().getLog(getClass());
+        log.info("Direct local driver instance %s created for server address %s", driver.hashCode(), localAddress);
+        return driver;
     }
 
     private InternalDriver createDriver(
