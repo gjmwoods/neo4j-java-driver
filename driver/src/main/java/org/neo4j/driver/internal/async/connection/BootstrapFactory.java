@@ -19,20 +19,26 @@
 package org.neo4j.driver.internal.async.connection;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
+import io.netty.channel.local.LocalChannel;
 
 public final class BootstrapFactory {
     private BootstrapFactory() {}
 
-    public static Bootstrap newBootstrap(int threadCount) {
-        return newBootstrap(EventLoopGroupFactory.newEventLoopGroup(threadCount));
+    public static Bootstrap newLocalBootstrap(int threadCount) {
+        return newBootstrap(EventLoopGroupFactory.newEventLoopGroup(threadCount), LocalChannel.class);
     }
 
-    public static Bootstrap newBootstrap(EventLoopGroup eventLoopGroup) {
+    public static Bootstrap newBootstrap(int threadCount) {
+        return newBootstrap(EventLoopGroupFactory.newEventLoopGroup(threadCount), EventLoopGroupFactory.channelClass());
+    }
+
+    public static Bootstrap newBootstrap(EventLoopGroup eventLoopGroup, Class<? extends Channel> channelClazz) {
         var bootstrap = new Bootstrap();
         bootstrap.group(eventLoopGroup);
-        bootstrap.channel(EventLoopGroupFactory.channelClass());
+        bootstrap.channel(channelClazz);
         bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
         bootstrap.option(ChannelOption.SO_REUSEADDR, true);
         return bootstrap;

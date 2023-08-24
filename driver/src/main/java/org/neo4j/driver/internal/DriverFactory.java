@@ -26,6 +26,7 @@ import static org.neo4j.driver.internal.util.ErrorUtil.addSuppressed;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.local.LocalAddress;
+import io.netty.channel.local.LocalChannel;
 import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 import java.net.URI;
@@ -39,6 +40,7 @@ import org.neo4j.driver.MetricsAdapter;
 import org.neo4j.driver.internal.async.connection.BootstrapFactory;
 import org.neo4j.driver.internal.async.connection.ChannelConnector;
 import org.neo4j.driver.internal.async.connection.ChannelConnectorImpl;
+import org.neo4j.driver.internal.async.connection.EventLoopGroupFactory;
 import org.neo4j.driver.internal.async.connection.LocalChannelConnector;
 import org.neo4j.driver.internal.async.connection.LocalChannelConnectorImpl;
 import org.neo4j.driver.internal.async.pool.ConnectionPoolImpl;
@@ -131,20 +133,16 @@ public class DriverFactory {
     }
 
     public final Driver newInstance(
-            LocalAddress address,
-            AuthTokenManager authTokenManager,
-            Config config,
-            EventLoopGroup eventLoopGroup,
-            Supplier<Rediscovery> rediscoverySupplier) {
+            LocalAddress address, AuthTokenManager authTokenManager, Config config, EventLoopGroup eventLoopGroup) {
         requireNonNull(authTokenManager, "authTokenProvider must not be null");
 
         Bootstrap bootstrap;
         boolean ownsEventLoopGroup;
         if (eventLoopGroup == null) {
-            bootstrap = createBootstrap(config.eventLoopThreads());
+            bootstrap = BootstrapFactory.newLocalBootstrap(config.eventLoopThreads());
             ownsEventLoopGroup = true;
         } else {
-            bootstrap = createBootstrap(eventLoopGroup);
+            bootstrap = BootstrapFactory.newBootstrap(eventLoopGroup, LocalChannel.class);
             ownsEventLoopGroup = false;
         }
 
@@ -451,7 +449,7 @@ public class DriverFactory {
      * <b>This method is protected only for testing</b>
      */
     protected Bootstrap createBootstrap(EventLoopGroup eventLoopGroup) {
-        return BootstrapFactory.newBootstrap(eventLoopGroup);
+        return BootstrapFactory.newBootstrap(eventLoopGroup, EventLoopGroupFactory.channelClass());
     }
 
     /**

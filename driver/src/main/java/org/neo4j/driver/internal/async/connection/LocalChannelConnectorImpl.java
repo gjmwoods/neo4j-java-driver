@@ -32,7 +32,6 @@ import org.neo4j.driver.internal.BoltAgent;
 import org.neo4j.driver.internal.BoltServerAddress;
 import org.neo4j.driver.internal.ConnectionSettings;
 import org.neo4j.driver.internal.cluster.RoutingContext;
-import org.neo4j.driver.internal.security.SecurityPlanImpl;
 
 public class LocalChannelConnectorImpl implements LocalChannelConnector {
     private final Clock clock;
@@ -57,13 +56,7 @@ public class LocalChannelConnectorImpl implements LocalChannelConnector {
 
     @Override
     public ChannelFuture connect(LocalAddress localAddress, Bootstrap bootstrap) {
-        bootstrap.handler(new NettyChannelInitializer(
-                BoltServerAddress.LOCAL_CHANNEL_MARKER,
-                SecurityPlanImpl.insecure(),
-                0,
-                authTokenManager,
-                clock,
-                logging));
+        bootstrap.handler(new LocalNettyChannelInitializer(authTokenManager, clock, logging));
 
         ChannelFuture channelConnected = bootstrap.connect(localAddress);
 
@@ -71,7 +64,7 @@ public class LocalChannelConnectorImpl implements LocalChannelConnector {
         ChannelPromise handshakeCompleted = channel.newPromise();
         ChannelPromise connectionInitialized = channel.newPromise();
 
-        installChannelConnectedListeners(BoltServerAddress.LOCAL_CHANNEL_MARKER, channelConnected, handshakeCompleted);
+        installChannelConnectedListeners(BoltServerAddress.LOCAL_ADDRESS_MARKER, channelConnected, handshakeCompleted);
         installHandshakeCompletedListeners(handshakeCompleted, connectionInitialized);
 
         return connectionInitialized;

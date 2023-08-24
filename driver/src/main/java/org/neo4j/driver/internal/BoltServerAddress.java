@@ -31,6 +31,7 @@ import org.neo4j.driver.net.ServerAddress;
 public class BoltServerAddress implements ServerAddress {
     public static final int DEFAULT_PORT = 7687;
     public static final BoltServerAddress LOCAL_DEFAULT = new BoltServerAddress("localhost", DEFAULT_PORT);
+    public static final BoltServerAddress LOCAL_ADDRESS_MARKER = new BoltServerAddress("localchannel", 999);
 
     protected final String host; // Host or IP address.
     private final String
