@@ -24,12 +24,16 @@ import static org.neo4j.driver.SessionConfig.builder;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.neo4j.driver.AccessMode;
 import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.async.AsyncSession;
+import org.neo4j.driver.exceptions.DatabaseException;
 import org.neo4j.driver.internal.spi.ConnectionPool;
 import org.neo4j.driver.testutil.DatabaseExtension;
 import org.neo4j.driver.testutil.ParallelizableIT;
@@ -104,6 +108,26 @@ class DriverCloseIT {
                     return result.list();
                 }));
         assertEquals(ConnectionPool.CONNECTION_POOL_CLOSED_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void shouldInterruptFuturesOnClosure() throws ExecutionException, InterruptedException {
+        var driver = createDriver();
+
+        // todo either need to install apoc in the ITs or an alternative query that takes a while to execute.
+        var result =
+                driver.session(AsyncSession.class).executeReadAsync(tx -> tx.runAsync("CALL apoc.util.sleep(15000)"));
+
+        // to ensure query execution has begun
+        Thread.sleep(100);
+
+        driver.closeAsync().toCompletableFuture().get();
+
+        // close completely settled
+        Thread.sleep(1000 * 10);
+
+        var ex = assertThrows(
+                DatabaseException.class, () -> result.toCompletableFuture().get(1, TimeUnit.SECONDS));
     }
 
     private static Driver createDriver() {

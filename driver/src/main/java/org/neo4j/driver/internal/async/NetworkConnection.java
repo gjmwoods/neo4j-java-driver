@@ -101,6 +101,10 @@ public class NetworkConnection implements Connection {
         this.connectionReadTimeout =
                 ChannelAttributes.connectionReadTimeout(channel).orElse(null);
         metricsListener.afterConnectionCreated(poolId(this.channel), this.inUseEvent);
+        //todo we probably need a new method on message dispatcher to handle closure.
+        this.channel.closeFuture().addListener(cf -> {
+            messageDispatcher.handleFailureMessage("Driver has been closed. Close all pending response handlers", null);
+        });
     }
 
     @Override
