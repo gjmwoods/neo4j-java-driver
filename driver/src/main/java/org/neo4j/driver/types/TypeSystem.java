@@ -145,6 +145,18 @@ public interface TypeSystem {
     Type DATE_TIME();
 
     /**
+     * Returns a {@link Type} instance representing a zoned date time.
+     * @return the type instance.
+     */
+    Type ZONED_DATE_TIME();
+
+    /**
+     * Returns a {@link Type} instance representing a offset date time
+     * @return
+     */
+    Type OFFSET_DATE_TIME();
+
+    /**
      * Returns a {@link Type} instance representing duration.
      * @return the type instance
      */
